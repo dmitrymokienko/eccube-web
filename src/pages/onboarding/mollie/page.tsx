@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 const POPUP_HEIGHT = 700;
 const POPUP_WIDTH = 600;
 
-export default function MollieOnBoardingPage() {
+export function MollieOnBoardingPage() {
     // TODO: add validation
     // TODO: add i18n
     const apiClient = useApiClient();

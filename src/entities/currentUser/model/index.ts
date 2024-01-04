@@ -3,8 +3,8 @@ import { IUser } from "../types";
 import { deleteUserApi, getUserInfoApi, updateUserApi } from "../api";
 import { Nullable } from "../../../shared/types";
 
-const $info = createStore<Nullable<IUser>>(null);
-const setInfo = createEvent<Nullable<IUser>>();
+const $info = createStore<Nullable<Partial<IUser>>>(null);
+const setInfo = createEvent<Nullable<Partial<IUser>>>();
 const fetchInfoFx = createEffect(getUserInfoApi);
 $info.on(setInfo, (_, v) => v).on(fetchInfoFx.doneData, (_, v) => v);
 

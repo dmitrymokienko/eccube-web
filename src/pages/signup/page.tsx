@@ -42,7 +42,7 @@ export function SignUpPage() {
             const type = data.isSupplier ? UserType.Supplier : UserType.Customer;
             const payload = omit(["confirmPassword", "isSupplier"], { ...data, type });
             const { id } = await auth.registerFx(payload);
-            currentUser.setInfo({ id } as any);
+            currentUser.setInfo({ id });
             navigate("/signup/success");
         } catch (error) {
             console.log(error);

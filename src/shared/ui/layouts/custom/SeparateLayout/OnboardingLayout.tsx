@@ -28,7 +28,7 @@ export function OnboardingLayout(props: IOnboardingLayoutProps) {
             }
             SideBarProps={{
                 sx: {
-                    backgroundImage: `url(${EccubeBg.src})`,
+                    backgroundImage: `url(${EccubeBg})`,
                     backgroundSize: "cover",
                     backgroundPosition: "top",
                     "&::after": {

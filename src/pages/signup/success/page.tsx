@@ -14,7 +14,7 @@ export interface ISignUpForm {
     isSupplier: boolean;
 }
 
-export default function SignUpSuccessPage() {
+export function SignUpSuccessPage() {
     // TODO: add validation
     // TODO: add i18n
     const navigate = useNavigate();

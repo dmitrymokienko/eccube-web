@@ -12,7 +12,7 @@ export interface ILoginForm {
     password: string;
 }
 
-export default function LoginPage() {
+export function LoginPage() {
     // TODO: add validation
     // TODO: add i18n
     const navigate = useNavigate();

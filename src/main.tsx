@@ -9,21 +9,28 @@ import "@fontsource/roboto-condensed/500.css";
 import "@fontsource/roboto-condensed/700.css";
 import "@fontsource/montserrat/500.css";
 import { SignUpPage } from "./pages/signup/page";
-import LoginPage from "./pages/login/page";
-import WelcomeOnBoardingPage from "./pages/onboarding/page";
-import SignUpSuccessPage from "./pages/signup/success/page";
-import UserOnBoardingPage from "./pages/onboarding/user/page.js";
-import CompanyOnBoardingPage from "./pages/onboarding/company/page.js";
-import MollieOnBoardingPage from "./pages/onboarding/mollie/page.js";
+import { LoginPage } from "./pages/login/page";
+import { WelcomeOnBoardingPage } from "./pages/onboarding/page";
+import { SignUpSuccessPage } from "./pages/signup/success/page";
+import { UserOnBoardingPage } from "./pages/onboarding/user/page";
+import { CompanyOnBoardingPage } from "./pages/onboarding/company/page";
+import { MollieOnBoardingPage } from "./pages/onboarding/mollie/page";
 
 // TODO: core/routing
 const router = createBrowserRouter([
     {
         path: "/",
         element: <SignUpPage />,
+    },
+    {
+        path: "/signup",
         children: [
             {
-                path: "/success",
+                index: true,
+                element: <SignUpPage />,
+            },
+            {
+                path: "success",
                 element: <SignUpSuccessPage />,
             },
         ],
@@ -34,18 +41,21 @@ const router = createBrowserRouter([
     },
     {
         path: "/onboarding",
-        element: <WelcomeOnBoardingPage />,
         children: [
             {
-                path: "/onboarding/user",
+                index: true,
+                element: <WelcomeOnBoardingPage />,
+            },
+            {
+                path: "user",
                 element: <UserOnBoardingPage />,
             },
             {
-                path: "/onboarding/company",
+                path: "company",
                 element: <CompanyOnBoardingPage />,
             },
             {
-                path: "/onboarding/mollie",
+                path: "mollie",
                 element: <MollieOnBoardingPage />,
             },
         ],

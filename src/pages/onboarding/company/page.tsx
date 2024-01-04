@@ -10,7 +10,7 @@ import { OnboardingLayout } from "../../../shared/ui/layouts/custom/SeparateLayo
 import { PrevPageButton } from "../../../shared/ui/layouts/custom/SeparateLayout/components/PrevPageButton";
 import { useNavigate } from "react-router-dom";
 
-export default function CompanyOnBoardingPage() {
+export function CompanyOnBoardingPage() {
     // TODO: add validation
     // TODO: add i18n
     const navigate = useNavigate();

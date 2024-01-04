@@ -1,8 +1,8 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, CreateAxiosDefaults } from "axios";
 
-export const backendBaseURL = (): string => import.meta.env.REACT_APP_BACKEND_BASE_URL;
+const backendBaseURL = (): string => import.meta.env.VITE_APP_BACKEND_BASE_URL;
 
-type ApiConfig = CreateAxiosDefaults<any>;
+type ApiConfig = CreateAxiosDefaults<unknown>;
 
 export class ApiClient {
     public instance: AxiosInstance;
@@ -10,12 +10,13 @@ export class ApiClient {
     protected createClient(apiConfiguration: ApiConfig): AxiosInstance {
         const { baseURL, responseType, headers } = apiConfiguration;
         return axios.create({
-            baseURL: baseURL ?? backendBaseURL(), // process.env.REACT_APP_BACKEND_BASE_URL,
+            baseURL: baseURL ?? backendBaseURL(),
             responseType: responseType ?? ("json" as const),
             headers: {
                 "Content-Type": "application/json",
                 ...headers,
             },
+            withCredentials: true,
             //   timeout: 10 * 1000,
         });
     }
@@ -37,7 +38,7 @@ export class ApiClient {
     public async post<TRequest, TResponse>(
         path: string,
         payload: TRequest,
-        config?: AxiosRequestConfig<any>
+        config?: AxiosRequestConfig<unknown>
     ): Promise<TResponse> {
         try {
             const response = await this.instance.post<TResponse>(path, payload, config);

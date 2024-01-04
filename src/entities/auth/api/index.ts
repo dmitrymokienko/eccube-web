@@ -1,5 +1,5 @@
 import { ApiClient } from "../../../core/api/apiClient";
-import { ILoginUserResponse, IUser } from "../../currentUser/types";
+import { ILoginUserResponse, IUser, UserType } from "../../currentUser/types";
 import { ICreateUserDto } from "../../currentUser/types/dto";
 
 const apiClient = new ApiClient();

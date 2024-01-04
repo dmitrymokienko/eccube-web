@@ -5,7 +5,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { OnboardingLayout } from "../../shared/ui/layouts/custom/SeparateLayout/OnboardingLayout";
 import { useNavigate } from "react-router-dom";
 
-export default function WelcomeOnBoardingPage() {
+export function WelcomeOnBoardingPage() {
     // TODO: add validation
     // TODO: add i18n
     const navigate = useNavigate();

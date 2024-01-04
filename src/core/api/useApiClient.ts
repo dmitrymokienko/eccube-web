@@ -24,7 +24,7 @@ export function useApiClient() {
                 const prevRequest = error.config;
                 if (error.response?.status === 401 && !prevRequest.send) {
                     prevRequest.send = true;
-                    await fetch(`${process.env.REACT_APP_BACKEND_BASE_URL}/v1/auth/refresh`, {
+                    await fetch(`${process.env.VITE_APP_BACKEND_BASE_URL}/v1/auth/refresh`, {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
