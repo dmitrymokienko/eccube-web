@@ -30,13 +30,9 @@ export function CompanyOnBoardingPage() {
     const { errors } = formState;
 
     const onSubmit = async (data: IOnboardingCompanyData) => {
-        try {
-            onboarding.setCompanyInfo(data);
-            await updateData();
-            navigate("/onboarding/mollie");
-        } catch (error) {
-            console.error(error);
-        }
+        onboarding.setCompanyInfo(data);
+        await updateData();
+        navigate("/onboarding/mollie");
     };
 
     return (

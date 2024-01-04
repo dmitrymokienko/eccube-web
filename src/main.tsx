@@ -7,7 +7,7 @@ import "./index.css";
 import "@fontsource/roboto-condensed/400.css";
 import "@fontsource/roboto-condensed/500.css";
 import "@fontsource/roboto-condensed/700.css";
-import "@fontsource/montserrat/500.css";
+import "@fontsource/bebas-neue/400.css";
 import { SignUpPage } from "./pages/signup/page";
 import { LoginPage } from "./pages/login/page";
 import { WelcomeOnBoardingPage } from "./pages/onboarding/page";

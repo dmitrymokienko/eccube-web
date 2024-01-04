@@ -22,8 +22,12 @@ export function LoginPage() {
     const { errors } = formState;
 
     const onSubmit = async (data: ILoginForm) => {
-        await auth.loginFx(data);
-        navigate("/onboarding");
+        try {
+            await auth.loginFx(data);
+            navigate("/onboarding");
+        } catch (error) {
+            form.setError("email", { message: "Email or password is incorrect" });
+        }
     };
 
     return (

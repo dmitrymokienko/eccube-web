@@ -45,7 +45,6 @@ export function SignUpPage() {
             currentUser.setInfo({ id });
             navigate("/signup/success");
         } catch (error) {
-            console.log(error);
             form.setError("email", {
                 type: "manual",
                 message: "Email already exists",

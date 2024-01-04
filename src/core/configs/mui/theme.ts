@@ -1,6 +1,7 @@
 import { createTheme } from "@mui/material/styles";
 import { components } from "./components";
 import { palette } from "./palette";
+import { typography } from "./typography";
 
 export const muiTheme = createTheme({
     breakpoints: {
@@ -18,8 +19,5 @@ export const muiTheme = createTheme({
     },
     palette,
     components,
-    typography: {
-        fontFamily: "Roboto Condensed, sans-serif",
-        fontSize: 16,
-    },
+    typography,
 });
