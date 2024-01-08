@@ -7,9 +7,6 @@ export interface IThemeRegistryProps {
     children: ReactNode;
 }
 
-// This implementation is from emotion-js
-// https://github.com/emotion-js/emotion/issues/2928#issuecomment-1319747902
-
 export default function ThemeRegistry(props: IThemeRegistryProps) {
     const { children } = props;
 
