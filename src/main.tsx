@@ -14,7 +14,9 @@ import { WelcomeOnBoardingPage } from "./pages/onboarding/page";
 import { SignUpSuccessPage } from "./pages/signup/success/page";
 import { UserOnBoardingPage } from "./pages/onboarding/user/page";
 import { CompanyOnBoardingPage } from "./pages/onboarding/company/page";
-import { MollieOnBoardingPage } from "./pages/onboarding/mollie/page";
+import { MollieCallbackPage } from "./pages/onboarding/mollie/page";
+import { AuthProvider } from "./shared/ui/providers/AuthProvider";
+import { ProtectedRoute } from "./core/routes/ProtectedRoute.js";
 
 // TODO: core/routing
 const router = createBrowserRouter([
@@ -40,7 +42,12 @@ const router = createBrowserRouter([
         element: <LoginPage />,
     },
     {
+        path: "/callback",
+        element: <MollieCallbackPage />,
+    },
+    {
         path: "/onboarding",
+        element: <ProtectedRoute />,
         children: [
             {
                 index: true,
@@ -54,11 +61,15 @@ const router = createBrowserRouter([
                 path: "company",
                 element: <CompanyOnBoardingPage />,
             },
-            {
-                path: "mollie",
-                element: <MollieOnBoardingPage />,
-            },
+            // {
+            //     path: "mollie",
+            //     element: <MollieCallbackPage />,
+            // },
         ],
+    },
+    {
+        path: "*",
+        element: <div>404</div>,
     },
 ]);
 
@@ -66,7 +77,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <React.StrictMode>
         <ThemeRegistry>
             <NiceModal.Provider>
-                <RouterProvider router={router} />
+                <AuthProvider>
+                    <RouterProvider router={router} />
+                </AuthProvider>
             </NiceModal.Provider>
         </ThemeRegistry>
     </React.StrictMode>

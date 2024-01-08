@@ -6,6 +6,8 @@ import { FormProvider, useForm } from "react-hook-form";
 import { LoginLayout } from "../../shared/ui/layouts/custom/SeparateLayout/LoginLayout";
 import { auth } from "../../entities/auth/model";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../shared/ui/providers/AuthProvider";
 
 export interface ILoginForm {
     email: string;
@@ -17,6 +19,8 @@ export function LoginPage() {
     // TODO: add i18n
     const navigate = useNavigate();
 
+    const { checkLoginState } = useContext(AuthContext);
+
     const form = useForm<ILoginForm>();
     const { register, handleSubmit, formState } = form;
     const { errors } = formState;
@@ -24,6 +28,7 @@ export function LoginPage() {
     const onSubmit = async (data: ILoginForm) => {
         try {
             await auth.loginFx(data);
+            await checkLoginState();
             navigate("/onboarding");
         } catch (error) {
             form.setError("email", { message: "Email or password is incorrect" });

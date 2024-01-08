@@ -25,9 +25,12 @@ export class ApiClient {
         this.instance = this.createClient(apiConfiguration);
     }
 
-    public async get<TResponse>(path: string): Promise<TResponse> {
+    public async get<TResponse>(
+        path: string,
+        params?: Record<string, string | number | boolean | null>
+    ): Promise<TResponse> {
         try {
-            const response = await this.instance.get<TResponse>(path);
+            const response = await this.instance.get<TResponse>(path, { params: params ?? {} });
             return response.data;
         } catch (err) {
             this.handleError(err as AxiosError);

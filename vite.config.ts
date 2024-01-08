@@ -13,6 +13,8 @@ export default defineConfig({
             key: fs.readFileSync("./certificates/bidding.eccube.key"),
             cert: fs.readFileSync("./certificates/bidding.eccube.crt"),
         },
+        host: "bidding.eccube.de",
+        port: 443,
     },
     plugins: [
         react(),
