@@ -14,6 +14,11 @@ export async function loginUserApi(data: { email: string; password: string }) {
     return res;
 }
 
+export async function checkLoggedInUserApi() {
+    const res = await apiClient.get<{ user: IUser }>("/v1/auth/logged_in");
+    return res;
+}
+
 // TODO: delete, temporary solution
 export async function activateUserApi(token: string) {
     const res = await apiClient.post<{ token: string }, IUser>("/v1/auth/activate", {

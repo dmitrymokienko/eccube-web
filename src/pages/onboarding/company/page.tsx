@@ -9,6 +9,7 @@ import { onboarding } from "../../../entities/onboarding/model";
 import { OnboardingLayout } from "../../../shared/ui/layouts/custom/SeparateLayout/OnboardingLayout";
 import { PrevPageButton } from "../../../shared/ui/layouts/custom/SeparateLayout/components/PrevPageButton";
 import { useNavigate } from "react-router-dom";
+import { startMollieOAuth2Api } from "../../../entities/onboarding/api";
 
 export function CompanyOnBoardingPage() {
     // TODO: add validation
@@ -29,14 +30,16 @@ export function CompanyOnBoardingPage() {
     const { handleSubmit, register, formState } = form;
     const { errors } = formState;
 
+    const startMollieAuthProcess = async () => {
+        const data = await startMollieOAuth2Api()();
+        const { authorizationUri } = data || {};
+        window.location.assign(authorizationUri);
+    };
+
     const onSubmit = async (data: IOnboardingCompanyData) => {
-        try {
-            onboarding.setCompanyInfo(data);
-            await updateData();
-            navigate("/onboarding/mollie");
-        } catch (error) {
-            console.error(error);
-        }
+        onboarding.setCompanyInfo(data);
+        await updateData();
+        startMollieAuthProcess();
     };
 
     return (

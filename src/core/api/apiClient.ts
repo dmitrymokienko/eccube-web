@@ -25,9 +25,12 @@ export class ApiClient {
         this.instance = this.createClient(apiConfiguration);
     }
 
-    public async get<TResponse>(path: string): Promise<TResponse> {
+    public async get<TResponse>(
+        path: string,
+        params?: Record<string, string | number | boolean | null>
+    ): Promise<TResponse> {
         try {
-            const response = await this.instance.get<TResponse>(path);
+            const response = await this.instance.get<TResponse>(path, { params: params ?? {} });
             return response.data;
         } catch (err) {
             this.handleError(err as AxiosError);
@@ -80,15 +83,18 @@ export class ApiClient {
     }
 
     protected handleError(error: AxiosError): void {
-        if (error.response) {
+        if (error?.response?.data) {
             // Request made and server responded
             const { data, status } = error.response;
             console.error(`Error status:: ${status}, data:: ${data}`);
+            throw error.response.data;
         } else if (error.request) {
             // The request was made but no response was received
             console.error(`Error request:: ${error.request}`);
+            throw error.request;
         }
         // Something happened in setting up the request that triggered an Error
         console.error(`Error message:: ${error.message}`);
+        throw error.message;
     }
 }

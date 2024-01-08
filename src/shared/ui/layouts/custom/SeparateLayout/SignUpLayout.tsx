@@ -48,7 +48,7 @@ export function SignUpLayout(props: ISignUpLayoutProps) {
                             navigate("/login");
                         }}
                     >
-                        Log in
+                        Login
                     </Button>
                 </Box>
             }
