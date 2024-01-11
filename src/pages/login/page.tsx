@@ -19,7 +19,7 @@ export function LoginPage() {
     // TODO: add i18n
     const navigate = useNavigate();
 
-    const { checkLoginState } = useContext(AuthContext);
+    const { checkLoginState, userInfo } = useContext(AuthContext);
 
     const form = useForm<ILoginForm>();
     const { register, handleSubmit, formState } = form;
@@ -29,6 +29,10 @@ export function LoginPage() {
         try {
             await auth.loginFx(data);
             await checkLoginState();
+            if (userInfo?.isOnboardingPassed) {
+                navigate("/main");
+                return;
+            }
             navigate("/onboarding");
         } catch (error) {
             form.setError("email", { message: "Email or password is incorrect" });

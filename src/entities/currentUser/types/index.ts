@@ -9,9 +9,15 @@ export interface IUser {
     lastName: string;
     email: string;
     //   avatar: string
+    address: string;
+    company: string;
+    createdAt: string;
+    updatedAt: string;
+    phoneNumber: string;
     type: UserType;
     isActive: boolean;
     isVerified: boolean;
+    isOnboardingPassed: boolean;
 }
 
 export interface ILoginUserResponse {

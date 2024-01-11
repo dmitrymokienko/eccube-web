@@ -5,6 +5,8 @@ import { OnboardingLayout } from "../../../shared/ui/layouts/custom/SeparateLayo
 import { PrevPageButton } from "../../../shared/ui/layouts/custom/SeparateLayout/components/PrevPageButton";
 import { useNavigate } from "react-router-dom";
 import { getMollieOAuth2AccessTokenApi } from "../../../entities/onboarding/api";
+import Box from "@mui/material/Box";
+import { LogoutButton } from "../../../shared/ui/layouts/custom/SeparateLayout/components/LogoutButton";
 
 export function MollieCallbackPage() {
     const navigate = useNavigate();
@@ -38,13 +40,17 @@ export function MollieCallbackPage() {
     return (
         <OnboardingLayout
             Header={
-                <PrevPageButton
-                    onClick={() => {
-                        navigate("/onboarding/company");
-                    }}
-                >
-                    Previous step
-                </PrevPageButton>
+                <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%" }}>
+                    <PrevPageButton
+                        onClick={() => {
+                            navigate("/onboarding");
+                        }}
+                    >
+                        Previous step
+                    </PrevPageButton>
+
+                    <LogoutButton />
+                </Box>
             }
         >
             <Typography variant="h4" component="h1" pb={4}>

@@ -1,4 +1,6 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, CreateAxiosDefaults } from "axios";
+import { auth } from "../../entities/auth/model";
+import { jwtDecode } from "jwt-decode";
 
 const backendBaseURL = (): string => import.meta.env.VITE_APP_BACKEND_BASE_URL;
 
@@ -23,6 +25,38 @@ export class ApiClient {
 
     constructor(apiConfiguration: ApiConfig = {}) {
         this.instance = this.createClient(apiConfiguration);
+
+        this.instance.interceptors.response.use(
+            (res) => {
+                return res;
+            },
+            async (err) => {
+                const config = err.config;
+                const refreshToken = JSON.parse(localStorage.getItem("refresh")!);
+                // Access Token was expired, retry
+                if (err?.response.status === 401 && refreshToken && !config._retry) {
+                    config._retry = true;
+                    try {
+                        const rs = await this.instance.post("/v1/auth/refresh", undefined, {
+                            headers: {
+                                "Content-Type": "application/json",
+                                authorization: `Refresh ${refreshToken}`,
+                            },
+                            withCredentials: true,
+                        });
+                        auth.setRefreshToken(rs.data.refreshToken);
+                        const { exp } = jwtDecode(rs.data.accessToken);
+                        if (exp) {
+                            auth.setExpiresIn(exp);
+                        }
+                        return this.instance(config);
+                    } catch (_error) {
+                        return Promise.reject(_error);
+                    }
+                }
+                return Promise.reject(err);
+            }
+        );
     }
 
     public async get<TResponse>(
@@ -98,3 +132,5 @@ export class ApiClient {
         throw error.message;
     }
 }
+
+export const defaultApiClient = new ApiClient();

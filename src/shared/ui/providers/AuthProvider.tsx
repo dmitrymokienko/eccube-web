@@ -4,10 +4,9 @@ import { checkLoggedInUserApi, refreshTokenApi } from "../../../entities/auth/ap
 import { useUnit } from "effector-react";
 import { Nullable } from "../../types";
 import { IUser } from "../../../entities/currentUser/types";
-import { createEvent, createStore } from "effector";
-import persist from "effector-localstorage";
 import { jwtDecode } from "jwt-decode";
 import { useInterval } from "../../hooks/useInterval";
+import { auth } from "../../../entities/auth/model";
 
 export interface IBackendTokens {
     accessToken: string;
@@ -29,23 +28,6 @@ const defaultAuthContext: {
 
 const INTERVAL = 60 * 1000; // 1 minute
 
-// EFFECTOR
-// TODO on the backend: generate new refresh-token via `checkLoggedInUserApi()` request
-// storing refresh-token in localStorage is possible, but better
-// to avoid store sensitive data in localStorage
-// think about this solution or find better one
-
-// refresh token
-const setRefreshToken = createEvent<Nullable<string>>();
-const $refreshToken = createStore<Nullable<string>>(null);
-$refreshToken.on(setRefreshToken, (_, payload) => payload);
-persist({ key: "refresh", store: $refreshToken });
-// expires in
-const setExpiresIn = createEvent<Nullable<number>>();
-const $tokenExpiresIn = createStore<Nullable<number>>(null);
-$tokenExpiresIn.on(setExpiresIn, (_, payload) => payload);
-persist({ key: "expires", store: $tokenExpiresIn });
-
 export const AuthContext = createContext(defaultAuthContext);
 
 export interface IAuthProviderProps {
@@ -54,8 +36,8 @@ export interface IAuthProviderProps {
 
 export function AuthProvider({ children }: IAuthProviderProps) {
     const userInfo = useUnit(currentUser.$info);
-    const refreshToken = useUnit($refreshToken);
-    const expiresIn = useUnit($tokenExpiresIn);
+    const refreshToken = useUnit(auth.$refreshToken);
+    const expiresIn = useUnit(auth.$tokenExpiresIn);
 
     const [loggedIn, setLoggedIn] = useState<Nullable<boolean>>(null);
 
@@ -65,18 +47,18 @@ export function AuthProvider({ children }: IAuthProviderProps) {
             setLoggedIn(true);
             if (user && backendTokens) {
                 currentUser.setInfo(user);
-                setRefreshToken(backendTokens.refreshToken);
+                auth.setRefreshToken(backendTokens.refreshToken);
                 const { exp } = jwtDecode(backendTokens.accessToken);
                 if (exp) {
-                    setExpiresIn(exp);
+                    auth.setExpiresIn(exp);
                 }
             }
         } catch (err) {
             console.error(err);
             setLoggedIn(false);
             currentUser.setInfo(null);
-            setRefreshToken(null);
-            setExpiresIn(null);
+            auth.setRefreshToken(null);
+            auth.setExpiresIn(null);
         }
     }, []);
 
@@ -87,18 +69,18 @@ export function AuthProvider({ children }: IAuthProviderProps) {
             }
             if (new Date().getTime() > expiresIn * 1000) {
                 const res = await refreshTokenApi(refreshToken);
-                setRefreshToken(res.refreshToken);
+                auth.setRefreshToken(res.refreshToken);
                 const { exp } = jwtDecode(res.accessToken);
                 if (exp) {
-                    setExpiresIn(exp);
+                    auth.setExpiresIn(exp);
                 }
             }
         } catch (err) {
             console.error(err);
             setLoggedIn(false);
             currentUser.setInfo(null);
-            setRefreshToken(null);
-            setExpiresIn(null);
+            auth.setRefreshToken(null);
+            auth.setExpiresIn(null);
         }
     };
 
