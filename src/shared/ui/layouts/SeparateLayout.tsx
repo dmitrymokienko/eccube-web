@@ -3,6 +3,7 @@ import { ReactNode } from "react";
 import EccubeLogo from "../../assets/icons/eccube-logo-white.svg?react";
 import { SxProps, Theme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { LangSwitcher } from "../components/LangSwitcher/LangSwitcher";
 
 export interface ISeparateLayoutProps {
     children: ReactNode;
@@ -20,6 +21,7 @@ export interface ISeparateLayoutProps {
     MainProps?: {
         sx?: SxProps;
     };
+    showLangSwitcher?: boolean;
 }
 
 export const SEPARATE_LAYOUT_SIDEBAR_WIDTH = 360;
@@ -36,6 +38,7 @@ export function SeparateLayout(props: ISeparateLayoutProps) {
         HeaderProps = {},
         SideBarProps = {},
         MainProps = {},
+        showLangSwitcher = true,
     } = props;
 
     // special breakpoint for current layout
@@ -75,6 +78,12 @@ export function SeparateLayout(props: ISeparateLayoutProps) {
                     }}
                 >
                     {Header}
+
+                    {showLangSwitcher && (
+                        <Box pl={3}>
+                            <LangSwitcher />
+                        </Box>
+                    )}
                 </Box>
                 {/* main */}
                 <Box sx={{ gridArea: "main" }}>
@@ -130,6 +139,12 @@ export function SeparateLayout(props: ISeparateLayoutProps) {
                 }}
             >
                 {Header}
+
+                {showLangSwitcher && (
+                    <Box pl={3}>
+                        <LangSwitcher />
+                    </Box>
+                )}
             </Box>
             {/* sidebar */}
             <Box

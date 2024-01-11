@@ -7,9 +7,12 @@ import { useNavigate } from "react-router-dom";
 import { getMollieOAuth2AccessTokenApi } from "../../../entities/onboarding/api";
 import Box from "@mui/material/Box";
 import { LogoutButton } from "../../../shared/ui/layouts/custom/SeparateLayout/components/LogoutButton";
+import { useTranslation } from "react-i18next";
 
 export function MollieCallbackPage() {
+    const { t } = useTranslation();
     const navigate = useNavigate();
+
     const called = useRef(false);
     // const { checkLoginState, loggedIn } = useContext(AuthContext);
 
@@ -18,17 +21,12 @@ export function MollieCallbackPage() {
             try {
                 if (called.current) return; // prevent rerender caused by StrictMode
                 called.current = true;
-
                 const search = window.location.search;
                 const code = new URLSearchParams(search).get("code");
-
                 const res = await getMollieOAuth2AccessTokenApi()(code!);
-                // const res = await apiClient.get<unknown>(`/mollie/auth/token${window.location.search}`); // await getMollieOAuth2AccessTokenApi()(code!);
                 console.log("response: ", res);
-                // navigate("/main");
             } catch (err) {
                 console.error(err);
-                // navigate("/main");
             }
         })();
     }, [navigate]);
@@ -46,7 +44,7 @@ export function MollieCallbackPage() {
                             navigate("/onboarding");
                         }}
                     >
-                        Previous step
+                        {t("button.prev-step")}
                     </PrevPageButton>
 
                     <LogoutButton />
@@ -54,13 +52,13 @@ export function MollieCallbackPage() {
             }
         >
             <Typography variant="h4" component="h1" pb={4}>
-                Mollie authorization
+                {t("onboarding.mollie-page.title")}
             </Typography>
             <Typography variant="body1" component="h1" gutterBottom>
-                Successfully connected to Mollie
+                {t("onboarding.mollie-page.text")}
             </Typography>
             <Button variant="contained" sx={{ marginTop: "24px" }} onClick={onSubmit}>
-                {`Continue`}
+                {t("button.continue")}
             </Button>
         </OnboardingLayout>
     );

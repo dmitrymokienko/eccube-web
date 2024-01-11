@@ -4,11 +4,14 @@ import { ISeparateLayoutProps, SEPARATE_LAYOUT_SIDEBAR_WIDTH, SeparateLayout } f
 import Typography from "@mui/material/Typography";
 import EccubeBg from "../../../../assets/images/eccube_bg.jpeg";
 import { SidebarRandomContent, getRandomInt } from "./lib/utils";
+import { useTranslation } from "react-i18next";
 
 export interface IOnboardingLayoutProps extends ISeparateLayoutProps {}
 
 export function OnboardingLayout(props: IOnboardingLayoutProps) {
     const { children, Header = null } = props;
+
+    const { t } = useTranslation();
 
     const random = getRandomInt();
     const sidebar = SidebarRandomContent[random];
@@ -19,10 +22,10 @@ export function OnboardingLayout(props: IOnboardingLayoutProps) {
             Sidebar={
                 <Box pt={6}>
                     <Typography variant="h5" component="h1" color="custom.const.white">
-                        {sidebar?.title ?? {}}
+                        {t(sidebar?.title ?? "")}
                     </Typography>
                     <Typography variant="body1" color="custom.const.white" mt={5}>
-                        {sidebar?.description ?? {}}
+                        {t(sidebar?.description ?? "")}
                     </Typography>
                 </Box>
             }

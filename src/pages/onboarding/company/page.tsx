@@ -12,10 +12,11 @@ import { useNavigate } from "react-router-dom";
 import { startMollieOAuth2Api } from "../../../entities/onboarding/api";
 import Box from "@mui/material/Box";
 import { LogoutButton } from "../../../shared/ui/layouts/custom/SeparateLayout/components/LogoutButton";
+import { useTranslation } from "react-i18next";
 
 export function CompanyOnBoardingPage() {
     // TODO: add validation
-    // TODO: add i18n
+    const { t } = useTranslation();
     const navigate = useNavigate();
 
     const { company, updateData } = useUnit({
@@ -61,32 +62,32 @@ export function CompanyOnBoardingPage() {
             }
         >
             <Typography variant="h4" component="h1" pb={4}>
-                Company information
+                {t("onboarding.company-page.title")}
             </Typography>
             <FormProvider {...form}>
                 <Stack component="form" spacing={1} onSubmit={handleSubmit(onSubmit)}>
                     <TextField
-                        label={"Company name"}
-                        placeholder="Enter company name"
+                        label={t("field.company-name")}
+                        placeholder={t("placeholder.company-name")}
                         error={!!errors?.company}
                         helperText={errors?.company?.message}
                         {...register("company", {
-                            required: "This field is required",
+                            required: t("validation.required"),
                             setValueAs: (value) => value.trim(),
                         })}
                     />
                     <TextField
-                        label={"Address"}
-                        placeholder="Enter company address"
+                        label={t("field.company-address")}
+                        placeholder={"placeholder.company-address"}
                         error={!!errors?.address}
                         helperText={errors?.address?.message}
                         {...register("address", {
-                            required: "This field is required",
+                            required: t("validation.required"),
                             setValueAs: (value) => value.trim(),
                         })}
                     />
                     <Button variant="contained" type="submit" sx={{ marginTop: "24px" }}>
-                        {`Next`}
+                        {t("button.next")}
                     </Button>
                 </Stack>
             </FormProvider>

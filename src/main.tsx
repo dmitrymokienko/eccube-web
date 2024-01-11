@@ -9,6 +9,7 @@ import "@fontsource/roboto-condensed/700.css";
 import "@fontsource/bebas-neue/400.css";
 import { AuthProvider } from "./shared/ui/providers/AuthProvider";
 import { router } from "./core/routes";
+import "./core/configs/i18n/config";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
     <React.StrictMode>

@@ -11,10 +11,11 @@ import { OnboardingLayout } from "../../../shared/ui/layouts/custom/SeparateLayo
 import { PrevPageButton } from "../../../shared/ui/layouts/custom/SeparateLayout/components/PrevPageButton";
 import Box from "@mui/material/Box";
 import { LogoutButton } from "../../../shared/ui/layouts/custom/SeparateLayout/components/LogoutButton";
+import { useTranslation } from "react-i18next";
 
 export function UserOnBoardingPage() {
     // TODO: add validation
-    // TODO: add i18n
+    const { t } = useTranslation();
     const navigate = useNavigate();
 
     const user = useUnit(onboarding.$user);
@@ -43,7 +44,7 @@ export function UserOnBoardingPage() {
                             navigate("/onboarding");
                         }}
                     >
-                        Previous step
+                        {t("button.prev-step")}
                     </PrevPageButton>
 
                     <LogoutButton />
@@ -51,42 +52,42 @@ export function UserOnBoardingPage() {
             }
         >
             <Typography variant="h4" component="h1" pb={4}>
-                Your information
+                {t("onboarding.user-info-page.title")}
             </Typography>
             <FormProvider {...form}>
                 <Stack component="form" spacing={1} onSubmit={handleSubmit(onSubmit)}>
                     <TextField
-                        label={"First name"}
-                        placeholder="Enter your first name"
+                        label={t("field.first-name")}
+                        placeholder={t("placeholder.first-name")}
                         error={!!errors?.firstName}
                         helperText={errors?.firstName?.message}
                         {...register("firstName", {
-                            required: "This field is required",
+                            required: t("validation.required"),
                             setValueAs: (value) => value.trim(),
                         })}
                     />
                     <TextField
-                        label={"Last name"}
-                        placeholder="Enter your last name"
+                        label={t("field.last-name")}
+                        placeholder={t("placeholder.last-name")}
                         error={!!errors?.lastName}
                         helperText={errors?.lastName?.message}
                         {...register("lastName", {
-                            required: "This field is required",
+                            required: t("validation.required"),
                             setValueAs: (value) => value.trim(),
                         })}
                     />
                     <TextField
-                        label={"Phone number"}
-                        placeholder="Enter your phone number"
+                        label={t("field.phone")}
+                        placeholder={t("placeholder.phone")}
                         error={!!errors?.phoneNumber}
                         helperText={errors?.phoneNumber?.message}
                         {...register("phoneNumber", {
-                            required: "This field is required",
+                            required: t("validation.required"),
                             setValueAs: (value) => value.trim(),
                         })}
                     />
                     <Button variant="contained" type="submit" sx={{ marginTop: "24px" }}>
-                        {`Next`}
+                        {t("button.next")}
                     </Button>
                 </Stack>
             </FormProvider>
