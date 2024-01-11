@@ -4,6 +4,8 @@ import Typography from "@mui/material/Typography";
 import { FormProvider, useForm } from "react-hook-form";
 import { OnboardingLayout } from "../../shared/ui/layouts/custom/SeparateLayout/OnboardingLayout";
 import { useNavigate } from "react-router-dom";
+import { LogoutButton } from "../../shared/ui/layouts/custom/SeparateLayout/components/LogoutButton";
+import Box from "@mui/material/Box";
 
 export function WelcomeOnBoardingPage() {
     // TODO: add validation
@@ -18,7 +20,13 @@ export function WelcomeOnBoardingPage() {
     };
 
     return (
-        <OnboardingLayout>
+        <OnboardingLayout
+            Header={
+                <Box sx={{ display: "flex", alignItems: "center", justifyContent: "flex-end", width: "100%" }}>
+                    <LogoutButton />
+                </Box>
+            }
+        >
             <Typography variant="h4" component="h1" pb={4}>
                 Welcome to Eccube!
             </Typography>
