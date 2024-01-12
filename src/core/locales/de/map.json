@@ -1,0 +1,74 @@
+{
+    "signup": {
+        "page.title": "Anmelden",
+        "have-account": "Haben Sie ein Eccube-Konto?",
+        "supplier.checkbox": "Ich bin Lieferant",
+        "success-page.title": "Erfolgreich registriert",
+        "success-page.description": "Wir haben Ihnen eine E-Mail mit einem Aktivierungslink gesendet. Bitte überprüfen Sie Ihre E-Mail und klicken Sie auf den Link, um Ihr Konto zu aktivieren."
+    },
+    "login": {
+        "page.title": "Einloggen",
+        "no-account": "Sie haben noch kein Eccube-Konto?"
+    },
+    "onboarding": {
+        "welcome-page.title": "Willkommen bei Eccube!",
+        "welcome-page.description": "Bevor wir beginnen, erzählen Sie uns bitte ein wenig über Ihr Unternehmen und sich selbst.\nBitte klicken Sie auf die Schaltfläche unten, um fortzufahren.",
+        "user-info-page.title": "Ihre Informationen",
+        "company-page.title": "Informationen zum Unternehmen",
+        "mollie-page.title": "Mollie verbinden",
+        "mollie-page.description": "Erfolgreich verbunden"
+    },
+    "sidebar": {
+        "banner-title1": "Wir sprechen gebäudemanagement",
+        "banner-description1": "Über 10 Jahre Kommunikation und Projektmanagement mit Handwerkern, Einkäufern, Unternehmern, Beratern... zu verschiedenen Themen rund um das Gebäudemanagement.",
+        "banner-title2": "Wir sichern ihr working capital",
+        "banner-description2": "Lange Zahlungsziele für Auftraggeber und schnelle Liquidität auf der Auftragsnehmerseite bieten für Kunden als auch für Handwerker die notwendige Flexibilität.",
+        "banner-title3": "Wir unterstützen sie mit prozessen und vorlagen",
+        "banner-description3": "Weitreichende Standards im Sektor des Gebäudemanagements sind in unseren Workflows integraler Bestandteil.",
+        "banner-title4": "Wir stehen für faire preise und hohe qualität",
+        "banner-description4": "Preistransparenz und bewertete Handwerker und Dienstleister sorgen nicht nur für ausgeglichenes Markangebot, sondern auch für faire Preise und bessere Qualität."
+    },
+    "button": {
+        "continue": "Weitermachen",
+        "login": "Einloggen",
+        "signup": "Anmelden",
+        "logout": "Ausloggen",
+        "activate": "Aktivieren",
+        "start": "Start",
+        "prev-step": "Vorheriger Schritt",
+        "next": "Nächster",
+        "save": "Speichern"
+    },
+    "field": {
+        "email": "E-Mail",
+        "password": "Passwort",
+        "confirm-password": "Bestätige das Passwort",
+        "first-name": "Vorname",
+        "last-name": "Nachname",
+        "phone": "Telefon",
+        "company-name": "Firmenname",
+        "company-address": "Firmenadresse"
+    },
+    "placeholder": {
+        "email": "Geben sie ihre E-Mail Adresse ein",
+        "password": "Geben Sie Ihr Passwort ein",
+        "confirm-password": "Passwort wiederholen",
+        "first-name": "Geben Sie Ihren Vornamen ein",
+        "last-name": "Geben Sie Ihren Nachnamen ein",
+        "phone": "Geben Sie Ihre Telefonnummer ein",
+        "company-name": "Geben Sie den Firmennamen ein",
+        "company-address": "Geben Sie die Firmenadresse ein"
+    },
+    "validation": {
+        "required": "Dieses Feld ist erforderlich",
+        "email": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
+        "email-already-exists": "E-Mail existiert bereits",
+        "password": "Das Passwort muss mindestens 8 Zeichen lang sein",
+        "password-confirmation": "Passwörter stimmen nicht überein",
+        "confirm-password": "Passwörter stimmen nicht überein",
+        "invalid-credentials": "Ungültige Anmeldeinformationen"
+    },
+    "common": {
+        "language": "Sprache"
+    }
+}

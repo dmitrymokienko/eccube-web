@@ -6,10 +6,11 @@ import { OnboardingLayout } from "../../shared/ui/layouts/custom/SeparateLayout/
 import { useNavigate } from "react-router-dom";
 import { LogoutButton } from "../../shared/ui/layouts/custom/SeparateLayout/components/LogoutButton";
 import Box from "@mui/material/Box";
+import { useTranslation } from "react-i18next";
 
 export function WelcomeOnBoardingPage() {
     // TODO: add validation
-    // TODO: add i18n
+    const { t } = useTranslation();
     const navigate = useNavigate();
 
     const form = useForm();
@@ -28,17 +29,15 @@ export function WelcomeOnBoardingPage() {
             }
         >
             <Typography variant="h4" component="h1" pb={4}>
-                Welcome to Eccube!
+                {t("onboarding.welcome-page.title")}
             </Typography>
             <FormProvider {...form}>
                 <Stack component="form" spacing={3} onSubmit={handleSubmit(onSubmit)}>
                     <Typography variant="body1" component="h1" gutterBottom>
-                        Before we start, please tell us a little bit about your company and yourself.
-                        <br />
-                        Please click the button below to continue.
+                        {t("onboarding.welcome-page.description")}
                     </Typography>
                     <Button variant="contained" type="submit" sx={{ marginTop: "24px" }}>
-                        Start
+                        {t("button.start")}
                     </Button>
                 </Stack>
             </FormProvider>

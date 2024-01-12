@@ -8,6 +8,7 @@ import { auth } from "../../entities/auth/model";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../shared/ui/providers/AuthProvider";
+import { useTranslation } from "react-i18next";
 
 export interface ILoginForm {
     email: string;
@@ -16,7 +17,7 @@ export interface ILoginForm {
 
 export function LoginPage() {
     // TODO: add validation
-    // TODO: add i18n
+    const { t } = useTranslation();
     const navigate = useNavigate();
 
     const { checkLoginState, userInfo } = useContext(AuthContext);
@@ -35,41 +36,41 @@ export function LoginPage() {
             }
             navigate("/onboarding");
         } catch (error) {
-            form.setError("email", { message: "Email or password is incorrect" });
+            form.setError("email", { message: t("validation.invalid-credentials") });
         }
     };
 
     return (
         <LoginLayout>
             <Typography variant="h4" component="h1" pb={4}>
-                Login
+                {t("login.page.title")}
             </Typography>
 
             <FormProvider {...form}>
                 <Stack component="form" spacing={1} onSubmit={handleSubmit(onSubmit)}>
                     <TextField
-                        label={"Email"}
-                        placeholder="Enter email"
+                        label={t("field.email")}
+                        placeholder={t("placeholder.email")}
                         error={!!errors?.email}
                         helperText={errors?.email?.message}
                         {...register("email", {
-                            required: "Email is required",
+                            required: t("validation.email"),
                             setValueAs: (value) => value.trim(),
                         })}
                     />
                     <TextField
                         type="password"
-                        label={"Password"}
-                        placeholder="Enter password"
+                        label={t("field.password")}
+                        placeholder={t("placeholder.password")}
                         error={!!errors?.password}
                         helperText={errors?.password?.message}
                         {...register("password", {
-                            required: "Password is required",
+                            required: t("validation.required"),
                             minLength: 6,
                         })}
                     />
                     <Button variant="contained" type="submit" sx={{ marginTop: "24px" }}>
-                        Continue
+                        {t("button.continue")}
                     </Button>
                 </Stack>
             </FormProvider>

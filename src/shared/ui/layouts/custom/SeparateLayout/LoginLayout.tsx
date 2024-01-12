@@ -12,12 +12,14 @@ import { SidebarRandomContent, getRandomInt } from "./lib/utils";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { Theme } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export interface ILoginLayoutProps extends ISeparateLayoutProps {}
 
 export function LoginLayout(props: ILoginLayoutProps) {
     const { children } = props;
 
+    const { t } = useTranslation();
     const navigate = useNavigate();
     const isCompactView = useMediaQuery<Theme>((theme) => theme.breakpoints.down(SEPARATE_LAYOUT_COMPACT_BREAKPOINT));
 
@@ -37,7 +39,8 @@ export function LoginLayout(props: ILoginLayoutProps) {
                         width: "100%",
                     }}
                 >
-                    Don&apos;t have an Eccube account?
+                    {t("login.no-account")}
+
                     <Button
                         variant="outlined"
                         type="submit"
@@ -47,17 +50,17 @@ export function LoginLayout(props: ILoginLayoutProps) {
                             navigate("/"); // signup page
                         }}
                     >
-                        Sign up
+                        {t("button.signup")}
                     </Button>
                 </Box>
             }
             Sidebar={
                 <Box pt={6}>
                     <Typography variant="h5" component="h1" color="custom.const.white">
-                        {sidebar?.title ?? {}}
+                        {t(sidebar?.title ?? "")}
                     </Typography>
                     <Typography variant="body1" color="custom.const.white" mt={5}>
-                        {sidebar?.description ?? {}}
+                        {t(sidebar?.description ?? "")}
                     </Typography>
                 </Box>
             }

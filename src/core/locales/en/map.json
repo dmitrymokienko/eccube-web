@@ -1,0 +1,74 @@
+{
+    "signup": {
+        "page.title": "Sign up",
+        "have-account": "Have an Eccube account?",
+        "supplier.checkbox": "I am a supplier",
+        "success-page.title": "Successfully registered",
+        "success-page.description": "We have sent you an email with an activation link. Please check your email and click on the link to activate your account."
+    },
+    "login": {
+        "page.title": "Login",
+        "no-account": "Don't have an Eccube account?"
+    },
+    "onboarding": {
+        "welcome-page.title": "Welcome to Eccube!",
+        "welcome-page.description": "Before we start, please tell us a little bit about your company and yourself.\nPlease click the button below to continue.",
+        "user-info-page.title": "Your information",
+        "company-page.title": "Company details",
+        "mollie-page.title": "Mollie connect",
+        "mollie-page.description": "Successfully connected"
+    },
+    "sidebar": {
+        "banner-title1": "We speak building management",
+        "banner-description1": "Over 10 years of communication and project management with craftsmen, purchasers, contractors, consultants... on various topics related to facility management.",
+        "banner-title2": "We secure your working capital",
+        "banner-description2": "Long payment terms for clients and fast liquidity on the contractor side provide the necessary flexibility for both customers and tradespeople.",
+        "banner-title3": "We support you with processes and templates",
+        "banner-description3": "Extensive standards in the building management sector are an integral part of our workflows.",
+        "banner-title4": "We stand for fair prices and high quality",
+        "banner-description4": "Price transparency and rated tradespeople and service providers not only ensure a balanced market offer, but also fair prices and better quality."
+    },
+    "button": {
+        "continue": "Continue",
+        "login": "Login",
+        "signup": "Sign up",
+        "logout": "Logout",
+        "activate": "Activate",
+        "start": "Start",
+        "prev-step": "Previous step",
+        "next": "Next",
+        "save": "Save"
+    },
+    "field": {
+        "email": "Email",
+        "password": "Password",
+        "confirm-password": "Confirm password",
+        "first-name": "First name",
+        "last-name": "Last name",
+        "phone": "Phone",
+        "company-name": "Company name",
+        "company-address": "Company address"
+    },
+    "placeholder": {
+        "email": "Enter your email",
+        "password": "Enter your password",
+        "confirm-password": "Repeat password",
+        "first-name": "Enter your first name",
+        "last-name": "Enter your last name",
+        "phone": "Enter your phone number",
+        "company-name": "Enter your company name",
+        "company-address": "Enter your company address"
+    },
+    "validation": {
+        "required": "This field is required",
+        "email": "Please enter a valid email address",
+        "email-already-exists": "Email already exists",
+        "password": "Password must be at least 8 characters long",
+        "password-confirmation": "Passwords do not match",
+        "confirm-password": "Passwords do not match",
+        "invalid-credentials": "Email or password is incorrect"
+    },
+    "common": {
+        "language": "Language"
+    }
+}

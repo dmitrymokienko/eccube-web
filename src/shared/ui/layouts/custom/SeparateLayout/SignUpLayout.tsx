@@ -12,12 +12,14 @@ import { SidebarRandomContent, getRandomInt } from "./lib/utils";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { Theme } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export interface ISignUpLayoutProps extends ISeparateLayoutProps {}
 
 export function SignUpLayout(props: ISignUpLayoutProps) {
     const { children } = props;
 
+    const { t } = useTranslation();
     const navigate = useNavigate();
 
     const isCompactView = useMediaQuery<Theme>((theme) => theme.breakpoints.down(SEPARATE_LAYOUT_COMPACT_BREAKPOINT));
@@ -38,7 +40,8 @@ export function SignUpLayout(props: ISignUpLayoutProps) {
                         width: "100%",
                     }}
                 >
-                    Have an Eccube account?
+                    {t("signup.have-account")}
+
                     <Button
                         variant="outlined"
                         type="submit"
@@ -48,17 +51,18 @@ export function SignUpLayout(props: ISignUpLayoutProps) {
                             navigate("/login");
                         }}
                     >
-                        Login
+                        {t("button.login")}
                     </Button>
+                    {/* <LangSwitcher /> */}
                 </Box>
             }
             Sidebar={
                 <Box pt={6}>
                     <Typography variant="h5" component="h1" color="custom.const.white">
-                        {sidebar?.title ?? {}}
+                        {t(sidebar?.title ?? "")}
                     </Typography>
                     <Typography variant="body1" color="custom.const.white" mt={5}>
-                        {sidebar?.description ?? {}}
+                        {t(sidebar?.description ?? "")}
                     </Typography>
                 </Box>
             }

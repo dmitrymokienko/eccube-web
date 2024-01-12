@@ -12,6 +12,7 @@ import { auth } from "../../entities/auth/model";
 import { UserType } from "../../entities/currentUser/types";
 import { SignUpLayout } from "../../shared/ui/layouts/custom/SeparateLayout/SignUpLayout";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export interface ISignUpForm {
     email: string;
@@ -20,9 +21,9 @@ export interface ISignUpForm {
     isSupplier: boolean;
 }
 
+// TODO: add validation
 export function SignUpPage() {
-    // TODO: add validation
-    // TODO: add i18n
+    const { t } = useTranslation();
     const navigate = useNavigate();
 
     const form = useForm<ISignUpForm>();
@@ -34,7 +35,7 @@ export function SignUpPage() {
         if (password !== confirmPassword) {
             form.setError("confirmPassword", {
                 type: "manual",
-                message: "Password does not match",
+                message: t("validation.password-confirmation"),
             });
             return;
         }
@@ -47,7 +48,7 @@ export function SignUpPage() {
         } catch (error) {
             form.setError("email", {
                 type: "manual",
-                message: "Email already exists",
+                message: t("validation.email-already-exists"),
             });
         }
     };
@@ -55,50 +56,50 @@ export function SignUpPage() {
     return (
         <SignUpLayout>
             <Typography variant="h4" component="h1" pb={4}>
-                Sign Up
+                {t("signup.page.title")}
             </Typography>
             <FormProvider {...form}>
                 <Stack component="form" spacing={1} onSubmit={handleSubmit(onSubmit)}>
                     <TextField
-                        label={"Email"}
-                        placeholder="Enter email"
+                        label={t("field.email")}
+                        placeholder={t("placeholder.email")}
                         error={!!errors?.email}
                         helperText={errors?.email?.message}
                         {...register("email", {
-                            required: "Email is required",
+                            required: t("validation.required"),
                             setValueAs: (value) => value.trim(),
                         })}
                     />
                     <TextField
                         type="password"
-                        label={"Password"}
-                        placeholder="Enter password"
+                        label={t("field.password")}
+                        placeholder={t("placeholder.password")}
                         error={!!errors?.password}
                         helperText={errors?.password?.message}
                         {...register("password", {
-                            required: "Password is required",
+                            required: t("validation.required"),
                             minLength: 6,
                         })}
                     />
                     <TextField
                         type="password"
-                        label={"Confirm Password"}
-                        placeholder="Repeat password"
+                        label={t("field.confirm-password")}
+                        placeholder={t("placeholder.confirm-password")}
                         error={!!errors?.confirmPassword}
                         helperText={errors?.confirmPassword?.message}
                         {...register("confirmPassword", {
-                            required: "Confirm password is required",
+                            required: t("validation.required"),
                             minLength: 6,
                         })}
                     />
                     <FormGroup>
                         <FormControlLabel
                             control={<Checkbox {...register("isSupplier")} />}
-                            label={"I am a supplier"}
+                            label={t("signup.supplier.checkbox")}
                         />
                     </FormGroup>
                     <Button variant="contained" type="submit" sx={{ marginTop: "24px" }}>
-                        Continue
+                        {t("button.continue")}
                     </Button>
                 </Stack>
             </FormProvider>
