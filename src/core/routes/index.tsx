@@ -7,6 +7,7 @@ import { ProtectedRoute } from "./ProtectedRoute";
 import { WelcomeOnBoardingPage } from "../../pages/onboarding/page";
 import { UserOnBoardingPage } from "../../pages/onboarding/user/page";
 import { CompanyOnBoardingPage } from "../../pages/onboarding/company/page";
+import {PaymentsPage} from "../../pages/payments/payments-page.tsx";
 
 export const router = createBrowserRouter([
     {
@@ -57,7 +58,11 @@ export const router = createBrowserRouter([
         ],
     },
     {
+      path: "/main",
+      element: <PaymentsPage />
+    },
+    {
         path: "*",
         element: <div>404</div>,
-    },
+    }
 ]);
