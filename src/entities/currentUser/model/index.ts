@@ -1,22 +1,22 @@
-import { combine, createEffect, createEvent, createStore } from "effector";
-import { IUser } from "../types";
-import { deleteUserApi, getUserInfoApi, updateUserApi } from "../api";
-import { Nullable } from "../../../shared/types";
+import { combine, createEffect, createEvent, createStore } from 'effector'
+import { IUser } from '../types'
+import { deleteUserApi, getUserInfoApi, updateUserApi } from '../api'
+import { Nullable } from '../../../shared/types'
 
-const $info = createStore<Nullable<Partial<IUser>>>(null);
-const setInfo = createEvent<Nullable<Partial<IUser>>>();
-const fetchInfoFx = createEffect(getUserInfoApi);
-$info.on(setInfo, (_, v) => v).on(fetchInfoFx.doneData, (_, v) => v);
+const $info = createStore<Nullable<Partial<IUser>>>(null)
+const setInfo = createEvent<Nullable<Partial<IUser>>>()
+const fetchInfoFx = createEffect(getUserInfoApi)
+$info.on(setInfo, (_, v) => v).on(fetchInfoFx.doneData, (_, v) => v)
 
-const updateFx = createEffect(updateUserApi);
-const deleteFx = createEffect(deleteUserApi);
+const updateFx = createEffect(updateUserApi)
+const deleteFx = createEffect(deleteUserApi)
 
 const $isLoading = combine(
-    fetchInfoFx.pending,
-    updateFx.pending,
-    deleteFx.pending,
-    (fetch, update, _delete) => fetch || update || _delete
-);
+  fetchInfoFx.pending,
+  updateFx.pending,
+  deleteFx.pending,
+  (fetch, update, _delete) => fetch || update || _delete
+)
 
 // TODO: add snackbar notifications
 // sample({
@@ -28,9 +28,9 @@ const $isLoading = combine(
 // })
 
 export const currentUser = {
-    $info,
-    setInfo,
-    fetchInfoFx,
-    updateFx,
-    $isLoading,
-};
+  $info,
+  setInfo,
+  fetchInfoFx,
+  updateFx,
+  $isLoading,
+}

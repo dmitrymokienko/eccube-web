@@ -1,5 +1,6 @@
-import { IOnboardingUserDto } from "../../currentUser/types/dto";
+import { IOnboardingUserDto } from '../../currentUser/types/dto'
 
-export interface IOnboardingUserData extends Pick<IOnboardingUserDto, "firstName" | "lastName" | "phoneNumber"> {}
+export interface IOnboardingUserData
+  extends Pick<IOnboardingUserDto, 'firstName' | 'lastName' | 'phoneNumber'> {}
 
-export interface IOnboardingCompanyData extends Pick<IOnboardingUserDto, "company" | "address"> {}
+export interface IOnboardingCompanyData extends Pick<IOnboardingUserDto, 'company' | 'address'> {}
