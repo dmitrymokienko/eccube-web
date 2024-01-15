@@ -6,6 +6,7 @@ import ReactJson from 'react-json-view'
 
 
 import {useCallback, useState} from "react";
+import {defaultApiClient} from "../../core/api/apiClient.ts";
 
 export const Logo = () => {
     return <div style={{width: 200, height: 200, paddingTop: 20, borderRadius: '50%'}}>
@@ -110,7 +111,9 @@ export function PaymentsPage() {
 
     const [payment, setPayment] = useState<typeof defaultPayment>(defaultPayment);
 
-    const makePayment = useCallback((p: PaymentType) => {
+    const makePayment = useCallback(async (p: PaymentType) => {
+        const res = await defaultApiClient.post<unknown>('/payments/create', p);
+        console.log('res::', res);
 
     }, [])
 
