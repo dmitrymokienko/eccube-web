@@ -37,7 +37,8 @@
         "start": "Start",
         "prev-step": "Vorheriger Schritt",
         "next": "Nächster",
-        "save": "Speichern"
+        "save": "Speichern",
+        "makePayment": "Zahlung durchführen"
     },
     "field": {
         "email": "E-Mail",
