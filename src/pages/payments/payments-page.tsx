@@ -6,6 +6,7 @@ import ReactJson from 'react-json-view'
 
 
 import {useCallback, useState} from "react";
+import {defaultApiClient} from "../../core/api/apiClient.ts";
 
 export const Logo = () => {
     return <div style={{width: 200, height: 200, paddingTop: 20, borderRadius: '50%'}}>
@@ -109,8 +110,11 @@ type PaymentType = typeof defaultPayment;
 export function PaymentsPage() {
 
     const [payment, setPayment] = useState<typeof defaultPayment>(defaultPayment);
+    const [payments, setPayments] = useState<any[]>([])
 
-    const makePayment = useCallback((p: PaymentType) => {
+    const makePayment = useCallback(async (p: PaymentType) => {
+        const payment = await defaultApiClient.post<unknown>('/payments/create', p);
+        setPayments(payments => payments.concat(payment))
 
     }, [])
 
@@ -118,6 +122,15 @@ export function PaymentsPage() {
     return (
         <div style={{background: '#ddd', minHeight: '100vh'}}>
             <Logo/>
+            <div style={{maxWidth: 200, margin: '24px auto', display: 'block'}}>
+                <h2>Payments list:</h2>
+                {payments.map((payment, i) => (
+                    // @ts-ignore
+                    <Button key={i} variant="contained" type="submit" sx={{ marginTop: "24px" }} onClick={() => window.open(payment._links.checkout.href, '_blank')} >
+                        {payment.id}
+                    </Button>
+                ))}
+            </div>
             <Button variant="contained" type="submit" sx={{maxWidth: 200, margin: '24px auto', display: 'block'}}
                     onClick={() => makePayment(payment)}>
                 {t("button.makePayment")}
