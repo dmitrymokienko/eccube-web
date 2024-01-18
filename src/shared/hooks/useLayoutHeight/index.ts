@@ -7,7 +7,7 @@ export type UseLayoutHeightOptions = {
 }
 
 export function useLayoutHeight(options?: UseLayoutHeightOptions) {
-  const { interval = 100, defaultHeight = '100vh', offset = 0 } = options || {}
+  const { defaultHeight = '100vh', offset = 0 } = options || {}
 
   // On some mobile browsers, most commonly Chrome and Safari on iOS
   // 100vh actually refers to outerHeight.
