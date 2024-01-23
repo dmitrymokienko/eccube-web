@@ -4,32 +4,33 @@ import { useEffect, useRef } from 'react'
 import { OnboardingLayout } from '../../../shared/ui/layouts/custom/SeparateLayout/OnboardingLayout'
 import { PrevPageButton } from '../../../shared/ui/layouts/custom/SeparateLayout/components/PrevPageButton'
 import { useNavigate } from 'react-router-dom'
-import { getMollieOAuth2AccessTokenApi } from '../../../entities/onboarding/api'
+import { fetchMollieOAuth2AccessTokenApi } from '../../../entities/mollie/api'
 import Box from '@mui/material/Box'
 import { LogoutButton } from '../../../shared/ui/layouts/custom/SeparateLayout/components/LogoutButton'
 import { useTranslation } from 'react-i18next'
+import { onboarding } from '../../../entities/onboarding/model'
 
 export function MollieCallbackPage() {
   const { t } = useTranslation()
   const navigate = useNavigate()
 
   const called = useRef(false)
-  // const { checkLoginState, loggedIn } = useContext(AuthContext);
 
   useEffect(() => {
-    ;(async () => {
+    const fetch = async () => {
       try {
         if (called.current) return // prevent rerender caused by StrictMode
         called.current = true
         const search = window.location.search
         const code = new URLSearchParams(search).get('code')
-        const res = await getMollieOAuth2AccessTokenApi()(code!)
-        console.log('response: ', res)
+        await fetchMollieOAuth2AccessTokenApi()(code!)
+        await onboarding.createMollieProfileFx()
       } catch (err) {
         console.error(err)
       }
-    })()
-  }, [navigate])
+    }
+    fetch()
+  }, [])
 
   const onSubmit = async () => {
     navigate('/main')

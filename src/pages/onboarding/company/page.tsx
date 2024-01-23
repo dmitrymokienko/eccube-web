@@ -9,40 +9,51 @@ import { onboarding } from '../../../entities/onboarding/model'
 import { OnboardingLayout } from '../../../shared/ui/layouts/custom/SeparateLayout/OnboardingLayout'
 import { PrevPageButton } from '../../../shared/ui/layouts/custom/SeparateLayout/components/PrevPageButton'
 import { useNavigate } from 'react-router-dom'
-import { startMollieOAuth2Api } from '../../../entities/onboarding/api'
+import { startMollieOAuth2Api } from '../../../entities/mollie/api'
 import Box from '@mui/material/Box'
 import { LogoutButton } from '../../../shared/ui/layouts/custom/SeparateLayout/components/LogoutButton'
 import { useTranslation } from 'react-i18next'
 
 export function CompanyOnBoardingPage() {
+  // TODO: add all fields by https://docs.mollie.com/reference/v2/profiles-api/create-profile
   // TODO: add validation
   const { t } = useTranslation()
   const navigate = useNavigate()
 
-  const { company, updateData } = useUnit({
+  const { company, createCompany } = useUnit({
     company: onboarding.$company,
-    updateData: onboarding.sendDataFx,
+    createCompany: onboarding.createOrganizationFx,
   })
 
   const form = useForm<IOnboardingCompanyData>({
     defaultValues: {
-      company: company?.company,
-      address: company?.address,
+      name: company?.name,
+      website: company?.website,
+      email: company?.email,
+      phone: company?.phone,
     },
   })
   const { handleSubmit, register, formState } = form
   const { errors } = formState
 
   const startMollieAuthProcess = async () => {
-    const data = await startMollieOAuth2Api()()
-    const { authorizationUri } = data || {}
-    window.location.assign(authorizationUri)
+    try {
+      const data = await startMollieOAuth2Api()()
+      const { authorizationUri } = data || {}
+      window.location.assign(authorizationUri)
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   const onSubmit = async (data: IOnboardingCompanyData) => {
     onboarding.setCompanyInfo(data)
-    await updateData()
-    startMollieAuthProcess()
+    try {
+      await createCompany()
+      startMollieAuthProcess()
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   return (
@@ -58,7 +69,7 @@ export function CompanyOnBoardingPage() {
         >
           <PrevPageButton
             onClick={() => {
-              navigate('/onboarding')
+              navigate('/onboarding/user')
             }}
           >
             {t('button.prev-step')}
@@ -76,20 +87,50 @@ export function CompanyOnBoardingPage() {
           <TextField
             label={t('field.company-name')}
             placeholder={t('placeholder.company-name')}
-            error={!!errors?.company}
-            helperText={errors?.company?.message}
-            {...register('company', {
+            error={!!errors?.name}
+            helperText={errors?.name?.message}
+            {...register('name', {
+              required: t('validation.required'),
+              setValueAs: (value) => value.trim(),
+            })}
+          />
+          <TextField
+            label={t('field.company-email')}
+            placeholder={t('placeholder.company-email')}
+            error={!!errors?.email}
+            helperText={errors?.email?.message}
+            {...register('email', {
+              required: t('validation.required'),
+              setValueAs: (value) => value.trim(),
+            })}
+          />
+          <TextField
+            label={t('field.company-website')}
+            placeholder={t('placeholder.company-website')}
+            error={!!errors?.website}
+            helperText={errors?.website?.message}
+            {...register('website', {
+              required: t('validation.required'),
+              setValueAs: (value) => value.trim(),
+            })}
+          />
+          <TextField
+            label={t('field.company-phone')}
+            placeholder={t('placeholder.company-phone')}
+            error={!!errors?.phone}
+            helperText={errors?.phone?.message}
+            {...register('phone', {
               required: t('validation.required'),
               setValueAs: (value) => value.trim(),
             })}
           />
           <TextField
             label={t('field.company-address')}
-            placeholder={'placeholder.company-address'}
+            placeholder={t('placeholder.company-address')}
             error={!!errors?.address}
             helperText={errors?.address?.message}
             {...register('address', {
-              required: t('validation.required'),
+              // required: t('validation.required'),
               setValueAs: (value) => value.trim(),
             })}
           />

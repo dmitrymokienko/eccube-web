@@ -11,10 +11,9 @@ export interface ICreateUserDto {
 export interface IOnboardingUserDto {
   firstName: string
   lastName: string
-  phoneNumber: string
-  company: string
-  address: string
-  //   avatar: string
+  phone: string
+  // address: string
+  // avatar: string
 }
 
 // TODO: update this interface Omit some props

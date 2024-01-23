@@ -1,8 +1,7 @@
 import { useContext } from 'react'
 import { AuthContext } from '../../shared/ui/providers/AuthProvider'
-import CircularProgress from '@mui/material/CircularProgress'
-import Box from '@mui/material/Box'
 import { Navigate, Outlet } from 'react-router-dom'
+import { Loader } from '../../shared/ui/components/Loader'
 
 export function ProtectedRoute() {
   const { loggedIn } = useContext(AuthContext)
@@ -12,18 +11,7 @@ export function ProtectedRoute() {
   }
 
   if (loggedIn === null) {
-    return (
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          height: '100vh',
-        }}
-      >
-        <CircularProgress />
-      </Box>
-    )
+    return <Loader visible />
   }
 
   return <Outlet />
