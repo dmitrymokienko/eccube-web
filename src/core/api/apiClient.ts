@@ -19,7 +19,6 @@ export class ApiClient {
         ...headers,
       },
       withCredentials: true,
-      //   timeout: 10 * 1000,
     })
   }
 

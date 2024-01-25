@@ -4,11 +4,13 @@ import EccubeLogo from '../../assets/icons/eccube-logo-white.svg?react'
 import { SxProps, Theme } from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { LangSwitcher } from '../components/LangSwitcher/LangSwitcher'
+import { Loader as DefaultLoader } from '../components/Loader'
 
 export interface ISeparateLayoutProps {
   children: ReactNode
   Header?: ReactNode
   Sidebar?: ReactNode
+  Loader?: ReactNode
   SideBarProps?: {
     sx?: SxProps
   }
@@ -19,6 +21,10 @@ export interface ISeparateLayoutProps {
     sx?: SxProps
   }
   MainProps?: {
+    sx?: SxProps
+  }
+  LoaderProps?: {
+    visible?: boolean
     sx?: SxProps
   }
   showLangSwitcher?: boolean
@@ -34,16 +40,22 @@ export function SeparateLayout(props: ISeparateLayoutProps) {
     children,
     Header = null,
     Sidebar = null,
+    Loader = null,
     WrapperProps = {},
     HeaderProps = {},
     SideBarProps = {},
     MainProps = {},
+    LoaderProps = {},
     showLangSwitcher = true,
   } = props
 
   // special breakpoint for current layout
   const isCompactView = useMediaQuery<Theme>((theme) =>
     theme.breakpoints.down(SEPARATE_LAYOUT_COMPACT_BREAKPOINT)
+  )
+
+  const LoaderComponent = Loader || (
+    <DefaultLoader visible={LoaderProps?.visible ?? false} sx={LoaderProps?.sx ?? {}} />
   )
 
   if (isCompactView) {
@@ -63,6 +75,8 @@ export function SeparateLayout(props: ISeparateLayoutProps) {
           ...(WrapperProps?.sx || {}),
         }}
       >
+        {/* loader */}
+        {LoaderComponent}
         {/* header */}
         <Box
           component="header"
@@ -124,6 +138,8 @@ export function SeparateLayout(props: ISeparateLayoutProps) {
         ...(WrapperProps?.sx || {}),
       }}
     >
+      {/* loader */}
+      {LoaderComponent}
       {/* header */}
       <Box
         component="header"

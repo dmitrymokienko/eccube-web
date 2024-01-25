@@ -34,10 +34,10 @@ export function SignUpSuccessPage() {
     <SignUpLayout>
       <Stack spacing={4}>
         <Typography variant="h4" component="h1" pb={2}>
-          {t('success-page.title')}
+          {t('signup.success-page.title')}
         </Typography>
         <Typography variant="body1" pb={4}>
-          {t('success-page.description')}
+          {t('signup.success-page.description')}
         </Typography>
       </Stack>
       <Button

@@ -18,13 +18,16 @@ export function UserOnBoardingPage() {
   const { t } = useTranslation()
   const navigate = useNavigate()
 
-  const user = useUnit(onboarding.$user)
+  const { user, updateData } = useUnit({
+    user: onboarding.$user,
+    updateData: onboarding.updateUserFx,
+  })
 
   const form = useForm<IOnboardingUserData>({
     defaultValues: {
       firstName: user?.firstName,
       lastName: user?.lastName,
-      phoneNumber: user?.phoneNumber,
+      phone: user?.phone,
     },
   })
   const { handleSubmit, register, formState } = form
@@ -32,7 +35,12 @@ export function UserOnBoardingPage() {
 
   const onSubmit = async (data: IOnboardingUserData) => {
     onboarding.setUserInfo(data)
-    navigate('/onboarding/company')
+    try {
+      await updateData()
+      navigate('/onboarding/company')
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   return (
@@ -86,9 +94,9 @@ export function UserOnBoardingPage() {
           <TextField
             label={t('field.phone')}
             placeholder={t('placeholder.phone')}
-            error={!!errors?.phoneNumber}
-            helperText={errors?.phoneNumber?.message}
-            {...register('phoneNumber', {
+            error={!!errors?.phone}
+            helperText={errors?.phone?.message}
+            {...register('phone', {
               required: t('validation.required'),
               setValueAs: (value) => value.trim(),
             })}

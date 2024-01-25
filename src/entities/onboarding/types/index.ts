@@ -1,6 +1,12 @@
 import { IOnboardingUserDto } from '../../currentUser/types/dto'
 
 export interface IOnboardingUserData
-  extends Pick<IOnboardingUserDto, 'firstName' | 'lastName' | 'phoneNumber'> {}
+  extends Pick<IOnboardingUserDto, 'firstName' | 'lastName' | 'phone'> {}
 
-export interface IOnboardingCompanyData extends Pick<IOnboardingUserDto, 'company' | 'address'> {}
+export interface IOnboardingCompanyData {
+  name: string
+  website: string
+  email: string
+  phone: string
+  address?: string
+}

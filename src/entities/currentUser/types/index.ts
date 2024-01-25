@@ -13,7 +13,7 @@ export interface IUser {
   company: string
   createdAt: string
   updatedAt: string
-  phoneNumber: string
+  phone: string
   type: UserType
   isActive: boolean
   isVerified: boolean

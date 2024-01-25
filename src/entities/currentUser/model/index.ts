@@ -5,11 +5,12 @@ import { Nullable } from '../../../shared/types'
 
 const $info = createStore<Nullable<Partial<IUser>>>(null)
 const setInfo = createEvent<Nullable<Partial<IUser>>>()
-const fetchInfoFx = createEffect(getUserInfoApi)
-$info.on(setInfo, (_, v) => v).on(fetchInfoFx.doneData, (_, v) => v)
 
+const fetchInfoFx = createEffect(getUserInfoApi)
 const updateFx = createEffect(updateUserApi)
 const deleteFx = createEffect(deleteUserApi)
+
+$info.on(setInfo, (_, v) => v).on(fetchInfoFx.doneData, (_, v) => v)
 
 const $isLoading = combine(
   fetchInfoFx.pending,
