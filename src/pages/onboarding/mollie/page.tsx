@@ -1,14 +1,14 @@
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import { useEffect, useRef } from 'react'
-import { OnboardingLayout } from '../../../shared/ui/layouts/custom/SeparateLayout/OnboardingLayout'
-import { PrevPageButton } from '../../../shared/ui/layouts/custom/SeparateLayout/components/PrevPageButton'
 import { useNavigate } from 'react-router-dom'
-import { fetchMollieOAuth2AccessTokenApi } from '../../../entities/mollie/api'
 import Box from '@mui/material/Box'
-import { LogoutButton } from '../../../shared/ui/layouts/custom/SeparateLayout/components/LogoutButton'
 import { useTranslation } from 'react-i18next'
-import { onboarding } from '../../../entities/onboarding/model'
+import { onboarding } from '@/entities/onboarding/model'
+import { LogoutButton } from '@/shared/ui/layouts/custom/SeparateLayout/components/LogoutButton'
+import { fetchMollieOAuth2AccessTokenApi } from '@/entities/mollie/api'
+import { OnboardingLayout } from '@/shared/ui/layouts/custom/SeparateLayout/OnboardingLayout'
+import { PrevPageButton } from '@/shared/ui/layouts/custom/SeparateLayout/components/PrevPageButton'
 
 export function MollieCallbackPage() {
   const { t } = useTranslation()
@@ -23,7 +23,8 @@ export function MollieCallbackPage() {
         called.current = true
         const search = window.location.search
         const code = new URLSearchParams(search).get('code')
-        await fetchMollieOAuth2AccessTokenApi()(code!)
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const { accessToken } = await fetchMollieOAuth2AccessTokenApi()(code!)
         await onboarding.createMollieProfileFx()
       } catch (err) {
         console.error(err)
