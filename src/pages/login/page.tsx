@@ -30,11 +30,11 @@ export function LoginPage() {
     try {
       await auth.loginFx(data)
       await checkLoginState()
-      if (userInfo?.isOnboardingPassed) {
+      if (userInfo?.isKybPassed) {
         navigate('/main')
         return
       }
-      navigate('/onboarding')
+      navigate('/kyb')
     } catch (error) {
       form.setError('email', { message: t('validation.invalid-credentials') })
     }

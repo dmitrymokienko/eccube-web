@@ -1,5 +1,5 @@
 import { combine, createEffect, createEvent, createStore, sample } from 'effector'
-import { IOnboardingCompanyData, IOnboardingUserData } from '../types'
+import { IKybCompanyData, IKybData } from '../types'
 import { Nullable } from '../../../shared/types'
 import { currentUser } from '../../currentUser/model'
 import { createOrganizationApi, updateUserApi } from '../../currentUser/api'
@@ -12,11 +12,11 @@ const updateUserFx = createEffect(async () => {
   return await updateUserApi(data)
 })
 
-const $user = createStore<Nullable<IOnboardingUserData>>(null)
-const setUserInfo = createEvent<Nullable<IOnboardingUserData>>()
+const $user = createStore<Nullable<IKybData>>(null)
+const setUserInfo = createEvent<Nullable<IKybData>>()
 
-const $company = createStore<Nullable<IOnboardingCompanyData>>(null)
-const setCompanyInfo = createEvent<Nullable<IOnboardingCompanyData>>()
+const $company = createStore<Nullable<IKybCompanyData>>(null)
+const setCompanyInfo = createEvent<Nullable<IKybCompanyData>>()
 
 $user.on(setUserInfo, (_, payload) => payload).on(reset, () => null)
 $company.on(setCompanyInfo, (_, payload) => payload).on(reset, () => null)
@@ -48,7 +48,7 @@ sample({
 //   target: reset,
 // })
 
-export const onboarding = {
+export const kyb = {
   $user,
   $company,
   setUserInfo,

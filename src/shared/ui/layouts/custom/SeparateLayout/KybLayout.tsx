@@ -10,9 +10,9 @@ import EccubeBg from '../../../../assets/images/eccube_bg.jpeg'
 import { SidebarRandomContent, getRandomInt } from './lib/utils'
 import { useTranslation } from 'react-i18next'
 
-export interface IOnboardingLayoutProps extends ISeparateLayoutProps {}
+export interface IKybLayoutProps extends ISeparateLayoutProps {}
 
-export function OnboardingLayout(props: IOnboardingLayoutProps) {
+export function KybLayout(props: IKybLayoutProps) {
   const { children, Header = null } = props
 
   const { t } = useTranslation()

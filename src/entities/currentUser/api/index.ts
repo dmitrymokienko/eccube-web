@@ -1,5 +1,5 @@
 import { defaultApiClient } from '../../../core/api/apiClient'
-import { IOnboardingCompanyData } from '../../onboarding/types'
+import { IKybCompanyData } from '../../kyb/types'
 import { IUser } from '../types'
 import { IUpdateUserDto } from '../types/dto'
 
@@ -19,10 +19,7 @@ export async function deleteUserApi() {
 }
 
 // TODO: update! now only required fields
-export async function createOrganizationApi(data: IOnboardingCompanyData) {
-  const res = await defaultApiClient.post<IOnboardingCompanyData, unknown>(
-    '/v1/organization/create',
-    data
-  )
+export async function createOrganizationApi(data: IKybCompanyData) {
+  const res = await defaultApiClient.post<IKybCompanyData, unknown>('/v1/organization/create', data)
   return res
 }
