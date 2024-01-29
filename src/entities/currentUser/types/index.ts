@@ -17,7 +17,7 @@ export interface IUser {
   type: UserType
   isActive: boolean
   isVerified: boolean
-  isOnboardingPassed: boolean
+  isKybPassed: boolean
 }
 
 export interface ILoginUserResponse {

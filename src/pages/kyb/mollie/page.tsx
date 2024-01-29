@@ -1,14 +1,14 @@
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import { useEffect, useRef } from 'react'
-import { OnboardingLayout } from '../../../shared/ui/layouts/custom/SeparateLayout/OnboardingLayout'
+import { KybLayout } from '../../../shared/ui/layouts/custom/SeparateLayout/KybLayout'
 import { PrevPageButton } from '../../../shared/ui/layouts/custom/SeparateLayout/components/PrevPageButton'
 import { useNavigate } from 'react-router-dom'
 import { fetchMollieOAuth2AccessTokenApi } from '../../../entities/mollie/api'
 import Box from '@mui/material/Box'
 import { LogoutButton } from '../../../shared/ui/layouts/custom/SeparateLayout/components/LogoutButton'
 import { useTranslation } from 'react-i18next'
-import { onboarding } from '../../../entities/onboarding/model'
+import { kyb } from '../../../entities/kyb/model'
 
 export function MollieCallbackPage() {
   const { t } = useTranslation()
@@ -24,7 +24,7 @@ export function MollieCallbackPage() {
         const search = window.location.search
         const code = new URLSearchParams(search).get('code')
         await fetchMollieOAuth2AccessTokenApi()(code!)
-        await onboarding.createMollieProfileFx()
+        await kyb.createMollieProfileFx()
       } catch (err) {
         console.error(err)
       }
@@ -37,7 +37,7 @@ export function MollieCallbackPage() {
   }
 
   return (
-    <OnboardingLayout
+    <KybLayout
       Header={
         <Box
           sx={{
@@ -49,7 +49,7 @@ export function MollieCallbackPage() {
         >
           <PrevPageButton
             onClick={() => {
-              navigate('/onboarding')
+              navigate('/kyb')
             }}
           >
             {t('button.prev-step')}
@@ -60,14 +60,14 @@ export function MollieCallbackPage() {
       }
     >
       <Typography variant="h4" component="h1" pb={4}>
-        {t('onboarding.mollie-page.title')}
+        {t('kyb.mollie-page.title')}
       </Typography>
       <Typography variant="body1" component="h1" gutterBottom>
-        {t('onboarding.mollie-page.description')}
+        {t('kyb.mollie-page.description')}
       </Typography>
       <Button variant="contained" sx={{ marginTop: '24px' }} onClick={onSubmit}>
         {t('button.continue')}
       </Button>
-    </OnboardingLayout>
+    </KybLayout>
   )
 }

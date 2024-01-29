@@ -8,7 +8,7 @@ export interface ICreateUserDto {
   isActive?: boolean
 }
 
-export interface IOnboardingUserDto {
+export interface IKybUserDto {
   firstName: string
   lastName: string
   phone: string
@@ -17,4 +17,4 @@ export interface IOnboardingUserDto {
 }
 
 // TODO: update this interface Omit some props
-export interface IUpdateUserDto extends Partial<IOnboardingUserDto>, Partial<ICreateUserDto> {}
+export interface IUpdateUserDto extends Partial<IKybUserDto>, Partial<ICreateUserDto> {}

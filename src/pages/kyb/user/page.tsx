@@ -4,26 +4,26 @@ import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useUnit } from 'effector-react'
-import { onboarding } from '../../../entities/onboarding/model'
-import { IOnboardingUserData } from '../../../entities/onboarding/types'
+import { kyb } from '../../../entities/kyb/model'
+import { IKybData } from '../../../entities/kyb/types'
 import { useNavigate } from 'react-router-dom'
-import { OnboardingLayout } from '../../../shared/ui/layouts/custom/SeparateLayout/OnboardingLayout'
+import { KybLayout } from '../../../shared/ui/layouts/custom/SeparateLayout/KybLayout'
 import { PrevPageButton } from '../../../shared/ui/layouts/custom/SeparateLayout/components/PrevPageButton'
 import Box from '@mui/material/Box'
 import { LogoutButton } from '../../../shared/ui/layouts/custom/SeparateLayout/components/LogoutButton'
 import { useTranslation } from 'react-i18next'
 
-export function UserOnBoardingPage() {
+export function UserKybPage() {
   // TODO: add validation
   const { t } = useTranslation()
   const navigate = useNavigate()
 
   const { user, updateData } = useUnit({
-    user: onboarding.$user,
-    updateData: onboarding.updateUserFx,
+    user: kyb.$user,
+    updateData: kyb.updateUserFx,
   })
 
-  const form = useForm<IOnboardingUserData>({
+  const form = useForm<IKybData>({
     defaultValues: {
       firstName: user?.firstName,
       lastName: user?.lastName,
@@ -33,18 +33,18 @@ export function UserOnBoardingPage() {
   const { handleSubmit, register, formState } = form
   const { errors } = formState
 
-  const onSubmit = async (data: IOnboardingUserData) => {
-    onboarding.setUserInfo(data)
+  const onSubmit = async (data: IKybData) => {
+    kyb.setUserInfo(data)
     try {
       await updateData()
-      navigate('/onboarding/company')
+      navigate('/kyb/company')
     } catch (e) {
       console.log(e)
     }
   }
 
   return (
-    <OnboardingLayout
+    <KybLayout
       Header={
         <Box
           sx={{
@@ -56,7 +56,7 @@ export function UserOnBoardingPage() {
         >
           <PrevPageButton
             onClick={() => {
-              navigate('/onboarding')
+              navigate('/kyb')
             }}
           >
             {t('button.prev-step')}
@@ -67,7 +67,7 @@ export function UserOnBoardingPage() {
       }
     >
       <Typography variant="h4" component="h1" pb={4}>
-        {t('onboarding.user-info-page.title')}
+        {t('kyb.user-info-page.title')}
       </Typography>
       <FormProvider {...form}>
         <Stack component="form" spacing={1} onSubmit={handleSubmit(onSubmit)}>
@@ -106,6 +106,6 @@ export function UserOnBoardingPage() {
           </Button>
         </Stack>
       </FormProvider>
-    </OnboardingLayout>
+    </KybLayout>
   )
 }

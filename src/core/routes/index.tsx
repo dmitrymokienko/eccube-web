@@ -2,11 +2,11 @@ import { Navigate, createBrowserRouter } from 'react-router-dom'
 import { SignUpPage } from '../../pages/signup/page'
 import { SignUpSuccessPage } from '../../pages/signup/success/page'
 import { LoginPage } from '../../pages/login/page'
-import { MollieCallbackPage } from '../../pages/onboarding/mollie/page'
+import { MollieCallbackPage } from '../../pages/kyb/mollie/page.tsx'
 import { ProtectedRoute } from './ProtectedRoute'
-import { WelcomeOnBoardingPage } from '../../pages/onboarding/page'
-import { UserOnBoardingPage } from '../../pages/onboarding/user/page'
-import { CompanyOnBoardingPage } from '../../pages/onboarding/company/page'
+import { WelcomeOnKybPage } from '../../pages/kyb/page.tsx'
+import { UserKybPage } from '../../pages/kyb/user/page.tsx'
+import { CompanyKybPage } from '../../pages/kyb/company/page.tsx'
 import { PaymentsPage } from '../../pages/payments/payments-page.tsx'
 
 export const router = createBrowserRouter([
@@ -36,20 +36,20 @@ export const router = createBrowserRouter([
     element: <MollieCallbackPage />,
   },
   {
-    path: '/onboarding',
+    path: '/kyb',
     element: <ProtectedRoute />,
     children: [
       {
         index: true,
-        element: <WelcomeOnBoardingPage />,
+        element: <WelcomeOnKybPage />,
       },
       {
         path: 'user',
-        element: <UserOnBoardingPage />,
+        element: <UserKybPage />,
       },
       {
         path: 'company',
-        element: <CompanyOnBoardingPage />,
+        element: <CompanyKybPage />,
       },
       // {
       //     path: "mollie",
