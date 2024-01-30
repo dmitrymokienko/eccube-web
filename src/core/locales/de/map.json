@@ -16,7 +16,8 @@
     "user-info-page.title": "Ihre Informationen",
     "company-page.title": "Informationen zum Unternehmen",
     "mollie-page.title": "Mollie verbinden",
-    "mollie-page.description": "Erfolgreich verbunden"
+    "mollie-page.description": "Erfolgreich verbunden",
+    "mollie-page.description-error": "Mollie-Verbindung fehlgeschlagen"
   },
   "sidebar": {
     "banner-title1": "Wir sprechen gebäudemanagement",

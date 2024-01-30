@@ -17,7 +17,7 @@ import { useTranslation } from 'react-i18next'
 export interface ISignUpLayoutProps extends ISeparateLayoutProps {}
 
 export function SignUpLayout(props: ISignUpLayoutProps) {
-  const { children } = props
+  const { children, ...rest } = props
 
   const { t } = useTranslation()
   const navigate = useNavigate()
@@ -31,6 +31,7 @@ export function SignUpLayout(props: ISignUpLayoutProps) {
 
   return (
     <SeparateLayout
+      {...rest}
       Header={
         <Box
           sx={{

@@ -18,7 +18,8 @@ export function UserKybPage() {
   const { t } = useTranslation()
   const navigate = useNavigate()
 
-  const { user, updateData } = useUnit({
+  const { isLoading, user, updateData } = useUnit({
+    isLoading: kyb.$isLoading,
     user: kyb.$user,
     updateData: kyb.updateUserFx,
   })
@@ -45,6 +46,7 @@ export function UserKybPage() {
 
   return (
     <KybLayout
+      LoaderProps={{ visible: isLoading }}
       Header={
         <Box
           sx={{

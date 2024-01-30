@@ -20,7 +20,8 @@ export function CompanyKybPage() {
   const { t } = useTranslation()
   const navigate = useNavigate()
 
-  const { company, createCompany } = useUnit({
+  const { isLoading, company, createCompany } = useUnit({
+    isLoading: kyb.$isLoading,
     company: kyb.$company,
     createCompany: kyb.createOrganizationFx,
   })
@@ -58,6 +59,7 @@ export function CompanyKybPage() {
 
   return (
     <KybLayout
+      LoaderProps={{ visible: isLoading }}
       Header={
         <Box
           sx={{

@@ -3,7 +3,7 @@ import { IKybCompanyData, IKybData } from '../types'
 import { Nullable } from '../../../shared/types'
 import { currentUser } from '../../currentUser/model'
 import { createOrganizationApi, updateUserApi } from '../../currentUser/api'
-import { createMollieProfileApi } from '../../mollie/api'
+import { createMollieProfileApi, fetchMollieOAuth2AccessTokenApi } from '../../mollie/api'
 
 const reset = createEvent()
 
@@ -21,6 +21,10 @@ const setCompanyInfo = createEvent<Nullable<IKybCompanyData>>()
 $user.on(setUserInfo, (_, payload) => payload).on(reset, () => null)
 $company.on(setCompanyInfo, (_, payload) => payload).on(reset, () => null)
 
+const fetchMollieTokenFx = createEffect(async (code: string) => {
+  return await fetchMollieOAuth2AccessTokenApi()(code!)
+})
+
 const createOrganizationFx = createEffect(async () => {
   const data = $company.getState()!
   return await createOrganizationApi(data)
@@ -34,6 +38,7 @@ const $isLoading = combine(
   updateUserFx.pending,
   createOrganizationFx.pending,
   createMollieProfileFx.pending,
+  fetchMollieTokenFx.pending,
   (...args: boolean[]) => args.some(Boolean)
 )
 
@@ -57,4 +62,5 @@ export const kyb = {
   $isLoading,
   createOrganizationFx,
   createMollieProfileFx,
+  fetchMollieTokenFx,
 }

@@ -9,6 +9,8 @@ import { useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
 import { AuthContext } from '../../shared/ui/providers/AuthProvider'
 import { useTranslation } from 'react-i18next'
+import { useUnit } from 'effector-react'
+import { sleep } from '../../shared/libs'
 
 export interface ILoginForm {
   email: string
@@ -20,6 +22,8 @@ export function LoginPage() {
   const { t } = useTranslation()
   const navigate = useNavigate()
 
+  const isLoading = useUnit(auth.$isLoading)
+
   const { checkLoginState, userInfo } = useContext(AuthContext)
 
   const form = useForm<ILoginForm>()
@@ -30,6 +34,7 @@ export function LoginPage() {
     try {
       await auth.loginFx(data)
       await checkLoginState()
+      await sleep(200)
       if (userInfo?.isKybPassed) {
         navigate('/main')
         return
@@ -41,7 +46,7 @@ export function LoginPage() {
   }
 
   return (
-    <LoginLayout>
+    <LoginLayout LoaderProps={{ visible: isLoading }}>
       <Typography variant="h4" component="h1" pb={4}>
         {t('login.page.title')}
       </Typography>
