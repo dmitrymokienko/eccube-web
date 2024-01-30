@@ -135,6 +135,7 @@ export function SeparateLayout(props: ISeparateLayoutProps) {
         width: '100%',
         height: '100vh',
         backgroundColor: '#F6F7F8', // '#f1eeee',
+        position: 'relative',
         ...(WrapperProps?.sx || {}),
       }}
     >

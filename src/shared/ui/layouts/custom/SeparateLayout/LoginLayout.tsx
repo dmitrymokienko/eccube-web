@@ -17,7 +17,7 @@ import { useTranslation } from 'react-i18next'
 export interface ILoginLayoutProps extends ISeparateLayoutProps {}
 
 export function LoginLayout(props: ILoginLayoutProps) {
-  const { children } = props
+  const { children, ...rest } = props
 
   const { t } = useTranslation()
   const navigate = useNavigate()
@@ -30,6 +30,7 @@ export function LoginLayout(props: ILoginLayoutProps) {
 
   return (
     <SeparateLayout
+      {...rest}
       Header={
         <Box
           sx={{

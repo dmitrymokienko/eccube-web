@@ -13,6 +13,7 @@ import { UserType } from '../../entities/currentUser/types'
 import { SignUpLayout } from '../../shared/ui/layouts/custom/SeparateLayout/SignUpLayout'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { useUnit } from 'effector-react'
 
 export interface ISignUpForm {
   email: string
@@ -25,6 +26,8 @@ export interface ISignUpForm {
 export function SignUpPage() {
   const { t } = useTranslation()
   const navigate = useNavigate()
+
+  const isLoading = useUnit(auth.$isLoading)
 
   const form = useForm<ISignUpForm>()
   const { register, handleSubmit, formState } = form
@@ -54,7 +57,7 @@ export function SignUpPage() {
   }
 
   return (
-    <SignUpLayout>
+    <SignUpLayout LoaderProps={{ visible: isLoading }}>
       <Typography variant="h4" component="h1" pb={4}>
         {t('signup.page.title')}
       </Typography>

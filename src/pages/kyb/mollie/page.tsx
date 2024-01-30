@@ -1,18 +1,24 @@
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { KybLayout } from '../../../shared/ui/layouts/custom/SeparateLayout/KybLayout'
 import { PrevPageButton } from '../../../shared/ui/layouts/custom/SeparateLayout/components/PrevPageButton'
 import { useNavigate } from 'react-router-dom'
-import { fetchMollieOAuth2AccessTokenApi } from '../../../entities/mollie/api'
 import Box from '@mui/material/Box'
 import { LogoutButton } from '../../../shared/ui/layouts/custom/SeparateLayout/components/LogoutButton'
 import { useTranslation } from 'react-i18next'
 import { kyb } from '../../../entities/kyb/model'
+import { useUnit } from 'effector-react'
+import CheckCircleIcon from '@mui/icons-material/CheckCircle'
+import ErrorIcon from '@mui/icons-material/Error'
 
 export function MollieCallbackPage() {
   const { t } = useTranslation()
   const navigate = useNavigate()
+
+  const [hasError, setHasError] = useState<boolean>(false)
+
+  const isLoading = useUnit(kyb.$isLoading)
 
   const called = useRef(false)
 
@@ -23,10 +29,11 @@ export function MollieCallbackPage() {
         called.current = true
         const search = window.location.search
         const code = new URLSearchParams(search).get('code')
-        await fetchMollieOAuth2AccessTokenApi()(code!)
+        await kyb.fetchMollieTokenFx(code!)
         await kyb.createMollieProfileFx()
       } catch (err) {
         console.error(err)
+        setHasError(true)
       }
     }
     fetch()
@@ -38,6 +45,7 @@ export function MollieCallbackPage() {
 
   return (
     <KybLayout
+      LoaderProps={{ visible: isLoading }}
       Header={
         <Box
           sx={{
@@ -62,10 +70,25 @@ export function MollieCallbackPage() {
       <Typography variant="h4" component="h1" pb={4}>
         {t('kyb.mollie-page.title')}
       </Typography>
-      <Typography variant="body1" component="h1" gutterBottom>
-        {t('kyb.mollie-page.description')}
+      <Typography
+        variant="body1"
+        component="h1"
+        gutterBottom
+        sx={{ color: hasError ? 'error.main' : 'success.main' }}
+      >
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+          {hasError ? <ErrorIcon sx={{ color: 'error.main' }} /> : null}
+          {hasError ? t('kyb.mollie-page.description-error') : null}
+          {!hasError && !isLoading ? <CheckCircleIcon sx={{ color: 'success.main' }} /> : null}
+          {!hasError && !isLoading ? t('kyb.mollie-page.description') : null}
+        </Box>
       </Typography>
-      <Button variant="contained" sx={{ marginTop: '24px' }} onClick={onSubmit}>
+      <Button
+        variant="contained"
+        sx={{ marginTop: '24px' }}
+        onClick={onSubmit}
+        disabled={isLoading}
+      >
         {t('button.continue')}
       </Button>
     </KybLayout>

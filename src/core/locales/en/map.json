@@ -16,7 +16,8 @@
     "user-info-page.title": "Your information",
     "company-page.title": "Company details",
     "mollie-page.title": "Mollie connect",
-    "mollie-page.description": "Successfully connected"
+    "mollie-page.description": "Successfully connected",
+    "mollie-page.description-error": "Something went wrong"
   },
   "sidebar": {
     "banner-title1": "We speak building management",

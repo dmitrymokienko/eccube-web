@@ -13,7 +13,7 @@ import { useTranslation } from 'react-i18next'
 export interface IKybLayoutProps extends ISeparateLayoutProps {}
 
 export function KybLayout(props: IKybLayoutProps) {
-  const { children, Header = null } = props
+  const { children, ...rest } = props
 
   const { t } = useTranslation()
 
@@ -22,7 +22,7 @@ export function KybLayout(props: IKybLayoutProps) {
 
   return (
     <SeparateLayout
-      Header={Header}
+      {...rest}
       Sidebar={
         <Box pt={6}>
           <Typography variant="h5" component="h1" color="custom.const.white">
