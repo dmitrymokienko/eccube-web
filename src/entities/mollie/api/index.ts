@@ -35,3 +35,10 @@ export function updateMollieProfileApi(apiClient: ApiClient = defaultApiClient) 
     return res
   }
 }
+
+export function checkMollieOnBoardingStatusApi(apiClient: ApiClient = defaultApiClient) {
+  return async () => {
+    const res = await apiClient.get<{ status: string }>('/mollie/onboarding-status')
+    return res
+  }
+}

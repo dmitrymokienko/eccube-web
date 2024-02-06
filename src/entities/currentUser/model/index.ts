@@ -1,6 +1,6 @@
 import { combine, createEffect, createEvent, createStore } from 'effector'
 import { IUser } from '../types'
-import { deleteUserApi, getUserInfoApi, updateUserApi } from '../api'
+import { createOrganizationApi, deleteUserApi, getUserInfoApi, updateUserApi } from '../api'
 import { Nullable } from '../../../shared/types'
 
 const $info = createStore<Nullable<Partial<IUser>>>(null)
@@ -10,13 +10,18 @@ const fetchInfoFx = createEffect(getUserInfoApi)
 const updateFx = createEffect(updateUserApi)
 const deleteFx = createEffect(deleteUserApi)
 
+const createOrganizationFx = createEffect(createOrganizationApi)
+const updateOrganizationFx = createEffect(updateUserApi)
+
 $info.on(setInfo, (_, v) => v).on(fetchInfoFx.doneData, (_, v) => v)
 
 const $isLoading = combine(
   fetchInfoFx.pending,
   updateFx.pending,
   deleteFx.pending,
-  (fetch, update, _delete) => fetch || update || _delete
+  createOrganizationFx.pending,
+  updateOrganizationFx.pending,
+  (fetch, update, delete_, create, updateOrg) => fetch || update || delete_ || create || updateOrg
 )
 
 // TODO: add snackbar notifications
@@ -33,5 +38,8 @@ export const currentUser = {
   setInfo,
   fetchInfoFx,
   updateFx,
+  deleteFx,
+  createOrganizationFx,
+  updateOrganizationFx,
   $isLoading,
 }

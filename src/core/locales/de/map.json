@@ -52,7 +52,15 @@
     "company-address": "Firmenadresse",
     "company-website": "Firmenwebsite",
     "company-phone": "Firmen Telefon",
-    "company-email": "Firmen E-Mail"
+    "company-email": "Firmen E-Mail",
+    "company-business-category": "Geschäftskategorie",
+    "vat-number": "Umsatzsteuer-Identifikationsnummer",
+    "registration-number": "Registrierungsnummer",
+    "iban": "IBAN",
+    "street-and-number": "Straße und Hausnummer",
+    "postal-code": "Postleitzahl",
+    "city": "Stadt",
+    "country": "Land"
   },
   "placeholder": {
     "email": "Geben sie ihre E-Mail Adresse ein",
@@ -65,7 +73,15 @@
     "company-address": "Geben Sie die Firmenadresse ein",
     "company-website": "Geben Sie die Firmenwebsite ein",
     "company-phone": "Geben Sie die Firmen Telefonnummer ein",
-    "company-email": "Geben Sie die Firmen E-Mail-Adresse ein"
+    "company-email": "Geben Sie die Firmen E-Mail-Adresse ein",
+    "company-business-category": "Wählen Sie die Geschäftskategorie aus",
+    "vat-number": "Geben Sie die Umsatzsteuer-Identifikationsnummer ein",
+    "registration-number": "Geben Sie die Registrierungsnummer ein",
+    "iban": "Geben Sie die IBAN ein",
+    "street-and-number": "Geben Sie die Straße und Hausnummer ein",
+    "postal-code": "Geben Sie die Postleitzahl ein",
+    "city": "Geben Sie die Stadt ein",
+    "country": "Wählen Sie das Land aus"
   },
   "validation": {
     "required": "Dieses Feld ist erforderlich",

@@ -4,8 +4,16 @@ export interface IKybData extends Pick<IKybUserDto, 'firstName' | 'lastName' | '
 
 export interface IKybCompanyData {
   name: string
+  address: {
+    streetAndNumber: string
+    postalCode: string
+    city: string
+    country: string
+  }
+  registrationNumber: string
+  vatNumber: string
   website: string
   email: string
   phone: string
-  address?: string
+  businessCategory: string
 }

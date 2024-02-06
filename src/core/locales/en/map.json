@@ -52,7 +52,15 @@
     "company-address": "Company address",
     "company-website": "Company website",
     "company-phone": "Company phone",
-    "company-email": "Company email"
+    "company-email": "Company email",
+    "company-business-category": "Business category",
+    "vat-number": "VAT number",
+    "registration-number": "Registration number",
+    "iban": "IBAN",
+    "street-and-number": "Street and number",
+    "postal-code": "Postal code",
+    "city": "City",
+    "country": "Country"
   },
   "placeholder": {
     "email": "Enter your email",
@@ -65,7 +73,15 @@
     "company-address": "Enter your company address",
     "company-website": "Enter your company website",
     "company-phone": "Enter your company phone",
-    "company-email": "Enter your company email"
+    "company-email": "Enter your company email",
+    "company-business-category": "Select your business category",
+    "vat-number": "Enter your VAT number",
+    "registration-number": "Enter your registration number",
+    "iban": "Enter your IBAN",
+    "street-and-number": "Enter your street and number",
+    "postal-code": "Enter your postal code",
+    "city": "Enter your city",
+    "country": "Select your country"
   },
   "validation": {
     "required": "This field is required",

@@ -3,7 +3,11 @@ import { IKybCompanyData, IKybData } from '../types'
 import { Nullable } from '../../../shared/types'
 import { currentUser } from '../../currentUser/model'
 import { createOrganizationApi, updateUserApi } from '../../currentUser/api'
-import { createMollieProfileApi, fetchMollieOAuth2AccessTokenApi } from '../../mollie/api'
+import {
+  checkMollieOnBoardingStatusApi,
+  createMollieProfileApi,
+  fetchMollieOAuth2AccessTokenApi,
+} from '../../mollie/api'
 
 const reset = createEvent()
 
@@ -19,7 +23,9 @@ const $company = createStore<Nullable<IKybCompanyData>>(null)
 const setCompanyInfo = createEvent<Nullable<IKybCompanyData>>()
 
 $user.on(setUserInfo, (_, payload) => payload).on(reset, () => null)
-$company.on(setCompanyInfo, (_, payload) => payload).on(reset, () => null)
+$company
+  .on(setCompanyInfo, (state, payload) => ({ ...(state as IKybCompanyData), ...payload }))
+  .on(reset, () => null)
 
 const fetchMollieTokenFx = createEffect(async (code: string) => {
   return await fetchMollieOAuth2AccessTokenApi()(code!)
@@ -32,6 +38,10 @@ const createOrganizationFx = createEffect(async () => {
 
 const createMollieProfileFx = createEffect(async () => {
   return await createMollieProfileApi()()
+})
+
+const checkMollieOnBoardingStatusFx = createEffect(async () => {
+  return await checkMollieOnBoardingStatusApi()()
 })
 
 const $isLoading = combine(
@@ -63,4 +73,5 @@ export const kyb = {
   createOrganizationFx,
   createMollieProfileFx,
   fetchMollieTokenFx,
+  checkMollieOnBoardingStatusFx,
 }
