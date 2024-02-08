@@ -17,13 +17,11 @@ export interface IBackendTokens {
 const defaultAuthContext: {
   userInfo: Nullable<Partial<IUser>>
   loggedIn: Nullable<boolean>
-  checkLoginState: () => void
+  checkLoginState: () => Promise<Nullable<IUser>>
 } = {
   userInfo: null,
   loggedIn: null,
-  checkLoginState: () => {
-    // noop
-  },
+  checkLoginState: () => Promise.resolve(null),
 }
 
 const INTERVAL = 60 * 1000 // 1 minute
@@ -52,13 +50,16 @@ export function AuthProvider({ children }: IAuthProviderProps) {
         if (exp) {
           auth.setExpiresIn(exp)
         }
+        return user
       }
+      return null
     } catch (err) {
       console.error(err)
       setLoggedIn(false)
       currentUser.setInfo(null)
       auth.setRefreshToken(null)
       auth.setExpiresIn(null)
+      return null
     }
   }, [])
 

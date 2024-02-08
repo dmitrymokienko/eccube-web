@@ -36,6 +36,16 @@ export function updateMollieProfileApi(apiClient: ApiClient = defaultApiClient) 
   }
 }
 
+export function sendKybPassedApi(apiClient: ApiClient = defaultApiClient) {
+  return async () => {
+    const res = await apiClient.post<undefined, IMollieProfileResponse>(
+      `/mollie/onboarding/me`,
+      undefined
+    )
+    return res
+  }
+}
+
 export function checkMollieOnBoardingStatusApi(apiClient: ApiClient = defaultApiClient) {
   return async () => {
     const res = await apiClient.get<{ status: string }>('/mollie/onboarding-status')

@@ -10,7 +10,6 @@ import { useContext } from 'react'
 import { AuthContext } from '../../shared/ui/providers/AuthProvider'
 import { useTranslation } from 'react-i18next'
 import { useUnit } from 'effector-react'
-import { sleep } from '../../shared/libs'
 
 export interface ILoginForm {
   email: string
@@ -24,7 +23,7 @@ export function LoginPage() {
 
   const isLoading = useUnit(auth.$isLoading)
 
-  const { checkLoginState, userInfo } = useContext(AuthContext)
+  const { checkLoginState } = useContext(AuthContext)
 
   const form = useForm<ILoginForm>()
   const { register, handleSubmit, formState } = form
@@ -33,9 +32,8 @@ export function LoginPage() {
   const onSubmit = async (data: ILoginForm) => {
     try {
       await auth.loginFx(data)
-      await checkLoginState()
-      await sleep(200)
-      if (userInfo?.isKybPassed) {
+      const res = await checkLoginState()
+      if (res?.isKybPassed) {
         navigate('/main')
         return
       }

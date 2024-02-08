@@ -7,6 +7,7 @@ import {
   checkMollieOnBoardingStatusApi,
   createMollieProfileApi,
   fetchMollieOAuth2AccessTokenApi,
+  sendKybPassedApi,
 } from '../../mollie/api'
 
 const reset = createEvent()
@@ -38,6 +39,10 @@ const createOrganizationFx = createEffect(async () => {
 
 const createMollieProfileFx = createEffect(async () => {
   return await createMollieProfileApi()()
+})
+
+const sendKybPassedFx = createEffect(async () => {
+  return await sendKybPassedApi()()
 })
 
 const checkMollieOnBoardingStatusFx = createEffect(async () => {
@@ -74,4 +79,5 @@ export const kyb = {
   createMollieProfileFx,
   fetchMollieTokenFx,
   checkMollieOnBoardingStatusFx,
+  sendKybPassedFx,
 }

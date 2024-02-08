@@ -21,10 +21,9 @@ export function CompanyProfileKybPage() {
   const { t } = useTranslation()
   const navigate = useNavigate()
 
-  const { isLoading, company, createCompany } = useUnit({
+  const { isLoading, company } = useUnit({
     isLoading: kyb.$isLoading,
     company: kyb.$company,
-    createCompany: kyb.createOrganizationFx,
   })
 
   const form = useForm<IKybCompanyData>({
@@ -52,8 +51,7 @@ export function CompanyProfileKybPage() {
   const onSubmit = async (data: IKybCompanyData) => {
     kyb.setCompanyInfo(data)
     try {
-      // await currentUser.updateOrganizationFx(data)
-      await createCompany()
+      await kyb.createOrganizationFx()
       startMollieAuthProcess()
     } catch (e) {
       console.log(e)
