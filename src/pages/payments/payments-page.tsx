@@ -5,6 +5,9 @@ import { t } from 'i18next'
 import ReactJson from 'react-json-view'
 
 import { useCallback, useState } from 'react'
+import { MollieOnboardingStatus } from '../../shared/ui/components/Button/MollieOnboardingStatus'
+import { MollieConnect } from '../../shared/ui/components/Button/MollieConnect'
+import Box from '@mui/material/Box'
 
 export const Logo = () => {
   return (
@@ -125,6 +128,13 @@ export function PaymentsPage() {
       >
         {t('button.makePayment')}
       </Button>
+
+      {/* TODO: just for testing */}
+      <Box display="flex" alignItems="center" gap={3}>
+        <MollieConnect />
+        <MollieOnboardingStatus />
+      </Box>
+
       <ReactJson
         src={payment}
         style={{

@@ -6,8 +6,9 @@ import { MollieCallbackPage } from '../../pages/kyb/mollie/page.tsx'
 import { ProtectedRoute } from './ProtectedRoute'
 import { WelcomeOnKybPage } from '../../pages/kyb/page.tsx'
 import { UserKybPage } from '../../pages/kyb/user/page.tsx'
-import { CompanyKybPage } from '../../pages/kyb/company/page.tsx'
+import { CompanyProfileKybPage } from '../../pages/kyb/profile/page.tsx'
 import { PaymentsPage } from '../../pages/payments/payments-page.tsx'
+import { CompanyKybPage } from '../../pages/kyb/company/page.tsx'
 
 export const router = createBrowserRouter([
   {
@@ -50,6 +51,10 @@ export const router = createBrowserRouter([
       {
         path: 'company',
         element: <CompanyKybPage />,
+      },
+      {
+        path: 'profile',
+        element: <CompanyProfileKybPage />,
       },
       // {
       //     path: "mollie",

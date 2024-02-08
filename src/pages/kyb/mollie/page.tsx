@@ -31,6 +31,7 @@ export function MollieCallbackPage() {
         const code = new URLSearchParams(search).get('code')
         await kyb.fetchMollieTokenFx(code!)
         await kyb.createMollieProfileFx()
+        await kyb.checkMollieOnBoardingStatusFx()
       } catch (err) {
         console.error(err)
         setHasError(true)
