@@ -1,29 +1,21 @@
+'use client'
 import Box from '@mui/material/Box'
 import {
   ISeparateLayoutProps,
-  SEPARATE_LAYOUT_COMPACT_BREAKPOINT,
   SEPARATE_LAYOUT_SIDEBAR_WIDTH,
   SeparateLayout,
-} from '../../SeparateLayout'
-import Button from '@mui/material/Button'
+} from '../SeparateLayout'
 import Typography from '@mui/material/Typography'
 import EccubeBg from '../../../../assets/images/eccube_bg.jpeg'
-import { SidebarRandomContent, getRandomInt } from './lib/utils'
-import useMediaQuery from '@mui/material/useMediaQuery'
-import { Theme } from '@mui/material/styles'
-import { useNavigate } from 'react-router-dom'
+import { SidebarRandomContent, getRandomInt } from '../lib/utils'
 import { useTranslation } from 'react-i18next'
 
-export interface ILoginLayoutProps extends ISeparateLayoutProps {}
+export interface IKybLayoutProps extends ISeparateLayoutProps {}
 
-export function LoginLayout(props: ILoginLayoutProps) {
+export function KybLayout(props: IKybLayoutProps) {
   const { children, ...rest } = props
 
   const { t } = useTranslation()
-  const navigate = useNavigate()
-  const isCompactView = useMediaQuery<Theme>((theme) =>
-    theme.breakpoints.down(SEPARATE_LAYOUT_COMPACT_BREAKPOINT)
-  )
 
   const random = getRandomInt()
   const sidebar = SidebarRandomContent[random]
@@ -31,32 +23,6 @@ export function LoginLayout(props: ILoginLayoutProps) {
   return (
     <SeparateLayout
       {...rest}
-      Header={
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'flex-end',
-            alignItems: 'center',
-            gap: isCompactView ? '8px' : '24px',
-            height: '100%',
-            width: '100%',
-          }}
-        >
-          {t('login.no-account')}
-
-          <Button
-            variant="outlined"
-            type="submit"
-            fullWidth={false}
-            size="small"
-            onClick={() => {
-              navigate('/') // signup page
-            }}
-          >
-            {t('button.signup')}
-          </Button>
-        </Box>
-      }
       Sidebar={
         <Box pt={6}>
           <Typography variant="h5" component="h1" color="custom.const.white">

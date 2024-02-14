@@ -1,10 +1,10 @@
 import Box from '@mui/material/Box'
 import { ReactNode } from 'react'
-import EccubeLogo from '../../assets/icons/eccube-logo-white.svg?react'
+import EccubeLogo from '../../../assets/icons/eccube-logo-white.svg?react'
 import { SxProps, Theme } from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
-import { LangSwitcher } from '../components/LangSwitcher/LangSwitcher'
-import { Loader as DefaultLoader } from '../components/Loader'
+import { LangSwitcher } from '../../components/LangSwitcher/LangSwitcher'
+import { Loader as DefaultLoader } from '../../components/Loader'
 
 export interface ISeparateLayoutProps {
   children: ReactNode

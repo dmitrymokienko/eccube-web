@@ -7,8 +7,9 @@ import { ProtectedRoute } from './ProtectedRoute'
 import { WelcomeOnKybPage } from '../../pages/kyb/page.tsx'
 import { UserKybPage } from '../../pages/kyb/user/page.tsx'
 import { CompanyProfileKybPage } from '../../pages/kyb/profile/page.tsx'
-import { PaymentsPage } from '../../pages/payments/payments-page.tsx'
 import { CompanyKybPage } from '../../pages/kyb/company/page.tsx'
+import { PaymentsPage } from '../../pages/payments/page.tsx'
+import { HomePage } from '@/pages/home/page.tsx'
 
 export const router = createBrowserRouter([
   {
@@ -63,8 +64,24 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    path: '/main',
-    element: <PaymentsPage />,
+    path: '/home',
+    element: <ProtectedRoute />,
+    children: [
+      {
+        index: true,
+        element: <HomePage />,
+      },
+    ],
+  },
+  {
+    path: '/payments',
+    element: <ProtectedRoute />,
+    children: [
+      {
+        index: true,
+        element: <PaymentsPage />,
+      },
+    ],
   },
   {
     path: '*',

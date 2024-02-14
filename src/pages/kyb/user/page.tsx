@@ -7,10 +7,10 @@ import { useUnit } from 'effector-react'
 import { kyb } from '../../../entities/kyb/model'
 import { IKybData } from '../../../entities/kyb/types'
 import { useNavigate } from 'react-router-dom'
-import { KybLayout } from '../../../shared/ui/layouts/custom/SeparateLayout/KybLayout'
-import { PrevPageButton } from '../../../shared/ui/layouts/custom/SeparateLayout/components/PrevPageButton'
+import { KybLayout } from '../../../shared/ui/layouts/SeparateLayout/custom/KybLayout'
+import { PrevPageButton } from '../../../shared/ui/components/Button/PrevPageButton'
 import Box from '@mui/material/Box'
-import { LogoutButton } from '../../../shared/ui/layouts/custom/SeparateLayout/components/LogoutButton'
+import { LogoutButton } from '../../../shared/ui/components/Button/LogoutButton'
 import { useTranslation } from 'react-i18next'
 
 export function UserKybPage() {
