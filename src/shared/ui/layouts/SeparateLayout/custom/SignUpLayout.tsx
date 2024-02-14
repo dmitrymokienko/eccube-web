@@ -1,21 +1,30 @@
-'use client'
 import Box from '@mui/material/Box'
 import {
   ISeparateLayoutProps,
+  SEPARATE_LAYOUT_COMPACT_BREAKPOINT,
   SEPARATE_LAYOUT_SIDEBAR_WIDTH,
   SeparateLayout,
-} from '../../SeparateLayout'
+} from '../SeparateLayout'
+import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import EccubeBg from '../../../../assets/images/eccube_bg.jpeg'
-import { SidebarRandomContent, getRandomInt } from './lib/utils'
+import { SidebarRandomContent, getRandomInt } from '../lib/utils'
+import useMediaQuery from '@mui/material/useMediaQuery'
+import { Theme } from '@mui/material/styles'
+import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
-export interface IKybLayoutProps extends ISeparateLayoutProps {}
+export interface ISignUpLayoutProps extends ISeparateLayoutProps {}
 
-export function KybLayout(props: IKybLayoutProps) {
+export function SignUpLayout(props: ISignUpLayoutProps) {
   const { children, ...rest } = props
 
   const { t } = useTranslation()
+  const navigate = useNavigate()
+
+  const isCompactView = useMediaQuery<Theme>((theme) =>
+    theme.breakpoints.down(SEPARATE_LAYOUT_COMPACT_BREAKPOINT)
+  )
 
   const random = getRandomInt()
   const sidebar = SidebarRandomContent[random]
@@ -23,6 +32,33 @@ export function KybLayout(props: IKybLayoutProps) {
   return (
     <SeparateLayout
       {...rest}
+      Header={
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'flex-end',
+            alignItems: 'center',
+            gap: isCompactView ? '8px' : '24px',
+            height: '100%',
+            width: '100%',
+          }}
+        >
+          {t('signup.have-account')}
+
+          <Button
+            variant="outlined"
+            type="submit"
+            fullWidth={false}
+            size="small"
+            onClick={() => {
+              navigate('/login')
+            }}
+          >
+            {t('button.login')}
+          </Button>
+          {/* <LangSwitcher /> */}
+        </Box>
+      }
       Sidebar={
         <Box pt={6}>
           <Typography variant="h5" component="h1" color="custom.const.white">

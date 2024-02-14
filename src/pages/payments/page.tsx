@@ -1,6 +1,5 @@
 import Button from '@mui/material/Button'
 
-import EccubeLogo from '../../shared/assets/icons/eccube-logo-white.svg?react'
 import { t } from 'i18next'
 import ReactJson from 'react-json-view'
 
@@ -8,14 +7,7 @@ import { useCallback, useState } from 'react'
 import { MollieOnboardingStatus } from '../../shared/ui/components/Button/MollieOnboardingStatus'
 import { MollieConnect } from '../../shared/ui/components/Button/MollieConnect'
 import Box from '@mui/material/Box'
-
-export const Logo = () => {
-  return (
-    <div style={{ width: 200, height: 200, paddingTop: 20, borderRadius: '50%' }}>
-      <EccubeLogo />
-    </div>
-  )
-}
+import { SidebarLayout } from '@/shared/ui/layouts/SidebarLayout/SidebarLayout'
 
 const defaultPayment = {
   profileId: 'pfl_WU9mjR6SEG',
@@ -118,8 +110,15 @@ export function PaymentsPage() {
   }, [])
 
   return (
-    <div style={{ background: '#ddd', minHeight: '100vh' }}>
-      <Logo />
+    <SidebarLayout
+      Header={
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+          {/* TODO: just for testing */}
+          <MollieConnect />
+          <MollieOnboardingStatus />
+        </Box>
+      }
+    >
       <Button
         variant="contained"
         type="submit"
@@ -128,12 +127,6 @@ export function PaymentsPage() {
       >
         {t('button.makePayment')}
       </Button>
-
-      {/* TODO: just for testing */}
-      <Box display="flex" alignItems="center" gap={3}>
-        <MollieConnect />
-        <MollieOnboardingStatus />
-      </Box>
 
       <ReactJson
         src={payment}
@@ -145,6 +138,6 @@ export function PaymentsPage() {
         }}
         onEdit={(e: { updated_src: typeof defaultPayment }) => setPayment(e.updated_src)}
       />
-    </div>
+    </SidebarLayout>
   )
 }

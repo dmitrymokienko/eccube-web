@@ -3,7 +3,7 @@ import Stack from '@mui/material/Stack'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 import { FormProvider, useForm } from 'react-hook-form'
-import { LoginLayout } from '../../shared/ui/layouts/custom/SeparateLayout/LoginLayout'
+import { LoginLayout } from '../../shared/ui/layouts/SeparateLayout/custom/LoginLayout'
 import { auth } from '../../entities/auth/model'
 import { useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
@@ -34,7 +34,7 @@ export function LoginPage() {
       await auth.loginFx(data)
       const res = await checkLoginState()
       if (res?.isKybPassed) {
-        navigate('/main')
+        navigate('/home')
         return
       }
       navigate('/kyb')

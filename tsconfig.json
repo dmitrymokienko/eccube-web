@@ -21,7 +21,12 @@
     "noFallthroughCasesInSwitch": true,
 
     // SVG
-    "types": ["vite-plugin-svgr/client"]
+    "types": ["vite-plugin-svgr/client"],
+
+    // all paths defined here must match the configured path in `vite.config.ts`
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]

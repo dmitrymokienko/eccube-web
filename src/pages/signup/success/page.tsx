@@ -5,7 +5,7 @@ import { useUnit } from 'effector-react'
 import { currentUser } from '../../../entities/currentUser/model'
 import { auth } from '../../../entities/auth/model'
 import { useNavigate } from 'react-router-dom'
-import { SignUpLayout } from '../../../shared/ui/layouts/custom/SeparateLayout/SignUpLayout'
+import { SignUpLayout } from '../../../shared/ui/layouts/SeparateLayout/custom/SignUpLayout'
 import { useTranslation } from 'react-i18next'
 
 export interface ISignUpForm {

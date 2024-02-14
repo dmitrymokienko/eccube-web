@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import svgr from 'vite-plugin-svgr'
 import basicSsl from '@vitejs/plugin-basic-ssl'
+import { fileURLToPath } from 'node:url'
 // import fs from "fs";
 
 // https://vitejs.dev/config/
@@ -20,4 +21,12 @@ export default defineConfig({
     svgr(),
     basicSsl(), // dev only !!!
   ],
+  resolve: {
+    alias: [
+      {
+        find: '@',
+        replacement: fileURLToPath(new URL('./src', import.meta.url)),
+      },
+    ],
+  },
 })

@@ -4,24 +4,23 @@ import {
   SEPARATE_LAYOUT_COMPACT_BREAKPOINT,
   SEPARATE_LAYOUT_SIDEBAR_WIDTH,
   SeparateLayout,
-} from '../../SeparateLayout'
+} from '../SeparateLayout'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import EccubeBg from '../../../../assets/images/eccube_bg.jpeg'
-import { SidebarRandomContent, getRandomInt } from './lib/utils'
+import { SidebarRandomContent, getRandomInt } from '../lib/utils'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { Theme } from '@mui/material/styles'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
-export interface ISignUpLayoutProps extends ISeparateLayoutProps {}
+export interface ILoginLayoutProps extends ISeparateLayoutProps {}
 
-export function SignUpLayout(props: ISignUpLayoutProps) {
+export function LoginLayout(props: ILoginLayoutProps) {
   const { children, ...rest } = props
 
   const { t } = useTranslation()
   const navigate = useNavigate()
-
   const isCompactView = useMediaQuery<Theme>((theme) =>
     theme.breakpoints.down(SEPARATE_LAYOUT_COMPACT_BREAKPOINT)
   )
@@ -43,7 +42,7 @@ export function SignUpLayout(props: ISignUpLayoutProps) {
             width: '100%',
           }}
         >
-          {t('signup.have-account')}
+          {t('login.no-account')}
 
           <Button
             variant="outlined"
@@ -51,12 +50,11 @@ export function SignUpLayout(props: ISignUpLayoutProps) {
             fullWidth={false}
             size="small"
             onClick={() => {
-              navigate('/login')
+              navigate('/') // signup page
             }}
           >
-            {t('button.login')}
+            {t('button.signup')}
           </Button>
-          {/* <LangSwitcher /> */}
         </Box>
       }
       Sidebar={
