@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography'
 export function HomePage() {
   return (
     <SidebarLayout
-      Header={
+      Nav={
         <Box sx={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
           {/* TODO: just for testing */}
           <MollieConnect />

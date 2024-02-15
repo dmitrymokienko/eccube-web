@@ -1,5 +1,5 @@
 import Stack from '@mui/material/Stack'
-import { IMenuDrawerProps, MenuDrawer } from './MenuDrawer'
+import { ISidebarDrawerProps, SidebarDrawer } from './SidebarDrawer'
 import EccubeLogo from '../../../../assets/icons/eccube-logo-dark.svg?react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import HomeIcon from '@mui/icons-material/Home'
@@ -24,14 +24,13 @@ const MENU_ITEMS = [
     icon: PaymentIcon,
     path: '/payments',
   },
+  // TODO: settings
 ]
 
 const setSelectedIndex = createEvent<number>()
 const $selectedIndex = createStore(0).on(setSelectedIndex, (_, v) => v)
 
-export interface ISidebarMenuProps extends IMenuDrawerProps {}
-
-export function SidebarMenu(props: ISidebarMenuProps) {
+export function Sidebar(props: ISidebarDrawerProps) {
   const navigate = useNavigate()
   const location = useLocation()
 
@@ -43,7 +42,7 @@ export function SidebarMenu(props: ISidebarMenuProps) {
   }, [])
 
   return (
-    <MenuDrawer open hideBackdrop variant="persistent" {...props}>
+    <SidebarDrawer open hideBackdrop variant="persistent" {...props}>
       <Stack spacing={8} pt={1} pb={3} px={1}>
         {/* TODO: link */}
         <EccubeLogo height="56px" />
@@ -70,6 +69,6 @@ export function SidebarMenu(props: ISidebarMenuProps) {
           })}
         </List>
       </Stack>
-    </MenuDrawer>
+    </SidebarDrawer>
   )
 }

@@ -16,7 +16,7 @@ const noop = () => {
   /* noop */
 }
 
-export interface IMenuDrawerProps extends DrawerProps {
+export interface ISidebarDrawerProps extends DrawerProps {
   fullScreen?: boolean
   maxWidth?: string
   onClose?: () => void
@@ -24,7 +24,7 @@ export interface IMenuDrawerProps extends DrawerProps {
   setRef?: (node: HTMLDivElement) => void
 }
 
-export function MenuDrawer(props: IMenuDrawerProps) {
+export function SidebarDrawer(props: ISidebarDrawerProps) {
   const {
     children,
     setRef,

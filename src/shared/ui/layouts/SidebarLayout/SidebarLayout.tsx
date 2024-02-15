@@ -1,33 +1,29 @@
 import Box from '@mui/material/Box'
-import { ReactNode } from 'react'
-import { SxProps, Theme, useTheme } from '@mui/material/styles'
-import useMediaQuery from '@mui/material/useMediaQuery'
+import { ComponentProps, ReactNode } from 'react'
+import { SxProps, useTheme } from '@mui/material/styles'
 import { LangSwitcher } from '../../components/LangSwitcher/LangSwitcher'
 import { Loader as DefaultLoader } from '../../components/Loader'
 import {
-  SIDEBAR_LAYOUT_COMPACT_BREAKPOINT,
   SIDEBAR_LAYOUT_DRAWER_WIDTH,
   SIDEBAR_LAYOUT_MAX_CONTENT_WIDTH,
   SIDEBAR_LAYOUT_NAV_HEIGHT,
 } from './lib/constants'
-import { SidebarMenu } from './components/SidebarMenu'
+import { Sidebar } from './components/Sidebar'
 import AppBar from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
 import { LogoutButton } from '../../components/Button/LogoutButton'
+import { omit } from 'ramda'
+import { ISidebarDrawerProps } from './components/SidebarDrawer'
 
 export interface ISidebarLayoutProps {
   children: ReactNode
-  Header?: ReactNode
+  Nav?: ReactNode
   Loader?: ReactNode
-  SideBarProps?: {
-    sx?: SxProps
-  }
+  SidebarProps?: ISidebarDrawerProps
   WrapperProps?: {
     sx?: SxProps
   }
-  HeaderProps?: {
-    sx?: SxProps
-  }
+  NavProps?: ComponentProps<typeof AppBar>
   MainProps?: {
     sx?: SxProps
   }
@@ -41,89 +37,26 @@ export interface ISidebarLayoutProps {
 export function SidebarLayout(props: ISidebarLayoutProps) {
   const {
     children,
-    Header = null,
+    Nav = null,
     Loader = null,
     WrapperProps = {},
-    HeaderProps = {},
+    NavProps = {},
     MainProps = {},
     LoaderProps = {},
+    SidebarProps = {},
     showLangSwitcher = true,
   } = props
 
   const theme = useTheme()
 
-  // special breakpoint for current layout
-  const isCompactView = useMediaQuery<Theme>((theme) =>
-    theme.breakpoints.down(SIDEBAR_LAYOUT_COMPACT_BREAKPOINT)
-  )
-
   const LoaderComponent = Loader || (
     <DefaultLoader visible={LoaderProps?.visible ?? false} sx={LoaderProps?.sx ?? {}} />
   )
 
-  // TODO: add sidebar
-  if (isCompactView) {
-    return (
-      <Box
-        sx={{
-          display: 'grid',
-          gridTemplateColumns: 'auto',
-          gridTemplateRows: '72px auto',
-          gridTemplateAreas: `
-            "header"
-            "main"
-            `,
-          width: '100%',
-          height: '100dvh', // TODO: check it works correctly
-          backgroundColor: '#F6F7F8', // '#f1eeee',
-          ...(WrapperProps?.sx || {}),
-        }}
-      >
-        {/* loader */}
-        {LoaderComponent}
-        {/* header */}
-        <Box
-          component="header"
-          sx={{
-            gridArea: 'header',
-            position: 'sticky',
-            top: 0,
-            left: 0,
-            zIndex: 1,
-            width: '100%',
-            padding: '8px 24px',
-            display: 'flex',
-            alignItems: 'center',
-            ...(HeaderProps?.sx || {}),
-          }}
-        >
-          {Header}
-
-          {showLangSwitcher && (
-            <Box pl={3}>
-              <LangSwitcher />
-            </Box>
-          )}
-        </Box>
-        {/* main */}
-        <Box sx={{ gridArea: 'main' }}>
-          <Box
-            component="main"
-            sx={{
-              zIndex: 1,
-              margin: '0 auto',
-              marginTop: '24px',
-              padding: '0 24px',
-              maxWidth: `${SIDEBAR_LAYOUT_MAX_CONTENT_WIDTH}px`,
-              ...(MainProps?.sx || {}),
-            }}
-          >
-            {children}
-          </Box>
-        </Box>
-      </Box>
-    )
-  }
+  // TODO: implement CompactView (show/hide sidebar)
+  // if (isCompactView) {
+  //   return null
+  // }
 
   // Desktop view
   return (
@@ -139,7 +72,7 @@ export function SidebarLayout(props: ISidebarLayoutProps) {
       {/* loader */}
       {LoaderComponent}
 
-      {/* header */}
+      {/* navigation */}
       <AppBar
         component="nav"
         position="fixed"
@@ -148,10 +81,12 @@ export function SidebarLayout(props: ISidebarLayoutProps) {
           backgroundColor: theme.palette.common.white,
           width: `calc(100% - ${SIDEBAR_LAYOUT_DRAWER_WIDTH}px)`,
           ml: `${SIDEBAR_LAYOUT_DRAWER_WIDTH}px`,
+          ...(NavProps?.sx || {}),
         }}
+        {...omit(['sx'], NavProps)}
       >
         <Toolbar sx={{ height: `${SIDEBAR_LAYOUT_NAV_HEIGHT}px` }}>
-          {Header}
+          {Nav}
           <Box sx={{ flexGrow: 1 }} />
           {showLangSwitcher && (
             <Box px={3}>
@@ -163,7 +98,7 @@ export function SidebarLayout(props: ISidebarLayoutProps) {
       </AppBar>
 
       {/* sidebar */}
-      <SidebarMenu />
+      <Sidebar {...SidebarProps} />
 
       {/* main */}
       <Box
