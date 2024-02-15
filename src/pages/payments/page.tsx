@@ -5,7 +5,6 @@ import ReactJson from 'react-json-view'
 
 import { useCallback, useState } from 'react'
 import { MollieOnboardingStatus } from '../../shared/ui/components/Button/MollieOnboardingStatus'
-import { MollieConnect } from '../../shared/ui/components/Button/MollieConnect'
 import Box from '@mui/material/Box'
 import { SidebarLayout } from '@/shared/ui/layouts/SidebarLayout/SidebarLayout'
 
@@ -113,8 +112,6 @@ export function PaymentsPage() {
     <SidebarLayout
       Nav={
         <Box sx={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-          {/* TODO: just for testing */}
-          <MollieConnect />
           <MollieOnboardingStatus />
         </Box>
       }
