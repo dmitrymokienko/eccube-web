@@ -1,7 +1,7 @@
 import { combine, createEffect, createEvent, createStore } from 'effector'
 import { IUser } from '../types'
 import { createOrganizationApi, deleteUserApi, getUserInfoApi, updateUserApi } from '../api'
-import { Nullable } from '../../../shared/types'
+import { Nullable } from '../../../shared/types/utilities'
 
 const $info = createStore<Nullable<Partial<IUser>>>(null)
 const setInfo = createEvent<Nullable<Partial<IUser>>>()

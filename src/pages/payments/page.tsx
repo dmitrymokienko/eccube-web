@@ -4,9 +4,8 @@ import { t } from 'i18next'
 import ReactJson from 'react-json-view'
 
 import { useCallback, useState } from 'react'
-import { MollieOnboardingStatus } from '../../shared/ui/components/Button/MollieOnboardingStatus'
-import Box from '@mui/material/Box'
 import { SidebarLayout } from '@/shared/ui/layouts/SidebarLayout/SidebarLayout'
+import { OnboardingInformer } from '@/features/onboarding/ui/OnboardingInformer'
 
 const defaultPayment = {
   profileId: 'pfl_WU9mjR6SEG',
@@ -109,13 +108,7 @@ export function PaymentsPage() {
   }, [])
 
   return (
-    <SidebarLayout
-      Nav={
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-          <MollieOnboardingStatus />
-        </Box>
-      }
-    >
+    <SidebarLayout Nav={<OnboardingInformer />}>
       <Button
         variant="contained"
         type="submit"

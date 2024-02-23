@@ -60,3 +60,19 @@ export interface IMollieProfileResponse {
     }
   }
 }
+
+export enum MollieOnboardingStatus {
+  needsData = 'needs-data',
+  inReview = 'in-review',
+  completed = 'completed',
+}
+
+export interface IMollieOnboardingStatus {
+  canReceivePayments: boolean
+  canReceiveSettlements: boolean
+  name: string // company name
+  resource: 'onboarding'
+  signedUpAt: string // '2024-02-05T07:21:42+00:00'
+  status: MollieOnboardingStatus
+  _links: Record<string, { href: string; type: string }>
+}

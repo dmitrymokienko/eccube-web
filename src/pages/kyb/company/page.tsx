@@ -48,7 +48,7 @@ export function CompanyKybPage() {
   }
 
   const setTestData = () => {
-    setValue('name', 'Mollie')
+    setValue('name', 'Super cleaning')
     setValue('address', {
       streetAndNumber: 'Keizersgracht 126',
       postalCode: '1015 CW',

@@ -1,18 +1,12 @@
 import { combine, createEffect, createEvent, createStore } from 'effector'
 import { activateUserApi, loginUserApi, registerUserApi } from '../api'
 // import persist from 'effector-localstorage'
-import { Nullable } from '../../../shared/types'
+import { Nullable } from '../../../shared/types/utilities'
 
 const registerFx = createEffect(registerUserApi)
 const loginFx = createEffect(loginUserApi)
 // TODO: delete this
 const activateFx = createEffect(activateUserApi)
-
-// EFFECTOR
-// TODO on the backend: generate new refresh-token via `checkLoggedInUserApi()` request
-// storing refresh-token in localStorage is possible, but better
-// to avoid store sensitive data in localStorage
-// think about this solution or find better one
 
 // refresh token
 const setRefreshToken = createEvent<Nullable<string>>()

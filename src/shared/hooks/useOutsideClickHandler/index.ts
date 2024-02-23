@@ -1,4 +1,4 @@
-import { Nullable } from '../../types'
+import { Nullable } from '../../types/utilities'
 import { RefObject, useEffect, useRef } from 'react'
 
 export function useOutsideClickHandler<T extends HTMLElement>(

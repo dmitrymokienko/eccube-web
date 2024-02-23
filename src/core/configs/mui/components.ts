@@ -181,4 +181,22 @@ export const components: Components<Omit<Theme, 'components'>> = {
       }),
     },
   },
+
+  MuiLink: {
+    defaultProps: {
+      underline: 'none',
+      color: 'primary',
+    },
+    styleOverrides: {
+      root: ({ theme }) => ({
+        color: theme.palette.custom.blue[0],
+        '&:hover': {
+          color: theme.palette.custom.blue[1],
+        },
+        '&:active': {
+          color: theme.palette.custom.blue[2],
+        },
+      }),
+    },
+  },
 }
