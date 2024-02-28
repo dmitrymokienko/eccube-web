@@ -9,7 +9,7 @@ import { kyb } from '../../../entities/kyb/model'
 import { KybLayout } from '../../../shared/ui/layouts/SeparateLayout/custom/KybLayout'
 import { PrevPageButton } from '../../../shared/ui/components/Button/PrevPageButton'
 import { useNavigate } from 'react-router-dom'
-import { startMollieOAuth2Api } from '../../../entities/mollie/api'
+import { startMollieAuthProcess } from '@/entities/mollie/libs'
 import Box from '@mui/material/Box'
 import { LogoutButton } from '../../../shared/ui/components/Button/LogoutButton'
 import { useTranslation } from 'react-i18next'
@@ -38,16 +38,6 @@ export function CompanyProfileKybPage() {
   const { handleSubmit, register, formState, setValue, watch } = form
   const { errors } = formState
 
-  const startMollieAuthProcess = async () => {
-    try {
-      const data = await startMollieOAuth2Api()()
-      const { authorizationUri } = data || {}
-      window.location.assign(authorizationUri)
-    } catch (e) {
-      console.log(e)
-    }
-  }
-
   const onSubmit = async (data: IKybCompanyData) => {
     kyb.setCompanyInfo(data)
     try {
@@ -59,7 +49,7 @@ export function CompanyProfileKybPage() {
   }
 
   const setTestData = () => {
-    // setValue('name', 'Mollie')
+    // setValue('name', 'Super cleaning')
     setValue('email', 'info@mollie.com')
     setValue('website', 'https://test.com')
     setValue('phone', '+31208202070')
@@ -104,6 +94,8 @@ export function CompanyProfileKybPage() {
               required: t('validation.required'),
               setValueAs: (value) => value.trim(),
             })}
+            // https://github.com/react-hook-form/react-hook-form/issues/220
+            InputLabelProps={{ shrink: !!watch('email') }}
           /> */}
           <TextField
             label={t('field.company-email')}

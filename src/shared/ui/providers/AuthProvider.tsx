@@ -2,7 +2,7 @@ import { ReactNode, createContext, useCallback, useEffect, useState } from 'reac
 import { currentUser } from '../../../entities/currentUser/model'
 import { checkLoggedInUserApi, refreshTokenApi } from '../../../entities/auth/api'
 import { useUnit } from 'effector-react'
-import { Nullable } from '../../types'
+import { Nullable } from '../../types/utilities'
 import { IUser } from '../../../entities/currentUser/types'
 import { jwtDecode } from 'jwt-decode'
 import { useInterval } from '../../hooks/useInterval'

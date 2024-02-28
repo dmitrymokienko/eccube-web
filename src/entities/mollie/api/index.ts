@@ -1,5 +1,5 @@
 import { ApiClient, defaultApiClient } from '../../../core/api/apiClient'
-import { IMollieProfileResponse, UpdateMollieProfileDto } from '../types'
+import { IMollieOnboardingStatus, IMollieProfileResponse, UpdateMollieProfileDto } from '../types'
 
 export function startMollieOAuth2Api(apiClient: ApiClient = defaultApiClient) {
   return async () => {
@@ -48,7 +48,17 @@ export function sendKybPassedApi(apiClient: ApiClient = defaultApiClient) {
 
 export function checkMollieOnBoardingStatusApi(apiClient: ApiClient = defaultApiClient) {
   return async () => {
-    const res = await apiClient.get<{ status: string }>('/mollie/onboarding-status')
+    const res = await apiClient.get<IMollieOnboardingStatus>('/mollie/onboarding-status')
+    return res
+  }
+}
+
+export function enablePaymentMethodApi(apiClient: ApiClient = defaultApiClient) {
+  return async (method: string) => {
+    const res = await apiClient.post<undefined, IMollieProfileResponse>(
+      `/mollie/profiles/methods/${method}`,
+      undefined
+    )
     return res
   }
 }

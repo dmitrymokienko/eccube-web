@@ -32,7 +32,6 @@ export function MollieCallbackPage() {
         await kyb.fetchMollieTokenFx(code!)
         await kyb.createMollieProfileFx()
         await kyb.sendKybPassedFx()
-        await kyb.checkMollieOnBoardingStatusFx()
       } catch (err) {
         console.error(err)
         setHasError(true)

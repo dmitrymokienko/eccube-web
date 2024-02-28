@@ -116,7 +116,7 @@ export function SidebarLayout(props: ISidebarLayoutProps) {
         <Box
           sx={{
             margin: '0 auto',
-            padding: '0 32px',
+            padding: '0 24px',
             maxWidth: `${SIDEBAR_LAYOUT_MAX_CONTENT_WIDTH}px`,
           }}
         >

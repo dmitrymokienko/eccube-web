@@ -17,7 +17,9 @@
     "company-page.title": "Company details",
     "mollie-page.title": "Mollie connect",
     "mollie-page.description": "Successfully connected",
-    "mollie-page.description-error": "Something went wrong"
+    "mollie-page.description-error": "Something went wrong",
+    "dashboard.onboarding-status-needs": "Please update information to start use payments.",
+    "dashboard.onboarding-status-review": "Your account's information is in review"
   },
   "sidebar": {
     "banner-title1": "We speak building management",
@@ -39,7 +41,8 @@
     "prev-step": "Previous step",
     "next": "Next",
     "save": "Save",
-    "makePayment": "Make Payment"
+    "makePayment": "Make Payment",
+    "complete": "Complete"
   },
   "field": {
     "email": "Email",
