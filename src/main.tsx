@@ -1,7 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { RouterProvider } from 'react-router-dom'
-import NiceModal from '@ebay/nice-modal-react'
 import ThemeRegistry from './shared/ui/providers/ThemeRegistry'
 import '@fontsource/roboto-condensed/400.css'
 import '@fontsource/roboto-condensed/500.css'
@@ -10,15 +9,16 @@ import '@fontsource/bebas-neue/400.css'
 import { AuthProvider } from './shared/ui/providers/AuthProvider'
 import { router } from './core/routes'
 import './core/configs/i18n/config'
+import { PopupsProvider } from './shared/ui/providers/PopupsProvider'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <ThemeRegistry>
-      <NiceModal.Provider>
+      <PopupsProvider>
         <AuthProvider>
           <RouterProvider router={router} />
         </AuthProvider>
-      </NiceModal.Provider>
+      </PopupsProvider>
     </ThemeRegistry>
   </React.StrictMode>
 )
