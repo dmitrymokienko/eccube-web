@@ -1,31 +1,30 @@
 import Button from '@mui/material/Button'
-
-import { t } from 'i18next'
-import ReactJson from 'react-json-view'
-
+import ReactJson, { InteractionProps } from 'react-json-view'
 import { useCallback, useState } from 'react'
 import { SidebarLayout } from '@/shared/ui/layouts/SidebarLayout/SidebarLayout'
 import { OnboardingInformer } from '@/features/onboarding/ui/OnboardingInformer'
+import { useTranslation } from 'react-i18next'
+import { mollie } from '@/entities/mollie/model'
 
 const defaultPayment = {
-  profileId: 'pfl_WU9mjR6SEG',
+  // profileId: 'pfl_WU9mjR6SEG',
   amount: {
-    value: '1027.99',
+    value: '1.99',
     currency: 'EUR',
   },
-  billingAddress: {
-    organizationName: 'Mollie B.V.',
-    streetAndNumber: 'Keizersgracht 126',
-    city: 'Amsterdam',
-    region: 'Noord-Holland',
-    postalCode: '1234AB',
-    country: 'NL',
-    title: 'Dhr.',
-    givenName: 'Piet',
-    familyName: 'Mondriaan',
-    email: 'piet@mondriaan.com',
-    phone: '+31309202070',
-  },
+  // billingAddress: {
+  //   organizationName: 'Mollie B.V.',
+  //   streetAndNumber: 'Keizersgracht 126',
+  //   city: 'Amsterdam',
+  //   region: 'Noord-Holland',
+  //   postalCode: '1234AB',
+  //   country: 'NL',
+  //   title: 'Dhr.',
+  //   givenName: 'Piet',
+  //   familyName: 'Mondriaan',
+  //   email: 'piet@mondriaan.com',
+  //   phone: '+31309202070',
+  // },
   shippingAddress: {
     organizationName: 'Mollie B.V.',
     streetAndNumber: 'Prinsengracht 126',
@@ -39,14 +38,14 @@ const defaultPayment = {
     familyName: 'Norris',
     email: 'norris@chucknorrisfacts.net',
   },
-  metadata: {
-    order_id: '1338',
-    description: 'Lego cars',
-  },
-  locale: 'nl_NL',
-  orderNumber: '1338',
-  redirectUrl: 'https://bidding.eccube.de/redirect_order',
-  webhookUrl: 'https://bidding.eccube.de/webhooks',
+  // metadata: {
+  //   order_id: '1338',
+  //   description: 'Lego cars',
+  // },
+  // locale: 'nl_NL',
+  // orderNumber: '1338',
+  // redirectUrl: 'https://bidding.eccube.de/redirect_order',
+  // webhookUrl: 'https://bidding.eccube.de/webhooks',
   method: 'klarnapaylater',
   lines: [
     {
@@ -98,13 +97,16 @@ const defaultPayment = {
   ],
 }
 
-type PaymentType = typeof defaultPayment
+type PaymentType = InteractionProps['updated_src']
 
 export function PaymentsPage() {
-  const [payment, setPayment] = useState<typeof defaultPayment>(defaultPayment)
+  const { t } = useTranslation()
 
-  const makePayment = useCallback((p: PaymentType) => {
-    console.log('makePayment', p)
+  const [payment, setPayment] = useState<PaymentType>(defaultPayment)
+
+  const makePayment = useCallback(async (p: PaymentType) => {
+    const res = await mollie.payments.createOrderFx(p)
+    console.log('res', res)
   }, [])
 
   return (
@@ -124,9 +126,9 @@ export function PaymentsPage() {
           maxHeight: '76vh',
           overflow: 'auto',
           border: '2px solid gray',
-          fontSize: 10,
+          fontSize: 12,
         }}
-        onEdit={(e: { updated_src: typeof defaultPayment }) => setPayment(e.updated_src)}
+        onEdit={(e: InteractionProps) => setPayment(e.updated_src)}
       />
     </SidebarLayout>
   )
