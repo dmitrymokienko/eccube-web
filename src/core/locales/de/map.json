@@ -42,6 +42,7 @@
     "next": "Nächster",
     "save": "Speichern",
     "makePayment": "Zahlung durchführen",
+    "createOrder": "Bestellung erstellen",
     "complete": "Vollständig"
   },
   "field": {
