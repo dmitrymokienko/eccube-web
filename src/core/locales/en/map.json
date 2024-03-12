@@ -41,7 +41,8 @@
     "prev-step": "Previous step",
     "next": "Next",
     "save": "Save",
-    "makePayment": "Make Payment",
+    "makePayment": "Make payment",
+    "createOrder": "Create order",
     "complete": "Complete"
   },
   "field": {

@@ -5,26 +5,13 @@ import { SidebarLayout } from '@/shared/ui/layouts/SidebarLayout/SidebarLayout'
 import { OnboardingInformer } from '@/features/onboarding/ui/OnboardingInformer'
 import { useTranslation } from 'react-i18next'
 import { mollie } from '@/entities/mollie/model'
+import Box from '@mui/material/Box'
 
 const defaultPayment = {
-  // profileId: 'pfl_WU9mjR6SEG',
   amount: {
-    value: '1.99',
+    value: '390.00',
     currency: 'EUR',
   },
-  // billingAddress: {
-  //   organizationName: 'Mollie B.V.',
-  //   streetAndNumber: 'Keizersgracht 126',
-  //   city: 'Amsterdam',
-  //   region: 'Noord-Holland',
-  //   postalCode: '1234AB',
-  //   country: 'NL',
-  //   title: 'Dhr.',
-  //   givenName: 'Piet',
-  //   familyName: 'Mondriaan',
-  //   email: 'piet@mondriaan.com',
-  //   phone: '+31309202070',
-  // },
   shippingAddress: {
     organizationName: 'Mollie B.V.',
     streetAndNumber: 'Prinsengracht 126',
@@ -33,7 +20,7 @@ const defaultPayment = {
     region: 'Noord-Holland',
     postalCode: '5678AB',
     country: 'NL',
-    title: 'Mr.',
+    // title: 'Mr.',
     givenName: 'Chuck',
     familyName: 'Norris',
     email: 'norris@chucknorrisfacts.net',
@@ -46,52 +33,31 @@ const defaultPayment = {
   // orderNumber: '1338',
   // redirectUrl: 'https://bidding.eccube.de/redirect_order',
   // webhookUrl: 'https://bidding.eccube.de/webhooks',
-  method: 'klarnapaylater',
+  method: 'banktransfer',
   lines: [
     {
-      type: 'physical',
-      sku: '5702016116977',
-      name: 'LEGO 42083 Bugatti Chiron',
-      productUrl: 'https://shop.lego.com/nl-NL/Bugatti-Chiron-42083',
-      imageUrl: 'https://sh-s7-live-s.legocdn.com/is/image//LEGO/42083_alt1?$main$',
-      quantity: 2,
+      type: 'digital',
+      // sku: '5702016116977',
+      name: 'Office cleaning',
+      // productUrl: 'https://shop.lego.com/nl-NL/Bugatti-Chiron-42083',
+      // imageUrl: 'https://sh-s7-live-s.legocdn.com/is/image//LEGO/42083_alt1?$main$',
+      quantity: 10,
       vatRate: '21.00',
       unitPrice: {
         currency: 'EUR',
-        value: '399.00',
+        value: '39.00',
       },
       totalAmount: {
         currency: 'EUR',
-        value: '698.00',
+        value: '390.00',
       },
       discountAmount: {
         currency: 'EUR',
-        value: '100.00',
+        value: '0.00',
       },
       vatAmount: {
         currency: 'EUR',
-        value: '121.14',
-      },
-    },
-    {
-      type: 'physical',
-      sku: '5702015594028',
-      name: 'LEGO 42056 Porsche 911 GT3 RS',
-      productUrl: 'https://shop.lego.com/nl-NL/Porsche-911-GT3-RS-42056',
-      imageUrl: 'https://sh-s7-live-s.legocdn.com/is/image/LEGO/42056?$PDPDefault$',
-      quantity: 1,
-      vatRate: '21.00',
-      unitPrice: {
-        currency: 'EUR',
-        value: '329.99',
-      },
-      totalAmount: {
-        currency: 'EUR',
-        value: '329.99',
-      },
-      vatAmount: {
-        currency: 'EUR',
-        value: '57.27',
+        value: '67.69', // €390.00 × (21.00% / 121.00%)
       },
     },
   ],
@@ -102,7 +68,7 @@ type PaymentType = InteractionProps['updated_src']
 export function PaymentsPage() {
   const { t } = useTranslation()
 
-  const [payment, setPayment] = useState<PaymentType>(defaultPayment)
+  const [order, setOrder] = useState<PaymentType>(defaultPayment)
 
   const makePayment = useCallback(async (p: PaymentType) => {
     const res = await mollie.payments.createOrderFx(p)
@@ -111,24 +77,26 @@ export function PaymentsPage() {
 
   return (
     <SidebarLayout Nav={<OnboardingInformer />}>
-      <Button
-        variant="contained"
-        type="submit"
-        sx={{ maxWidth: 200, margin: '24px auto', display: 'block' }}
-        onClick={() => makePayment(payment)}
-      >
-        {t('button.makePayment')}
-      </Button>
+      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }} py={3}>
+        <Button
+          fullWidth={false}
+          variant="contained"
+          type="submit"
+          onClick={() => makePayment(order)}
+        >
+          {t('button.createOrder')}
+        </Button>
+      </Box>
 
       <ReactJson
-        src={payment}
+        src={order}
         style={{
           maxHeight: '76vh',
           overflow: 'auto',
           border: '2px solid gray',
           fontSize: 12,
         }}
-        onEdit={(e: InteractionProps) => setPayment(e.updated_src)}
+        onEdit={(e: InteractionProps) => setOrder(e.updated_src)}
       />
     </SidebarLayout>
   )
