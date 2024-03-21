@@ -18,7 +18,8 @@
     "mollie-page.title": "Mollie connect",
     "mollie-page.description": "Successfully connected",
     "mollie-page.description-error": "Something went wrong",
-    "dashboard.onboarding-status-needs": "Please update information to start use payments.",
+    "mollie-page.onboarding": "We recommend you to complete the onboarding process with Mollie to start accepting payments.",
+    "dashboard.onboarding-status-needs": "Please update information to start accept payments.",
     "dashboard.onboarding-status-review": "Your account's information is in review"
   },
   "sidebar": {
@@ -43,7 +44,9 @@
     "save": "Save",
     "makePayment": "Make payment",
     "createOrder": "Create order",
-    "complete": "Complete"
+    "complete": "Complete",
+    "complete-onboarding": "Complete onboarding",
+    "go-to-app": "Go to the app"
   },
   "field": {
     "email": "Email",
@@ -93,7 +96,9 @@
     "email-already-exists": "Email already exists",
     "password": "Password must be at least 8 characters long",
     "password-confirmation": "Passwords do not match",
-    "confirm-password": "Passwords do not match",
+    "weak-password": "Password is not strong enough",
+    "short-password": "Password is too short",
+    "long-password": "Password is too long",
     "invalid-credentials": "Email or password is incorrect"
   },
   "common": {

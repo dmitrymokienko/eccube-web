@@ -15,6 +15,8 @@ import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useUnit } from 'effector-react'
 
+const WEAK_PASSWORD = 'password is not strong enough'
+
 export interface ISignUpForm {
   email: string
   password: string
@@ -22,7 +24,6 @@ export interface ISignUpForm {
   isSupplier: boolean
 }
 
-// TODO: add validation
 export function SignUpPage() {
   const { t } = useTranslation()
   const navigate = useNavigate()
@@ -48,7 +49,17 @@ export function SignUpPage() {
       const { id } = await auth.registerFx(payload)
       currentUser.setInfo({ id })
       navigate('/signup/success')
-    } catch (error) {
+    } catch (e) {
+      const error = e as Error
+      const message = error?.message ?? ''
+      const res = Array.isArray(message) ? message[0] : message
+      if (res === WEAK_PASSWORD) {
+        form.setError('password', {
+          type: 'manual',
+          message: t('validation.weak-password'),
+        })
+        return
+      }
       form.setError('email', {
         type: 'manual',
         message: t('validation.email-already-exists'),
@@ -81,7 +92,8 @@ export function SignUpPage() {
             helperText={errors?.password?.message}
             {...register('password', {
               required: t('validation.required'),
-              minLength: 6,
+              minLength: { value: 8, message: t('validation.short-password') },
+              maxLength: { value: 48, message: t('validation.long-password') },
             })}
           />
           <TextField
@@ -92,7 +104,8 @@ export function SignUpPage() {
             helperText={errors?.confirmPassword?.message}
             {...register('confirmPassword', {
               required: t('validation.required'),
-              minLength: 6,
+              minLength: { value: 8, message: t('validation.short-password') },
+              maxLength: { value: 48, message: t('validation.long-password') },
             })}
           />
           <FormGroup>
