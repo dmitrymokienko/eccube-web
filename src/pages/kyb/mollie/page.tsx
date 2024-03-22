@@ -11,6 +11,7 @@ import { kyb } from '../../../entities/kyb/model'
 import { useUnit } from 'effector-react'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 import ErrorIcon from '@mui/icons-material/Error'
+import { MollieOnboardingStatus } from '@/entities/mollie/types'
 
 export function MollieCallbackPage() {
   const { t } = useTranslation()
@@ -18,7 +19,10 @@ export function MollieCallbackPage() {
 
   const [hasError, setHasError] = useState<boolean>(false)
 
-  const isLoading = useUnit(kyb.$isLoading)
+  const { isLoading, mollieKyb } = useUnit({
+    isLoading: kyb.$isLoading,
+    mollieKyb: kyb.$mollieOnboardingStatus,
+  })
 
   const called = useRef(false)
 
@@ -32,6 +36,7 @@ export function MollieCallbackPage() {
         await kyb.fetchMollieTokenFx(code!)
         await kyb.createMollieProfileFx()
         await kyb.sendKybPassedFx()
+        await kyb.checkMollieOnBoardingStatusFx()
       } catch (err) {
         console.error(err)
         setHasError(true)
@@ -40,9 +45,11 @@ export function MollieCallbackPage() {
     fetch()
   }, [])
 
-  const onSubmit = async () => {
+  const onGoToAppClick = async () => {
     navigate('/home')
   }
+
+  const href = mollieKyb?._links?.dashboard?.href ?? ''
 
   return (
     <KybLayout
@@ -71,6 +78,7 @@ export function MollieCallbackPage() {
       <Typography variant="h4" component="h1" pb={4}>
         {t('kyb.mollie-page.title')}
       </Typography>
+      {/* Status */}
       <Typography
         variant="body1"
         component="h1"
@@ -84,13 +92,29 @@ export function MollieCallbackPage() {
           {!hasError && !isLoading ? t('kyb.mollie-page.description') : null}
         </Box>
       </Typography>
+      {/* Mollie's onboarding description */}
+      {mollieKyb?.status === MollieOnboardingStatus.needsData ? (
+        <Typography variant="body1" pt={3}>
+          {t('kyb.mollie-page.onboarding')}
+        </Typography>
+      ) : null}
+
       <Button
         variant="contained"
+        sx={{ marginTop: '32px' }}
+        disabled={isLoading}
+        href={href}
+        target="_blank"
+      >
+        {t('button.complete-onboarding')}
+      </Button>
+      <Button
+        variant="outlined"
         sx={{ marginTop: '24px' }}
-        onClick={onSubmit}
+        onClick={onGoToAppClick}
         disabled={isLoading}
       >
-        {t('button.continue')}
+        {t('button.go-to-app')}
       </Button>
     </KybLayout>
   )

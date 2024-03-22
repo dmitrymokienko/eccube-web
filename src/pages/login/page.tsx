@@ -17,7 +17,6 @@ export interface ILoginForm {
 }
 
 export function LoginPage() {
-  // TODO: add validation
   const { t } = useTranslation()
   const navigate = useNavigate()
 
@@ -69,7 +68,9 @@ export function LoginPage() {
             helperText={errors?.password?.message}
             {...register('password', {
               required: t('validation.required'),
-              minLength: 6,
+              // TODO: update 6 -> 8 - temporary support test accounts
+              minLength: { value: 6, message: t('validation.short-password') },
+              maxLength: { value: 48, message: t('validation.long-password') },
             })}
           />
           <Button variant="contained" type="submit" sx={{ marginTop: '24px' }}>
