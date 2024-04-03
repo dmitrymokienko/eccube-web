@@ -41,6 +41,7 @@
     "effector-react": "^23.1.0",
     "i18next": "^23.7.16",
     "jwt-decode": "^4.0.0",
+    "million": "^3.0.6",
     "notistack": "^3.0.1",
     "ramda": "^0.29.1",
     "react": "^18.2.0",
