@@ -1,3 +1,4 @@
+import million from 'million/compiler'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import svgr from 'vite-plugin-svgr'
@@ -17,6 +18,7 @@ export default defineConfig({
     port: 443,
   },
   plugins: [
+    million.vite({ auto: true }),
     react(),
     svgr(),
     basicSsl(), // dev only !!!
