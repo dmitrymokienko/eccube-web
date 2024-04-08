@@ -1,9 +1,9 @@
-import { UserType } from '..'
+import { Role } from '..'
 
 export interface ICreateUserDto {
   email: string
   password: string
-  type: UserType
+  role: Role[]
   isVerified?: boolean
   isActive?: boolean
 }

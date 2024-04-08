@@ -1,6 +1,8 @@
-export enum UserType {
-  Supplier = 'Supplier',
-  Customer = 'Customer',
+export enum Role {
+  Guest = 'guest',
+  Supplier = 'supplier',
+  Customer = 'customer',
+  Admin = 'admin',
 }
 
 export interface IUser {
@@ -14,7 +16,7 @@ export interface IUser {
   createdAt: string
   updatedAt: string
   phone: string
-  type: UserType
+  role: Role
   isActive: boolean
   isVerified: boolean
   isKybPassed: boolean

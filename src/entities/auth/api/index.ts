@@ -1,9 +1,9 @@
 import { defaultApiClient } from '../../../core/api/apiClient'
 import { IBackendTokens } from '../../../shared/ui/providers/AuthProvider'
-import { ILoginUserResponse, IUser, UserType } from '../../currentUser/types'
+import { ILoginUserResponse, IUser, Role } from '../../currentUser/types'
 import { ICreateUserDto } from '../../currentUser/types/dto'
 
-export async function registerUserApi(data: { email: string; password: string; type: UserType }) {
+export async function registerUserApi(data: { email: string; password: string; role: Role[] }) {
   const res = await defaultApiClient.post<ICreateUserDto, IUser>('/v1/auth/register', data)
   return res
 }
