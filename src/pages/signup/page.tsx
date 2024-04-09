@@ -9,7 +9,7 @@ import { omit } from 'ramda'
 import { FormProvider, useForm } from 'react-hook-form'
 import { currentUser } from '../../entities/currentUser/model'
 import { auth } from '../../entities/auth/model'
-import { UserType } from '../../entities/currentUser/types'
+import { Role } from '../../entities/currentUser/types'
 import { SignUpLayout } from '../../shared/ui/layouts/SeparateLayout/custom/SignUpLayout'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
@@ -44,8 +44,8 @@ export function SignUpPage() {
       return
     }
     try {
-      const type = data.isSupplier ? UserType.Supplier : UserType.Customer
-      const payload = omit(['confirmPassword', 'isSupplier'], { ...data, type })
+      const role = data.isSupplier ? Role.Supplier : Role.Customer
+      const payload = omit(['confirmPassword', 'isSupplier'], { ...data, role: [role] })
       const { id } = await auth.registerFx(payload)
       currentUser.setInfo({ id })
       navigate('/signup/success')
