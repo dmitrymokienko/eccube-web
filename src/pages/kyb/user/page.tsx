@@ -7,10 +7,6 @@ import { useUnit } from 'effector-react'
 import { kyb } from '../../../entities/kyb/model'
 import { IKybData } from '../../../entities/kyb/types'
 import { useNavigate } from 'react-router-dom'
-import { KybLayout } from '../../../shared/ui/layouts/SeparateLayout/custom/KybLayout'
-import { PrevPageButton } from '../../../shared/ui/components/Button/PrevPageButton'
-import Box from '@mui/material/Box'
-import { LogoutButton } from '../../../shared/ui/components/Button/LogoutButton'
 import { useTranslation } from 'react-i18next'
 
 export function UserKybPage() {
@@ -18,7 +14,7 @@ export function UserKybPage() {
   const { t } = useTranslation()
   const navigate = useNavigate()
 
-  const { isLoading, user, updateData } = useUnit({
+  const { user, updateData } = useUnit({
     isLoading: kyb.$isLoading,
     user: kyb.$user,
     updateData: kyb.updateUserFx,
@@ -45,32 +41,11 @@ export function UserKybPage() {
   }
 
   return (
-    <KybLayout
-      LoaderProps={{ visible: isLoading }}
-      Header={
-        <Box
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            width: '100%',
-          }}
-        >
-          <PrevPageButton
-            onClick={() => {
-              navigate('/kyb')
-            }}
-          >
-            {t('button.prev-step')}
-          </PrevPageButton>
-
-          <LogoutButton />
-        </Box>
-      }
-    >
+    <>
       <Typography variant="h4" component="h1" pb={4}>
         {t('kyb.user-info-page.title')}
       </Typography>
+
       <FormProvider {...form}>
         <Stack component="form" spacing={1} onSubmit={handleSubmit(onSubmit)}>
           <TextField
@@ -108,6 +83,6 @@ export function UserKybPage() {
           </Button>
         </Stack>
       </FormProvider>
-    </KybLayout>
+    </>
   )
 }

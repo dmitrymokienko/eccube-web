@@ -2,10 +2,7 @@ import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
 import { FormProvider, useForm } from 'react-hook-form'
-import { KybLayout } from '../../shared/ui/layouts/SeparateLayout/custom/KybLayout'
 import { useNavigate } from 'react-router-dom'
-import { LogoutButton } from '../../shared/ui/components/Button/LogoutButton'
-import Box from '@mui/material/Box'
 import { useTranslation } from 'react-i18next'
 
 export function WelcomeOnKybPage() {
@@ -21,23 +18,11 @@ export function WelcomeOnKybPage() {
   }
 
   return (
-    <KybLayout
-      Header={
-        <Box
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'flex-end',
-            width: '100%',
-          }}
-        >
-          <LogoutButton />
-        </Box>
-      }
-    >
+    <>
       <Typography variant="h4" component="h1" pb={4}>
         {t('kyb.welcome-page.title')}
       </Typography>
+
       <FormProvider {...form}>
         <Stack component="form" spacing={3} onSubmit={handleSubmit(onSubmit)}>
           <Typography variant="body1" component="h1" gutterBottom>
@@ -48,6 +33,6 @@ export function WelcomeOnKybPage() {
           </Button>
         </Stack>
       </FormProvider>
-    </KybLayout>
+    </>
   )
 }

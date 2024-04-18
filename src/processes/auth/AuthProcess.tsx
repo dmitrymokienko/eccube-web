@@ -1,37 +1,67 @@
-import Box from '@mui/material/Box'
 import {
-  ISeparateLayoutProps,
   SEPARATE_LAYOUT_COMPACT_BREAKPOINT,
   SEPARATE_LAYOUT_SIDEBAR_WIDTH,
   SeparateLayout,
-} from '../SeparateLayout'
-import Button from '@mui/material/Button'
-import Typography from '@mui/material/Typography'
-import EccubeBg from '../../../../assets/images/eccube_bg.jpeg'
-import { SidebarRandomContent, getRandomInt } from '../lib/utils'
+} from '@/shared/ui/layouts/SeparateLayout/SeparateLayout'
+import { auth } from '../../entities/auth/model'
+import EccubeBg from '@/shared/assets/images/eccube_bg.jpeg'
+import { useUnit } from 'effector-react'
+import { ReactNode, useMemo } from 'react'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { Theme } from '@mui/material/styles'
-import { useNavigate } from 'react-router-dom'
+import { SidebarRandomContent, getRandomInt } from '@/shared/ui/layouts/SeparateLayout/lib/utils'
+import { Outlet, useMatch, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
+import Typography from '@mui/material/Typography'
 
-export interface ISignUpLayoutProps extends ISeparateLayoutProps {}
+export interface IAuthProcessProps {
+  children?: ReactNode
+}
 
-export function SignUpLayout(props: ISignUpLayoutProps) {
-  const { children, ...rest } = props
+export function AuthProcess(props: IAuthProcessProps) {
+  const { children } = props
 
   const { t } = useTranslation()
   const navigate = useNavigate()
+
+  const isLoading = useUnit(auth.$isLoading)
 
   const isCompactView = useMediaQuery<Theme>((theme) =>
     theme.breakpoints.down(SEPARATE_LAYOUT_COMPACT_BREAKPOINT)
   )
 
-  const random = getRandomInt()
-  const sidebar = SidebarRandomContent[random]
+  const singUpPages = useMatch('/signup*')
+  const loginPages = useMatch('/login*')
+
+  const sidebar = useMemo(() => {
+    const random = getRandomInt()
+    return SidebarRandomContent[random]
+  }, [])
+
+  const appBar = useMemo(() => {
+    if (singUpPages) {
+      return {
+        label: 'signup.have-account',
+        btn: 'button.login',
+      }
+    }
+    if (loginPages) {
+      return {
+        label: 'login.no-account',
+        btn: 'button.signup',
+      }
+    }
+    return {
+      label: '',
+      btn: '',
+    }
+  }, [singUpPages, loginPages])
 
   return (
     <SeparateLayout
-      {...rest}
+      LoaderProps={{ visible: isLoading }}
       Header={
         <Box
           sx={{
@@ -43,7 +73,7 @@ export function SignUpLayout(props: ISignUpLayoutProps) {
             width: '100%',
           }}
         >
-          {t('signup.have-account')}
+          {t(appBar.label)}
 
           <Button
             variant="outlined"
@@ -51,12 +81,11 @@ export function SignUpLayout(props: ISignUpLayoutProps) {
             fullWidth={false}
             size="small"
             onClick={() => {
-              navigate('/login')
+              navigate(singUpPages ? '/login' : '/signup')
             }}
           >
-            {t('button.login')}
+            {t(appBar.btn)}
           </Button>
-          {/* <LangSwitcher /> */}
         </Box>
       }
       Sidebar={
@@ -86,7 +115,7 @@ export function SignUpLayout(props: ISignUpLayoutProps) {
         },
       }}
     >
-      {children}
+      {children || <Outlet />}
     </SeparateLayout>
   )
 }
