@@ -28,6 +28,7 @@ export function WelcomeOnKybPage() {
           <Typography variant="body1" component="h1" gutterBottom>
             {t('kyb.welcome-page.description')}
           </Typography>
+
           <Button variant="contained" type="submit" sx={{ marginTop: '24px' }}>
             {t('button.start')}
           </Button>

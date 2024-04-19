@@ -69,6 +69,7 @@ export function LoginPage() {
               maxLength: { value: 48, message: t('validation.long-password') },
             })}
           />
+
           <Button variant="contained" type="submit" sx={{ marginTop: '24px' }}>
             {t('button.continue')}
           </Button>

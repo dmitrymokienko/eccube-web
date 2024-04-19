@@ -78,6 +78,7 @@ export function UserKybPage() {
               setValueAs: (value) => value.trim(),
             })}
           />
+
           <Button variant="contained" type="submit" sx={{ marginTop: '24px' }}>
             {t('button.next')}
           </Button>

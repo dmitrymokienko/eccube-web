@@ -68,6 +68,7 @@ export function SignUpPage() {
       <Typography variant="h4" component="h1" pb={4}>
         {t('signup.page.title')}
       </Typography>
+
       <FormProvider {...form}>
         <Stack component="form" spacing={1} onSubmit={handleSubmit(onSubmit)}>
           <TextField
@@ -110,6 +111,7 @@ export function SignUpPage() {
               label={t('signup.supplier.checkbox')}
             />
           </FormGroup>
+
           <Button variant="contained" type="submit" sx={{ marginTop: '24px' }}>
             {t('button.continue')}
           </Button>

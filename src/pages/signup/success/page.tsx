@@ -35,10 +35,12 @@ export function SignUpSuccessPage() {
         <Typography variant="h4" component="h1" pb={2}>
           {t('signup.success-page.title')}
         </Typography>
+
         <Typography variant="body1" pb={4}>
           {t('signup.success-page.description')}
         </Typography>
       </Stack>
+
       <Button
         fullWidth
         variant="contained"
