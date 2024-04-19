@@ -1,11 +1,8 @@
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import { useEffect, useRef, useState } from 'react'
-import { KybLayout } from '../../../shared/ui/layouts/SeparateLayout/custom/KybLayout'
-import { PrevPageButton } from '../../../shared/ui/components/Button/PrevPageButton'
 import { useNavigate } from 'react-router-dom'
 import Box from '@mui/material/Box'
-import { LogoutButton } from '../../../shared/ui/components/Button/LogoutButton'
 import { useTranslation } from 'react-i18next'
 import { kyb } from '../../../entities/kyb/model'
 import { useUnit } from 'effector-react'
@@ -52,32 +49,11 @@ export function MollieCallbackPage() {
   const href = mollieKyb?._links?.dashboard?.href ?? ''
 
   return (
-    <KybLayout
-      LoaderProps={{ visible: isLoading }}
-      Header={
-        <Box
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            width: '100%',
-          }}
-        >
-          <PrevPageButton
-            onClick={() => {
-              navigate('/kyb')
-            }}
-          >
-            {t('button.prev-step')}
-          </PrevPageButton>
-
-          <LogoutButton />
-        </Box>
-      }
-    >
+    <>
       <Typography variant="h4" component="h1" pb={4}>
         {t('kyb.mollie-page.title')}
       </Typography>
+
       {/* Status */}
       <Typography
         variant="body1"
@@ -92,6 +68,7 @@ export function MollieCallbackPage() {
           {!hasError && !isLoading ? t('kyb.mollie-page.description') : null}
         </Box>
       </Typography>
+
       {/* Mollie's onboarding description */}
       {mollieKyb?.status === MollieOnboardingStatus.needsData ? (
         <Typography variant="body1" pt={3}>
@@ -108,6 +85,7 @@ export function MollieCallbackPage() {
       >
         {t('button.complete-onboarding')}
       </Button>
+
       <Button
         variant="outlined"
         sx={{ marginTop: '24px' }}
@@ -116,6 +94,6 @@ export function MollieCallbackPage() {
       >
         {t('button.go-to-app')}
       </Button>
-    </KybLayout>
+    </>
   )
 }

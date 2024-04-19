@@ -5,7 +5,6 @@ import { useUnit } from 'effector-react'
 import { currentUser } from '../../../entities/currentUser/model'
 import { auth } from '../../../entities/auth/model'
 import { useNavigate } from 'react-router-dom'
-import { SignUpLayout } from '../../../shared/ui/layouts/SeparateLayout/custom/SignUpLayout'
 import { useTranslation } from 'react-i18next'
 
 export interface ISignUpForm {
@@ -31,7 +30,7 @@ export function SignUpSuccessPage() {
   }
 
   return (
-    <SignUpLayout>
+    <>
       <Stack spacing={4}>
         <Typography variant="h4" component="h1" pb={2}>
           {t('signup.success-page.title')}
@@ -49,6 +48,6 @@ export function SignUpSuccessPage() {
       >
         {t('button.activate')}
       </Button>
-    </SignUpLayout>
+    </>
   )
 }

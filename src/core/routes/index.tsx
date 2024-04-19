@@ -10,6 +10,8 @@ import { CompanyProfileKybPage } from '../../pages/kyb/profile/page.tsx'
 import { CompanyKybPage } from '../../pages/kyb/company/page.tsx'
 import { PaymentsPage } from '../../pages/payments/page.tsx'
 import { HomePage } from '@/pages/home/page.tsx'
+import { AuthProcess } from '@/processes/auth/AuthProcess.tsx'
+import { KybProcess } from '@/processes/kyb/KybProcess.tsx'
 
 export const router = createBrowserRouter([
   {
@@ -18,6 +20,7 @@ export const router = createBrowserRouter([
   },
   {
     path: '/signup',
+    element: <AuthProcess />,
     children: [
       {
         index: true,
@@ -31,15 +34,27 @@ export const router = createBrowserRouter([
   },
   {
     path: '/login',
-    element: <LoginPage />,
+    element: <AuthProcess />,
+    children: [
+      {
+        index: true,
+        element: <LoginPage />,
+      },
+    ],
   },
   {
     path: '/callback',
-    element: <MollieCallbackPage />,
+    element: <KybProcess />,
+    children: [
+      {
+        index: true,
+        element: <MollieCallbackPage />,
+      },
+    ],
   },
   {
     path: '/kyb',
-    element: <ProtectedRoute />,
+    element: <KybProcess />,
     children: [
       {
         index: true,

@@ -10,10 +10,8 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { currentUser } from '../../entities/currentUser/model'
 import { auth } from '../../entities/auth/model'
 import { Role } from '../../entities/currentUser/types'
-import { SignUpLayout } from '../../shared/ui/layouts/SeparateLayout/custom/SignUpLayout'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { useUnit } from 'effector-react'
 
 const WEAK_PASSWORD = 'password is not strong enough'
 
@@ -27,8 +25,6 @@ export interface ISignUpForm {
 export function SignUpPage() {
   const { t } = useTranslation()
   const navigate = useNavigate()
-
-  const isLoading = useUnit(auth.$isLoading)
 
   const form = useForm<ISignUpForm>()
   const { register, handleSubmit, formState } = form
@@ -45,7 +41,7 @@ export function SignUpPage() {
     }
     try {
       const role = data.isSupplier ? Role.Supplier : Role.Customer
-      const payload = omit(['confirmPassword', 'isSupplier'], { ...data, role: [role] })
+      const payload = omit(['confirmPassword', 'isSupplier'], { ...data, roles: [role] })
       const { id } = await auth.registerFx(payload)
       currentUser.setInfo({ id })
       navigate('/signup/success')
@@ -68,7 +64,7 @@ export function SignUpPage() {
   }
 
   return (
-    <SignUpLayout LoaderProps={{ visible: isLoading }}>
+    <>
       <Typography variant="h4" component="h1" pb={4}>
         {t('signup.page.title')}
       </Typography>
@@ -119,6 +115,6 @@ export function SignUpPage() {
           </Button>
         </Stack>
       </FormProvider>
-    </SignUpLayout>
+    </>
   )
 }

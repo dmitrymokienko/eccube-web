@@ -3,13 +3,11 @@ import Stack from '@mui/material/Stack'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 import { FormProvider, useForm } from 'react-hook-form'
-import { LoginLayout } from '../../shared/ui/layouts/SeparateLayout/custom/LoginLayout'
 import { auth } from '../../entities/auth/model'
 import { useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
 import { AuthContext } from '../../shared/ui/providers/AuthProvider'
 import { useTranslation } from 'react-i18next'
-import { useUnit } from 'effector-react'
 
 export interface ILoginForm {
   email: string
@@ -19,8 +17,6 @@ export interface ILoginForm {
 export function LoginPage() {
   const { t } = useTranslation()
   const navigate = useNavigate()
-
-  const isLoading = useUnit(auth.$isLoading)
 
   const { checkLoginState } = useContext(AuthContext)
 
@@ -43,7 +39,7 @@ export function LoginPage() {
   }
 
   return (
-    <LoginLayout LoaderProps={{ visible: isLoading }}>
+    <>
       <Typography variant="h4" component="h1" pb={4}>
         {t('login.page.title')}
       </Typography>
@@ -78,6 +74,6 @@ export function LoginPage() {
           </Button>
         </Stack>
       </FormProvider>
-    </LoginLayout>
+    </>
   )
 }
