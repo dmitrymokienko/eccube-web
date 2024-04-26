@@ -15,7 +15,7 @@ export const components: Components<Omit<Theme, 'components'>> = {
       {
         props: { variant: 'contained' },
         style: ({ theme }) => ({
-          padding: '8px 24px',
+          padding: '6px 24px',
           backgroundColor: theme.palette.custom.blue[0],
           // TODO: add new boxShadows
           '&:hover': {
