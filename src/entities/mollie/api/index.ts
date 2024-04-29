@@ -10,7 +10,7 @@ export function startMollieOAuth2Api(apiClient: ApiClient = defaultApiClient) {
 export function fetchMollieOAuth2AccessTokenApi(apiClient: ApiClient = defaultApiClient) {
   return async (code: string) => {
     const res = await apiClient.post<{ code: string }, { accessToken: string }>(
-      '/mollie/auth/token',
+      '/api/mollie/auth/token',
       { code }
     )
     return res
