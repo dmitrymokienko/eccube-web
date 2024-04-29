@@ -4,7 +4,7 @@ import { createEffect, createStore, sample } from 'effector'
 
 // ORDERS
 const createOrderFx = createEffect(async (data: unknown) => {
-  const res = await defaultApiClient.post<unknown, unknown>(`/mollie/order/create`, data)
+  const res = await defaultApiClient.post<unknown, unknown>(`/api/mollie/order/create`, data)
   return res
 })
 const $order = createStore<unknown>(null)

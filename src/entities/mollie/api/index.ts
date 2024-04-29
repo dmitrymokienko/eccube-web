@@ -3,7 +3,7 @@ import { IMollieOnboardingStatus, IMollieProfileResponse, UpdateMollieProfileDto
 
 export function startMollieOAuth2Api(apiClient: ApiClient = defaultApiClient) {
   return async () => {
-    const res = await apiClient.get<{ authorizationUri: string }>('/mollie/auth/url')
+    const res = await apiClient.get<{ authorizationUri: string }>('/api/mollie/auth/url')
     return res
   }
 }
@@ -20,7 +20,7 @@ export function fetchMollieOAuth2AccessTokenApi(apiClient: ApiClient = defaultAp
 export function createMollieProfileApi(apiClient: ApiClient = defaultApiClient) {
   return async () => {
     const res = await apiClient.post<undefined, IMollieProfileResponse>(
-      `/mollie/create/profile`,
+      `/api/mollie/create/profile`,
       undefined
     )
     return res
@@ -29,7 +29,7 @@ export function createMollieProfileApi(apiClient: ApiClient = defaultApiClient) 
 export function updateMollieProfileApi(apiClient: ApiClient = defaultApiClient) {
   return async (payload: UpdateMollieProfileDto) => {
     const res = await apiClient.patch<UpdateMollieProfileDto, IMollieProfileResponse>(
-      `/mollie/update/profile`,
+      `/api/mollie/update/profile`,
       payload
     )
     return res
@@ -39,7 +39,7 @@ export function updateMollieProfileApi(apiClient: ApiClient = defaultApiClient) 
 export function sendKybPassedApi(apiClient: ApiClient = defaultApiClient) {
   return async () => {
     const res = await apiClient.post<undefined, IMollieProfileResponse>(
-      `/mollie/onboarding/me`,
+      `/api/mollie/onboarding/me`,
       undefined
     )
     return res
@@ -48,7 +48,7 @@ export function sendKybPassedApi(apiClient: ApiClient = defaultApiClient) {
 
 export function checkMollieOnBoardingStatusApi(apiClient: ApiClient = defaultApiClient) {
   return async () => {
-    const res = await apiClient.get<IMollieOnboardingStatus>('/mollie/onboarding-status')
+    const res = await apiClient.get<IMollieOnboardingStatus>('/api/mollie/onboarding-status')
     return res
   }
 }
@@ -56,7 +56,7 @@ export function checkMollieOnBoardingStatusApi(apiClient: ApiClient = defaultApi
 export function enablePaymentMethodApi(apiClient: ApiClient = defaultApiClient) {
   return async (method: string) => {
     const res = await apiClient.post<undefined, IMollieProfileResponse>(
-      `/mollie/profiles/methods/${method}`,
+      `/api/mollie/profiles/methods/${method}`,
       undefined
     )
     return res

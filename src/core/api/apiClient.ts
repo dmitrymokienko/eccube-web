@@ -36,7 +36,7 @@ export class ApiClient {
         if (err?.response.status === 401 && refreshToken && !config._retry) {
           config._retry = true
           try {
-            const rs = await this.instance.post('/v1/auth/refresh', undefined, {
+            const rs = await this.instance.post('/api/auth/refresh', undefined, {
               headers: {
                 'Content-Type': 'application/json',
                 authorization: `Refresh ${refreshToken}`,
