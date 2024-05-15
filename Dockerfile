@@ -17,4 +17,4 @@ FROM nginx:latest
 COPY --from=build /app/dist /usr/share/nginx/html
 COPY /ops/nginx/nginx.conf /etc/nginx/
 EXPOSE 80
-CMD [ "pnpm", "start" ]
+CMD ["nginx", "-g", "daemon off;"]
