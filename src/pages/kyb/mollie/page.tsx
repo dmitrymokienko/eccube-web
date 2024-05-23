@@ -9,6 +9,7 @@ import { useUnit } from 'effector-react'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 import ErrorIcon from '@mui/icons-material/Error'
 import { MollieOnboardingStatus } from '@/entities/mollie/types'
+import { auth } from '@/entities/auth/model'
 
 export function MollieCallbackPage() {
   const { t } = useTranslation()
@@ -30,6 +31,7 @@ export function MollieCallbackPage() {
         called.current = true
         const search = window.location.search
         const code = new URLSearchParams(search).get('code')
+        await auth.refreshUserAndTokensFx()
         await kyb.fetchMollieTokenFx(code!)
         await kyb.createMollieProfileFx()
         await kyb.sendKybPassedFx()

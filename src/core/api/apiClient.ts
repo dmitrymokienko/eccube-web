@@ -1,6 +1,8 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, CreateAxiosDefaults } from 'axios'
 import { auth } from '../../entities/auth/model'
 import { jwtDecode } from 'jwt-decode'
+import { Nullable } from '@/shared/types/utilities'
+import { IBackendTokens } from '@/shared/ui/providers/AuthProvider'
 
 const backendBaseURL = (): string => import.meta.env.VITE_APP_BACKEND_BASE_URL
 
@@ -8,6 +10,12 @@ type ApiConfig = CreateAxiosDefaults<unknown>
 
 export class ApiClient {
   public instance: AxiosInstance
+
+  private accessToken: Nullable<string> = null
+
+  public setAccessToken(token: Nullable<string>): void {
+    this.accessToken = token
+  }
 
   protected createClient(apiConfiguration: ApiConfig): AxiosInstance {
     const { baseURL, responseType, headers } = apiConfiguration
@@ -25,29 +33,46 @@ export class ApiClient {
   constructor(apiConfiguration: ApiConfig = {}) {
     this.instance = this.createClient(apiConfiguration)
 
+    this.instance.interceptors.request.use(
+      (config) => {
+        if (this.accessToken) {
+          config.headers['Authorization'] = 'Bearer ' + this.accessToken
+        }
+        return config
+      },
+      (error) => {
+        return Promise.reject(error)
+      }
+    )
+
     this.instance.interceptors.response.use(
       (res) => {
+        if (this.accessToken) return res
+        const authorizationHeader: string = res.headers['authorization']
+        if (authorizationHeader) {
+          const token = authorizationHeader.split(' ')[1]
+          if (token) {
+            this.setAccessToken(token)
+          }
+        }
         return res
       },
       async (err) => {
         const config = err.config
-        const refreshToken = JSON.parse(localStorage.getItem('refresh')!)
         // Access Token was expired, retry
-        if (err?.response.status === 401 && refreshToken && !config._retry) {
+        const { exp = null } = jwtDecode(this.accessToken ?? '')
+        const isExpired = exp && new Date().getTime() > exp * 1000
+        if (err?.response.status === 401 && isExpired && !config._retry) {
           config._retry = true
           try {
-            const rs = await this.instance.post('/api/auth/refresh', undefined, {
-              headers: {
-                'Content-Type': 'application/json',
-                authorization: `Refresh ${refreshToken}`,
-              },
-              withCredentials: true,
-            })
-            auth.setRefreshToken(rs.data.refreshToken)
-            const { exp } = jwtDecode(rs.data.accessToken)
-            if (exp) {
-              auth.setExpiresIn(exp)
-            }
+            const { backendTokens } = await this.get<{ backendTokens: IBackendTokens }>(
+              '/api/auth/refresh'
+            )
+            this.setAccessToken(backendTokens?.accessToken ?? null)
+            auth.setAccessToken(backendTokens?.accessToken ?? null)
+            auth.setRefreshToken(backendTokens?.refreshToken ?? null)
+            const { exp = null } = jwtDecode(backendTokens.accessToken ?? {})
+            auth.setExpiresIn(exp)
             return this.instance(config)
           } catch (_error) {
             return Promise.reject(_error)

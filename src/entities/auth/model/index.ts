@@ -1,12 +1,19 @@
 import { combine, createEffect, createEvent, createStore } from 'effector'
-import { activateUserApi, loginUserApi, registerUserApi } from '../api'
+import { activateUserApi, loginUserApi, refreshUserAndTokensApi, registerUserApi } from '../api'
 // import persist from 'effector-localstorage'
 import { Nullable } from '../../../shared/types/utilities'
 
 const registerFx = createEffect(registerUserApi)
 const loginFx = createEffect(loginUserApi)
+const refreshUserAndTokensFx = createEffect(refreshUserAndTokensApi)
+
 // TODO: delete this
 const activateFx = createEffect(activateUserApi)
+
+// access token
+const setAccessToken = createEvent<Nullable<string>>()
+const $accessToken = createStore<Nullable<string>>(null)
+$accessToken.on(setAccessToken, (_, payload) => payload)
 
 // refresh token
 const setRefreshToken = createEvent<Nullable<string>>()
@@ -23,14 +30,20 @@ $tokenExpiresIn.on(setExpiresIn, (_, payload) => payload)
 const $isLoading = combine(
   registerFx.pending,
   loginFx.pending,
-  (register, login) => register || login
+  activateFx.pending,
+  refreshUserAndTokensFx.pending,
+  (...args: boolean[]) => args.some(Boolean)
 )
 
 export const auth = {
+  $isLoading,
   registerFx,
   loginFx,
   activateFx,
-  $isLoading,
+  refreshUserAndTokensFx,
+  // access token
+  setAccessToken,
+  $accessToken,
   // refresh token
   setRefreshToken,
   $refreshToken,

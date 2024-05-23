@@ -1,12 +1,12 @@
 import { ReactNode, createContext, useCallback, useEffect, useState } from 'react'
 import { currentUser } from '../../../entities/currentUser/model'
-import { checkLoggedInUserApi, refreshTokenApi } from '../../../entities/auth/api'
 import { useUnit } from 'effector-react'
 import { Nullable } from '../../types/utilities'
-import { IUser } from '../../../entities/currentUser/types'
+import { ILoginUserResponse, IUser } from '../../../entities/currentUser/types'
 import { jwtDecode } from 'jwt-decode'
 import { useInterval } from '../../hooks/useInterval'
 import { auth } from '../../../entities/auth/model'
+import { defaultApiClient } from '@/core/api/apiClient'
 
 export interface IBackendTokens {
   accessToken: string
@@ -18,10 +18,15 @@ const defaultAuthContext: {
   userInfo: Nullable<Partial<IUser>>
   loggedIn: Nullable<boolean>
   checkLoginState: () => Promise<Nullable<IUser>>
+  setLoggedIn: (loggedIn: boolean) => void
+  login: (pair: { email: string; password: string }) => Promise<ILoginUserResponse>
 } = {
   userInfo: null,
   loggedIn: null,
   checkLoginState: () => Promise.resolve(null),
+  setLoggedIn: () => {},
+  login: () =>
+    Promise.resolve({ user: null, backendTokens: null } as unknown as ILoginUserResponse),
 }
 
 const INTERVAL = 60 * 1000 // 1 minute
@@ -34,22 +39,31 @@ export interface IAuthProviderProps {
 
 export function AuthProvider({ children }: IAuthProviderProps) {
   const userInfo = useUnit(currentUser.$info)
-  const refreshToken = useUnit(auth.$refreshToken)
   const expiresIn = useUnit(auth.$tokenExpiresIn)
 
   const [loggedIn, setLoggedIn] = useState<Nullable<boolean>>(null)
 
+  const login = useCallback(async (pair: { email: string; password: string }) => {
+    try {
+      const res = await auth.loginFx(pair)
+      setLoggedIn(true)
+      currentUser.setInfo(res.user)
+      updateTokens(res.backendTokens)
+      return res
+    } catch (err) {
+      console.error(err)
+      setLoggedIn(false)
+      return { user: null, backendTokens: null } as unknown as ILoginUserResponse
+    }
+  }, [])
+
   const checkLoginState = useCallback(async () => {
     try {
-      const { user, backendTokens } = await checkLoggedInUserApi()
+      const { user, backendTokens } = await auth.refreshUserAndTokensFx()
       setLoggedIn(true)
       if (user && backendTokens) {
         currentUser.setInfo(user)
-        auth.setRefreshToken(backendTokens.refreshToken)
-        const { exp } = jwtDecode(backendTokens.accessToken)
-        if (exp) {
-          auth.setExpiresIn(exp)
-        }
+        updateTokens(backendTokens)
         return user
       }
       return null
@@ -57,37 +71,23 @@ export function AuthProvider({ children }: IAuthProviderProps) {
       console.error(err)
       setLoggedIn(false)
       currentUser.setInfo(null)
-      auth.setRefreshToken(null)
-      auth.setExpiresIn(null)
+      updateTokens({} as IBackendTokens)
       return null
     }
   }, [])
 
   const refresh = async () => {
-    try {
-      if (!expiresIn || !refreshToken) {
-        throw new Error('No tokens')
-      }
-      if (new Date().getTime() > expiresIn * 1000) {
-        const res = await refreshTokenApi(refreshToken)
-        auth.setRefreshToken(res.refreshToken)
-        const { exp } = jwtDecode(res.accessToken)
-        if (exp) {
-          auth.setExpiresIn(exp)
-        }
-      }
-    } catch (err) {
-      console.error(err)
-      setLoggedIn(false)
-      currentUser.setInfo(null)
-      auth.setRefreshToken(null)
-      auth.setExpiresIn(null)
+    if (!expiresIn) {
+      throw new Error('No tokens')
+    }
+    if (new Date().getTime() > expiresIn * 1000) {
+      await checkLoginState()
     }
   }
 
   useEffect(() => {
     checkLoginState()
-  }, [checkLoginState])
+  }, [])
 
   // check access-token's expiration every minute
   useInterval(() => {
@@ -95,8 +95,16 @@ export function AuthProvider({ children }: IAuthProviderProps) {
     refresh()
   }, INTERVAL)
 
+  function updateTokens(backendTokens: IBackendTokens) {
+    defaultApiClient.setAccessToken(backendTokens?.accessToken ?? null)
+    auth.setAccessToken(backendTokens?.accessToken ?? null)
+    auth.setRefreshToken(backendTokens?.refreshToken ?? null)
+    const { exp = null } = jwtDecode(backendTokens?.accessToken ?? {})
+    auth.setExpiresIn(exp)
+  }
+
   return (
-    <AuthContext.Provider value={{ loggedIn, checkLoginState, userInfo }}>
+    <AuthContext.Provider value={{ login, loggedIn, setLoggedIn, checkLoginState, userInfo }}>
       {children}
     </AuthContext.Provider>
   )

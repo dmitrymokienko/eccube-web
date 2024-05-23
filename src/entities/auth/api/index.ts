@@ -21,9 +21,9 @@ export async function logoutUserApi() {
   return res
 }
 
-export async function checkLoggedInUserApi() {
+export async function refreshUserAndTokensApi() {
   const res = await defaultApiClient.get<{ user: IUser; backendTokens: IBackendTokens }>(
-    '/api/auth/logged_in'
+    '/api/auth/refresh'
   )
   return res
 }
@@ -33,19 +33,5 @@ export async function activateUserApi(token: string) {
   const res = await defaultApiClient.post<{ token: string }, IUser>('/api/auth/activate', {
     token,
   })
-  return res
-}
-
-export async function refreshTokenApi(refreshToken: string) {
-  const res = await defaultApiClient.post<undefined, IBackendTokens>(
-    '/api/auth/refresh',
-    undefined,
-    {
-      headers: {
-        authorization: `Refresh ${refreshToken}`,
-      },
-      withCredentials: true,
-    }
-  )
   return res
 }
