@@ -27,12 +27,12 @@ export class ApiClient {
     this.instance = this.createClient(apiConfiguration)
 
     this.instance.interceptors.request.use(
-      (config) => {
+      (req) => {
         const accessToken = auth.$accessToken.getState()
         if (accessToken) {
-          config.headers['Authorization'] = 'Bearer ' + accessToken
+          req.headers['Authorization'] = 'Bearer ' + accessToken
         }
-        return config
+        return req
       },
       (error) => {
         return Promise.reject(error)
@@ -41,15 +41,6 @@ export class ApiClient {
 
     this.instance.interceptors.response.use(
       (res) => {
-        const accessToken = auth.$accessToken.getState()
-        if (accessToken) return res
-        const authorizationHeader: string = res.headers['authorization']
-        if (authorizationHeader) {
-          const token = authorizationHeader.split(' ')[1]
-          if (token) {
-            auth.setAccessToken(token)
-          }
-        }
         return res
       },
       async (err) => {
