@@ -3,7 +3,6 @@ import { currentUser } from '../../../entities/currentUser/model'
 import { useUnit } from 'effector-react'
 import { Nullable } from '../../types/utilities'
 import { ILoginUserResponse, IUser } from '../../../entities/currentUser/types'
-import { jwtDecode } from 'jwt-decode'
 import { useInterval } from '../../hooks/useInterval'
 import { auth } from '../../../entities/auth/model'
 
@@ -49,11 +48,12 @@ export function AuthProvider({ children }: IAuthProviderProps) {
       const res = await auth.loginFx(pair)
       setLoggedIn(true)
       currentUser.setInfo(res.user)
-      updateTokens(res.backendTokens)
       return res
     } catch (err) {
       console.error(err)
       setLoggedIn(false)
+      currentUser.setInfo(null)
+      auth.reset()
       return { user: null, backendTokens: null } as unknown as ILoginUserResponse
     }
   }, [])
@@ -64,7 +64,6 @@ export function AuthProvider({ children }: IAuthProviderProps) {
       setLoggedIn(true)
       if (user && backendTokens) {
         currentUser.setInfo(user)
-        updateTokens(backendTokens)
         return user
       }
       return null
@@ -72,7 +71,7 @@ export function AuthProvider({ children }: IAuthProviderProps) {
       console.error(err)
       setLoggedIn(false)
       currentUser.setInfo(null)
-      updateTokens({} as IBackendTokens)
+      auth.reset()
       return null
     }
   }, [])
@@ -97,13 +96,6 @@ export function AuthProvider({ children }: IAuthProviderProps) {
     if (!loggedIn) return
     refresh()
   }, INTERVAL)
-
-  function updateTokens(backendTokens: IBackendTokens) {
-    auth.setAccessToken(backendTokens?.accessToken ?? null)
-    auth.setRefreshToken(backendTokens?.refreshToken ?? null)
-    const { exp = null } = jwtDecode(backendTokens?.accessToken ?? {})
-    auth.setExpiresIn(exp)
-  }
 
   return (
     <AuthContext.Provider value={{ login, loggedIn, setLoggedIn, checkLoginState, userInfo }}>

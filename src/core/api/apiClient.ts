@@ -73,9 +73,7 @@ export class ApiClient {
             auth.setExpiresIn(exp)
             return this.instance(config)
           } catch (_error) {
-            auth.setAccessToken(null)
-            auth.setRefreshToken(null)
-            auth.setExpiresIn(null)
+            auth.reset()
             return Promise.reject(_error)
           }
         }
