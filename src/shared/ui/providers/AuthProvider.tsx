@@ -6,7 +6,6 @@ import { ILoginUserResponse, IUser } from '../../../entities/currentUser/types'
 import { jwtDecode } from 'jwt-decode'
 import { useInterval } from '../../hooks/useInterval'
 import { auth } from '../../../entities/auth/model'
-import { defaultApiClient } from '@/core/api/apiClient'
 
 export interface IBackendTokens {
   accessToken: string
@@ -96,7 +95,6 @@ export function AuthProvider({ children }: IAuthProviderProps) {
   }, INTERVAL)
 
   function updateTokens(backendTokens: IBackendTokens) {
-    defaultApiClient.setAccessToken(backendTokens?.accessToken ?? null)
     auth.setAccessToken(backendTokens?.accessToken ?? null)
     auth.setRefreshToken(backendTokens?.refreshToken ?? null)
     const { exp = null } = jwtDecode(backendTokens?.accessToken ?? {})

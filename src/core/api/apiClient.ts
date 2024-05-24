@@ -1,7 +1,6 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, CreateAxiosDefaults } from 'axios'
 import { auth } from '../../entities/auth/model'
 import { jwtDecode } from 'jwt-decode'
-import { Nullable } from '@/shared/types/utilities'
 import { IBackendTokens } from '@/shared/ui/providers/AuthProvider'
 
 const backendBaseURL = (): string => import.meta.env.VITE_APP_BACKEND_BASE_URL
@@ -10,12 +9,6 @@ type ApiConfig = CreateAxiosDefaults<unknown>
 
 export class ApiClient {
   public instance: AxiosInstance
-
-  private accessToken: Nullable<string> = null
-
-  public setAccessToken(token: Nullable<string>): void {
-    this.accessToken = token
-  }
 
   protected createClient(apiConfiguration: ApiConfig): AxiosInstance {
     const { baseURL, responseType, headers } = apiConfiguration
@@ -35,8 +28,9 @@ export class ApiClient {
 
     this.instance.interceptors.request.use(
       (config) => {
-        if (this.accessToken) {
-          config.headers['Authorization'] = 'Bearer ' + this.accessToken
+        const accessToken = auth.$accessToken.getState()
+        if (accessToken) {
+          config.headers['Authorization'] = 'Bearer ' + accessToken
         }
         return config
       },
@@ -47,28 +41,37 @@ export class ApiClient {
 
     this.instance.interceptors.response.use(
       (res) => {
-        if (this.accessToken) return res
+        const accessToken = auth.$accessToken.getState()
+        if (accessToken) return res
         const authorizationHeader: string = res.headers['authorization']
         if (authorizationHeader) {
           const token = authorizationHeader.split(' ')[1]
           if (token) {
-            this.setAccessToken(token)
+            auth.setAccessToken(token)
           }
         }
         return res
       },
       async (err) => {
         const config = err.config
-        // Access Token was expired, retry
-        const { exp = null } = jwtDecode(this.accessToken ?? '')
+        const accessToken = auth.$accessToken.getState()
+        const refreshToken = auth.$refreshToken.getState()
+        const exp = auth.$tokenExpiresIn.getState()
         const isExpired = exp && new Date().getTime() > exp * 1000
-        if (err?.response.status === 401 && isExpired && !config._retry) {
+        // Access Token was expired, retry
+        if (
+          err?.response.status === 401 &&
+          accessToken &&
+          refreshToken &&
+          isExpired &&
+          !config._retry
+        ) {
           config._retry = true
           try {
             const { backendTokens } = await this.get<{ backendTokens: IBackendTokens }>(
               '/api/auth/refresh'
             )
-            this.setAccessToken(backendTokens?.accessToken ?? null)
+            auth.setAccessToken(backendTokens?.accessToken ?? null)
             auth.setAccessToken(backendTokens?.accessToken ?? null)
             auth.setRefreshToken(backendTokens?.refreshToken ?? null)
             const { exp = null } = jwtDecode(backendTokens.accessToken ?? {})
@@ -88,6 +91,8 @@ export class ApiClient {
     params?: Record<string, string | number | boolean | null>
   ): Promise<TResponse> {
     try {
+      const accessToken = auth.$accessToken.getState()
+      console.log('accessToken', accessToken)
       const response = await this.instance.get<TResponse>(path, { params: params ?? {} })
       return response.data
     } catch (err) {
@@ -102,6 +107,8 @@ export class ApiClient {
     config?: AxiosRequestConfig<unknown>
   ): Promise<TResponse> {
     try {
+      const accessToken = auth.$accessToken.getState()
+      console.log('accessToken', accessToken)
       const response = await this.instance.post<TResponse>(path, payload, config)
       return response.data
     } catch (err) {
