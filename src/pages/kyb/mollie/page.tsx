@@ -1,6 +1,6 @@
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
-import { useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Box from '@mui/material/Box'
 import { useTranslation } from 'react-i18next'
@@ -9,12 +9,15 @@ import { useUnit } from 'effector-react'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 import ErrorIcon from '@mui/icons-material/Error'
 import { MollieOnboardingStatus } from '@/entities/mollie/types'
+import { AuthContext } from '@/shared/ui/providers/AuthProvider'
 
 export function MollieCallbackPage() {
   const { t } = useTranslation()
   const navigate = useNavigate()
 
   const [hasError, setHasError] = useState<boolean>(false)
+
+  const { loggedIn } = useContext(AuthContext)
 
   const { isLoading, mollieKyb } = useUnit({
     isLoading: kyb.$isLoading,
@@ -39,8 +42,10 @@ export function MollieCallbackPage() {
         setHasError(true)
       }
     }
-    fetch()
-  }, [])
+    if (loggedIn) {
+      fetch()
+    }
+  }, [loggedIn])
 
   const onGoToAppClick = async () => {
     navigate('/home')

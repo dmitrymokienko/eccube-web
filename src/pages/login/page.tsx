@@ -3,11 +3,10 @@ import Stack from '@mui/material/Stack'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 import { FormProvider, useForm } from 'react-hook-form'
-import { auth } from '../../entities/auth/model'
 import { useNavigate } from 'react-router-dom'
-import { useContext } from 'react'
-import { AuthContext } from '../../shared/ui/providers/AuthProvider'
 import { useTranslation } from 'react-i18next'
+import { useContext } from 'react'
+import { AuthContext } from '@/shared/ui/providers/AuthProvider'
 
 export interface ILoginForm {
   email: string
@@ -18,7 +17,7 @@ export function LoginPage() {
   const { t } = useTranslation()
   const navigate = useNavigate()
 
-  const { checkLoginState } = useContext(AuthContext)
+  const { login } = useContext(AuthContext)
 
   const form = useForm<ILoginForm>()
   const { register, handleSubmit, formState } = form
@@ -26,9 +25,8 @@ export function LoginPage() {
 
   const onSubmit = async (data: ILoginForm) => {
     try {
-      await auth.loginFx(data)
-      const res = await checkLoginState()
-      if (res?.isKybPassed) {
+      const res = await login(data)
+      if (res.user.isKybPassed) {
         navigate('/home')
         return
       }
