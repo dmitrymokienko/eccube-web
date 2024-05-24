@@ -54,30 +54,28 @@ export class ApiClient {
       },
       async (err) => {
         const config = err.config
-        const accessToken = auth.$accessToken.getState()
-        const refreshToken = auth.$refreshToken.getState()
         const exp = auth.$tokenExpiresIn.getState()
         const isExpired = exp && new Date().getTime() > exp * 1000
         // Access Token was expired, retry
-        if (
-          err?.response.status === 401 &&
-          accessToken &&
-          refreshToken &&
-          isExpired &&
-          !config._retry
-        ) {
+        if (err?.response.status === 401 && isExpired && !config._retry) {
           config._retry = true
           try {
             const { backendTokens } = await this.get<{ backendTokens: IBackendTokens }>(
               '/api/auth/refresh'
             )
-            auth.setAccessToken(backendTokens?.accessToken ?? null)
-            auth.setAccessToken(backendTokens?.accessToken ?? null)
-            auth.setRefreshToken(backendTokens?.refreshToken ?? null)
-            const { exp = null } = jwtDecode(backendTokens.accessToken ?? {})
+            if (!backendTokens) {
+              throw new Error('No tokens')
+            }
+            auth.setAccessToken(backendTokens.accessToken)
+            auth.setAccessToken(backendTokens.accessToken)
+            auth.setRefreshToken(backendTokens.refreshToken)
+            const { exp = null } = jwtDecode(backendTokens.accessToken)
             auth.setExpiresIn(exp)
             return this.instance(config)
           } catch (_error) {
+            auth.setAccessToken(null)
+            auth.setRefreshToken(null)
+            auth.setExpiresIn(null)
             return Promise.reject(_error)
           }
         }
