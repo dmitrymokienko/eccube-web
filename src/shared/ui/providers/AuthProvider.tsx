@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useCallback, useEffect, useState } from 'react'
+import { ReactNode, createContext, useCallback, useEffect, useRef, useState } from 'react'
 import { currentUser } from '../../../entities/currentUser/model'
 import { useUnit } from 'effector-react'
 import { Nullable } from '../../types/utilities'
@@ -41,6 +41,8 @@ export function AuthProvider({ children }: IAuthProviderProps) {
   const expiresIn = useUnit(auth.$tokenExpiresIn)
 
   const [loggedIn, setLoggedIn] = useState<Nullable<boolean>>(null)
+
+  const called = useRef(false)
 
   const login = useCallback(async (pair: { email: string; password: string }) => {
     try {
@@ -85,6 +87,8 @@ export function AuthProvider({ children }: IAuthProviderProps) {
   }
 
   useEffect(() => {
+    if (called.current) return // prevent rerender caused by StrictMode
+    called.current = true
     checkLoginState()
   }, [])
 
