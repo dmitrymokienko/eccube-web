@@ -12,8 +12,8 @@ import { Sidebar } from './components/Sidebar'
 import AppBar from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
 import { LogoutButton } from '../../components/Button/LogoutButton'
-import { omit } from 'ramda'
 import { ISidebarDrawerProps } from './components/SidebarDrawer'
+import { omit } from '@/shared/libs/utilities'
 
 export interface ISidebarLayoutProps {
   children: ReactNode

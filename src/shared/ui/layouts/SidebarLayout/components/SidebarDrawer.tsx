@@ -1,9 +1,9 @@
 import { useEffect } from 'react'
 import { SIDEBAR_LAYOUT_DRAWER_WIDTH } from '../lib/constants'
-import { omit } from 'ramda'
 import { Loader } from '@/shared/ui/components/Loader'
 import Drawer, { DrawerProps } from '@mui/material/Drawer'
 import { useTheme } from '@mui/material/styles'
+import { omit } from '@/shared/libs/utilities'
 
 const enum Anchor {
   Left = 'left',
