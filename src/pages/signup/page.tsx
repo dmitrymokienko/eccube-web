@@ -1,14 +1,10 @@
 import Button from '@mui/material/Button'
-import Checkbox from '@mui/material/Checkbox'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import FormGroup from '@mui/material/FormGroup'
 import Stack from '@mui/material/Stack'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 import { FormProvider, useForm } from 'react-hook-form'
 import { currentUser } from '../../entities/currentUser/model'
 import { auth } from '../../entities/auth/model'
-import { Role } from '../../entities/currentUser/types'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { omit } from '@/shared/libs/utilities'
@@ -19,7 +15,6 @@ export interface ISignUpForm {
   email: string
   password: string
   confirmPassword: string
-  isSupplier: boolean
 }
 
 export function SignUpPage() {
@@ -40,8 +35,7 @@ export function SignUpPage() {
       return
     }
     try {
-      const role = data.isSupplier ? Role.Supplier : Role.Customer
-      const payload = omit(['confirmPassword', 'isSupplier'], { ...data, roles: [role] })
+      const payload = omit(['confirmPassword'], { ...data })
       const { id } = await auth.registerFx(payload)
       currentUser.setInfo({ id })
       navigate('/signup/success')
@@ -81,6 +75,7 @@ export function SignUpPage() {
               setValueAs: (value) => value.trim(),
             })}
           />
+
           <TextField
             type="password"
             label={t('field.password')}
@@ -93,6 +88,7 @@ export function SignUpPage() {
               maxLength: { value: 48, message: t('validation.long-password') },
             })}
           />
+
           <TextField
             type="password"
             label={t('field.confirm-password')}
@@ -105,12 +101,6 @@ export function SignUpPage() {
               maxLength: { value: 48, message: t('validation.long-password') },
             })}
           />
-          <FormGroup>
-            <FormControlLabel
-              control={<Checkbox {...register('isSupplier')} />}
-              label={t('signup.supplier.checkbox')}
-            />
-          </FormGroup>
 
           <Button variant="contained" type="submit" sx={{ marginTop: '24px' }}>
             {t('button.continue')}

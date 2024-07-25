@@ -1,10 +1,3 @@
-export enum Role {
-  Guest = 'guest',
-  Supplier = 'supplier',
-  Customer = 'customer',
-  Admin = 'admin',
-}
-
 export interface IUser {
   id: string
   firstName: string
@@ -16,7 +9,6 @@ export interface IUser {
   createdAt: string
   updatedAt: string
   phone: string
-  role: Role
   isActive: boolean
   isVerified: boolean
   isKybPassed: boolean

@@ -8,7 +8,7 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "start": "vite",
     "build": "tsc && vite build",
     "test": "vitest run",
     "test:watch": "vitest",
