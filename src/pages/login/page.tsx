@@ -27,7 +27,7 @@ export function LoginPage() {
     try {
       const res = await login(data)
       if (res.user.isKybPassed) {
-        navigate('/home')
+        navigate('/dashboard/home')
         return
       }
       navigate('/kyb')

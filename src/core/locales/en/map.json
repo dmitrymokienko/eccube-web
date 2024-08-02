@@ -44,9 +44,11 @@
     "save": "Save",
     "makePayment": "Make payment",
     "createOrder": "Create order",
+    "createTender": "Create a tender",
     "complete": "Complete",
     "complete-onboarding": "Complete onboarding",
-    "go-to-app": "Go to the app"
+    "go-to-app": "Go to the app",
+    "goBack": "Go back"
   },
   "field": {
     "email": "Email",
@@ -102,6 +104,7 @@
     "invalid-credentials": "Email or password is incorrect"
   },
   "common": {
-    "language": "Language"
+    "language": "Language",
+    "Germany": "Germany"
   }
 }

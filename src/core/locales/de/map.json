@@ -44,9 +44,11 @@
     "save": "Speichern",
     "makePayment": "Zahlung durchführen",
     "createOrder": "Bestellung erstellen",
+    "createTender": "ein Angebot erstellen",
     "complete": "Vollständig",
     "complete-onboarding": "Vollständiges Onboarding",
-    "go-to-app": "Gehen Sie zur Anwendung"
+    "go-to-app": "Gehen Sie zur Anwendung",
+    "goBack": "Zurück"
   },
   "field": {
     "email": "E-Mail",
@@ -67,7 +69,16 @@
     "street-and-number": "Straße und Hausnummer",
     "postal-code": "Postleitzahl",
     "city": "Stadt",
-    "country": "Land"
+    "country": "Land",
+
+    "create-tender": {
+      "title": "Angebot erstellen",
+      "short-description": "Kurzbeschreibung",
+      "description": "Beschreibung",
+      "start-date": "Startdatum",
+      "end-date": "Enddatum",
+      "street": "Straße"
+    }
   },
   "placeholder": {
     "email": "Geben sie ihre E-Mail Adresse ein",
@@ -102,6 +113,7 @@
     "invalid-credentials": "Ungültige Anmeldeinformationen"
   },
   "common": {
-    "language": "Sprache"
+    "language": "Sprache",
+    "Germany": "Deutschland"
   }
 }
