@@ -42,6 +42,8 @@
     "prev-step": "Vorheriger Schritt",
     "next": "Nächster",
     "save": "Speichern",
+    "create": "Erstellen",
+    "save-as-draft": "Als Entwurf speichern",
     "makePayment": "Zahlung durchführen",
     "createOrder": "Bestellung erstellen",
     "createTender": "ein Angebot erstellen",
@@ -72,12 +74,21 @@
     "country": "Land",
 
     "create-tender": {
-      "title": "Angebot erstellen",
-      "short-description": "Kurzbeschreibung",
+      "title": "Titel",
+      "short-description": "Kurze Beschreibung",
       "description": "Beschreibung",
       "start-date": "Startdatum",
       "end-date": "Enddatum",
-      "street": "Straße"
+      "street": "Straße",
+      "city": "Stadt",
+      "postal-code": "Postleitzahl",
+      "country": "Land",
+      "preferred-payment-terms": "Bevorzugte Zahlungsbedingungen",
+      "individual-period": "Individueller Zeitraum",
+      "n_days": "{{n}} Tage",
+      "payment-terms": "Zahlungsbedingungen",
+      "address-suffix": "Adresszusatz",
+      "publishment": "Veröffentlichung"
     }
   },
   "placeholder": {
@@ -99,7 +110,11 @@
     "street-and-number": "Geben Sie die Straße und Hausnummer ein",
     "postal-code": "Geben Sie die Postleitzahl ein",
     "city": "Geben Sie die Stadt ein",
-    "country": "Wählen Sie das Land aus"
+    "country": "Wählen Sie das Land aus",
+
+    "create-tender": {
+      "rte-project-description": "Geben Sie eine detaillierte Projektbeschreibung ein"
+    }
   },
   "validation": {
     "required": "Dieses Feld ist erforderlich",
@@ -114,6 +129,23 @@
   },
   "common": {
     "language": "Sprache",
-    "Germany": "Deutschland"
+    "Germany": "Deutschland",
+    "eccube": "Eccube",
+    "dashboard": "Armaturenbrett",
+    "settings": "Einstellungen",
+    "profile": "Profil",
+    "logout": "Abmelden",
+    "team": "Team",
+    "notifications": "Benachrichtigungen",
+    "search": "Suche",
+    "invitation": "Einladung"
+  },
+  "tender": {
+    "label": {
+      "new-tender": "Neue Ausschreibung",
+      "tender-list": "Ausschreibungsliste",
+      "tender-details": "Ausschreibungsdetails",
+      "tender-title": "Ausschreibungstitel"
+    }
   }
 }

@@ -43,9 +43,7 @@ export const RichTextEditor = (props: RichTextEditorProps) => {
   const editorRef = useRef<Editor>(null)
 
   // const currentStyle = editorState.getCurrentInlineStyle()
-
   // const selection = editorState.getSelection()
-
   // const blockType = editorState
   //   .getCurrentContent()
   //   .getBlockForKey(selection.getStartKey())
@@ -191,7 +189,6 @@ export const RichTextEditor = (props: RichTextEditorProps) => {
           handleKeyCommand={handleKeyCommand}
           keyBindingFn={mapKeyToEditorCommand}
           onChange={onChange}
-          placeholder={'Please write full work description'}
           ref={editorRef}
           spellCheck={true}
           readOnly={readOnly}

@@ -136,7 +136,7 @@ export function SeparateLayout(props: ISeparateLayoutProps) {
         height: '100vh',
         backgroundColor: '#F6F7F8', // '#f1eeee',
         position: 'relative',
-        overflowY: 'scroll',
+        overflowY: 'auto',
         ...(WrapperProps?.sx || {}),
       }}
     >

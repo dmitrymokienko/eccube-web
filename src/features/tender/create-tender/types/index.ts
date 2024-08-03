@@ -15,7 +15,7 @@ export type CreatePlainTenderProcessForm = {
   description: EditorState // string
   paymentTerm: string
   attachments?: File[]
-  publishment: boolean
+  publishment: TenderPublishment[]
   invitedSuppliers: string[]
   invitedTeamMembers: string[]
 }
@@ -25,3 +25,9 @@ export type CreateTenderDto = CreatePlainTenderProcessForm
 
 // stub
 export type TenderDto = CreatePlainTenderProcessForm & { id: string }
+
+export enum TenderPublishment {
+  ECCUBE = 'eccube',
+  TEAM = 'team',
+  INVITATION = 'invitation',
+}

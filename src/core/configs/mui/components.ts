@@ -199,4 +199,15 @@ export const components: Components<Omit<Theme, 'components'>> = {
       }),
     },
   },
+
+  MuiRadio: {
+    styleOverrides: {
+      root: ({ theme }) => ({
+        color: theme.palette.custom.blue[0],
+        '&.Mui-checked': {
+          color: theme.palette.custom.blue[0],
+        },
+      }),
+    },
+  },
 }
