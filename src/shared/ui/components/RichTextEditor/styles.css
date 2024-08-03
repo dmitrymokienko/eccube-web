@@ -1,0 +1,15 @@
+div.public-DraftEditorPlaceholder-root {
+  font-size: 1rem;
+  color: #6a7582;
+}
+
+div.DraftEditor-root {
+  font-size: 1rem;
+  font-family: 'Roboto Condensed', sans-serif;
+  color: #0f1112;
+}
+
+.public-DraftStyleDefault-ol,
+.public-DraftStyleDefault-ul {
+  margin-top: 0;
+}

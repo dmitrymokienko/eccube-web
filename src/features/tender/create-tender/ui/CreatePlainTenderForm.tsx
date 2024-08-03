@@ -1,4 +1,4 @@
-import { useFormContext } from 'react-hook-form'
+import { Controller, useFormContext } from 'react-hook-form'
 import { CreatePlainTenderProcessForm } from '@/features/tender/create-tender/types'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
@@ -6,6 +6,8 @@ import Stack from '@mui/material/Stack'
 import TextField from '@mui/material/TextField'
 import { tenderCreation } from '../model'
 import { useEffect } from 'react'
+import { RichTextEditor } from '@/shared/ui/components/RichTextEditor'
+import { EditorState } from 'draft-js'
 
 export function CreatePlainTenderForm() {
   const { t } = useTranslation()
@@ -18,6 +20,7 @@ export function CreatePlainTenderForm() {
     watch,
     setValue,
     handleSubmit,
+    control,
     formState: { errors },
   } = form
 
@@ -139,6 +142,18 @@ export function CreatePlainTenderForm() {
       />
 
       {/* TODO: CUSTOM FIELDS */}
+
+      <Controller
+        name="description"
+        control={control}
+        render={({ field }) => (
+          <RichTextEditor
+            showRichBar
+            editorState={field.value || EditorState.createEmpty()}
+            onChange={field.onChange}
+          />
+        )}
+      />
 
       {/* TODO: other fields */}
     </Stack>

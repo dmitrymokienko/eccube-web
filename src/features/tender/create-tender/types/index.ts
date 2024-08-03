@@ -1,3 +1,5 @@
+import { EditorState } from 'draft-js'
+
 export type CreatePlainTenderProcessForm = {
   title: string
   shortDescription: string
@@ -10,7 +12,7 @@ export type CreatePlainTenderProcessForm = {
   city: string
   country: string
   customFields: Record<string, string>
-  description: string
+  description: EditorState // string
   paymentTerm: string
   attachments?: File[]
   publishment: boolean
