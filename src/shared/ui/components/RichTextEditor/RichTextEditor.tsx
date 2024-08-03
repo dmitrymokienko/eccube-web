@@ -18,9 +18,10 @@ import IconButton from '@mui/material/IconButton'
 import FormatBoldIcon from '@mui/icons-material/FormatBold'
 import FormatItalicIcon from '@mui/icons-material/FormatItalic'
 import FormatUnderlinedIcon from '@mui/icons-material/FormatUnderlined'
-import StrikethroughSIcon from '@mui/icons-material/StrikethroughS'
+import FormatStrikethroughIcon from '@mui/icons-material/FormatStrikethrough'
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted'
 import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered'
+import { styled } from '@mui/material/styles'
 
 export interface RichTextEditorProps extends Partial<DraftEditorProps> {
   Actions?: JSX.Element
@@ -113,64 +114,66 @@ export const RichTextEditor = (props: RichTextEditorProps) => {
   return (
     <Stack
       spacing={0}
+      // TextField props
       sx={{
-        px: 3,
+        p: '8.5px 14px',
         backgroundColor: 'white',
         borderRadius: '4px',
+        border: `1px solid rgba(0, 0, 0, 0.26)`,
       }}
     >
       {showRichBar && (
         <>
-          <Stack spacing={1} direction="row" sx={{ py: 1 }}>
-            <Stack spacing={0} direction="row">
-              <IconButton
+          <Stack spacing={1} direction="row" sx={{ pb: 1 }}>
+            <Stack spacing={1} direction="row">
+              <CustomIconButton
                 // color={currentStyle.has(DraftInlineStyle.BOLD) ? 'brand' : 'secondary'}
                 onClick={onBoldClick}
                 disabled={readOnly}
               >
-                <FormatBoldIcon />
-              </IconButton>
+                <FormatBoldIcon fontSize="inherit" />
+              </CustomIconButton>
 
-              <IconButton
+              <CustomIconButton
                 // color={currentStyle.has(DraftInlineStyle.ITALIC) ? 'brand' : 'secondary'}
                 onClick={onItalicClick}
                 disabled={readOnly}
               >
-                <FormatItalicIcon />
-              </IconButton>
+                <FormatItalicIcon fontSize="inherit" />
+              </CustomIconButton>
 
-              <IconButton
+              <CustomIconButton
                 // color={currentStyle.has(DraftInlineStyle.UNDERLINE) ? 'brand' : 'secondary'}
                 onClick={onUnderlineClick}
                 disabled={readOnly}
               >
-                <FormatUnderlinedIcon />
-              </IconButton>
+                <FormatUnderlinedIcon fontSize="inherit" />
+              </CustomIconButton>
 
-              <IconButton
+              <CustomIconButton
                 // color={currentStyle.has(DraftInlineStyle.STRIKETHROUGH) ? 'brand' : 'secondary'}
                 onClick={onStrikeThroughClick}
                 disabled={readOnly}
               >
-                <StrikethroughSIcon />
-              </IconButton>
+                <FormatStrikethroughIcon fontSize="inherit" />
+              </CustomIconButton>
 
-              <IconButton
+              <CustomIconButton
+                // color={DraftBlockType.ORDERED_LIST_ITEM === blockType ? 'brand' : 'secondary'}
+                onClick={onOrderedListClick}
+                disabled={readOnly}
+              >
+                <FormatListNumberedIcon fontSize="inherit" />
+              </CustomIconButton>
+
+              <CustomIconButton
                 // color={DraftBlockType.UNORDERED_LIST_ITEM === blockType ? 'brand' : 'secondary'}
                 onClick={onBulletListClick}
                 disabled={readOnly}
                 sx={{ mr: 1 }}
               >
-                <FormatListBulletedIcon />
-              </IconButton>
-
-              <IconButton
-                // color={DraftBlockType.ORDERED_LIST_ITEM === blockType ? 'brand' : 'secondary'}
-                onClick={onOrderedListClick}
-                disabled={readOnly}
-              >
-                <FormatListNumberedIcon />
-              </IconButton>
+                <FormatListBulletedIcon fontSize="inherit" />
+              </CustomIconButton>
             </Stack>
 
             <Box sx={{ flexGrow: 1 }} />
@@ -182,13 +185,13 @@ export const RichTextEditor = (props: RichTextEditorProps) => {
         </>
       )}
 
-      <Box sx={{ py: 1.5 }}>
+      <Box sx={{ pt: 1 }}>
         <Editor
           editorState={editorState}
           handleKeyCommand={handleKeyCommand}
           keyBindingFn={mapKeyToEditorCommand}
           onChange={onChange}
-          placeholder={readOnly ? 'Item description' : 'Add item description'}
+          placeholder={'Please write full work description'}
           ref={editorRef}
           spellCheck={true}
           readOnly={readOnly}
@@ -198,3 +201,9 @@ export const RichTextEditor = (props: RichTextEditorProps) => {
     </Stack>
   )
 }
+
+const CustomIconButton = styled(IconButton)({
+  width: '24px',
+  height: '24px',
+  fontSize: '20px',
+})
