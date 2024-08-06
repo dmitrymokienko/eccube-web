@@ -21,22 +21,29 @@ import FormatUnderlinedIcon from '@mui/icons-material/FormatUnderlined'
 import FormatStrikethroughIcon from '@mui/icons-material/FormatStrikethrough'
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted'
 import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered'
-import { styled } from '@mui/material/styles'
+import { styled, useTheme } from '@mui/material/styles'
+import { Typography } from '@mui/material'
 
 export interface RichTextEditorProps extends Partial<DraftEditorProps> {
   Actions?: JSX.Element
   showRichBar?: boolean
+  error?: boolean
+  helperText?: string
 }
 
 export const RichTextEditor = (props: RichTextEditorProps) => {
+  const theme = useTheme()
+
   const [state, setState] = useState(EditorState.createEmpty())
 
   const {
+    error = false,
     showRichBar = true,
     readOnly = false,
     Actions = null,
     editorState = state,
     onChange = setState,
+    helperText = '\u00A0', // Non-breaking space
     ...rest
   } = props
 
@@ -110,91 +117,105 @@ export const RichTextEditor = (props: RichTextEditorProps) => {
   }
 
   return (
-    <Stack
-      spacing={0}
-      // TextField props
-      sx={{
-        p: '8.5px 14px',
-        backgroundColor: 'white',
-        borderRadius: '4px',
-        border: `1px solid rgba(0, 0, 0, 0.26)`,
-      }}
-    >
-      {showRichBar && (
-        <>
-          <Stack spacing={1} direction="row" sx={{ pb: 1 }}>
-            <Stack spacing={1} direction="row">
-              <CustomIconButton
-                // color={currentStyle.has(DraftInlineStyle.BOLD) ? 'brand' : 'secondary'}
-                onClick={onBoldClick}
-                disabled={readOnly}
-              >
-                <FormatBoldIcon fontSize="inherit" />
-              </CustomIconButton>
+    <Stack spacing={0}>
+      <Stack
+        spacing={0}
+        // TextField props
+        sx={{
+          p: '8.5px 14px',
+          backgroundColor: 'white',
+          borderRadius: '4px',
+          border: error ? `1px solid ${theme.palette.error.main}` : `1px solid rgba(0, 0, 0, 0.26)`,
+        }}
+      >
+        {showRichBar && (
+          <>
+            <Stack spacing={1} direction="row" sx={{ pb: 1 }}>
+              <Stack spacing={1} direction="row">
+                <CustomIconButton
+                  // color={currentStyle.has(DraftInlineStyle.BOLD) ? 'brand' : 'secondary'}
+                  onClick={onBoldClick}
+                  disabled={readOnly}
+                >
+                  <FormatBoldIcon fontSize="inherit" />
+                </CustomIconButton>
 
-              <CustomIconButton
-                // color={currentStyle.has(DraftInlineStyle.ITALIC) ? 'brand' : 'secondary'}
-                onClick={onItalicClick}
-                disabled={readOnly}
-              >
-                <FormatItalicIcon fontSize="inherit" />
-              </CustomIconButton>
+                <CustomIconButton
+                  // color={currentStyle.has(DraftInlineStyle.ITALIC) ? 'brand' : 'secondary'}
+                  onClick={onItalicClick}
+                  disabled={readOnly}
+                >
+                  <FormatItalicIcon fontSize="inherit" />
+                </CustomIconButton>
 
-              <CustomIconButton
-                // color={currentStyle.has(DraftInlineStyle.UNDERLINE) ? 'brand' : 'secondary'}
-                onClick={onUnderlineClick}
-                disabled={readOnly}
-              >
-                <FormatUnderlinedIcon fontSize="inherit" />
-              </CustomIconButton>
+                <CustomIconButton
+                  // color={currentStyle.has(DraftInlineStyle.UNDERLINE) ? 'brand' : 'secondary'}
+                  onClick={onUnderlineClick}
+                  disabled={readOnly}
+                >
+                  <FormatUnderlinedIcon fontSize="inherit" />
+                </CustomIconButton>
 
-              <CustomIconButton
-                // color={currentStyle.has(DraftInlineStyle.STRIKETHROUGH) ? 'brand' : 'secondary'}
-                onClick={onStrikeThroughClick}
-                disabled={readOnly}
-              >
-                <FormatStrikethroughIcon fontSize="inherit" />
-              </CustomIconButton>
+                <CustomIconButton
+                  // color={currentStyle.has(DraftInlineStyle.STRIKETHROUGH) ? 'brand' : 'secondary'}
+                  onClick={onStrikeThroughClick}
+                  disabled={readOnly}
+                >
+                  <FormatStrikethroughIcon fontSize="inherit" />
+                </CustomIconButton>
 
-              <CustomIconButton
-                // color={DraftBlockType.ORDERED_LIST_ITEM === blockType ? 'brand' : 'secondary'}
-                onClick={onOrderedListClick}
-                disabled={readOnly}
-              >
-                <FormatListNumberedIcon fontSize="inherit" />
-              </CustomIconButton>
+                <CustomIconButton
+                  // color={DraftBlockType.ORDERED_LIST_ITEM === blockType ? 'brand' : 'secondary'}
+                  onClick={onOrderedListClick}
+                  disabled={readOnly}
+                >
+                  <FormatListNumberedIcon fontSize="inherit" />
+                </CustomIconButton>
 
-              <CustomIconButton
-                // color={DraftBlockType.UNORDERED_LIST_ITEM === blockType ? 'brand' : 'secondary'}
-                onClick={onBulletListClick}
-                disabled={readOnly}
-                sx={{ mr: 1 }}
-              >
-                <FormatListBulletedIcon fontSize="inherit" />
-              </CustomIconButton>
+                <CustomIconButton
+                  // color={DraftBlockType.UNORDERED_LIST_ITEM === blockType ? 'brand' : 'secondary'}
+                  onClick={onBulletListClick}
+                  disabled={readOnly}
+                  sx={{ mr: 1 }}
+                >
+                  <FormatListBulletedIcon fontSize="inherit" />
+                </CustomIconButton>
+              </Stack>
+
+              <Box sx={{ flexGrow: 1 }} />
+
+              {Actions}
             </Stack>
 
-            <Box sx={{ flexGrow: 1 }} />
+            <Divider />
+          </>
+        )}
 
-            {Actions}
-          </Stack>
+        <Box sx={{ pt: 1 }}>
+          <Editor
+            editorState={editorState}
+            handleKeyCommand={handleKeyCommand}
+            keyBindingFn={mapKeyToEditorCommand}
+            onChange={onChange}
+            ref={editorRef}
+            spellCheck={true}
+            readOnly={readOnly}
+            {...rest}
+          />
+        </Box>
+      </Stack>
 
-          <Divider />
-        </>
-      )}
-
-      <Box sx={{ pt: 1 }}>
-        <Editor
-          editorState={editorState}
-          handleKeyCommand={handleKeyCommand}
-          keyBindingFn={mapKeyToEditorCommand}
-          onChange={onChange}
-          ref={editorRef}
-          spellCheck={true}
-          readOnly={readOnly}
-          {...rest}
-        />
-      </Box>
+      <Typography
+        variant="caption"
+        color={error ? theme.palette.error.main : theme.palette.text.secondary}
+        sx={{
+          '&&&': {
+            margin: '4px 14px 0 14px',
+          },
+        }}
+      >
+        {helperText}
+      </Typography>
     </Stack>
   )
 }
