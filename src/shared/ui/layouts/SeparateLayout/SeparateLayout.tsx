@@ -136,12 +136,16 @@ export function SeparateLayout(props: ISeparateLayoutProps) {
         height: '100vh',
         backgroundColor: '#F6F7F8', // '#f1eeee',
         position: 'relative',
+        overflowY: 'auto',
         ...(WrapperProps?.sx || {}),
       }}
     >
       {/* loader */}
+
       {LoaderComponent}
+
       {/* header */}
+
       <Box
         component="header"
         sx={{
@@ -149,11 +153,13 @@ export function SeparateLayout(props: ISeparateLayoutProps) {
           position: 'sticky',
           top: 0,
           left: 0,
-          zIndex: 1,
+          zIndex: 2,
           width: '100%',
           padding: '8px 40px',
           display: 'flex',
           alignItems: 'center',
+          backgroundColor: '#F6F7F8', // '#f1eeee',
+          boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
           ...(HeaderProps?.sx || {}),
         }}
       >
@@ -165,10 +171,17 @@ export function SeparateLayout(props: ISeparateLayoutProps) {
           </Box>
         )}
       </Box>
+
       {/* sidebar */}
+
       <Box
         component="aside"
         sx={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          bottom: 0,
+          width: `${SEPARATE_LAYOUT_SIDEBAR_WIDTH}px`,
           gridArea: 'sidebar',
           padding: '32px',
           ...(SideBarProps?.sx || {}),
@@ -179,7 +192,9 @@ export function SeparateLayout(props: ISeparateLayoutProps) {
           {Sidebar}
         </Box>
       </Box>
+
       {/* main */}
+
       <Box sx={{ gridArea: 'main' }}>
         <Box
           component="main"

@@ -13,7 +13,14 @@
         /> -->
 
     <title>Eccube</title>
+
+    <script>
+      if (typeof global === 'undefined') {
+        window.global = window
+      }
+    </script>
   </head>
+
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>

@@ -42,11 +42,15 @@
     "prev-step": "Previous step",
     "next": "Next",
     "save": "Save",
+    "create": "Create",
+    "save-as-draft": "Save as draft",
     "makePayment": "Make payment",
     "createOrder": "Create order",
+    "createTender": "Create a tender",
     "complete": "Complete",
     "complete-onboarding": "Complete onboarding",
-    "go-to-app": "Go to the app"
+    "go-to-app": "Go to the app",
+    "goBack": "Go back"
   },
   "field": {
     "email": "Email",
@@ -67,7 +71,24 @@
     "street-and-number": "Street and number",
     "postal-code": "Postal code",
     "city": "City",
-    "country": "Country"
+    "country": "Country",
+    "create-tender": {
+      "title": "Title",
+      "short-description": "Short description",
+      "description": "Description",
+      "start-date": "Start date",
+      "end-date": "End date",
+      "street": "Street",
+      "city": "City",
+      "postal-code": "Postal code",
+      "country": "Country",
+      "preferred-payment-terms": "Preferred payment terms",
+      "individual-period": "Individual period",
+      "n_days": "{{n}} days",
+      "payment-terms": "Payment terms",
+      "address-suffix": "Address suffix",
+      "publishment": "Publishment"
+    }
   },
   "placeholder": {
     "email": "Enter your email",
@@ -88,7 +109,11 @@
     "street-and-number": "Enter your street and number",
     "postal-code": "Enter your postal code",
     "city": "Enter your city",
-    "country": "Select your country"
+    "country": "Select your country",
+
+    "create-tender": {
+      "rte-project-description": "Enter a detailed project description"
+    }
   },
   "validation": {
     "required": "This field is required",
@@ -102,6 +127,24 @@
     "invalid-credentials": "Email or password is incorrect"
   },
   "common": {
-    "language": "Language"
+    "language": "Language",
+    "Germany": "Germany",
+    "eccube": "Eccube",
+    "dashboard": "Dashboard",
+    "settings": "Settings",
+    "profile": "Profile",
+    "logout": "Logout",
+    "team": "Team",
+    "notifications": "Notifications",
+    "search": "Search",
+    "invitation": "Invitation"
+  },
+  "tender": {
+    "label": {
+      "new-tender": "New tender",
+      "tender-list": "Tender list",
+      "tender-details": "Tender details",
+      "tender-title": "Tender title"
+    }
   }
 }

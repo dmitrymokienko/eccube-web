@@ -4,6 +4,8 @@ import EccubeLogo from '../../../../assets/icons/eccube-logo-dark.svg?react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import HomeIcon from '@mui/icons-material/Home'
 import PaymentIcon from '@mui/icons-material/Payment'
+import HistoryEduIcon from '@mui/icons-material/HistoryEdu'
+import SettingsIcon from '@mui/icons-material/Settings'
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
 import ListItemButton from '@mui/material/ListItemButton'
@@ -17,14 +19,23 @@ const MENU_ITEMS = [
   {
     label: 'Home',
     icon: HomeIcon,
-    path: '/home',
+    path: '/dashboard/home',
+  },
+  {
+    label: 'Tenders',
+    icon: HistoryEduIcon,
+    path: '/dashboard/tenders',
   },
   {
     label: 'Payments',
     icon: PaymentIcon,
-    path: '/payments',
+    path: '/dashboard/payments',
   },
-  // TODO: settings
+  {
+    label: 'Settings',
+    icon: SettingsIcon,
+    path: '/dashboard/settings',
+  },
 ]
 
 const setSelectedIndex = createEvent<number>()

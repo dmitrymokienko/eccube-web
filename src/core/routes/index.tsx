@@ -12,6 +12,10 @@ import { PaymentsPage } from '../../pages/payments/page.tsx'
 import { HomePage } from '@/pages/home/page.tsx'
 import { AuthProcess } from '@/processes/auth/AuthProcess.tsx'
 import { KybProcess } from '@/processes/kyb/KybProcess.tsx'
+import { CreatePlainTenderProcess } from '@/processes/tender/CreatePlainTenderProcess.tsx'
+import { TendersPage } from '@/pages/tender/dashboard-tender/page.tsx'
+import { SettingsPage } from '@/pages/settings/page.tsx'
+import { CreatePlainTenderForm } from '@/features/tender/create-tender/ui/CreatePlainTenderForm.tsx'
 
 export const router = createBrowserRouter([
   {
@@ -52,6 +56,7 @@ export const router = createBrowserRouter([
       },
     ],
   },
+
   {
     path: '/kyb',
     element: <KybProcess />,
@@ -78,26 +83,71 @@ export const router = createBrowserRouter([
       // },
     ],
   },
+
   {
-    path: '/home',
+    path: '/dashboard',
     element: <ProtectedRoute />,
     children: [
       {
-        index: true,
+        path: 'home',
         element: <HomePage />,
       },
-    ],
-  },
-  {
-    path: '/payments',
-    element: <ProtectedRoute />,
-    children: [
       {
-        index: true,
+        path: 'payments',
         element: <PaymentsPage />,
+      },
+      {
+        path: 'tenders',
+        element: <TendersPage />,
+      },
+      {
+        path: 'settings',
+        element: <SettingsPage />,
       },
     ],
   },
+
+  {
+    path: '/tender',
+    children: [
+      {
+        path: 'create',
+        element: <ProtectedRoute />,
+        children: [
+          {
+            path: 'plain',
+            element: <CreatePlainTenderProcess />,
+            children: [
+              {
+                // TODO: separate to steps (better UI/UX)
+                index: true,
+                // path: 'step_1',
+                element: <CreatePlainTenderForm />,
+              },
+            ],
+          },
+        ],
+      },
+      {
+        path: 'edit',
+        element: <ProtectedRoute />,
+        children: [
+          {
+            path: 'plain/:id',
+            element: <CreatePlainTenderProcess />, // TODO: Implement EditPlainTenderProcess
+            children: [
+              {
+                index: true,
+                // path: 'step_1',
+                element: <div>pip</div>,
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+
   {
     path: '*',
     element: <div>404</div>,

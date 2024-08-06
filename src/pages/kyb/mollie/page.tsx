@@ -48,7 +48,7 @@ export function MollieCallbackPage() {
   }, [loggedIn])
 
   const onGoToAppClick = async () => {
-    navigate('/home')
+    navigate('/dashboard/home')
   }
 
   const href = mollieKyb?._links?.dashboard?.href ?? ''
