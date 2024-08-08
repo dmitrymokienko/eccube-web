@@ -7,7 +7,7 @@ import { currentUser } from '../../entities/currentUser/model'
 import { auth } from '../../entities/auth/model'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { omit } from '@/shared/libs/utilities'
+import { omit } from '@/shared/libs/utils/utilities'
 
 const WEAK_PASSWORD = 'password is not strong enough'
 

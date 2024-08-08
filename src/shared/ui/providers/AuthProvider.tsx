@@ -3,8 +3,8 @@ import { currentUser } from '../../../entities/currentUser/model'
 import { useUnit } from 'effector-react'
 import { Nullable } from '../../types/utilities'
 import { ILoginUserResponse, IUser } from '../../../entities/currentUser/types'
-import { useInterval } from '../../hooks/useInterval'
 import { auth } from '../../../entities/auth/model'
+import { useInterval } from '@/shared/libs/hooks/useInterval'
 
 export interface IBackendTokens {
   accessToken: string

@@ -5,6 +5,7 @@ import { SxProps, Theme } from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { LangSwitcher } from '../../components/LangSwitcher/LangSwitcher'
 import { Loader as DefaultLoader } from '../../components/Loader'
+import { Z_INDEX } from '@/shared/libs/constants/style'
 
 export interface ISeparateLayoutProps {
   children: ReactNode
@@ -85,7 +86,7 @@ export function SeparateLayout(props: ISeparateLayoutProps) {
             position: 'sticky',
             top: 0,
             left: 0,
-            zIndex: 1,
+            zIndex: Z_INDEX.SlightlySoaring,
             width: '100%',
             padding: '8px 24px',
             display: 'flex',
@@ -106,7 +107,7 @@ export function SeparateLayout(props: ISeparateLayoutProps) {
           <Box
             component="main"
             sx={{
-              zIndex: 1,
+              zIndex: Z_INDEX.SlightlySoaring,
               margin: '0 auto',
               marginTop: '24px',
               padding: '0 24px',
@@ -153,7 +154,7 @@ export function SeparateLayout(props: ISeparateLayoutProps) {
           position: 'sticky',
           top: 0,
           left: 0,
-          zIndex: 2,
+          zIndex: Z_INDEX.Soaring,
           width: '100%',
           padding: '8px 40px',
           display: 'flex',
@@ -199,7 +200,7 @@ export function SeparateLayout(props: ISeparateLayoutProps) {
         <Box
           component="main"
           sx={{
-            zIndex: 1,
+            zIndex: Z_INDEX.SlightlySoaring,
             margin: '0 auto',
             marginTop: '40px',
             paddingRight: `${SEPARATE_LAYOUT_SIDEBAR_WIDTH}px`,

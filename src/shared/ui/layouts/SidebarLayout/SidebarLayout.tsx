@@ -13,7 +13,7 @@ import AppBar from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
 import { LogoutButton } from '../../components/Button/LogoutButton'
 import { ISidebarDrawerProps } from './components/SidebarDrawer'
-import { omit } from '@/shared/libs/utilities'
+import { omit } from '@/shared/libs/utils/utilities'
 
 export interface ISidebarLayoutProps {
   children: ReactNode

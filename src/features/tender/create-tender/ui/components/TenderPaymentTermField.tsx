@@ -31,20 +31,6 @@ export function TenderPaymentTermField(props: ITenderPaymentTermFieldProps) {
     formState: { errors },
   } = form
 
-  const renderRadioItem = (n: number) => {
-    return (
-      <FormControlLabel
-        value={n}
-        control={<Radio />}
-        label={t('field.create-tender.n_days', { n })}
-        labelPlacement="top"
-        onClick={() => {
-          setVisibleAdditionalField(false)
-        }}
-      />
-    )
-  }
-
   return (
     <>
       <Controller
@@ -57,8 +43,20 @@ export function TenderPaymentTermField(props: ITenderPaymentTermFieldProps) {
                 <FormLabel component="legend">
                   {t('field.create-tender.preferred-payment-terms')}
                 </FormLabel>
+
                 <RadioGroup row value={value} onChange={onChange}>
-                  {VALUES.map((v) => renderRadioItem(v))}
+                  {VALUES.map((n) => (
+                    <FormControlLabel
+                      key={n}
+                      value={n}
+                      control={<Radio />}
+                      label={t('field.create-tender.n_days', { n })}
+                      labelPlacement="top"
+                      onClick={() => {
+                        setVisibleAdditionalField(false)
+                      }}
+                    />
+                  ))}
 
                   <FormControlLabel
                     // value={0}
