@@ -87,7 +87,8 @@
       "n_days": "{{n}} days",
       "payment-terms": "Payment terms",
       "address-suffix": "Address suffix",
-      "publishment": "Publishment"
+      "publishment": "Publishment",
+      "days": "days"
     }
   },
   "placeholder": {

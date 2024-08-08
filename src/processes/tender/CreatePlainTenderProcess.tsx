@@ -33,7 +33,7 @@ export function CreatePlainTenderProcess(props: ICreatePlainTenderProcessProps) 
 
   const form = useForm<CreatePlainTenderProcessForm>({
     defaultValues: {
-      country: 'DE',
+      country: t('common.Germany'),
     },
   })
 
