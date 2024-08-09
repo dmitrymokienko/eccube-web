@@ -148,7 +148,8 @@
       "new-tender": "New tender",
       "tender-list": "Tender list",
       "tender-details": "Tender details",
-      "tender-title": "Tender title"
+      "tender-title": "Tender title",
+      "supplier-invitation": "Supplier invitation (emails)"
     }
   }
 }

@@ -78,8 +78,6 @@ export class ApiClient {
     params?: Record<string, string | number | boolean | null>
   ): Promise<TResponse> {
     try {
-      const accessToken = auth.$accessToken.getState()
-      console.log('accessToken', accessToken)
       const response = await this.instance.get<TResponse>(path, { params: params ?? {} })
       return response.data
     } catch (err) {
@@ -94,8 +92,6 @@ export class ApiClient {
     config?: AxiosRequestConfig<unknown>
   ): Promise<TResponse> {
     try {
-      const accessToken = auth.$accessToken.getState()
-      console.log('accessToken', accessToken)
       const response = await this.instance.post<TResponse>(path, payload, config)
       return response.data
     } catch (err) {

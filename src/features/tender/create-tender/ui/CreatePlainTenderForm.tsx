@@ -1,4 +1,4 @@
-import { Controller, useFormContext } from 'react-hook-form'
+import { Controller, FieldErrors, useFormContext } from 'react-hook-form'
 import { CreatePlainTenderProcessForm } from '@/features/tender/create-tender/types'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
@@ -13,10 +13,11 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import { TenderPublishmentField } from './components/TenderPublishmentField'
 import { TenderPaymentTermField } from './components/TenderPaymentTermField'
-import { Locale } from '@/entities/locale/types'
 import { FilesUploader } from '@/features/uploadFiles/ui/FilesUploader'
 import { useState } from 'react'
 import { IUploadedFile } from '@/features/uploadFiles/types'
+import { EmailTextField } from '@/shared/ui/components/TextFields/EmailTextField'
+import { prepareCreateTenderDtoMapper } from '../utils/mappers'
 
 export function CreatePlainTenderForm() {
   const { t } = useTranslation()
@@ -30,28 +31,33 @@ export function CreatePlainTenderForm() {
     register,
     watch,
     getValues,
+    setValue,
     handleSubmit,
     control,
     formState: { errors },
   } = form
 
   const onSubmit = async (data: CreatePlainTenderProcessForm) => {
-    const payload = { ...data, country: Locale.DE, isDraft: false } // due to the fact that readonly/disabled fields are not submitted by RHF
+    const payload = prepareCreateTenderDtoMapper({ ...data, isDraft: false })
     const res = await tenderCreation.createNewTenderFx(payload)
-    await tenderCreation.withdrawalFromDraftFx(res.id)
+    console.log(res)
     navigate('/tender/create/plain/success')
   }
 
   const onSaveDraft = async () => {
     const data = getValues()
-    const payload = { ...data, country: Locale.DE, isDraft: true } // due to the fact that readonly/disabled fields are not submitted by RHF
+    const payload = prepareCreateTenderDtoMapper({ ...data, isDraft: true })
     await tenderCreation.createNewTenderFx(payload)
     navigate('/tender/create/plain/success')
   }
 
+  const onInvalid = (e: FieldErrors) => {
+    console.error(e)
+  }
+
   return (
     // TODO: i18n for all labels, placeholders
-    <Stack component="form" spacing={2} onSubmit={handleSubmit(onSubmit)}>
+    <Stack component="form" spacing={2} onSubmit={handleSubmit(onSubmit, onInvalid)}>
       <Typography variant="h3" sx={{ py: 4 }}>
         {t('tender.label.new-tender')}
       </Typography>
@@ -190,14 +196,14 @@ export function CreatePlainTenderForm() {
       {/* TODO: 1. Add more actions (highlight, do/undo, text-alignment and etc) */}
       {/* TODO: 2. 3-line by default */}
       <Controller
-        name="description"
+        name="workDescription"
         control={control}
         rules={{ required: t('validation.required') }}
         render={({ field }) => (
           <RichTextEditor
             showRichBar
-            error={!!errors?.description}
-            helperText={errors?.description?.message}
+            error={!!errors?.workDescription}
+            helperText={errors?.workDescription?.message}
             placeholder={t('placeholder.create-tender.rte-project-description')}
             editorState={field.value || EditorState.createEmpty()}
             onChange={field.onChange}
@@ -205,13 +211,17 @@ export function CreatePlainTenderForm() {
         )}
       />
 
-      <TenderPaymentTermField />
-
       <FilesUploader files={files} onUpload={setFiles} />
+
+      <TenderPaymentTermField />
 
       <TenderPublishmentField />
 
-      {/* TODO: other fields */}
+      {/* TODO: emails <SupplierInvitationField /> */}
+      <EmailTextField
+        label={t('tender.label.supplier-invitation')}
+        onAddEmail={(emails) => setValue('invitedSuppliers', emails)}
+      />
 
       {/* TODO: add confirm dialogs */}
       <Stack spacing={2} sx={{ py: 4 }}>

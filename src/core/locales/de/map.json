@@ -149,7 +149,8 @@
       "new-tender": "Neue Ausschreibung",
       "tender-list": "Ausschreibungsliste",
       "tender-details": "Ausschreibungsdetails",
-      "tender-title": "Ausschreibungstitel"
+      "tender-title": "Ausschreibungstitel",
+      "supplier-invitation": "Lieferanteneinladung (E-Mails)"
     }
   }
 }

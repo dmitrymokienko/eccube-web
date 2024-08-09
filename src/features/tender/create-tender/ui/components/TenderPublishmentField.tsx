@@ -28,7 +28,12 @@ export function TenderPublishmentField() {
   const { t } = useTranslation()
 
   const form = useFormContext<CreatePlainTenderProcessForm>()
-  const { watch, getValues, setValue, formState } = form
+  const {
+    watch,
+    getValues,
+    setValue,
+    formState: { isSubmitted },
+  } = form
 
   const onChange = (checked: boolean, pType: TenderPublishment) => {
     const value = getValues('publishment') || []
@@ -36,7 +41,7 @@ export function TenderPublishmentField() {
   }
 
   return (
-    <FormControl required error={!!formState.errors?.publishment} component="fieldset">
+    <FormControl required error={isSubmitted && !getValues('publishment')} component="fieldset">
       <FormLabel component="legend"> {t('field.create-tender.publishment')}</FormLabel>
 
       <FormGroup row>

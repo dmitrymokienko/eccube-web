@@ -17,6 +17,7 @@ const getListItemStyles = (theme: Theme) => ({
   backgroundColor: theme.palette.background.paper,
   borderRadius: '4px',
   border: `2px solid ${theme.palette.divider}`,
+  padding: '4px 14px',
 })
 
 export function UploadedFile(props: IUploadedFileProps) {
@@ -32,15 +33,15 @@ export function UploadedFile(props: IUploadedFileProps) {
 
   const Content = (
     <>
-      <ListItemIcon>
+      <ListItemIcon sx={{ minWidth: '42px' }}>
         <AttachFileIcon />
       </ListItemIcon>
 
-      <ListItemText primary={fileName} />
+      <ListItemText primary={fileName} primaryTypographyProps={{ noWrap: true }} />
 
       {onDelete ? (
         <ListItemIcon onClick={handleDelete} sx={{ minWidth: '28px', cursor: 'pointer' }}>
-          <DeleteOutlineIcon />
+          <DeleteOutlineIcon sx={(theme) => ({ color: theme.palette.error.main })} />
         </ListItemIcon>
       ) : null}
     </>

@@ -1,10 +1,10 @@
 import { ReactNode, createContext, useCallback, useEffect, useRef, useState } from 'react'
-import { currentUser } from '../../../entities/currentUser/model'
 import { useUnit } from 'effector-react'
-import { Nullable } from '../../types/utilities'
-import { ILoginUserResponse, IUser } from '../../../entities/currentUser/types'
-import { auth } from '../../../entities/auth/model'
 import { useInterval } from '@/shared/libs/hooks/useInterval'
+import { Nullable } from '@/shared/types/utilities'
+import { ILoginUserResponse, IUser } from '@/entities/currentUser/types'
+import { currentUser } from '@/entities/currentUser/model'
+import { auth } from '@/entities/auth/model'
 
 export interface IBackendTokens {
   accessToken: string
@@ -61,12 +61,17 @@ export function AuthProvider({ children }: IAuthProviderProps) {
   const checkLoginState = useCallback(async () => {
     try {
       const { user, backendTokens } = await auth.refreshUserAndTokensFx()
-      setLoggedIn(true)
       if (user && backendTokens) {
         currentUser.setInfo(user)
-        return user
       }
-      return null
+      if (!loggedIn) {
+        setLoggedIn(true)
+        // auto-redirect after token refresh
+        if (window.location.pathname === '/login' || window.location.pathname === '/signup') {
+          window.location.href = '/dashboard/home'
+        }
+      }
+      return user
     } catch (err) {
       console.error(err)
       setLoggedIn(false)
