@@ -14,10 +14,15 @@ import Button from '@mui/material/Button'
 import { TenderPublishmentField } from './components/TenderPublishmentField'
 import { TenderPaymentTermField } from './components/TenderPaymentTermField'
 import { Locale } from '@/entities/locale/types'
+import { FilesUploader } from '@/features/uploadFiles/ui/FilesUploader'
+import { useState } from 'react'
+import { IUploadedFile } from '@/features/uploadFiles/types'
 
 export function CreatePlainTenderForm() {
   const { t } = useTranslation()
   const navigate = useNavigate()
+
+  const [files, setFiles] = useState<IUploadedFile[]>([])
 
   const form = useFormContext<CreatePlainTenderProcessForm>()
 
@@ -202,7 +207,7 @@ export function CreatePlainTenderForm() {
 
       <TenderPaymentTermField />
 
-      {/* File uploader */}
+      <FilesUploader files={files} onUpload={setFiles} />
 
       <TenderPublishmentField />
 

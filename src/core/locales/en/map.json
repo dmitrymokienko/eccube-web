@@ -50,7 +50,8 @@
     "complete": "Complete",
     "complete-onboarding": "Complete onboarding",
     "go-to-app": "Go to the app",
-    "goBack": "Go back"
+    "goBack": "Go back",
+    "upload-file": "Upload file"
   },
   "field": {
     "email": "Email",
@@ -125,7 +126,9 @@
     "weak-password": "Password is not strong enough",
     "short-password": "Password is too short",
     "long-password": "Password is too long",
-    "invalid-credentials": "Email or password is incorrect"
+    "invalid-credentials": "Email or password is incorrect",
+    "upload-file-max-count": "Unable to upload: the maximum number of files is reached",
+    "upload-file-max-size": "Unable to upload: the maximum file size is reached ({{n}}Mb)"
   },
   "common": {
     "language": "Language",
