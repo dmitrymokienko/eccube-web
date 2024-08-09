@@ -1,4 +1,6 @@
-export type Nullable<T> = T | null
+export type Nullable<T> = T | null | undefined
+
+export type Awaitable<T> = T | PromiseLike<T>
 
 export type Xor<A, B> =
   | (B & {

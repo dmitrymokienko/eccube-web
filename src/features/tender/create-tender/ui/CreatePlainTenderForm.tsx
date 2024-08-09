@@ -13,10 +13,16 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import { TenderPublishmentField } from './components/TenderPublishmentField'
 import { TenderPaymentTermField } from './components/TenderPaymentTermField'
+import { Locale } from '@/entities/locale/types'
+import { FilesUploader } from '@/features/uploadFiles/ui/FilesUploader'
+import { useState } from 'react'
+import { IUploadedFile } from '@/features/uploadFiles/types'
 
 export function CreatePlainTenderForm() {
   const { t } = useTranslation()
   const navigate = useNavigate()
+
+  const [files, setFiles] = useState<IUploadedFile[]>([])
 
   const form = useFormContext<CreatePlainTenderProcessForm>()
 
@@ -30,7 +36,7 @@ export function CreatePlainTenderForm() {
   } = form
 
   const onSubmit = async (data: CreatePlainTenderProcessForm) => {
-    const payload = { ...data, country: 'DE', isDraft: false } // due to the fact that readonly/disabled fields are not submitted by RHF
+    const payload = { ...data, country: Locale.DE, isDraft: false } // due to the fact that readonly/disabled fields are not submitted by RHF
     const res = await tenderCreation.createNewTenderFx(payload)
     await tenderCreation.withdrawalFromDraftFx(res.id)
     navigate('/tender/create/plain/success')
@@ -38,14 +44,14 @@ export function CreatePlainTenderForm() {
 
   const onSaveDraft = async () => {
     const data = getValues()
-    const payload = { ...data, country: 'DE', isDraft: true } // due to the fact that readonly/disabled fields are not submitted by RHF
+    const payload = { ...data, country: Locale.DE, isDraft: true } // due to the fact that readonly/disabled fields are not submitted by RHF
     await tenderCreation.createNewTenderFx(payload)
     navigate('/tender/create/plain/success')
   }
 
   return (
     // TODO: i18n for all labels, placeholders
-    <Stack component="form" spacing={1} onSubmit={handleSubmit(onSubmit)}>
+    <Stack component="form" spacing={2} onSubmit={handleSubmit(onSubmit)}>
       <Typography variant="h3" sx={{ py: 4 }}>
         {t('tender.label.new-tender')}
       </Typography>
@@ -201,7 +207,7 @@ export function CreatePlainTenderForm() {
 
       <TenderPaymentTermField />
 
-      {/* File uploader */}
+      <FilesUploader files={files} onUpload={setFiles} />
 
       <TenderPublishmentField />
 
@@ -210,6 +216,7 @@ export function CreatePlainTenderForm() {
       {/* TODO: add confirm dialogs */}
       <Stack spacing={2} sx={{ py: 4 }}>
         <Button type="submit">{t('button.create')}</Button>
+
         <Button type="button" variant="outlined" onClick={onSaveDraft}>
           {t('button.save-as-draft')}
         </Button>

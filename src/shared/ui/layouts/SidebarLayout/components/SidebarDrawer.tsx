@@ -3,7 +3,7 @@ import { SIDEBAR_LAYOUT_DRAWER_WIDTH } from '../lib/constants'
 import { Loader } from '@/shared/ui/components/Loader'
 import Drawer, { DrawerProps } from '@mui/material/Drawer'
 import { useTheme } from '@mui/material/styles'
-import { omit } from '@/shared/libs/utilities'
+import { omit } from '@/shared/libs/utils/utilities'
 
 const enum Anchor {
   Left = 'left',

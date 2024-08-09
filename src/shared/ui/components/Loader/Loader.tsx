@@ -1,6 +1,7 @@
 import Box from '@mui/material/Box'
 import CircularProgress from '@mui/material/CircularProgress'
 import { SxProps } from '@mui/material/styles'
+import { Z_INDEX } from '@/shared/libs/constants/style'
 
 export interface ILoaderProps {
   visible: boolean
@@ -19,7 +20,7 @@ export function Loader(props: ILoaderProps) {
         alignItems: 'center',
         height: '100vh',
         backgroundColor: 'rgba(0,0,0,0.1)',
-        zIndex: 2,
+        zIndex: Z_INDEX.Loader,
         position: 'absolute',
         top: 0,
         left: 0,

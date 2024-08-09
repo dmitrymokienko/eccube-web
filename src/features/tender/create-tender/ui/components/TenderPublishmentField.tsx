@@ -1,4 +1,3 @@
-import Box from '@mui/material/Box'
 import Checkbox from '@mui/material/Checkbox'
 import FormControl from '@mui/material/FormControl'
 import FormControlLabel from '@mui/material/FormControlLabel'
@@ -8,13 +7,27 @@ import { useFormContext } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { CreatePlainTenderProcessForm, TenderPublishment } from '../../types'
 
-// TODO: refactor (const + map array( renderItem ))
-// TODO: i18n
+const PUBLISHMENT_FIELDS = [
+  {
+    type: TenderPublishment.ECCUBE,
+    label: 'common.eccube',
+  },
+  {
+    type: TenderPublishment.TEAM,
+    label: 'common.team',
+  },
+  {
+    type: TenderPublishment.INVITATION,
+    label: 'common.invitation',
+  },
+]
+
+type PublishmentItemType = (typeof PUBLISHMENT_FIELDS)[number]
+
 export function TenderPublishmentField() {
   const { t } = useTranslation()
 
   const form = useFormContext<CreatePlainTenderProcessForm>()
-
   const { watch, getValues, setValue, formState } = form
 
   const onChange = (checked: boolean, pType: TenderPublishment) => {
@@ -23,45 +36,24 @@ export function TenderPublishmentField() {
   }
 
   return (
-    <Box sx={{ pt: 2 }}>
-      <FormControl required error={!!formState.errors?.publishment} component="fieldset">
-        <FormLabel component="legend"> {t('field.create-tender.publishment')}</FormLabel>
+    <FormControl required error={!!formState.errors?.publishment} component="fieldset">
+      <FormLabel component="legend"> {t('field.create-tender.publishment')}</FormLabel>
 
-        <FormGroup row sx={{ justifyContent: 'space-between' }}>
+      <FormGroup row>
+        {PUBLISHMENT_FIELDS.map((item: PublishmentItemType) => (
           <FormControlLabel
+            key={item.type}
             control={
               <Checkbox
-                checked={(watch('publishment') || []).includes(TenderPublishment.ECCUBE)}
-                onChange={(e, checked) => onChange(checked, TenderPublishment.ECCUBE)}
+                checked={(watch('publishment') || []).includes(item.type)}
+                onChange={(_e, checked) => onChange(checked, item.type)}
               />
             }
-            label={t('common.eccube')}
+            label={t(item.label)}
             labelPlacement="top"
           />
-
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={(watch('publishment') || []).includes(TenderPublishment.TEAM)}
-                onChange={(e, checked) => onChange(checked, TenderPublishment.TEAM)}
-              />
-            }
-            label={t('common.team')}
-            labelPlacement="top"
-          />
-
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={(watch('publishment') || []).includes(TenderPublishment.INVITATION)}
-                onChange={(e, checked) => onChange(checked, TenderPublishment.INVITATION)}
-              />
-            }
-            label={t('common.invitation')}
-            labelPlacement="top"
-          />
-        </FormGroup>
-      </FormControl>
-    </Box>
+        ))}
+      </FormGroup>
+    </FormControl>
   )
 }
