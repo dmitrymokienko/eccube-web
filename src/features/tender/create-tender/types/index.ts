@@ -1,6 +1,8 @@
 import { EditorState } from 'draft-js'
+import { prepareCreateTenderDtoMapper } from '../utils/mappers'
 
 export type CreatePlainTenderProcessForm = {
+  isDraft: boolean
   title: string
   shortDescription: string
   startDate: string
@@ -11,17 +13,16 @@ export type CreatePlainTenderProcessForm = {
   postalCode: string
   city: string
   country: string
-  customFields: Record<string, string>
-  description: EditorState // string
-  paymentTerm: string
-  attachments?: File[]
+  workDescription: EditorState // string
+  paymentTerm: string // number
   publishment: TenderPublishment[]
   invitedSuppliers: string[]
-  invitedTeamMembers: string[]
+  uploadedFiles?: File[]
+  invitedTeamMembers?: string[] // EXCLUDE FROM MVP
+  fields?: Record<string, string> // EXCLUDE FROM MVP
 }
 
-// stub
-export type CreateTenderDto = CreatePlainTenderProcessForm
+export type CreateTenderDto = ReturnType<typeof prepareCreateTenderDtoMapper>
 
 // stub
 export type TenderDto = CreatePlainTenderProcessForm & { id: string }

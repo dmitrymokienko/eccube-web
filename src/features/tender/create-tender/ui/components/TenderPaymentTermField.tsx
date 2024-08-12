@@ -15,6 +15,7 @@ export interface ITenderPaymentTermFieldProps {
 }
 
 const VALUES = [30, 60, 90]
+const ID = 'eccube-tender-payment-term-radios'
 
 export function TenderPaymentTermField(props: ITenderPaymentTermFieldProps) {
   const { name = 'paymentTerm' } = props
@@ -26,9 +27,9 @@ export function TenderPaymentTermField(props: ITenderPaymentTermFieldProps) {
   const form = useFormContext<CreatePlainTenderProcessForm>()
 
   const {
-    control,
     setValue,
-    formState: { errors },
+    control,
+    formState: { errors, isSubmitted },
   } = form
 
   return (
@@ -36,15 +37,15 @@ export function TenderPaymentTermField(props: ITenderPaymentTermFieldProps) {
       <Controller
         name={name}
         control={control}
-        render={({ field: { value, onChange }, fieldState }) => {
+        render={({ field: { value, onChange } }) => {
           return (
             <Box>
-              <FormControl required error={!!fieldState.error}>
-                <FormLabel component="legend">
+              <FormControl required error={isSubmitted && !value}>
+                <FormLabel component="legend" id={ID}>
                   {t('field.create-tender.preferred-payment-terms')}
                 </FormLabel>
 
-                <RadioGroup row value={value} onChange={onChange}>
+                <RadioGroup row value={value} onChange={onChange} aria-labelledby={ID}>
                   {VALUES.map((n) => (
                     <FormControlLabel
                       key={n}
