@@ -34,4 +34,8 @@ export enum DraftBlockType {
   ATOMIC = 'atomic',
   CODE_BLOCK = 'code-block',
   UNSTYLED = 'unstyled',
+  ALIGN_LEFT = 'align-left',
+  ALIGN_CENTER = 'align-center',
+  ALIGN_RIGHT = 'align-right',
+  ALIGN_JUSTIFY = 'align-justify',
 }

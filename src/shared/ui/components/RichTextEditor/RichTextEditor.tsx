@@ -1,7 +1,6 @@
 import { Editor, EditorState, RichUtils, getDefaultKeyBinding } from 'draft-js'
 import 'draft-js/dist/Draft.css'
 import './styles.css'
-
 import Box from '@mui/material/Box'
 import Divider from '@mui/material/Divider'
 import Stack from '@mui/material/Stack'
@@ -23,6 +22,14 @@ import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted'
 import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered'
 import { styled, useTheme } from '@mui/material/styles'
 import { Typography } from '@mui/material'
+
+import AlignHorizontalLeftTwoToneIcon from '@mui/icons-material/AlignHorizontalLeftTwoTone'
+import AlignHorizontalRightTwoToneIcon from '@mui/icons-material/AlignHorizontalRightTwoTone'
+import AlignHorizontalCenterIcon from '@mui/icons-material/AlignHorizontalCenter'
+import FormatAlignJustifyIcon from '@mui/icons-material/FormatAlignJustify'
+import FormatColorTextIcon from '@mui/icons-material/FormatColorText'
+import UndoIcon from '@mui/icons-material/Undo'
+import RedoIcon from '@mui/icons-material/Redo'
 
 export interface RichTextEditorProps extends Partial<DraftEditorProps> {
   Actions?: JSX.Element
@@ -55,6 +62,11 @@ export const RichTextEditor = (props: RichTextEditorProps) => {
   //   .getCurrentContent()
   //   .getBlockForKey(selection.getStartKey())
   //   .getType()
+
+  const currentBlockType = editorState
+    .getCurrentContent()
+    .getBlockForKey(editorState.getSelection().getStartKey())
+    .getType()
 
   const handleKeyCommand = (command: string) => {
     const newState = RichUtils.handleKeyCommand(editorState, command)
@@ -93,6 +105,16 @@ export const RichTextEditor = (props: RichTextEditorProps) => {
   const onOrderedListClick = (e: MouseEvent<HTMLElement>) => {
     e.preventDefault()
     toggleBlockType(DraftBlockType.ORDERED_LIST_ITEM)
+  }
+
+  const onAlignRightClick = (e: MouseEvent<HTMLElement>) => {
+    e.preventDefault()
+    toggleBlockType(DraftBlockType.ALIGN_RIGHT)
+  }
+
+  const onAlignLeftClick = (e: MouseEvent<HTMLElement>) => {
+    e.preventDefault()
+    toggleBlockType(DraftBlockType.ALIGN_LEFT)
   }
 
   const mapKeyToEditorCommand = (e: SyntheticKeyboardEvent): DraftEditorCommand | null => {
@@ -179,6 +201,62 @@ export const RichTextEditor = (props: RichTextEditorProps) => {
                   sx={{ mr: 1 }}
                 >
                   <FormatListBulletedIcon fontSize="inherit" />
+                </CustomIconButton>
+                <CustomIconButton
+                  color={DraftBlockType.ALIGN_LEFT === currentBlockType ? 'primary' : 'default'}
+                  onClick={onAlignLeftClick}
+                  disabled={readOnly}
+                  sx={{ mr: 1 }}
+                >
+                  <AlignHorizontalLeftTwoToneIcon fontSize="inherit" />
+                </CustomIconButton>
+                <CustomIconButton
+                  color={DraftBlockType.ALIGN_RIGHT === currentBlockType ? 'primary' : 'default'}
+                  onClick={onAlignRightClick}
+                  disabled={readOnly}
+                  sx={{ mr: 1 }}
+                >
+                  <AlignHorizontalRightTwoToneIcon fontSize="inherit" />
+                </CustomIconButton>
+                <CustomIconButton
+                  // color={DraftBlockType.UNORDERED_LIST_ITEM === blockType ? 'brand' : 'secondary'}
+                  onClick={onBulletListClick}
+                  disabled={readOnly}
+                  sx={{ mr: 1 }}
+                >
+                  <AlignHorizontalCenterIcon fontSize="inherit" />
+                </CustomIconButton>
+                <CustomIconButton
+                  // color={DraftBlockType.UNORDERED_LIST_ITEM === blockType ? 'brand' : 'secondary'}
+                  onClick={onBulletListClick}
+                  disabled={readOnly}
+                  sx={{ mr: 1 }}
+                >
+                  <FormatAlignJustifyIcon fontSize="inherit" />
+                </CustomIconButton>
+                <CustomIconButton
+                  // color={DraftBlockType.UNORDERED_LIST_ITEM === blockType ? 'brand' : 'secondary'}
+                  onClick={onBulletListClick}
+                  disabled={readOnly}
+                  sx={{ mr: 1 }}
+                >
+                  <FormatColorTextIcon fontSize="inherit" />
+                </CustomIconButton>
+                <CustomIconButton
+                  // color={DraftBlockType.UNORDERED_LIST_ITEM === blockType ? 'brand' : 'secondary'}
+                  onClick={onBulletListClick}
+                  disabled={readOnly}
+                  sx={{ mr: 1 }}
+                >
+                  <UndoIcon fontSize="inherit" />
+                </CustomIconButton>
+                <CustomIconButton
+                  // color={DraftBlockType.UNORDERED_LIST_ITEM === blockType ? 'brand' : 'secondary'}
+                  onClick={onBulletListClick}
+                  disabled={readOnly}
+                  sx={{ mr: 1 }}
+                >
+                  <RedoIcon fontSize="inherit" />
                 </CustomIconButton>
               </Stack>
 
