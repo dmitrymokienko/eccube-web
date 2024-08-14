@@ -1,5 +1,5 @@
+import { createNewTenderApi } from '@/entities/tender/api'
 import { combine, createEffect } from 'effector'
-import { createNewTenderApi } from '../api'
 
 const createNewTenderFx = createEffect(createNewTenderApi)
 

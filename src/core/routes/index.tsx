@@ -1,10 +1,9 @@
 import { Navigate, createBrowserRouter } from 'react-router-dom'
-import { SignUpPage } from '../../pages/signup/page'
 import { SignUpSuccessPage } from '../../pages/signup/success/page'
 import { LoginPage } from '../../pages/login/page'
 import { MollieCallbackPage } from '../../pages/kyb/mollie/page.tsx'
 import { ProtectedRoute } from './ProtectedRoute'
-import { WelcomeOnKybPage } from '../../pages/kyb/page.tsx'
+import { WelcomeOnKybPage } from '../../pages/kyb/welcome/page.tsx'
 import { UserKybPage } from '../../pages/kyb/user/page.tsx'
 import { CompanyProfileKybPage } from '../../pages/kyb/profile/page.tsx'
 import { CompanyKybPage } from '../../pages/kyb/company/page.tsx'
@@ -16,6 +15,7 @@ import { CreatePlainTenderProcess } from '@/processes/tender/CreatePlainTenderPr
 import { TendersPage } from '@/pages/tender/dashboard-tender/page.tsx'
 import { SettingsPage } from '@/pages/settings/page.tsx'
 import { CreatePlainTenderForm } from '@/features/tender/create-tender/ui/CreatePlainTenderForm.tsx'
+import { SignUpPage } from '@/pages/signup/main/page.tsx'
 
 export const router = createBrowserRouter([
   {

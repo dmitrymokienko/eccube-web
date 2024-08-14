@@ -15,7 +15,6 @@ import { TenderPublishmentField } from './components/TenderPublishmentField'
 import { TenderPaymentTermField } from './components/TenderPaymentTermField'
 import { FilesUploader } from '@/features/uploadFiles/ui/FilesUploader'
 import { useState } from 'react'
-import { IUploadedFile } from '@/features/uploadFiles/types'
 import { EmailTextField } from '@/shared/ui/components/TextFields/EmailTextField'
 import { prepareCreateTenderDtoMapper } from '../utils/mappers'
 
@@ -23,7 +22,7 @@ export function CreatePlainTenderForm() {
   const { t } = useTranslation()
   const navigate = useNavigate()
 
-  const [files, setFiles] = useState<IUploadedFile[]>([])
+  const [uploadedFiles, setFiles] = useState<File[]>([])
 
   const form = useFormContext<CreatePlainTenderProcessForm>()
 
@@ -38,15 +37,15 @@ export function CreatePlainTenderForm() {
   } = form
 
   const onSubmit = async (data: CreatePlainTenderProcessForm) => {
-    const payload = prepareCreateTenderDtoMapper({ ...data, isDraft: false })
+    const payload = prepareCreateTenderDtoMapper({ ...data, uploadedFiles, isDraft: false })
     const res = await tenderCreation.createNewTenderFx(payload)
     console.log(res)
-    navigate('/tender/create/plain/success')
+    // navigate('/tender/create/plain/success')
   }
 
   const onSaveDraft = async () => {
     const data = getValues()
-    const payload = prepareCreateTenderDtoMapper({ ...data, isDraft: true })
+    const payload = prepareCreateTenderDtoMapper({ ...data, uploadedFiles, isDraft: true })
     await tenderCreation.createNewTenderFx(payload)
     navigate('/tender/create/plain/success')
   }
@@ -211,13 +210,12 @@ export function CreatePlainTenderForm() {
         )}
       />
 
-      <FilesUploader files={files} onUpload={setFiles} />
+      <FilesUploader files={uploadedFiles} onUpload={setFiles} />
 
       <TenderPaymentTermField />
 
       <TenderPublishmentField />
 
-      {/* TODO: emails <SupplierInvitationField /> */}
       <EmailTextField
         label={t('tender.label.supplier-invitation')}
         onAddEmail={(emails) => setValue('invitedSuppliers', emails)}
