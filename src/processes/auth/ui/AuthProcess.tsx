@@ -3,7 +3,6 @@ import {
   SEPARATE_LAYOUT_SIDEBAR_WIDTH,
   SeparateLayout,
 } from '@/shared/ui/layouts/SeparateLayout/SeparateLayout'
-import { auth } from '../../entities/auth/model'
 import EccubeBg from '@/shared/assets/images/eccube_bg.jpeg'
 import { useUnit } from 'effector-react'
 import { ReactNode, useMemo } from 'react'
@@ -15,6 +14,7 @@ import { useTranslation } from 'react-i18next'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
+import { auth } from '@/entities/auth/model'
 
 export interface IAuthProcessProps {
   children?: ReactNode
