@@ -4,11 +4,11 @@ import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useUnit } from 'effector-react'
-import { IKybCompanyData } from '../../../entities/kyb/types'
-import { kyb } from '../../../entities/kyb/model'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { isDevelopment } from '../../../core/libs/utils'
+import { kyb } from '@/entities/kyb/model'
+import { IKybCompanyData } from '@/entities/kyb/types'
+import { isDevelopment } from '@/core/libs/utils'
 
 export function CompanyKybPage() {
   // TODO: add all fields by https://docs.mollie.com/reference/v2/profiles-api/create-profile

@@ -1,7 +1,7 @@
 import { ReactNode, useContext } from 'react'
-import { AuthContext } from '../../shared/ui/providers/AuthProvider'
+import { AuthContext } from '../../../shared/ui/providers/AuthProvider'
 import { Navigate, Outlet } from 'react-router-dom'
-import { Loader } from '../../shared/ui/components/Loader'
+import { Loader } from '../../../shared/ui/components/Loader'
 
 export interface IProtectedRouteProps {
   children?: ReactNode

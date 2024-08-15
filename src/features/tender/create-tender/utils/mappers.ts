@@ -4,7 +4,7 @@ import { omit } from '@/shared/libs/utils/utilities'
 import { convertEditorStateToString } from '@/shared/ui/components/RichTextEditor/utils'
 
 export function prepareCreateTenderDtoMapper(data: CreatePlainTenderProcessForm) {
-  const { street, addressSuffix, postalCode, city, workDescription, ...rest } = omit(
+  const { street, addressSuffix, postalCode, city, workDescription, paymentTerm, ...rest } = omit(
     ['country'],
     data
   )
@@ -12,12 +12,13 @@ export function prepareCreateTenderDtoMapper(data: CreatePlainTenderProcessForm)
     ...rest,
     address: {
       street: street.trim(),
-      // houseNumber: houseNumber.trim(),
+      houseNumber: '32', // TODO: STUB
       suffix: addressSuffix.trim(),
       postalCode: postalCode.trim(),
       city: city.trim(),
       country: Locale.DE,
     },
+    paymentTerm: parseInt(paymentTerm, 10),
     // TODO: tempo
     workDescription: convertEditorStateToString(workDescription),
   }

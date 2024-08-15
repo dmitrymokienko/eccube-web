@@ -4,12 +4,12 @@ import { useContext, useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Box from '@mui/material/Box'
 import { useTranslation } from 'react-i18next'
-import { kyb } from '../../../entities/kyb/model'
 import { useUnit } from 'effector-react'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 import ErrorIcon from '@mui/icons-material/Error'
 import { MollieOnboardingStatus } from '@/entities/mollie/types'
 import { AuthContext } from '@/shared/ui/providers/AuthProvider'
+import { kyb } from '@/entities/kyb/model'
 
 export function MollieCallbackPage() {
   const { t } = useTranslation()

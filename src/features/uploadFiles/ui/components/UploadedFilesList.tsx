@@ -1,9 +1,8 @@
 import List from '@mui/material/List'
-import { IUploadedFile } from '../../types'
 import { UploadedFile } from './UploadedFile'
 
 export interface IUploadedFilesListProps {
-  files: IUploadedFile[]
+  files: File[]
   onDelete?: (fileName: string) => void
 }
 
@@ -15,9 +14,9 @@ export function UploadedFilesList(props: IUploadedFilesListProps) {
     <List>
       {files.map((file) => (
         <UploadedFile
-          key={file.fileName}
-          fileName={file.fileName}
-          downloadLink={file.fileUrl}
+          key={file.name}
+          fileName={file.name}
+          // downloadLink={file.fileUrl}
           onDelete={onDelete}
         />
       ))}

@@ -3,11 +3,11 @@ import Stack from '@mui/material/Stack'
 import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 import { FormProvider, useForm } from 'react-hook-form'
-import { currentUser } from '../../entities/currentUser/model'
-import { auth } from '../../entities/auth/model'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { omit } from '@/shared/libs/utils/utilities'
+import { currentUser } from '@/entities/currentUser/model'
+import { auth } from '@/entities/auth/model'
 
 const WEAK_PASSWORD = 'password is not strong enough'
 

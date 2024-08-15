@@ -4,10 +4,10 @@ import TextField from '@mui/material/TextField'
 import Typography from '@mui/material/Typography'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useUnit } from 'effector-react'
-import { kyb } from '../../../entities/kyb/model'
-import { IKybData } from '../../../entities/kyb/types'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { kyb } from '@/entities/kyb/model'
+import { IKybData } from '@/entities/kyb/types'
 
 export function UserKybPage() {
   // TODO: add validation

@@ -2,10 +2,10 @@ import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
 import { useUnit } from 'effector-react'
-import { currentUser } from '../../../entities/currentUser/model'
-import { auth } from '../../../entities/auth/model'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { currentUser } from '@/entities/currentUser/model'
+import { auth } from '@/entities/auth/model'
 
 export interface ISignUpForm {
   email: string
