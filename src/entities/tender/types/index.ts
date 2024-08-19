@@ -1,4 +1,4 @@
-import { EditorState } from 'draft-js'
+import { RawDraftContentState } from 'draft-js'
 
 export interface ITender {
   id: string
@@ -12,7 +12,7 @@ export interface ITender {
   postalCode: string
   city: string
   country: string
-  workDescription: EditorState
+  workDescription: RawDraftContentState
   paymentTerm: string // number
   publishment: TenderPublishment[]
   invitedSuppliers: string[]

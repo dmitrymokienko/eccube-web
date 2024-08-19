@@ -1,7 +1,7 @@
 import { Locale } from '@/entities/locale/types'
 import { CreatePlainTenderProcessForm } from '../types'
 import { omit } from '@/shared/libs/utils/utilities'
-import { convertEditorStateToString } from '@/shared/ui/components/RichTextEditor/utils'
+import { prepareRTEForSubmit } from '@/shared/ui/components/RichTextEditor/utils'
 
 export function prepareCreateTenderDtoMapper(data: CreatePlainTenderProcessForm) {
   const { street, addressSuffix, postalCode, city, workDescription, paymentTerm, ...rest } = omit(
@@ -19,7 +19,6 @@ export function prepareCreateTenderDtoMapper(data: CreatePlainTenderProcessForm)
       country: Locale.DE,
     },
     paymentTerm: parseInt(paymentTerm, 10),
-    // TODO: tempo
-    workDescription: convertEditorStateToString(workDescription),
+    workDescription: prepareRTEForSubmit(workDescription),
   }
 }
