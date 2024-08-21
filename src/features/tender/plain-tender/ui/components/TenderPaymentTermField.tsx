@@ -6,7 +6,7 @@ import Radio from '@mui/material/Radio'
 import RadioGroup from '@mui/material/RadioGroup'
 import { Controller, useFormContext } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
-import { CreatePlainTenderProcessForm } from '../../types'
+import { CreatePlainTenderProcessForm } from '../../model/interfaces'
 import TextField from '@mui/material/TextField'
 import { useState } from 'react'
 

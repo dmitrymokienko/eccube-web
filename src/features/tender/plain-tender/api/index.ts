@@ -1,6 +1,7 @@
 import { defaultApiClient } from '@/core/api/apiClient'
-import { CreateTenderDto, TenderDto } from '@/features/tender/create-tender/types'
 import { omit } from '@/shared/libs/utils/utilities'
+import { CreateTenderDto } from '@/features/tender/plain-tender/api/dto'
+import { ITender } from '@/entities/tender/model/interfaces'
 
 export async function uploadTenderFilesApi(uploadedFiles: File[]) {
   if (uploadedFiles.length === 0) return false
@@ -8,7 +9,7 @@ export async function uploadTenderFilesApi(uploadedFiles: File[]) {
   for (const file of uploadedFiles) {
     formData.append('files', file)
   }
-  await defaultApiClient.post<FormData, TenderDto>('/api/tender/upload', formData, {
+  await defaultApiClient.post<FormData, ITender>('/api/tender/upload', formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },
@@ -17,7 +18,7 @@ export async function uploadTenderFilesApi(uploadedFiles: File[]) {
 }
 
 export async function createNewTenderApi(data: CreateTenderDto) {
-  const res = await defaultApiClient.post<CreateTenderDto, TenderDto>(
+  const res = await defaultApiClient.post<CreateTenderDto, ITender>(
     '/api/tender/create',
     omit(['uploadedFiles'], data)
   )

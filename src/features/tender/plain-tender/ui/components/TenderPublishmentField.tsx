@@ -5,8 +5,8 @@ import FormGroup from '@mui/material/FormGroup'
 import FormLabel from '@mui/material/FormLabel'
 import { useFormContext } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
-import { CreatePlainTenderProcessForm } from '../../types'
-import { TenderPublishment } from '@/entities/tender/types'
+import { CreatePlainTenderProcessForm } from '../../model/interfaces'
+import { TenderPublishment } from '@/entities/tender/model/constants'
 
 const PUBLISHMENT_FIELDS = [
   {

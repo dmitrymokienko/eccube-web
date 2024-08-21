@@ -1,4 +1,5 @@
 import { RawDraftContentState } from 'draft-js'
+import { TenderPublishment } from '../constants'
 
 export interface ITender {
   id: string
@@ -20,10 +21,4 @@ export interface ITender {
   uploadedFiles?: File[]
   invitedTeamMembers?: string[] // EXCLUDE FROM MVP
   fields?: Record<string, string> // EXCLUDE FROM MVP
-}
-
-export enum TenderPublishment {
-  ECCUBE = 'eccube',
-  TEAM = 'team',
-  INVITATION = 'invitation',
 }

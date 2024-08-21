@@ -15,8 +15,10 @@ import { CompanyKybPage } from '@/pages/kyb/company/ui/page'
 import { ProtectedRoute } from './components/ProtectedRoute'
 import { PaymentsPage } from '@/pages/payments/ui/page'
 import { CompanyProfileKybPage } from '@/pages/kyb/profile/ui/page'
-import { PlainTenderCreationPage } from '@/pages/tender/creation/plain-tender/ui/page'
+import { PlainTenderCreationPage } from '@/pages/tender/creation/plain-tender/creation-form/ui/page'
 import { PlainTenderEditionPage } from '@/pages/tender/edition/plain-tender/ui/page'
+import { PlainTenderSuccessCreationPage } from '@/pages/tender/creation/plain-tender/creation-success/ui/page'
+import { PlainTenderDraftSuccessCreationPage } from '@/pages/tender/creation/plain-tender/creation-success-draft/ui/page'
 
 export const router = createBrowserRouter([
   {
@@ -124,6 +126,14 @@ export const router = createBrowserRouter([
                 index: true,
                 // path: 'step_1',
                 element: <PlainTenderCreationPage />,
+              },
+              {
+                path: 'success',
+                element: <PlainTenderSuccessCreationPage />,
+              },
+              {
+                path: 'success-draft',
+                element: <PlainTenderDraftSuccessCreationPage />,
               },
             ],
           },
