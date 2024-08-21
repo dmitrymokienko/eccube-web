@@ -115,7 +115,8 @@
     "country": "Wählen Sie das Land aus",
 
     "create-tender": {
-      "rte-project-description": "Geben Sie eine detaillierte Projektbeschreibung ein"
+      "rte-project-description": "Geben Sie eine detaillierte Projektbeschreibung ein",
+      "supplier-invitation": "E-Mail eingeben und auf die Schaltfläche 'Plus' klicken"
     }
   },
   "validation": {

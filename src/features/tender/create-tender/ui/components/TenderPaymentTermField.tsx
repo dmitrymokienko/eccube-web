@@ -41,7 +41,7 @@ export function TenderPaymentTermField(props: ITenderPaymentTermFieldProps) {
           return (
             <Box>
               <FormControl required error={isSubmitted && !value}>
-                <FormLabel component="legend" id={ID}>
+                <FormLabel component="legend" id={ID} sx={{ pb: 1 }}>
                   {t('field.create-tender.preferred-payment-terms')}
                 </FormLabel>
 
@@ -50,7 +50,7 @@ export function TenderPaymentTermField(props: ITenderPaymentTermFieldProps) {
                     <FormControlLabel
                       key={n}
                       value={n}
-                      control={<Radio />}
+                      control={<Radio size="small" />}
                       label={t('field.create-tender.n_days', { n })}
                       labelPlacement="top"
                       onClick={() => {
@@ -66,7 +66,7 @@ export function TenderPaymentTermField(props: ITenderPaymentTermFieldProps) {
                       setVisibleAdditionalField(true)
                     }}
                     checked={visibleAdditionalField}
-                    control={<Radio />}
+                    control={<Radio size="small" />}
                     label={t('field.create-tender.individual-period')}
                     labelPlacement="top"
                   />

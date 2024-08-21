@@ -43,7 +43,9 @@ export function TenderPublishmentField() {
 
   return (
     <FormControl required error={isSubmitted && !getValues('publishment')} component="fieldset">
-      <FormLabel component="legend"> {t('field.create-tender.publishment')}</FormLabel>
+      <FormLabel component="legend" sx={{ pb: 1 }}>
+        {t('field.create-tender.publishment')}
+      </FormLabel>
 
       <FormGroup row>
         {PUBLISHMENT_FIELDS.map((item: PublishmentItemType) => (
@@ -51,6 +53,7 @@ export function TenderPublishmentField() {
             key={item.type}
             control={
               <Checkbox
+                size="small"
                 checked={(watch('publishment') || []).includes(item.type)}
                 onChange={(_e, checked) => onChange(checked, item.type)}
               />

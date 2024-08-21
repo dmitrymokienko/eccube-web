@@ -9,7 +9,6 @@ import { RichTextEditor } from '@/shared/ui/components/RichTextEditor'
 import { EditorState } from 'draft-js'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import { TenderPublishmentField } from './components/TenderPublishmentField'
 import { TenderPaymentTermField } from './components/TenderPaymentTermField'
@@ -38,16 +37,23 @@ export function CreatePlainTenderForm() {
 
   const onSubmit = async (data: CreatePlainTenderProcessForm) => {
     const payload = prepareCreateTenderDtoMapper({ ...data, uploadedFiles, isDraft: false })
-    const res = await tenderCreation.createNewTenderFx(payload)
-    console.log(res)
-    // navigate('/tender/create/plain/success')
+    try {
+      await tenderCreation.createNewTenderFx(payload)
+      navigate('/tender/create/plain/success')
+    } catch (e) {
+      console.error(e)
+    }
   }
 
   const onSaveDraft = async () => {
     const data = getValues()
     const payload = prepareCreateTenderDtoMapper({ ...data, uploadedFiles, isDraft: true })
-    await tenderCreation.createNewTenderFx(payload)
-    navigate('/tender/create/plain/success')
+    try {
+      await tenderCreation.createNewTenderFx(payload)
+      navigate('/tender/create/plain/success-draft')
+    } catch (e) {
+      console.error(e)
+    }
   }
 
   const onInvalid = (e: FieldErrors) => {
@@ -55,12 +61,7 @@ export function CreatePlainTenderForm() {
   }
 
   return (
-    // TODO: i18n for all labels, placeholders
     <Stack component="form" spacing={2} onSubmit={handleSubmit(onSubmit, onInvalid)}>
-      <Typography variant="h3" sx={{ py: 4 }}>
-        {t('tender.label.new-tender')}
-      </Typography>
-
       <TextField
         label={t('field.create-tender.title')}
         placeholder={t('placeholder.create-tender.title')}
@@ -210,14 +211,19 @@ export function CreatePlainTenderForm() {
         )}
       />
 
-      <FilesUploader files={uploadedFiles} onUpload={setFiles} />
+      <FilesUploader files={uploadedFiles} onUpload={setFiles} sx={{ pb: 2 }} />
 
+      {/* TODO: mobile view (column) */}
       <TenderPaymentTermField />
 
-      <TenderPublishmentField />
+      {/* TODO: mobile view (column) */}
+      <Box sx={{ pt: 1, pb: 2 }}>
+        <TenderPublishmentField />
+      </Box>
 
       <EmailTextField
         label={t('tender.label.supplier-invitation')}
+        placeholder={t('placeholder.create-tender.supplier-invitation')}
         onAddEmail={(emails) => setValue('invitedSuppliers', emails)}
       />
 

@@ -1,9 +1,8 @@
 import { Navigate, createBrowserRouter } from 'react-router-dom'
 import { HomePage } from '@/pages/home/ui/page.tsx'
 import { KybProcess } from '@/processes/kyb/ui/KybProcess.tsx'
-import { TendersPage } from '@/pages/tender/dashboard-tender/ui/page.tsx'
+import { TendersPage } from '@/pages/tender/dashboard/ui/page'
 import { SettingsPage } from '@/pages/settings/ui/page.tsx'
-import { CreatePlainTenderForm } from '@/features/tender/create-tender/ui/CreatePlainTenderForm.tsx'
 import { AuthProcess } from '@/processes/auth/ui/AuthProcess.tsx'
 import { CreatePlainTenderProcess } from '@/processes/tender/ui/CreatePlainTenderProcess.tsx'
 import { SignUpPage } from '@/pages/signup/main/ui/page'
@@ -16,6 +15,8 @@ import { CompanyKybPage } from '@/pages/kyb/company/ui/page'
 import { ProtectedRoute } from './components/ProtectedRoute'
 import { PaymentsPage } from '@/pages/payments/ui/page'
 import { CompanyProfileKybPage } from '@/pages/kyb/profile/ui/page'
+import { PlainTenderCreationPage } from '@/pages/tender/creation/plain-tender/ui/page'
+import { PlainTenderEditionPage } from '@/pages/tender/edition/plain-tender/ui/page'
 
 export const router = createBrowserRouter([
   {
@@ -122,7 +123,7 @@ export const router = createBrowserRouter([
                 // TODO: separate to steps (better UI/UX)
                 index: true,
                 // path: 'step_1',
-                element: <CreatePlainTenderForm />,
+                element: <PlainTenderCreationPage />,
               },
             ],
           },
@@ -139,7 +140,7 @@ export const router = createBrowserRouter([
               {
                 index: true,
                 // path: 'step_1',
-                element: <div>pip</div>,
+                element: <PlainTenderEditionPage />,
               },
             ],
           },
