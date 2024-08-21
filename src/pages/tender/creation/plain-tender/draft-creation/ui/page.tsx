@@ -3,9 +3,8 @@ import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 
-export function PlainTenderSuccessCreationPage() {
+export function PlainTenderDraftCreationPage() {
   const { t } = useTranslation()
   const navigate = useNavigate()
 
@@ -16,18 +15,12 @@ export function PlainTenderSuccessCreationPage() {
 
   return (
     <Stack spacing={4}>
-      <Stack spacing={0}>
-        <Typography variant="h3" textAlign="center">
-          <CheckCircleIcon fontSize="inherit" sx={{ color: 'success.main' }} />
-        </Typography>
-
-        <Typography variant="h3" textAlign="center">
-          {t('tender.label.successfully-created-tender')}
-        </Typography>
-      </Stack>
+      <Typography variant="h3" textAlign="center">
+        {t('tender.label.successfully-created-tender-draft')}
+      </Typography>
 
       <Typography variant="body1" textAlign="justify">
-        {t('tender.description.successfully-created-tender')}
+        {t('tender.description.successfully-created-tender-draft')}
       </Typography>
 
       <Button type="button" onClick={onContinue}>

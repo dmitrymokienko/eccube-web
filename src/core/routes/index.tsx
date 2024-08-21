@@ -18,7 +18,7 @@ import { CompanyProfileKybPage } from '@/pages/kyb/profile/ui/page'
 import { PlainTenderCreationPage } from '@/pages/tender/creation/plain-tender/creation-form/ui/page'
 import { PlainTenderEditionPage } from '@/pages/tender/edition/plain-tender/ui/page'
 import { PlainTenderSuccessCreationPage } from '@/pages/tender/creation/plain-tender/creation-success/ui/page'
-import { PlainTenderDraftSuccessCreationPage } from '@/pages/tender/creation/plain-tender/creation-success-draft/ui/page'
+import { PlainTenderDraftCreationPage } from '@/pages/tender/creation/plain-tender/draft-creation/ui/page'
 
 export const router = createBrowserRouter([
   {
@@ -132,8 +132,8 @@ export const router = createBrowserRouter([
                 element: <PlainTenderSuccessCreationPage />,
               },
               {
-                path: 'success-draft',
-                element: <PlainTenderDraftSuccessCreationPage />,
+                path: 'draft',
+                element: <PlainTenderDraftCreationPage />,
               },
             ],
           },

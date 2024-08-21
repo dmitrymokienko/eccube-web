@@ -150,7 +150,13 @@
       "tender-list": "Tender list",
       "tender-details": "Tender details",
       "tender-title": "Tender title",
-      "supplier-invitation": "Supplier invitation (emails)"
+      "supplier-invitation": "Supplier invitation (emails)",
+      "successfully-created-tender": "Successfully created tender",
+      "successfully-created-tender-draft": "Tender's draft has been saved"
+    },
+    "description": {
+      "successfully-created-tender": "We have sent an email to the selected suppliers. You can view the list of suppliers and other details in the 'Tender details' drawer in the dashboard.",
+      "successfully-created-tender-draft": "The tender has been saved as a draft. You can continue editing via 'Tender details' drawer in the dashboard."
     }
   }
 }

@@ -21,7 +21,7 @@ export function PlainTenderCreationPage() {
   const { getValues, handleSubmit } = form
 
   const onSubmit = async (data: CreatePlainTenderProcessForm) => {
-    const payload = prepareCreateTenderDtoMapper({ ...data, uploadedFiles, isDraft: false })
+    const payload = prepareCreateTenderDtoMapper({ ...data, uploadedFiles })
     try {
       await tenderCreation.createNewTenderFx(payload)
       navigate('/tender/create/plain/success')
@@ -32,10 +32,10 @@ export function PlainTenderCreationPage() {
 
   const onSaveDraft = async () => {
     const data = getValues()
-    const payload = prepareCreateTenderDtoMapper({ ...data, uploadedFiles, isDraft: true })
+    const payload = prepareCreateTenderDtoMapper({ ...data, uploadedFiles })
     try {
-      await tenderCreation.createNewTenderFx(payload)
-      navigate('/tender/create/plain/success-draft')
+      await tenderCreation.createNewTenderDraftFx(payload)
+      navigate('/tender/create/plain/draft')
     } catch (e) {
       console.error(e)
     }

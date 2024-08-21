@@ -151,7 +151,13 @@
       "tender-list": "Ausschreibungsliste",
       "tender-details": "Ausschreibungsdetails",
       "tender-title": "Ausschreibungstitel",
-      "supplier-invitation": "Lieferanteneinladung (E-Mails)"
+      "supplier-invitation": "Lieferanteneinladung (E-Mails)",
+      "successfully-created-tender": "Erfolgreich erstellte Ausschreibung",
+      "successfully-created-tender-draft": "Der Entwurf der Ausschreibung wurde gespeichert"
+    },
+    "description": {
+      "successfully-created-tender": "Wir haben eine E-Mail an die ausgewählten Lieferanten geschickt. Sie können die Liste der Lieferanten und andere Details in der Schublade 'Ausschreibungsdetails' im Dashboard einsehen.",
+      "successfully-created-tender-draft": "Die Ausschreibung wurde als Entwurf gespeichert. Sie können die Bearbeitung über die Schublade 'Ausschreibungsdetails' im Dashboard fortsetzen."
     }
   }
 }
