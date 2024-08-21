@@ -5,6 +5,7 @@ import Stack from '@mui/material/Stack'
 import { isEmpty } from '@/shared/libs/utils/utilities'
 import { UploadedFilesList } from './components/UploadedFilesList'
 import { useTranslation } from 'react-i18next'
+import { SxProps } from '@mui/material/styles'
 
 const MAX_COUNT = 6
 const ATTACHMENT_MAX_SIZE = 10 * 1_000 * 1_000 // 10MB
@@ -13,10 +14,11 @@ export interface IFilesUploaderProps {
   files: File[]
   onUpload: (files: File[]) => void
   deletable?: boolean
+  sx?: SxProps
 }
 
 export function FilesUploader(props: IFilesUploaderProps) {
-  const { files = [], onUpload, deletable = true } = props
+  const { files = [], onUpload, deletable = true, sx = {} } = props
 
   const { t } = useTranslation()
 
@@ -47,7 +49,7 @@ export function FilesUploader(props: IFilesUploaderProps) {
   }
 
   return (
-    <Stack spacing={0}>
+    <Stack spacing={0} sx={sx}>
       <Stack spacing={0.5}>
         <UploadFilesButton onChange={onFileUpload} disabled={isTooMuchFiles} />
 

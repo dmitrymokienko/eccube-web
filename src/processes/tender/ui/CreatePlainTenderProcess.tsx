@@ -15,7 +15,7 @@ import { kyb } from '@/entities/kyb/model'
 import { PrevPageButton } from '@/shared/ui/components/Button/PrevPageButton'
 import { AuthContext } from '@/shared/ui/providers/AuthProvider'
 import { FormProvider, useForm } from 'react-hook-form'
-import { CreatePlainTenderProcessForm } from '@/features/tender/create-tender/types'
+import { CreatePlainTenderProcessForm } from '@/features/tender/plain-tender/model/interfaces'
 
 export interface ICreatePlainTenderProcessProps {
   children?: ReactNode
@@ -36,11 +36,6 @@ export function CreatePlainTenderProcess(props: ICreatePlainTenderProcessProps) 
       country: t('common.Germany'),
     },
   })
-
-  // TODO: Implement this
-  //   const isCompactView = useMediaQuery<Theme>((theme) =>
-  //     theme.breakpoints.down(SEPARATE_LAYOUT_COMPACT_BREAKPOINT)
-  //   )
 
   //   const firstPage = useMatch('/tender/plain/step_1')
 

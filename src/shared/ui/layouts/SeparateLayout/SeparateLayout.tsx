@@ -33,7 +33,7 @@ export interface ISeparateLayoutProps {
 
 export const SEPARATE_LAYOUT_SIDEBAR_WIDTH = 360
 export const SEPARATE_LAYOUT_HEADER_HEIGHT = 72
-export const SEPARATE_LAYOUT_CONTENT_WIDTH = 480
+export const SEPARATE_LAYOUT_CONTENT_WIDTH = 500
 export const SEPARATE_LAYOUT_COMPACT_BREAKPOINT = 1280
 
 export function SeparateLayout(props: ISeparateLayoutProps) {
@@ -73,12 +73,16 @@ export function SeparateLayout(props: ISeparateLayoutProps) {
           width: '100%',
           height: '100dvh', // TODO: check it works correctly
           backgroundColor: '#F6F7F8', // '#f1eeee',
+          overflowY: 'auto',
           ...(WrapperProps?.sx || {}),
         }}
       >
         {/* loader */}
+
         {LoaderComponent}
+
         {/* header */}
+
         <Box
           component="header"
           sx={{
@@ -86,11 +90,13 @@ export function SeparateLayout(props: ISeparateLayoutProps) {
             position: 'sticky',
             top: 0,
             left: 0,
-            zIndex: Z_INDEX.SlightlySoaring,
+            zIndex: Z_INDEX.Soaring,
             width: '100%',
             padding: '8px 24px',
             display: 'flex',
             alignItems: 'center',
+            backgroundColor: '#F6F7F8', // '#f1eeee',
+            boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
             ...(HeaderProps?.sx || {}),
           }}
         >
@@ -102,6 +108,7 @@ export function SeparateLayout(props: ISeparateLayoutProps) {
             </Box>
           )}
         </Box>
+
         {/* main */}
         <Box sx={{ gridArea: 'main' }}>
           <Box
@@ -188,7 +195,7 @@ export function SeparateLayout(props: ISeparateLayoutProps) {
           ...(SideBarProps?.sx || {}),
         }}
       >
-        <Box sx={{ position: 'relative', zIndex: 1 }}>
+        <Box sx={{ position: 'relative', zIndex: Z_INDEX.SlightlySoaring }}>
           <EccubeLogo />
           {Sidebar}
         </Box>

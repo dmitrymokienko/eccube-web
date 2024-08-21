@@ -114,7 +114,8 @@
     "country": "Select your country",
 
     "create-tender": {
-      "rte-project-description": "Enter a detailed project description"
+      "rte-project-description": "Enter a detailed project description",
+      "supplier-invitation": "Enter email and click 'Plus' button"
     }
   },
   "validation": {
