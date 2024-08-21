@@ -4,10 +4,17 @@ import { prepareRTEForSubmit } from '@/shared/ui/components/RichTextEditor/utils
 import { CreatePlainTenderProcessForm } from '../../model/interfaces'
 
 export function prepareCreateTenderDtoMapper(data: CreatePlainTenderProcessForm) {
-  const { street, addressSuffix, postalCode, city, workDescription, paymentTerm, ...rest } = omit(
-    ['country'],
-    data
-  )
+  const {
+    street = '',
+    addressSuffix = '',
+    postalCode = '',
+    city = '',
+    workDescription,
+    paymentTerm,
+    publishment = [],
+    ...rest
+  } = omit(['country'], data)
+
   return {
     ...rest,
     address: {
@@ -18,7 +25,8 @@ export function prepareCreateTenderDtoMapper(data: CreatePlainTenderProcessForm)
       city: city.trim(),
       country: Locale.DE,
     },
-    paymentTerm: parseInt(paymentTerm, 10),
+    publishment,
+    paymentTerm: paymentTerm ? parseInt(paymentTerm, 10) : undefined,
     workDescription: prepareRTEForSubmit(workDescription),
   }
 }

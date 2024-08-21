@@ -29,3 +29,16 @@ export async function createNewTenderApi(data: CreateTenderDto) {
   await uploadTenderFilesApi(data.uploadedFiles || [])
   return res
 }
+
+export async function createNewTenderDraftApi(data: Partial<CreateTenderDto>) {
+  const res = await defaultApiClient.post<Partial<CreateTenderDto>, ITender>(
+    '/api/tender/create/draft',
+    omit(['uploadedFiles'], data)
+  )
+
+  const tenderId = res.id
+  console.log('tenderId:: ', tenderId)
+
+  await uploadTenderFilesApi(data.uploadedFiles || [])
+  return res
+}

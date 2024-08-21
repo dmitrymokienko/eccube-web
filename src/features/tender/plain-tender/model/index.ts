@@ -1,7 +1,9 @@
 import { combine, createEffect } from 'effector'
-import { createNewTenderApi } from '../api'
+import { createNewTenderApi, createNewTenderDraftApi } from '../api'
 
 const createNewTenderFx = createEffect(createNewTenderApi)
+
+const createNewTenderDraftFx = createEffect(createNewTenderDraftApi)
 
 const withdrawalFromDraftFx = createEffect(async (id: string) => {
   console.log(id)
@@ -10,6 +12,7 @@ const withdrawalFromDraftFx = createEffect(async (id: string) => {
 
 const $isLoading = combine(
   createNewTenderFx.pending,
+  createNewTenderDraftFx.pending,
   withdrawalFromDraftFx.pending,
   (...args: boolean[]) => args.some(Boolean)
 )
@@ -17,5 +20,6 @@ const $isLoading = combine(
 export const tenderCreation = {
   $isLoading,
   createNewTenderFx,
+  createNewTenderDraftFx,
   withdrawalFromDraftFx,
 }
