@@ -1,5 +1,5 @@
 import { prepareCreateTenderDtoMapper } from '@/features/tender/plain-tender/api/mapper'
-import { tenderCreation } from '@/features/tender/plain-tender/model'
+import { tender } from '@/features/tender/plain-tender/model'
 import { CreatePlainTenderProcessForm } from '@/features/tender/plain-tender/model/interfaces'
 import { PlainTenderForm } from '@/features/tender/plain-tender/ui/PlainTenderForm'
 import Button from '@mui/material/Button'
@@ -23,7 +23,7 @@ export function PlainTenderCreationPage() {
   const onSubmit = async (data: CreatePlainTenderProcessForm) => {
     const payload = prepareCreateTenderDtoMapper({ ...data, uploadedFiles })
     try {
-      await tenderCreation.createNewTenderFx(payload)
+      await tender.createNewTenderFx(payload)
       navigate('/tender/create/plain/success')
     } catch (e) {
       console.error(e)
@@ -34,7 +34,7 @@ export function PlainTenderCreationPage() {
     const data = getValues()
     const payload = prepareCreateTenderDtoMapper({ ...data, uploadedFiles })
     try {
-      await tenderCreation.createNewTenderDraftFx(payload)
+      await tender.createNewTenderDraftFx(payload)
       navigate('/tender/create/plain/draft')
     } catch (e) {
       console.error(e)

@@ -16,3 +16,16 @@ export function isEmpty(value: unknown): boolean {
   if (value instanceof Map || value instanceof Set) return value.size === 0
   return false
 }
+
+export function createQueryParams(params?: Record<string, string>) {
+  if (!params) return ''
+  const searchParams = new URLSearchParams()
+  Object.entries(params).forEach(([key, value]) => {
+    if (Array.isArray(value)) {
+      value.forEach((val) => searchParams.append(key, val))
+    } else {
+      searchParams.append(key, value)
+    }
+  })
+  return searchParams.toString()
+}
