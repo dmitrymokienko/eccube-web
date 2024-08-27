@@ -7,19 +7,25 @@ import { Table } from '@/shared/ui/components/Table/Table'
 import { useEffect } from 'react'
 import { prepareTenderTable } from '../lib/utils'
 import { tender } from '@/features/tender/plain-tender/model'
+import { useUnit } from 'effector-react'
+import { currentUser } from '@/entities/currentUser/model'
 
 export function TendersPage() {
   const { t } = useTranslation()
   const navigate = useNavigate()
 
+  const user = useUnit(currentUser.$info)
+  const tendersList = useUnit(tender.$list)
+  const isLoading = useUnit(tender.$isLoading)
+
   useEffect(() => {
-    tender.fetchTenderListFx()
+    tender.fetchTenderListFx({ createdById: user?.id })
   }, [])
 
-  const table = prepareTenderTable()
+  const table = prepareTenderTable(tendersList)
 
   return (
-    <SidebarLayout>
+    <SidebarLayout LoaderProps={{ visible: isLoading }}>
       <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }} py={3}>
         <Button
           fullWidth={false}

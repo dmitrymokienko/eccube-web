@@ -146,7 +146,6 @@ export const components: Components<Omit<Theme, 'components'>> = {
   MuiSelect: {
     defaultProps: {
       variant: 'outlined',
-      fullWidth: true,
       autoComplete: 'off',
       placeholder: 'Please select...',
       size: 'small',

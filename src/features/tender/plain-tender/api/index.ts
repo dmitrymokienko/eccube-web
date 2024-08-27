@@ -2,6 +2,7 @@ import { defaultApiClient } from '@/core/api/apiClient'
 import { createQueryParams, omit } from '@/shared/libs/utils/utilities'
 import { CreateTenderDto } from '@/features/tender/plain-tender/api/dto'
 import { ITender } from '@/entities/tender/model/interfaces'
+import { TenderListQueryFilters } from '../model/interfaces'
 
 export async function uploadTenderFilesApi(uploadedFiles: File[]) {
   if (uploadedFiles.length === 0) return false
@@ -39,7 +40,7 @@ export async function createNewTenderDraftApi(data: Partial<CreateTenderDto>) {
   return res
 }
 
-export async function fetchTenderListApi(filters?: Record<string, string>) {
+export async function fetchTenderListApi(filters?: TenderListQueryFilters) {
   const queryParams = createQueryParams(filters)
   return defaultApiClient.get<ITender[]>(`/api/tender/list?${queryParams}`)
 }

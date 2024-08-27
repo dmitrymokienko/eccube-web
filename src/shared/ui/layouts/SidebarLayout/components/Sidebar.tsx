@@ -14,6 +14,7 @@ import ListItemText from '@mui/material/ListItemText'
 import { createEvent, createStore } from 'effector'
 import { useUnit } from 'effector-react'
 import { useEffect } from 'react'
+import { Z_INDEX } from '@/shared/libs/constants/style'
 
 const MENU_ITEMS = [
   {
@@ -53,7 +54,13 @@ export function Sidebar(props: ISidebarDrawerProps) {
   }, [])
 
   return (
-    <SidebarDrawer open hideBackdrop variant="persistent" {...props}>
+    <SidebarDrawer
+      open
+      hideBackdrop
+      variant="persistent"
+      sx={{ zIndex: Z_INDEX.SlightlySoaring }}
+      {...props}
+    >
       <Stack spacing={8} pt={1} pb={3} px={1}>
         {/* TODO: link */}
         <EccubeLogo height="56px" />

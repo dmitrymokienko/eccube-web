@@ -14,6 +14,10 @@ import InfoIcon from '@mui/icons-material/Info'
 import { ITableProps, ITableRow } from './interfaces'
 import { BodyRow, Cell, HeadCell, Row, SortIcon } from './components/Styled'
 import { getComparator, stableSort } from './utils'
+import TableFooter from '@mui/material/TableFooter'
+import TableRow from '@mui/material/TableRow'
+import { TablePaginationActions } from './components/TablePaginationActions'
+import TableContainer from '@mui/material/TableContainer'
 
 const DEFAULT_ROWS_PER_PAGE = 10
 const DEFAULT_PAGE = 0
@@ -45,7 +49,7 @@ export function Table(props: ITableProps) {
   }
 
   const handleRowsPerPageChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setRowsPerPage(+e.target.value)
+    setRowsPerPage(parseInt(e.target.value, 10))
     setPage(0)
   }
 
@@ -69,94 +73,109 @@ export function Table(props: ITableProps) {
 
   return (
     <Paper elevation={1} sx={{ borderRadius: '4px', width: '100%' }}>
-      <MuiTable stickyHeader aria-label="dashboard table">
-        <TableHead>
-          <Row>
-            {columns.map((column) => (
-              <HeadCell
-                key={column.id}
-                align={column?.align ?? 'left'}
-                sortDirection={orderBy === column.id ? order : undefined}
-                sx={column?.sx ?? {}}
-                onMouseEnter={() => {
-                  setHeadCellHoveredColumnId(column.id)
-                }}
-                onMouseLeave={() => {
-                  setHeadCellHoveredColumnId(null)
-                }}
-              >
-                <TableSortLabel
-                  active={orderBy === column.id}
-                  direction={orderBy === column.id ? order : 'asc'}
-                  onClick={handleRequestSort(column.id)}
-                  IconComponent={() => (
-                    <SortIcon
-                      hover={headCellHoveredColumnId === column.id}
-                      active={orderBy === column.id}
-                      sx={{
-                        transform: !order
-                          ? 'rotate(0deg)'
-                          : order === 'asc'
-                            ? 'rotate(0deg)'
-                            : 'rotate(180deg)',
-                      }}
-                    />
-                  )}
-                >
-                  <Box display="inline-flex" alignItems="center" gap={1}>
-                    <Typography component="span" variant="body1">
-                      {column?.title ?? ''}
-                    </Typography>
-
-                    {column?.tooltip ? (
-                      <Tooltip title={column.tooltip} placement="top">
-                        <InfoIcon />
-                      </Tooltip>
-                    ) : null}
-                  </Box>
-                </TableSortLabel>
-              </HeadCell>
-            ))}
-          </Row>
-        </TableHead>
-
-        <TableBody>
-          {noRows ? <EmptyState colSpan={columns.length}>{Empty}</EmptyState> : null}
-
-          {visibleRows.map((row) => (
-            <BodyRow
-              hover
-              tabIndex={-1}
-              key={row.id}
-              onClick={(e) => handleRowClick(e, row.id)}
-              sx={{ cursor: onRowClick ? 'pointer' : 'default' }}
-            >
+      <TableContainer>
+        <MuiTable stickyHeader aria-label="sticky table">
+          <TableHead>
+            <Row>
               {columns.map((column) => (
-                <Cell
+                <HeadCell
                   key={column.id}
                   align={column?.align ?? 'left'}
-                  error={row.error}
-                  sx={column.sx}
+                  sortDirection={orderBy === column.id ? order : undefined}
+                  sx={column?.sx ?? {}}
+                  onMouseEnter={() => {
+                    setHeadCellHoveredColumnId(column.id)
+                  }}
+                  onMouseLeave={() => {
+                    setHeadCellHoveredColumnId(null)
+                  }}
                 >
-                  {column?.format ? column.format(row[column.id]) : row[column.id]}
-                </Cell>
-              ))}
-            </BodyRow>
-          ))}
-        </TableBody>
-      </MuiTable>
+                  <TableSortLabel
+                    active={orderBy === column.id}
+                    direction={orderBy === column.id ? order : 'asc'}
+                    onClick={handleRequestSort(column.id)}
+                    IconComponent={() => (
+                      <SortIcon
+                        hover={headCellHoveredColumnId === column.id}
+                        active={orderBy === column.id}
+                        sx={{
+                          transform: !order
+                            ? 'rotate(180deg)'
+                            : order === 'asc'
+                              ? 'rotate(180deg)'
+                              : 'rotate(0deg)',
+                        }}
+                      />
+                    )}
+                  >
+                    <Box display="inline-flex" alignItems="center" gap={1}>
+                      <Typography component="span" variant="body1">
+                        {column?.title ?? ''}
+                      </Typography>
 
-      {rows.length > 0 && (
-        <TablePagination
-          component="div"
-          count={rows.length ?? 0}
-          page={page}
-          onPageChange={handlePageChange}
-          onRowsPerPageChange={handleRowsPerPageChange}
-          rowsPerPage={rowsPerPage}
-          rowsPerPageOptions={[5, 10, 25]}
-        />
-      )}
+                      {column?.tooltip ? (
+                        <Tooltip title={column.tooltip} placement="top">
+                          <InfoIcon />
+                        </Tooltip>
+                      ) : null}
+                    </Box>
+                  </TableSortLabel>
+                </HeadCell>
+              ))}
+            </Row>
+          </TableHead>
+
+          <TableBody>
+            {noRows ? <EmptyState colSpan={columns.length}>{Empty}</EmptyState> : null}
+
+            {visibleRows.map((row) => (
+              <BodyRow
+                hover
+                tabIndex={-1}
+                key={row.id}
+                onClick={(e) => handleRowClick(e, row.id)}
+                sx={{ cursor: onRowClick ? 'pointer' : 'default' }}
+              >
+                {columns.map((column) => (
+                  <Cell
+                    key={column.id}
+                    align={column?.align ?? 'left'}
+                    error={row.error}
+                    sx={column.sx}
+                  >
+                    {column?.format ? column.format(row[column.id]) : row[column.id]}
+                  </Cell>
+                ))}
+              </BodyRow>
+            ))}
+          </TableBody>
+
+          {rows.length > 0 && (
+            <TableFooter>
+              <TableRow>
+                <TablePagination
+                  rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
+                  colSpan={3}
+                  count={rows.length}
+                  rowsPerPage={rowsPerPage}
+                  page={page}
+                  slotProps={{
+                    select: {
+                      inputProps: {
+                        'aria-label': 'rows per page',
+                      },
+                      native: true,
+                    },
+                  }}
+                  onPageChange={handlePageChange}
+                  onRowsPerPageChange={handleRowsPerPageChange}
+                  ActionsComponent={TablePaginationActions}
+                />
+              </TableRow>
+            </TableFooter>
+          )}
+        </MuiTable>
+      </TableContainer>
     </Paper>
   )
 }

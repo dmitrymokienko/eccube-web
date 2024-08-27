@@ -17,6 +17,7 @@ export interface ITender {
   paymentTerm: string // number
   publishment: TenderPublishment[]
   invitedSuppliers: string[]
+  status: string
   uploadedFiles?: File[]
   invitedTeamMembers?: string[] // EXCLUDE FROM MVP
   fields?: Record<string, string> // EXCLUDE FROM MVP
