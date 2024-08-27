@@ -1,7 +1,8 @@
 import { defaultApiClient } from '@/core/api/apiClient'
-import { omit } from '@/shared/libs/utils/utilities'
+import { createQueryParams, omit } from '@/shared/libs/utils/utilities'
 import { CreateTenderDto } from '@/features/tender/plain-tender/api/dto'
 import { ITender } from '@/entities/tender/model/interfaces'
+import { TenderListQueryFilters } from '../model/interfaces'
 
 export async function uploadTenderFilesApi(uploadedFiles: File[]) {
   if (uploadedFiles.length === 0) return false
@@ -22,10 +23,8 @@ export async function createNewTenderApi(data: CreateTenderDto) {
     '/api/tender/create',
     omit(['uploadedFiles'], data)
   )
-
   const tenderId = res.id
   console.log('tenderId:: ', tenderId)
-
   await uploadTenderFilesApi(data.uploadedFiles || [])
   return res
 }
@@ -35,10 +34,13 @@ export async function createNewTenderDraftApi(data: Partial<CreateTenderDto>) {
     '/api/tender/create/draft',
     omit(['uploadedFiles'], data)
   )
-
   const tenderId = res.id
   console.log('tenderId:: ', tenderId)
-
   await uploadTenderFilesApi(data.uploadedFiles || [])
   return res
+}
+
+export async function fetchTenderListApi(filters?: TenderListQueryFilters) {
+  const queryParams = createQueryParams(filters)
+  return defaultApiClient.get<ITender[]>(`/api/tender/list?${queryParams}`)
 }

@@ -14,6 +14,7 @@ import Toolbar from '@mui/material/Toolbar'
 import { LogoutButton } from '../../components/Button/LogoutButton'
 import { ISidebarDrawerProps } from './components/SidebarDrawer'
 import { omit } from '@/shared/libs/utils/utilities'
+import { Z_INDEX } from '@/shared/libs/constants/style'
 
 export interface ISidebarLayoutProps {
   children: ReactNode
@@ -78,6 +79,7 @@ export function SidebarLayout(props: ISidebarLayoutProps) {
         position="fixed"
         elevation={0}
         sx={{
+          zIndex: Z_INDEX.SlightlySoaring,
           backgroundColor: theme.palette.common.white,
           width: `calc(100% - ${SIDEBAR_LAYOUT_DRAWER_WIDTH}px)`,
           ml: `${SIDEBAR_LAYOUT_DRAWER_WIDTH}px`,
