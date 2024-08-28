@@ -109,7 +109,7 @@ export function Table(props: ITableProps) {
                     )}
                   >
                     <Box display="inline-flex" alignItems="center" gap={1}>
-                      <Typography component="span" variant="body1">
+                      <Typography component="span" variant="body1" sx={{ fontWeight: 600 }}>
                         {column?.title ?? ''}
                       </Typography>
 

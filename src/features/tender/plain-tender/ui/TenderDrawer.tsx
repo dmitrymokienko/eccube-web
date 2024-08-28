@@ -50,7 +50,7 @@ export function TenderDrawer(props: TenderDrawerProps) {
     >
       <Box>
         <Stack direction="row" justifyContent="space-between" alignItems="center" mb={2}>
-          <Typography variant="h6">Tender Details</Typography>
+          <Typography variant="h5">Tender Details</Typography>
 
           <Stack direction="row" spacing={1}>
             <IconButton onClick={onEdit} color="primary">
