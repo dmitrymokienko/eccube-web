@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next'
 import { SxProps } from '@mui/material/styles'
 
 const MAX_COUNT = 6
-const ATTACHMENT_MAX_SIZE = 10 * 1_000 * 1_000 // 10MB
+const ATTACHMENT_MAX_SIZE = 10 * 1024 * 1024 // 10MB
 
 export interface IFilesUploaderProps {
   files: File[]
@@ -22,18 +22,21 @@ export function FilesUploader(props: IFilesUploaderProps) {
 
   const { t } = useTranslation()
 
-  const [error, setError] = useState<string>()
+  const [error, setError] = useState<string | boolean>(false)
 
   const isTooMuchFiles = useMemo(() => files.length >= MAX_COUNT, [files?.length])
 
   const onFileUpload = (e: FormEvent<HTMLInputElement>) => {
-    setError('')
+    setError(false)
     const extractedFiles = e.currentTarget.files as FileList
     const extractedFile = extractedFiles[0] as File
     const isFileAlreadyExists = files.some((v) => v.name === extractedFile.name)
-    if (isFileAlreadyExists) return
+    if (isFileAlreadyExists) {
+      setError(t('validation.upload-file-already-exists'))
+      return
+    }
     if (extractedFile.size >= ATTACHMENT_MAX_SIZE) {
-      setError(t('validation.upload-file-max-size', { n: ATTACHMENT_MAX_SIZE / 1_000 / 1_000 }))
+      setError(t('validation.upload-file-max-size', { n: ATTACHMENT_MAX_SIZE / 1024 / 1024 }))
       return
     }
     if (isEmpty(files)) {

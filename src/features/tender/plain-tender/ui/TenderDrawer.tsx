@@ -8,6 +8,8 @@ import {
   Box,
   Stack,
   SwipeableDrawer,
+  useMediaQuery,
+  Theme,
 } from '@mui/material'
 import {
   Edit as EditIcon,
@@ -17,6 +19,7 @@ import {
 import { ITender } from '@/entities/tender/model/interfaces'
 import { RichTextEditor } from '@/shared/ui/components/RichTextEditor'
 import { prepareRTEForRHF } from '@/shared/ui/components/RichTextEditor/utils'
+import EccubeLogo from '@/shared/assets/icons/eccube-logo-white.svg?react'
 
 interface TenderDrawerProps {
   open: boolean
@@ -26,6 +29,8 @@ interface TenderDrawerProps {
 
 export function TenderDrawer(props: TenderDrawerProps) {
   const { open, onClose, tenderData } = props
+
+  const isCompact = useMediaQuery<Theme>((theme) => theme.breakpoints.down(1280))
 
   // TODO Implement onEdit functions
   const onEdit = () => {
@@ -45,79 +50,100 @@ export function TenderDrawer(props: TenderDrawerProps) {
       onClose={onClose}
       onOpen={() => {}}
       PaperProps={{
-        sx: { width: '100%', maxWidth: '800px', p: 3 },
+        sx: { width: '100%', maxWidth: isCompact ? '800px' : '1200px' },
       }}
     >
-      <Box>
-        <Stack direction="row" justifyContent="space-between" alignItems="center" mb={2}>
-          <Typography variant="h5">Tender Details</Typography>
+      {/* decor */}
+      <Stack direction="row" spacing={0}>
+        {isCompact ? (
+          <span />
+        ) : (
+          <Box
+            sx={{
+              width: '400px',
+              height: '100vh',
+              backgroundColor: '#1c1c1c',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              p: 2,
+            }}
+          >
+            <EccubeLogo />
+          </Box>
+        )}
 
-          <Stack direction="row" spacing={1}>
-            <IconButton onClick={onEdit} color="primary">
-              <EditIcon />
-            </IconButton>
+        {/* data */}
+        <Box sx={{ width: '100%', px: 4, py: 3 }}>
+          <Stack direction="row" justifyContent="space-between" alignItems="center" mb={2}>
+            <Typography variant="h5">Tender Details</Typography>
 
-            <IconButton onClick={onDelete} color="secondary">
-              <DeleteIcon />
-            </IconButton>
+            <Stack direction="row" spacing={1}>
+              <IconButton onClick={onEdit} color="primary">
+                <EditIcon />
+              </IconButton>
+
+              <IconButton onClick={onDelete} color="error">
+                <DeleteIcon />
+              </IconButton>
+            </Stack>
           </Stack>
-        </Stack>
 
-        <Divider />
+          <Divider />
 
-        <List>
-          <ListItem>
-            <ListItemText primary="Title" secondary={tenderData?.title || '-'} />
-          </ListItem>
+          <List>
+            <ListItem>
+              <ListItemText primary="Title" secondary={tenderData?.title || '-'} />
+            </ListItem>
 
-          <ListItem>
-            <ListItemText
-              primary="Short Description"
-              secondary={tenderData?.shortDescription || '-'}
-            />
-          </ListItem>
-
-          {!!tenderData.workDescription && (
             <ListItem>
               <ListItemText
-                primary="Work Description"
-                secondary={
-                  <RichTextEditor
-                    readOnly
-                    showRichBar={false}
-                    editorState={prepareRTEForRHF(tenderData.workDescription)}
-                  />
-                }
+                primary="Short Description"
+                secondary={tenderData?.shortDescription || '-'}
               />
             </ListItem>
-          )}
 
-          <ListItem>
-            <ListItemText primary="Start Date" secondary={tenderData.startDate} />
-          </ListItem>
+            {!!tenderData.workDescription && (
+              <ListItem>
+                <ListItemText
+                  primary="Work Description"
+                  secondary={
+                    <RichTextEditor
+                      readOnly
+                      showRichBar={false}
+                      editorState={prepareRTEForRHF(tenderData.workDescription)}
+                    />
+                  }
+                />
+              </ListItem>
+            )}
 
-          <ListItem>
-            <ListItemText primary="End Date" secondary={tenderData.endDate} />
-          </ListItem>
+            <ListItem>
+              <ListItemText primary="Start Date" secondary={tenderData.startDate} />
+            </ListItem>
 
-          {/* <ListItem>
+            <ListItem>
+              <ListItemText primary="End Date" secondary={tenderData.endDate} />
+            </ListItem>
+
+            {/* <ListItem>
             <ListItemText primary="Address" secondary={tenderData.address} />
           </ListItem> */}
 
-          {tenderData?.invitedSuppliers?.length > 0 && (
-            <ListItem>
-              <ListItemText primary="Invited Suppliers" />
-              <List>
-                {tenderData?.invitedSuppliers?.map((supplier, index) => (
-                  <ListItem key={index}>
-                    <ListItemText secondary={supplier} />
-                  </ListItem>
-                ))}
-              </List>
-            </ListItem>
-          )}
+            {tenderData?.invitedSuppliers?.length > 0 && (
+              <ListItem>
+                <ListItemText primary="Invited Suppliers" />
+                <List>
+                  {tenderData?.invitedSuppliers?.map((supplier, index) => (
+                    <ListItem key={index}>
+                      <ListItemText secondary={supplier} />
+                    </ListItem>
+                  ))}
+                </List>
+              </ListItem>
+            )}
 
-          {/* <ListItem>
+            {/* <ListItem>
             <ListItemText primary="Uploaded Attachments" />
             <List>
               {tenderData?.uploadedFiles?.map((attachment, index) => (
@@ -130,8 +156,9 @@ export function TenderDrawer(props: TenderDrawerProps) {
               ))}
             </List>
           </ListItem> */}
-        </List>
-      </Box>
+          </List>
+        </Box>
+      </Stack>
     </SwipeableDrawer>
   )
 }

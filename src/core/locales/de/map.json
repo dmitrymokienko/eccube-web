@@ -130,6 +130,7 @@
     "long-password": "Passwort ist zu lang",
     "invalid-credentials": "Ungültige Anmeldeinformationen",
     "upload-file-max-count": "Hochladen nicht möglich: Die maximale Anzahl von Dateien ist erreicht",
+    "upload-file-already-exists": "Download nicht möglich: Eine Datei mit demselben Namen wurde bereits heruntergeladen.",
     "upload-file-max-size": "Hochladen nicht möglich: Die maximale Dateigröße ist erreicht ({{n}}Mb)"
   },
   "common": {

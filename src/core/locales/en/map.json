@@ -129,6 +129,7 @@
     "long-password": "Password is too long",
     "invalid-credentials": "Email or password is incorrect",
     "upload-file-max-count": "Unable to upload: the maximum number of files is reached",
+    "upload-file-already-exists": "Unable to upload: the file with the same name already exists",
     "upload-file-max-size": "Unable to upload: the maximum file size is reached ({{n}}Mb)"
   },
   "common": {
