@@ -1,6 +1,5 @@
 import Stack from '@mui/material/Stack'
 import { ISidebarDrawerProps, SidebarDrawer } from './SidebarDrawer'
-import EccubeLogo from '../../../../assets/icons/eccube-logo-dark.svg?react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import HomeIcon from '@mui/icons-material/Home'
 import PaymentIcon from '@mui/icons-material/Payment'
@@ -15,6 +14,7 @@ import { createEvent, createStore } from 'effector'
 import { useUnit } from 'effector-react'
 import { useEffect } from 'react'
 import { Z_INDEX } from '@/shared/libs/constants/style'
+import { SIDEBAR_LAYOUT_NAV_HEIGHT } from '../lib/constants'
 
 const MENU_ITEMS = [
   {
@@ -61,10 +61,7 @@ export function Sidebar(props: ISidebarDrawerProps) {
       sx={{ zIndex: Z_INDEX.SlightlySoaring }}
       {...props}
     >
-      <Stack spacing={8} pt={1} pb={3} px={1}>
-        {/* TODO: link */}
-        <EccubeLogo height="56px" />
-
+      <Stack spacing={8} pt={`calc(${SIDEBAR_LAYOUT_NAV_HEIGHT}px + 80px)`} pb={3} px={1}>
         <List>
           {MENU_ITEMS.map((v, i) => {
             const Icon = v.icon

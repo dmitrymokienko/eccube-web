@@ -15,6 +15,7 @@ import { LogoutButton } from '../../components/Button/LogoutButton'
 import { ISidebarDrawerProps } from './components/SidebarDrawer'
 import { omit } from '@/shared/libs/utils/utilities'
 import { Z_INDEX } from '@/shared/libs/constants/style'
+import EccubeLogo from '@/shared/assets/icons/eccube-logo-dark.svg?react'
 
 export interface ISidebarLayoutProps {
   children: ReactNode
@@ -77,24 +78,37 @@ export function SidebarLayout(props: ISidebarLayoutProps) {
       <AppBar
         component="nav"
         position="fixed"
-        elevation={0}
+        elevation={1}
         sx={{
-          zIndex: Z_INDEX.SlightlySoaring,
+          zIndex: Z_INDEX.Soaring,
           backgroundColor: theme.palette.common.white,
-          width: `calc(100% - ${SIDEBAR_LAYOUT_DRAWER_WIDTH}px)`,
-          ml: `${SIDEBAR_LAYOUT_DRAWER_WIDTH}px`,
+          width: '100%',
           ...(NavProps?.sx || {}),
         }}
         {...omit(['sx'], NavProps)}
       >
         <Toolbar sx={{ height: `${SIDEBAR_LAYOUT_NAV_HEIGHT}px` }}>
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              width: `calc(${SIDEBAR_LAYOUT_DRAWER_WIDTH}px - 24px)`,
+            }}
+          >
+            <EccubeLogo height="56px" />
+          </Box>
+
           {Nav}
+
           <Box sx={{ flexGrow: 1 }} />
+
           {showLangSwitcher && (
             <Box px={3}>
               <LangSwitcher />
             </Box>
           )}
+
           <LogoutButton />
         </Toolbar>
       </AppBar>

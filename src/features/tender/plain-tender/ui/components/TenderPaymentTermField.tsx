@@ -37,15 +37,15 @@ export function TenderPaymentTermField(props: ITenderPaymentTermFieldProps) {
       <Controller
         name={name}
         control={control}
-        render={({ field: { value, onChange } }) => {
+        render={({ field }) => {
           return (
             <Box>
-              <FormControl required error={isSubmitted && !value}>
+              <FormControl required error={isSubmitted && !field.value}>
                 <FormLabel component="legend" id={ID} sx={{ pb: 1 }}>
                   {t('field.create-tender.preferred-payment-terms')}
                 </FormLabel>
 
-                <RadioGroup row value={value} onChange={onChange} aria-labelledby={ID}>
+                <RadioGroup {...field} row aria-labelledby={ID}>
                   {VALUES.map((n) => (
                     <FormControlLabel
                       key={n}
@@ -77,20 +77,19 @@ export function TenderPaymentTermField(props: ITenderPaymentTermFieldProps) {
         }}
       />
 
-      {visibleAdditionalField && (
-        <TextField
-          type="number"
-          inputProps={{ min: 1 }}
-          defaultValue={VALUES[VALUES.length - 1]}
-          label={t('field.create-tender.days')}
-          placeholder={t('placeholder.create-tender.days')}
-          onChange={(e) => {
-            setValue(name, e.target.value)
-          }}
-          error={!!errors?.[name]}
-          helperText={(errors?.[name]?.message as string) ?? ''}
-        />
-      )}
+      <TextField
+        type="number"
+        inputProps={{ min: 1 }}
+        defaultValue={VALUES[VALUES.length - 1]}
+        label={t('field.create-tender.days')}
+        placeholder={t('placeholder.create-tender.days')}
+        onChange={(e) => {
+          setValue(name, e.target.value)
+        }}
+        error={!!errors?.[name]}
+        helperText={(errors?.[name]?.message as string) ?? ''}
+        sx={{ display: visibleAdditionalField ? 'block' : 'none' }}
+      />
     </>
   )
 }

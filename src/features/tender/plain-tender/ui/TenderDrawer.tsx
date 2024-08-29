@@ -16,10 +16,12 @@ import {
   Delete as DeleteIcon,
   //   AttachFile as AttachFileIcon,
 } from '@mui/icons-material'
+import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace'
 import { ITender } from '@/entities/tender/model/interfaces'
 import { RichTextEditor } from '@/shared/ui/components/RichTextEditor'
 import { prepareRTEForRHF } from '@/shared/ui/components/RichTextEditor/utils'
 import EccubeLogo from '@/shared/assets/icons/eccube-logo-white.svg?react'
+import { SIDEBAR_LAYOUT_NAV_HEIGHT } from '@/shared/ui/layouts/SidebarLayout/lib/constants'
 
 interface TenderDrawerProps {
   open: boolean
@@ -42,7 +44,6 @@ export function TenderDrawer(props: TenderDrawerProps) {
     console.log('Delete Tender')
   }
 
-  if (!tenderData) return null
   return (
     <SwipeableDrawer
       anchor="left"
@@ -54,6 +55,7 @@ export function TenderDrawer(props: TenderDrawerProps) {
       }}
     >
       {/* decor */}
+      {/* TODO: position fixed */}
       <Stack direction="row" spacing={0}>
         {isCompact ? (
           <span />
@@ -62,7 +64,7 @@ export function TenderDrawer(props: TenderDrawerProps) {
             sx={{
               width: '400px',
               height: '100vh',
-              backgroundColor: '#1c1c1c',
+              backgroundColor: '#1c1c1c', // TODO: to custom palette
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
@@ -74,11 +76,21 @@ export function TenderDrawer(props: TenderDrawerProps) {
         )}
 
         {/* data */}
-        <Box sx={{ width: '100%', px: 4, py: 3 }}>
-          <Stack direction="row" justifyContent="space-between" alignItems="center" mb={2}>
+
+        <Box sx={{ width: '100%', px: 4 }}>
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+            height={SIDEBAR_LAYOUT_NAV_HEIGHT}
+          >
             <Typography variant="h5">Tender Details</Typography>
 
             <Stack direction="row" spacing={1}>
+              <IconButton onClick={onClose} color="default">
+                <KeyboardBackspaceIcon />
+              </IconButton>
+
               <IconButton onClick={onEdit} color="primary">
                 <EditIcon />
               </IconButton>
@@ -91,59 +103,62 @@ export function TenderDrawer(props: TenderDrawerProps) {
 
           <Divider />
 
-          <List>
-            <ListItem>
-              <ListItemText primary="Title" secondary={tenderData?.title || '-'} />
-            </ListItem>
+          {!!tenderData && (
+            <List sx={{ '& > li': { px: 0 } }}>
+              <ListItem>
+                <ListItemText primary="Title" secondary={tenderData?.title || '-'} />
+              </ListItem>
 
-            <ListItem>
-              <ListItemText
-                primary="Short Description"
-                secondary={tenderData?.shortDescription || '-'}
-              />
-            </ListItem>
-
-            {!!tenderData.workDescription && (
               <ListItem>
                 <ListItemText
-                  primary="Work Description"
-                  secondary={
-                    <RichTextEditor
-                      readOnly
-                      showRichBar={false}
-                      editorState={prepareRTEForRHF(tenderData.workDescription)}
-                    />
-                  }
+                  primary="Short Description"
+                  secondary={tenderData?.shortDescription || '-'}
                 />
               </ListItem>
-            )}
 
-            <ListItem>
-              <ListItemText primary="Start Date" secondary={tenderData.startDate} />
-            </ListItem>
+              {!!tenderData.workDescription && (
+                <ListItem>
+                  <ListItemText
+                    primary="Work Description"
+                    secondary={
+                      <Box sx={{ mt: 1 }}>
+                        <RichTextEditor
+                          readOnly
+                          showRichBar={false}
+                          editorState={prepareRTEForRHF(tenderData.workDescription)}
+                        />
+                      </Box>
+                    }
+                  />
+                </ListItem>
+              )}
 
-            <ListItem>
-              <ListItemText primary="End Date" secondary={tenderData.endDate} />
-            </ListItem>
+              <ListItem>
+                <ListItemText primary="Start Date" secondary={tenderData.startDate} />
+              </ListItem>
 
-            {/* <ListItem>
+              <ListItem>
+                <ListItemText primary="End Date" secondary={tenderData.endDate} />
+              </ListItem>
+
+              {/* <ListItem>
             <ListItemText primary="Address" secondary={tenderData.address} />
           </ListItem> */}
 
-            {tenderData?.invitedSuppliers?.length > 0 && (
-              <ListItem>
-                <ListItemText primary="Invited Suppliers" />
-                <List>
-                  {tenderData?.invitedSuppliers?.map((supplier, index) => (
-                    <ListItem key={index}>
-                      <ListItemText secondary={supplier} />
-                    </ListItem>
-                  ))}
-                </List>
-              </ListItem>
-            )}
+              {tenderData?.invitedSuppliers?.length > 0 && (
+                <ListItem>
+                  <ListItemText primary="Invited Suppliers" />
+                  <List>
+                    {tenderData?.invitedSuppliers?.map((supplier, index) => (
+                      <ListItem key={index}>
+                        <ListItemText secondary={supplier} />
+                      </ListItem>
+                    ))}
+                  </List>
+                </ListItem>
+              )}
 
-            {/* <ListItem>
+              {/* <ListItem>
             <ListItemText primary="Uploaded Attachments" />
             <List>
               {tenderData?.uploadedFiles?.map((attachment, index) => (
@@ -156,7 +171,8 @@ export function TenderDrawer(props: TenderDrawerProps) {
               ))}
             </List>
           </ListItem> */}
-          </List>
+            </List>
+          )}
         </Box>
       </Stack>
     </SwipeableDrawer>
