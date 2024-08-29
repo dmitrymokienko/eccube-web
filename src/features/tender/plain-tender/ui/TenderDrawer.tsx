@@ -12,11 +12,13 @@ import List from '@mui/material/List'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace'
+
 import { ITender } from '@/entities/tender/model/interfaces'
 import { RichTextEditor } from '@/shared/ui/components/RichTextEditor'
 import { prepareRTEForRHF } from '@/shared/ui/components/RichTextEditor/utils'
 import EccubeLogo from '@/shared/assets/icons/eccube-logo-white.svg?react'
 import { SIDEBAR_LAYOUT_NAV_HEIGHT } from '@/shared/ui/layouts/SidebarLayout/lib/constants'
+import { formatDate } from '@/shared/libs/utils/datetime'
 
 interface TenderDrawerProps {
   open: boolean
@@ -128,11 +130,11 @@ export function TenderDrawer(props: TenderDrawerProps) {
               )}
 
               <ListItem>
-                <ListItemText primary="Start Date" secondary={tenderData.startDate} />
+                <ListItemText primary="Start Date" secondary={formatDate(tenderData.startPeriod)} />
               </ListItem>
 
               <ListItem>
-                <ListItemText primary="End Date" secondary={tenderData.endDate} />
+                <ListItemText primary="End Date" secondary={formatDate(tenderData.endPeriod)} />
               </ListItem>
 
               {/* <ListItem>

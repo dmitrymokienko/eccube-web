@@ -71,20 +71,30 @@ export function PlainTenderForm(props: IPlainTenderFormProps) {
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 3 }}>
         {/* TODO: disable all date before 'now()' */}
         <Controller
-          name="startDate"
+          name="startPeriod"
           control={control}
           rules={{ required: t('validation.required') }}
           render={({ field }) => (
-            <DatePicker label={t('field.create-tender.start-date')} {...field} />
+            <DatePicker
+              label={t('field.create-tender.start-date')}
+              value={field.value}
+              inputRef={field.ref}
+              onChange={(date) => field.onChange(date)}
+            />
           )}
         />
-        {/* TODO: disable all date before 'startDate' */}
+        {/* TODO: disable all date before 'startPeriod' */}
         <Controller
-          name="endDate"
+          name="endPeriod"
           control={control}
           rules={{ required: t('validation.required') }}
           render={({ field }) => (
-            <DatePicker label={t('field.create-tender.end-date')} {...field} />
+            <DatePicker
+              label={t('field.create-tender.end-date')}
+              value={field.value}
+              inputRef={field.ref}
+              onChange={(date) => field.onChange(date)}
+            />
           )}
         />
       </Box>

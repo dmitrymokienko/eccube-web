@@ -1,12 +1,13 @@
 import { RawDraftContentState } from 'draft-js'
 import { TenderPublishment } from '../constants'
+import { Nullable } from '@/shared/types/utilities'
 
 export interface ITender {
   id: string
   title: string
   shortDescription: string
-  startDate: string
-  endDate: string
+  startPeriod: Nullable<string> // timestamp
+  endPeriod: Nullable<string> // timestamp
   street: string
   houseNumber: string
   addressSuffix: string
