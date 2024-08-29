@@ -146,6 +146,14 @@
     "search": "Suche",
     "invitation": "Einladung"
   },
+   "address": {
+    "address": "Adresse",
+    "street": "Straße",
+    "address-suffix": "Adresszusatz",
+    "city": "Stadt",
+    "postal-code": "Postleitzahl",
+    "country": "Land"
+  },
   "tender": {
     "label": {
       "new-tender": "Neue Ausschreibung",

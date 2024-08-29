@@ -145,6 +145,14 @@
     "search": "Search",
     "invitation": "Invitation"
   },
+  "address": {
+    "address": "Address",
+    "street": "Street",
+    "address-suffix": "Address suffix",
+    "city": "City",
+    "postal-code": "Postal code",
+    "country": "Country"
+  },
   "tender": {
     "label": {
       "new-tender": "New tender",
