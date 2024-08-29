@@ -31,7 +31,7 @@ export interface ISeparateLayoutProps {
   showLangSwitcher?: boolean
 }
 
-export const SEPARATE_LAYOUT_SIDEBAR_WIDTH = 360
+export const SEPARATE_LAYOUT_SIDEBAR_WIDTH = 320
 export const SEPARATE_LAYOUT_HEADER_HEIGHT = 72
 export const SEPARATE_LAYOUT_CONTENT_WIDTH = 500
 export const SEPARATE_LAYOUT_COMPACT_BREAKPOINT = 1280
