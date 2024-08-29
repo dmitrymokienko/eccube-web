@@ -2,7 +2,15 @@ import { ITender } from '@/entities/tender/model/interfaces'
 import { Nullable } from '@/shared/types/utilities'
 import { EditorState } from 'draft-js'
 
-export type CreatePlainTenderProcessForm = Omit<ITender, 'id' | 'workDescription' | 'startPeriod' | 'endPeriod'> & {
+export type CreatePlainTenderProcessForm = Omit<
+  ITender,
+  'id' | 'workDescription' | 'startPeriod' | 'endPeriod' | 'address'
+> & {
+  city: string
+  postalCode: string
+  street: string
+  addressSuffix: string
+  country: string
   startPeriod: Nullable<Date>
   endPeriod: Nullable<Date>
   workDescription: EditorState

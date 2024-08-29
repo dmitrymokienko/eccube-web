@@ -12,7 +12,7 @@ export function prepareCreateTenderDtoMapper(data: CreatePlainTenderProcessForm)
     city = '',
     workDescription,
     paymentTerm,
-    publishment = [],
+    publishment,
     startPeriod,
     endPeriod,
     ...rest
@@ -30,7 +30,7 @@ export function prepareCreateTenderDtoMapper(data: CreatePlainTenderProcessForm)
     },
     startPeriod: convertToTimestamp(startPeriod),
     endPeriod: convertToTimestamp(endPeriod),
-    publishment,
+    publishment: publishment || [],
     paymentTerm: paymentTerm ? parseInt(paymentTerm, 10) : undefined,
     workDescription: prepareRTEForSubmit(workDescription),
   }
