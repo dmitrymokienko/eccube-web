@@ -5,9 +5,9 @@ import { format, parseISO } from "date-fns"
 export const GERMANY_DATE_FORMAT = 'dd.MM.yyyy'
 
 
-export function convertToTimestamp(date: Nullable<Date>): Nullable<string> {
+export function convertToTimestamp(date: Nullable<Date>): Nullable<number> {
   if (!date) return undefined
-  return format(date, `yyyy-MM-dd'T'HH:mm:ssXXX`);
+  return date.getTime()
 }
 
 export function convertToDate(date: Nullable<string>): Nullable<Date> {
