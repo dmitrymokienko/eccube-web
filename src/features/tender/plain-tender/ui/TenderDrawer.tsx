@@ -1,21 +1,16 @@
-import {
-  List,
-  ListItem,
-  ListItemText,
-  IconButton,
-  Typography,
-  Divider,
-  Box,
-  Stack,
-  SwipeableDrawer,
-  useMediaQuery,
-  Theme,
-} from '@mui/material'
-import {
-  Edit as EditIcon,
-  Delete as DeleteIcon,
-  //   AttachFile as AttachFileIcon,
-} from '@mui/icons-material'
+import Drawer from '@mui/material/Drawer' // SwipeableDrawer
+import useMediaQuery from '@mui/material/useMediaQuery'
+import { Theme } from '@mui/material/styles'
+import Stack from '@mui/material/Stack'
+import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
+import IconButton from '@mui/material/IconButton'
+import Divider from '@mui/material/Divider'
+import ListItem from '@mui/material/ListItem'
+import ListItemText from '@mui/material/ListItemText'
+import List from '@mui/material/List'
+import EditIcon from '@mui/icons-material/Edit'
+import DeleteIcon from '@mui/icons-material/Delete'
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace'
 import { ITender } from '@/entities/tender/model/interfaces'
 import { RichTextEditor } from '@/shared/ui/components/RichTextEditor'
@@ -45,11 +40,10 @@ export function TenderDrawer(props: TenderDrawerProps) {
   }
 
   return (
-    <SwipeableDrawer
+    <Drawer
       anchor="left"
       open={open}
       onClose={onClose}
-      onOpen={() => {}}
       PaperProps={{
         sx: { width: '100%', maxWidth: isCompact ? '800px' : '1200px' },
       }}
@@ -175,6 +169,6 @@ export function TenderDrawer(props: TenderDrawerProps) {
           )}
         </Box>
       </Stack>
-    </SwipeableDrawer>
+    </Drawer>
   )
 }
