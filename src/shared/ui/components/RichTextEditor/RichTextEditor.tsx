@@ -210,6 +210,7 @@ export const RichTextEditor = (props: RichTextEditorProps) => {
         color={error ? theme.palette.error.main : theme.palette.text.secondary}
         sx={{
           '&&&': {
+            display: readOnly ? 'none' : 'block',
             margin: '4px 14px 0 14px',
           },
         }}

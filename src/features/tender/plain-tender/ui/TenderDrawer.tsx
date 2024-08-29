@@ -187,21 +187,49 @@ export function TenderDrawer(props: TenderDrawerProps) {
               </ListItem>
             )}
 
-            {tenderData.startPeriod && (
+            <Box
+              sx={{
+                display: 'grid',
+                alignItems: 'center',
+                gridTemplateColumns: '1fr 1fr',
+                gap: '24px',
+                '& > li': { px: 0 },
+              }}
+            >
               <ListItem>
-                <ListItemText primary="Start Date" secondary={formatDate(tenderData.startPeriod)} />
+                <ListItemText
+                  primary="Start Date"
+                  secondary={formatDate(tenderData.startPeriod) || '-'}
+                />
+              </ListItem>
+
+              <ListItem>
+                <ListItemText
+                  primary="End Date"
+                  secondary={formatDate(tenderData.endPeriod) || '-'}
+                />
+              </ListItem>
+            </Box>
+
+            {tenderData.paymentTerm && (
+              <ListItem>
+                <ListItemText primary="Payment Term" secondary={`${tenderData.paymentTerm} days`} />
               </ListItem>
             )}
 
-            {tenderData.endPeriod && (
+            {tenderData.publishment?.length > 0 && (
               <ListItem>
-                <ListItemText primary="End Date" secondary={formatDate(tenderData.endPeriod)} />
+                <ListItemText primary="Publishment" secondary={tenderData.publishment.join('; ')} />
               </ListItem>
             )}
 
             <ListItemButton
               onClick={handleAddressClick}
-              sx={(theme) => ({ backgroundColor: theme.palette.grey[300], borderRadius: '4px' })}
+              sx={(theme) => ({
+                backgroundColor: theme.palette.grey[300],
+                borderRadius: '4px',
+                mt: 2,
+              })}
             >
               <ListItemText primary={t('address.address')} />
               {addressOpen ? <ExpandLess /> : <ExpandMore />}
