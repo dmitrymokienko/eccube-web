@@ -216,31 +216,31 @@ export function TenderDrawer(props: TenderDrawerProps) {
                 <ListItem sx={{ pl: 4 }}>
                   <ListItemText
                     primary={t('address.street')}
-                    secondary={tenderData?.addressStreet || '-'}
+                    secondary={tenderData?.address?.street || '-'}
                   />
                 </ListItem>
                 <ListItem sx={{ pl: 4 }}>
                   <ListItemText
                     primary={t('address.city')}
-                    secondary={tenderData?.addressCity || '-'}
+                    secondary={tenderData?.address?.city || '-'}
                   />
                 </ListItem>
                 <ListItem sx={{ pl: 4 }}>
                   <ListItemText
                     primary={t('address.address-suffix')}
-                    secondary={tenderData?.addressSuffix || '-'}
+                    secondary={tenderData?.address?.suffix || '-'}
                   />
                 </ListItem>
                 <ListItem sx={{ pl: 4 }}>
                   <ListItemText
                     primary={t('address.postal-code')}
-                    secondary={tenderData?.addressPostalCode || '-'}
+                    secondary={tenderData?.address?.postalCode || '-'}
                   />
                 </ListItem>
                 <ListItem sx={{ pl: 4 }}>
                   <ListItemText
                     primary={t('address.country')}
-                    secondary={mapCountryCodeToName(tenderData?.addressCountry as Locale)}
+                    secondary={mapCountryCodeToName(tenderData?.address?.country as Locale)}
                   />
                 </ListItem>
               </List>

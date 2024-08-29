@@ -11,12 +11,14 @@ export interface ITender {
   startPeriod: Nullable<string> // timestamp
   endPeriod: Nullable<string> // timestamp
 
-  addressStreet: string
-  addressHouseNumber: string
-  addressSuffix: string
-  addressPostalCode: string
-  addressCity: string
-  addressCountry: string
+  address: {
+    street: string
+    houseNumber: string
+    suffix: string
+    postalCode: string
+    city: string
+    country: string
+  }
 
   workDescription: RawDraftContentState
 
@@ -24,9 +26,9 @@ export interface ITender {
   publishment: TenderPublishment[]
 
   invitedSuppliers: string[]
-  
+
   uploadedFiles?: File[]
-  
+
   status: string
 
   invitedTeamMembers?: string[] // EXCLUDE FROM MVP
