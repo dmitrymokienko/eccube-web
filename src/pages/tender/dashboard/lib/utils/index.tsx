@@ -15,15 +15,21 @@ export function prepareTenderTable(rows: ITender[]): {
         sx: { width: '30px' },
       },
       {
+        id: 'title',
+        title: 'Title',
+        align: 'left',
+      },
+      {
         id: 'shortDescription',
         title: 'Short description',
         align: 'left',
+        sx: { width: '40%' },
       },
       {
         id: 'status',
         title: 'Status',
         align: 'right',
-        sx: { width: '40%' },
+        sx: { width: '80px' },
         format: (value) => (
           <Typography
             variant="body1"
@@ -40,6 +46,7 @@ export function prepareTenderTable(rows: ITender[]): {
     rows: (rows || []).map((row, index) => ({
       id: row.id,
       number: index + 1,
+      title: row.title || '-',
       shortDescription: row.shortDescription || '-',
       status: row.status,
     })),

@@ -14,6 +14,7 @@ export const UploadFilesButton = forwardRef<
     <Button
       component="label"
       role={undefined}
+      aria-label="upload"
       variant="outlined"
       tabIndex={-1}
       startIcon={<FileUploadIcon />}
@@ -42,3 +43,4 @@ const HiddenInput = styled('input')({
   overflow: 'hidden',
   clipPath: 'inset(50%)',
 })
+// display: 'none',

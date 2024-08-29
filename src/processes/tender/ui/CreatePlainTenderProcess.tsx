@@ -33,6 +33,11 @@ export function CreatePlainTenderProcess(props: ICreatePlainTenderProcessProps) 
 
   const form = useForm<CreatePlainTenderProcessForm>({
     defaultValues: {
+      startPeriod: null,
+      endPeriod: null,
+      // @ts-expect-error RHF set default value
+      publishment: '',
+      paymentTerm: '', // important to have default value for RadioGroup
       country: t('common.Germany'),
     },
   })

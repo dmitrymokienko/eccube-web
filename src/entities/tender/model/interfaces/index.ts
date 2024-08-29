@@ -1,24 +1,34 @@
 import { RawDraftContentState } from 'draft-js'
 import { TenderPublishment } from '../constants'
+import { Nullable } from '@/shared/types/utilities'
 
 export interface ITender {
   id: string
+
   title: string
   shortDescription: string
-  startDate: string
-  endDate: string
-  street: string
-  houseNumber: string
+
+  startPeriod: Nullable<string> // timestamp
+  endPeriod: Nullable<string> // timestamp
+
+  addressStreet: string
+  addressHouseNumber: string
   addressSuffix: string
-  postalCode: string
-  city: string
-  country: string
+  addressPostalCode: string
+  addressCity: string
+  addressCountry: string
+
   workDescription: RawDraftContentState
+
   paymentTerm: string // number
   publishment: TenderPublishment[]
+
   invitedSuppliers: string[]
-  status: string
+  
   uploadedFiles?: File[]
+  
+  status: string
+
   invitedTeamMembers?: string[] // EXCLUDE FROM MVP
   fields?: Record<string, string> // EXCLUDE FROM MVP
 }
