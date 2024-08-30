@@ -32,6 +32,7 @@ import { Z_INDEX } from '@/shared/libs/constants/style'
 import { tenderModel } from '../model'
 import { useNavigate } from 'react-router-dom'
 
+const DRAWER_WIDTH = 800
 const BANNER_WIDTH = 320
 
 interface TenderDrawerProps {
@@ -83,7 +84,7 @@ export function TenderDrawer(props: TenderDrawerProps) {
       PaperProps={{
         sx: {
           width: '100%',
-          maxWidth: isCompact ? '800px' : `calc(800px + ${BANNER_WIDTH}px)`,
+          maxWidth: isCompact ? `${DRAWER_WIDTH}px` : `calc(${DRAWER_WIDTH}px + ${BANNER_WIDTH}px)`,
           zIndex: Z_INDEX.Drawer,
         },
       }}
