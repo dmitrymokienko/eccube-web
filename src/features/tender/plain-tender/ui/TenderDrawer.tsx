@@ -29,6 +29,8 @@ import { formatDate } from '@/shared/libs/utils/datetime'
 import { mapCountryCodeToName } from '@/shared/libs/mappers/countries'
 import { Locale } from '@/entities/locale/types'
 import { Z_INDEX } from '@/shared/libs/constants/style'
+import { tenderModel } from '../model'
+import { useNavigate } from 'react-router-dom'
 
 const BANNER_WIDTH = 320
 
@@ -41,18 +43,26 @@ interface TenderDrawerProps {
 export function TenderDrawer(props: TenderDrawerProps) {
   const { open, onClose, tenderData } = props
 
+  const navigate = useNavigate()
+
   const isCompact = useMediaQuery<Theme>((theme) => theme.breakpoints.down(1280))
 
   const [addressOpen, setAddressOpen] = useState(false)
 
-  // TODO Implement onEdit functions
   const onEdit = () => {
-    console.log('Edit Tender')
+    if (!tenderData) throw new Error('No tender found')
+    // TODO: implement
+    navigate('')
   }
 
-  // TODO Implement onDelete functions
-  const onDelete = () => {
-    console.log('Delete Tender')
+  const onDelete = async () => {
+    if (!tenderData) throw new Error('No tender found')
+    try {
+      await tenderModel.deleteByIdFx(tenderData.id)
+      onClose()
+    } catch (error) {
+      console.error('Failed to delete tender', error)
+    }
   }
 
   const handleClose = () => {
@@ -70,7 +80,11 @@ export function TenderDrawer(props: TenderDrawerProps) {
       open={open}
       onClose={handleClose}
       PaperProps={{
-        sx: { width: '100%', maxWidth: isCompact ? '800px' : `calc(800px + ${BANNER_WIDTH}px)` },
+        sx: {
+          width: '100%',
+          maxWidth: isCompact ? '800px' : `calc(800px + ${BANNER_WIDTH}px)`,
+          zIndex: Z_INDEX.Drawer,
+        },
       }}
     >
       <Box

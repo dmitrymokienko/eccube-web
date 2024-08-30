@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 import { Table } from '@/shared/ui/components/Table/Table'
 import { useEffect, MouseEvent } from 'react'
 import { prepareTenderTable } from '../lib/utils'
-import { tender } from '@/features/tender/plain-tender/model'
+import { tenderModel } from '@/features/tender/plain-tender/model'
 import { useUnit } from 'effector-react'
 import { currentUser } from '@/entities/currentUser/model'
 import { TenderDrawer } from '@/features/tender/plain-tender/ui/TenderDrawer'
@@ -17,12 +17,12 @@ export function TendersPage() {
   const [params, setParams] = useSearchParams()
 
   const user = useUnit(currentUser.$info)
-  const tendersList = useUnit(tender.$list)
-  const isLoading = useUnit(tender.$isLoading)
+  const tendersList = useUnit(tenderModel.$list)
+  const isLoading = useUnit(tenderModel.$isLoading)
 
   useEffect(() => {
     if (!user) return
-    tender.fetchTenderListFx({ createdById: user.id })
+    tenderModel.fetchTenderListFx({ createdById: user.id })
   }, [user])
 
   const onCloseDrawer = () => {
