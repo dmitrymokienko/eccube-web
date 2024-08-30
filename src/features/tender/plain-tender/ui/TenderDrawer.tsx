@@ -51,6 +51,7 @@ export function TenderDrawer(props: TenderDrawerProps) {
 
   const onEdit = () => {
     if (!tenderData) throw new Error('No tender found')
+    onClose()
     // TODO: implement
     navigate('')
   }
@@ -150,13 +151,13 @@ export function TenderDrawer(props: TenderDrawerProps) {
               </Tooltip>
 
               <Tooltip title="Edit details">
-                <IconButton onClick={onEdit} color="primary">
+                <IconButton onClick={onEdit} color="primary" disabled={!tenderData}>
                   <EditIcon />
                 </IconButton>
               </Tooltip>
 
               <Tooltip title="Delete">
-                <IconButton onClick={onDelete} color="error">
+                <IconButton onClick={onDelete} color="error" disabled={!tenderData}>
                   <DeleteIcon />
                 </IconButton>
               </Tooltip>
@@ -166,7 +167,7 @@ export function TenderDrawer(props: TenderDrawerProps) {
           <Divider />
         </Box>
 
-        {/* info */}
+        {/* info list */}
         {!!tenderData && (
           <List sx={{ '& > li': { px: 0 } }}>
             <ListItem>
