@@ -2,7 +2,7 @@ import { ITender } from '@/entities/tender/model/interfaces'
 import { Nullable } from '@/shared/types/utilities'
 import { EditorState } from 'draft-js'
 
-export type CreatePlainTenderProcessForm = Omit<
+export type PlainTenderProcessForm = Omit<
   ITender,
   'id' | 'workDescription' | 'startPeriod' | 'endPeriod' | 'address'
 > & {

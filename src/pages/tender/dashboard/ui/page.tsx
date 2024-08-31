@@ -56,11 +56,7 @@ export function TendersPage() {
         </Button>
       </Box>
 
-      <TenderDrawer
-        open={isDrawerOpen}
-        onClose={onCloseDrawer}
-        tenderData={tendersList?.find((tender) => tender.id === id)}
-      />
+      <TenderDrawer id={id} open={isDrawerOpen} onClose={onCloseDrawer} />
 
       <Table {...tableData} onRowClick={onRowClick} />
     </SidebarLayout>

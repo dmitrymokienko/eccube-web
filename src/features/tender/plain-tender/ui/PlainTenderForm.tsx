@@ -1,5 +1,5 @@
 import { Controller, useFormContext } from 'react-hook-form'
-import { CreatePlainTenderProcessForm } from '@/features/tender/plain-tender/model/interfaces'
+import { PlainTenderProcessForm } from '@/features/tender/plain-tender/model/interfaces'
 import { useTranslation } from 'react-i18next'
 import Stack from '@mui/material/Stack'
 import TextField from '@mui/material/TextField'
@@ -22,7 +22,7 @@ export function PlainTenderForm(props: IPlainTenderFormProps) {
 
   const { t } = useTranslation()
 
-  const form = useFormContext<CreatePlainTenderProcessForm>()
+  const form = useFormContext<PlainTenderProcessForm>()
 
   const {
     register,

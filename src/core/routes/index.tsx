@@ -16,9 +16,12 @@ import { ProtectedRoute } from './components/ProtectedRoute'
 import { PaymentsPage } from '@/pages/payments/ui/page'
 import { CompanyProfileKybPage } from '@/pages/kyb/profile/ui/page'
 import { PlainTenderCreationPage } from '@/pages/tender/creation/plain-tender/creation-form/ui/page'
-import { PlainTenderEditionPage } from '@/pages/tender/edition/plain-tender/ui/page'
+import { PlainTenderEditionPage } from '@/pages/tender/edition/plain-tender/ui/edition-form/page'
 import { PlainTenderSuccessCreationPage } from '@/pages/tender/creation/plain-tender/creation-success/ui/page'
 import { PlainTenderDraftCreationPage } from '@/pages/tender/creation/plain-tender/draft-creation/ui/page'
+import { EditPlainTenderProcess } from '@/processes/tender/ui/EditPlainTenderProcess'
+import { PlainTenderDraftEditionPage } from '@/pages/tender/edition/plain-tender/ui/draft-edition/ui/page'
+import { PlainTenderSuccessPublishingPage } from '@/pages/tender/edition/plain-tender/ui/publishing-success/ui/page'
 
 export const router = createBrowserRouter([
   {
@@ -145,12 +148,20 @@ export const router = createBrowserRouter([
         children: [
           {
             path: 'plain/:id',
-            element: <CreatePlainTenderProcess />, // TODO: Implement EditPlainTenderProcess
+            element: <EditPlainTenderProcess />,
             children: [
               {
                 index: true,
                 // path: 'step_1',
                 element: <PlainTenderEditionPage />,
+              },
+              {
+                path: 'success',
+                element: <PlainTenderSuccessPublishingPage />,
+              },
+              {
+                path: 'draft',
+                element: <PlainTenderDraftEditionPage />,
               },
             ],
           },

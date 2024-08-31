@@ -56,7 +56,9 @@
     "go-to-app": "Gehen Sie zur Anwendung",
     "goBack": "Zurück",
     "upload-file": "Datei hochladen",
-    "cancel": "Stornieren"
+    "cancel": "Stornieren",
+    "publish": "Veröffentlichen",
+    "update": "Aktualisieren"
   },
   "field": {
     "email": "E-Mail",
@@ -207,6 +209,10 @@
       "delete-tender": {
         "title": "Ausschreibung löschen",
         "content": "Sind Sie sicher, dass Sie diese Ausschreibung löschen möchten?"
+      },
+      "confirm-publish-tender": {
+        "title": "Ausschreibung veröffentlichen",
+        "content": "Sind Sie sicher, dass Sie diese Ausschreibung veröffentlichen möchten?"
       }
     }
   }

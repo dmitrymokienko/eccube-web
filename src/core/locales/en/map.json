@@ -56,7 +56,9 @@
     "go-to-app": "Go to the app",
     "goBack": "Go back",
     "upload-file": "Upload file",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "publish": "Publish",
+    "update": "Update"
   },
   "field": {
     "email": "Email",
@@ -206,6 +208,10 @@
       "delete-tender": {
         "title": "Delete Tender",
         "content": "Are you sure you want to delete this tender?"
+      },
+      "confirm-publish-tender": {
+        "title": "Publish Tender",
+        "content": "Are you sure you want to publish this tender? Note that you won't be able to edit it after publishing."
       }
     }
   }

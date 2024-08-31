@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useUnit } from 'effector-react'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import NiceModal from '@ebay/nice-modal-react'
@@ -22,7 +23,6 @@ import Tooltip from '@mui/material/Tooltip'
 import Collapse from '@mui/material/Collapse'
 import ListItemButton from '@mui/material/ListItemButton'
 
-import { ITender } from '@/entities/tender/model/interfaces'
 import { RichTextEditor } from '@/shared/ui/components/RichTextEditor'
 import { prepareRTEForRHF } from '@/shared/ui/components/RichTextEditor/utils'
 import EccubeLogo from '@/shared/assets/icons/eccube-logo-white.svg?react'
@@ -33,18 +33,19 @@ import { Locale } from '@/entities/locale/types'
 import { Z_INDEX } from '@/shared/libs/constants/style'
 import { tenderModel } from '../model'
 import { ConfirmationDialog } from '@/shared/ui/components/Dialogs/ConfirmationDialog'
+import { Nullable } from '@/shared/types/utilities'
 
 const DRAWER_WIDTH = 800
 const BANNER_WIDTH = 320
 
 interface TenderDrawerProps {
+  id: Nullable<string>
   open: boolean
   onClose: () => void
-  tenderData?: ITender
 }
 
 export function TenderDrawer(props: TenderDrawerProps) {
-  const { open, onClose, tenderData } = props
+  const { id, open, onClose } = props
 
   const { t } = useTranslation()
   const navigate = useNavigate()
@@ -53,11 +54,17 @@ export function TenderDrawer(props: TenderDrawerProps) {
 
   const [addressOpen, setAddressOpen] = useState(false)
 
+  const tenderData = useUnit(tenderModel.$currentTender)
+
+  useEffect(() => {
+    if (!id) return
+    tenderModel.fetchByIdFx(id)
+  }, [id])
+
   const onEdit = () => {
     if (!tenderData) throw new Error('No tender found')
     onClose()
-    // TODO: implement
-    navigate('')
+    navigate(`/tender/edit/plain/${tenderData.id}`)
   }
 
   const onDelete = async () => {

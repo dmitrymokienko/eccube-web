@@ -7,19 +7,21 @@ import NiceModal from '@ebay/nice-modal-react'
 import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
+import { useUnit } from 'effector-react'
 import { useState } from 'react'
 import { FieldErrors, useFormContext } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 
-export function PlainTenderCreationPage() {
+export function PlainTenderEditionPage() {
   const { t } = useTranslation()
   const navigate = useNavigate()
 
-  const [uploadedFiles, setFiles] = useState<File[]>([])
+  const tender = useUnit(tenderModel.$currentTender)
+
+  const [uploadedFiles, setFiles] = useState<File[]>(tender?.uploadedFiles || [])
 
   const form = useFormContext<PlainTenderProcessForm>()
-
   const { getValues, handleSubmit } = form
 
   const onSubmit = async (data: PlainTenderProcessForm) => {
@@ -29,7 +31,8 @@ export function PlainTenderCreationPage() {
       onConfirm: async () => {
         const payload = prepareRHFTenderToTenderDtoMapper({ ...data, uploadedFiles })
         try {
-          await tenderModel.createNewTenderFx(payload)
+          await tenderModel.updateByIdFx({ ...payload, id: tender!.id })
+          await tenderModel.withdrawalFromDraftFx(tender!.id)
           navigate('/tender/create/plain/success')
         } catch (e) {
           console.error(e)
@@ -42,7 +45,7 @@ export function PlainTenderCreationPage() {
     const data = getValues()
     const payload = prepareRHFTenderToTenderDtoMapper({ ...data, uploadedFiles })
     try {
-      await tenderModel.createNewTenderDraftFx(payload)
+      await tenderModel.updateByIdFx({ ...payload, id: tender!.id })
       navigate('/tender/create/plain/draft')
     } catch (e) {
       console.error(e)
@@ -60,12 +63,11 @@ export function PlainTenderCreationPage() {
       <Stack component="form" spacing={2} onSubmit={handleSubmit(onSubmit, onInvalid)}>
         <PlainTenderForm uploadedFiles={uploadedFiles} setFiles={setFiles} />
 
-        {/* TODO: add confirm dialogs */}
         <Stack spacing={2} sx={{ py: 4 }}>
-          <Button type="submit">{t('button.create')}</Button>
+          <Button type="submit">{t('button.publish')}</Button>
 
           <Button type="button" variant="outlined" onClick={onSaveDraft}>
-            {t('button.save-as-draft')}
+            {t('button.update')}
           </Button>
         </Stack>
       </Stack>
