@@ -1,5 +1,7 @@
 import { useState } from 'react'
-import { t } from 'i18next'
+import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
+import NiceModal from '@ebay/nice-modal-react'
 import Drawer from '@mui/material/Drawer' // SwipeableDrawer
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { Theme } from '@mui/material/styles'
@@ -30,7 +32,7 @@ import { mapCountryCodeToName } from '@/shared/libs/mappers/countries'
 import { Locale } from '@/entities/locale/types'
 import { Z_INDEX } from '@/shared/libs/constants/style'
 import { tenderModel } from '../model'
-import { useNavigate } from 'react-router-dom'
+import { ConfirmationDialog } from '@/shared/ui/components/Dialogs/ConfirmationDialog'
 
 const DRAWER_WIDTH = 800
 const BANNER_WIDTH = 320
@@ -44,6 +46,7 @@ interface TenderDrawerProps {
 export function TenderDrawer(props: TenderDrawerProps) {
   const { open, onClose, tenderData } = props
 
+  const { t } = useTranslation()
   const navigate = useNavigate()
 
   const isCompact = useMediaQuery<Theme>((theme) => theme.breakpoints.down(1280))
@@ -59,12 +62,18 @@ export function TenderDrawer(props: TenderDrawerProps) {
 
   const onDelete = async () => {
     if (!tenderData) throw new Error('No tender found')
-    try {
-      await tenderModel.deleteByIdFx(tenderData.id)
-      onClose()
-    } catch (error) {
-      console.error('Failed to delete tender', error)
-    }
+    NiceModal.show(ConfirmationDialog, {
+      title: t('modal.tender.delete-tender.title'),
+      content: t('modal.tender.delete-tender.content'),
+      onConfirm: async () => {
+        try {
+          await tenderModel.deleteByIdFx(tenderData.id)
+          onClose()
+        } catch (error) {
+          console.error('Failed to delete tender', error)
+        }
+      },
+    })
   }
 
   const handleClose = () => {
@@ -101,18 +110,18 @@ export function TenderDrawer(props: TenderDrawerProps) {
         {/* decor */}
         {!isCompact && (
           <Box
-            sx={{
+            sx={(theme) => ({
               position: 'fixed',
               left: 0,
               top: 0,
               bottom: 0,
               width: `${BANNER_WIDTH}px`,
-              backgroundColor: '#1c1c1c', // TODO: to custom palette
+              backgroundColor: theme.palette.custom.const.black,
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
               p: 2,
-            }}
+            })}
           >
             <EccubeLogo />
           </Box>
@@ -138,26 +147,26 @@ export function TenderDrawer(props: TenderDrawerProps) {
             }}
           >
             <Typography variant="h5">
-              {t('Tender Details')}
+              {t('tender-drawer.header-title')}
               {/* <Typography component="span" variant="h5" color="grey[300]">
                 {tenderData?.status && ` / ${tenderData.status}`}
               </Typography> */}
             </Typography>
 
             <Stack direction="row" spacing={1}>
-              <Tooltip title="Close">
+              <Tooltip title={t('button.goBack')}>
                 <IconButton onClick={handleClose} color="default">
                   <KeyboardBackspaceIcon />
                 </IconButton>
               </Tooltip>
 
-              <Tooltip title="Edit details">
+              <Tooltip title={t('tender-drawer.edit-details')}>
                 <IconButton onClick={onEdit} color="primary" disabled={!tenderData}>
                   <EditIcon />
                 </IconButton>
               </Tooltip>
 
-              <Tooltip title="Delete">
+              <Tooltip title={t('tender-drawer.delete-tender')}>
                 <IconButton onClick={onDelete} color="error" disabled={!tenderData}>
                   <DeleteIcon />
                 </IconButton>
@@ -172,16 +181,22 @@ export function TenderDrawer(props: TenderDrawerProps) {
         {!!tenderData && (
           <List sx={{ '& > li': { px: 0 } }}>
             <ListItem>
-              <ListItemText primary="Status" secondary={tenderData?.status || '-'} />
-            </ListItem>
-
-            <ListItem>
-              <ListItemText primary="Title" secondary={tenderData?.title || '-'} />
+              <ListItemText
+                primary={t('tender-drawer.status')}
+                secondary={tenderData?.status || '-'}
+              />
             </ListItem>
 
             <ListItem>
               <ListItemText
-                primary="Short Description"
+                primary={t('tender-drawer.title')}
+                secondary={tenderData?.title || '-'}
+              />
+            </ListItem>
+
+            <ListItem>
+              <ListItemText
+                primary={t('tender-drawer.short-description')}
                 secondary={tenderData?.shortDescription || '-'}
               />
             </ListItem>
@@ -189,7 +204,7 @@ export function TenderDrawer(props: TenderDrawerProps) {
             {!!tenderData.workDescription && (
               <ListItem>
                 <ListItemText
-                  primary="Work Description"
+                  primary={t('tender-drawer.work-description')}
                   secondary={
                     <Box sx={{ mt: 1 }}>
                       <RichTextEditor
@@ -214,14 +229,14 @@ export function TenderDrawer(props: TenderDrawerProps) {
             >
               <ListItem>
                 <ListItemText
-                  primary="Start Date"
+                  primary={t('tender-drawer.start-date')}
                   secondary={formatDate(tenderData.startPeriod) || '-'}
                 />
               </ListItem>
 
               <ListItem>
                 <ListItemText
-                  primary="End Date"
+                  primary={t('tender-drawer.end-date')}
                   secondary={formatDate(tenderData.endPeriod) || '-'}
                 />
               </ListItem>
@@ -229,13 +244,19 @@ export function TenderDrawer(props: TenderDrawerProps) {
 
             {tenderData.paymentTerm && (
               <ListItem>
-                <ListItemText primary="Payment Term" secondary={`${tenderData.paymentTerm} days`} />
+                <ListItemText
+                  primary={t('tender-drawer.payment-term')}
+                  secondary={t('field.create-tender.n_days', { n: tenderData.paymentTerm })}
+                />
               </ListItem>
             )}
 
             {tenderData.publishment?.length > 0 && (
               <ListItem>
-                <ListItemText primary="Publishment" secondary={tenderData.publishment.join('; ')} />
+                <ListItemText
+                  primary={t('tender-drawer.publishment')}
+                  secondary={tenderData.publishment.join('; ')}
+                />
               </ListItem>
             )}
 
@@ -292,7 +313,7 @@ export function TenderDrawer(props: TenderDrawerProps) {
 
             {tenderData?.invitedSuppliers?.length > 0 && (
               <ListItem>
-                <ListItemText primary="Invited Suppliers" />
+                <ListItemText primary={t('tender-drawer.invited-suppliers')} />
                 <List>
                   {tenderData?.invitedSuppliers?.map((supplier, index) => (
                     <ListItem key={index}>

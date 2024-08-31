@@ -20,5 +20,10 @@ export const muiTheme = createTheme({
   },
   palette,
   components,
-  typography,
+  typography: {
+    ...typography,
+    allVariants: {
+      color: '#1c1c1c',
+    },
+  },
 })

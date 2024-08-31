@@ -18,6 +18,7 @@ import TableFooter from '@mui/material/TableFooter'
 import TableRow from '@mui/material/TableRow'
 import { TablePaginationActions } from './components/TablePaginationActions'
 import TableContainer from '@mui/material/TableContainer'
+import { useTranslation } from 'react-i18next'
 
 const DEFAULT_ROWS_PER_PAGE = 10
 const DEFAULT_PAGE = 0
@@ -31,6 +32,8 @@ export function Table(props: ITableProps) {
     defaultPage = DEFAULT_PAGE,
     defaultRowsPerPage = DEFAULT_ROWS_PER_PAGE,
   } = props
+
+  const { t } = useTranslation()
 
   const [order, setOrder] = useState<'asc' | 'desc'>('asc')
   const [orderBy, setOrderBy] = useState<string>('')
@@ -161,15 +164,14 @@ export function Table(props: ITableProps) {
                   page={page}
                   slotProps={{
                     select: {
-                      inputProps: {
-                        'aria-label': 'rows per page',
-                      },
+                      inputProps: { 'aria-label': 'rows per page' },
                       native: true,
                     },
                   }}
                   onPageChange={handlePageChange}
                   onRowsPerPageChange={handleRowsPerPageChange}
                   ActionsComponent={TablePaginationActions}
+                  labelRowsPerPage={t('table.pagination.rows-per-page')}
                 />
               </TableRow>
             </TableFooter>

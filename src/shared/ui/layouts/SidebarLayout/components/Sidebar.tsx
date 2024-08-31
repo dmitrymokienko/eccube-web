@@ -15,25 +15,26 @@ import { useUnit } from 'effector-react'
 import { useEffect } from 'react'
 import { Z_INDEX } from '@/shared/libs/constants/style'
 import { SIDEBAR_LAYOUT_NAV_HEIGHT } from '../lib/constants'
+import { useTranslation } from 'react-i18next'
 
 const MENU_ITEMS = [
   {
-    label: 'Home',
+    label: 'sidebar.home',
     icon: HomeIcon,
     path: '/dashboard/home',
   },
   {
-    label: 'Tenders',
+    label: 'sidebar.tenders',
     icon: HistoryEduIcon,
     path: '/dashboard/tenders',
   },
   {
-    label: 'Payments',
+    label: 'sidebar.payments',
     icon: PaymentIcon,
     path: '/dashboard/payments',
   },
   {
-    label: 'Settings',
+    label: 'sidebar.settings',
     icon: SettingsIcon,
     path: '/dashboard/settings',
   },
@@ -43,6 +44,7 @@ const setSelectedIndex = createEvent<number>()
 const $selectedIndex = createStore(0).on(setSelectedIndex, (_, v) => v)
 
 export function Sidebar(props: ISidebarDrawerProps) {
+  const { t } = useTranslation()
   const navigate = useNavigate()
   const location = useLocation()
 
@@ -77,7 +79,7 @@ export function Sidebar(props: ISidebarDrawerProps) {
                   <ListItemIcon>
                     <Icon />
                   </ListItemIcon>
-                  <ListItemText primary={v.label} />
+                  <ListItemText primary={t(v.label)} />
                 </ListItemButton>
               </ListItem>
             )

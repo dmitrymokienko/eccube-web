@@ -2,7 +2,7 @@ export const palette = {
   custom: {
     const: {
       white: '#ffffff',
-      black: '#000000',
+      black: '#1c1c1c',
     },
     blue: {
       0: '#4ac1f5', // primary

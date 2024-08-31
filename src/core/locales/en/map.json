@@ -23,6 +23,10 @@
     "dashboard.onboarding-status-review": "Your account's information is in review"
   },
   "sidebar": {
+    "home": "Home",
+    "tenders": "Tenders",
+    "payments": "Payments",
+    "settings": "Settings",
     "banner-title1": "We speak building management",
     "banner-description1": "Over 10 years of communication and project management with craftsmen, purchasers, contractors, consultants... on various topics related to facility management.",
     "banner-title2": "We secure your working capital",
@@ -51,7 +55,8 @@
     "complete-onboarding": "Complete onboarding",
     "go-to-app": "Go to the app",
     "goBack": "Go back",
-    "upload-file": "Upload file"
+    "upload-file": "Upload file",
+    "cancel": "Cancel"
   },
   "field": {
     "email": "Email",
@@ -153,6 +158,18 @@
     "postal-code": "Postal code",
     "country": "Country"
   },
+  "table": {
+    "pagination": {
+      "rows-per-page": "Rows per page"
+    },
+    "tender": {
+      "header": {
+        "title": "Title",
+        "shortDescription": "Short Description",
+        "status": "Status"
+      }
+    }
+  },
   "tender": {
     "label": {
       "new-tender": "New tender",
@@ -166,6 +183,30 @@
     "description": {
       "successfully-created-tender": "We have sent an email to the selected suppliers. You can view the list of suppliers and other details in the 'Tender details' drawer in the dashboard.",
       "successfully-created-tender-draft": "The tender has been saved as a draft. You can continue editing via 'Tender details' drawer in the dashboard."
+    }
+  },
+  "tender-drawer": {
+    "header-title": "Tender Details",
+    "edit-details": "Edit Details",
+    "delete-tender": "Delete Tender",
+    "status": "Status",
+    "title": "Title",
+    "short-description": "Short Description",
+    "work-description": "Work Description",
+    "start-date": "Start Date",
+    "end-date": "End Date",
+    "payment-term": "Payment Term",
+    "publishment": "Publishment",
+    "invited-suppliers": "Invited Suppliers",
+    "confirm-delete-title": "Delete Tender",
+    "confirm-delete-content": "Are you sure you want to delete this tender?"
+  },
+  "modal": {
+    "tender": {
+      "delete-tender": {
+        "title": "Delete Tender",
+        "content": "Are you sure you want to delete this tender?"
+      }
     }
   }
 }
