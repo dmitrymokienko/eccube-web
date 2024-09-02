@@ -190,21 +190,21 @@ export function TenderDrawer(props: TenderDrawerProps) {
             <ListItem>
               <ListItemText
                 primary={t('tender-drawer.status')}
-                secondary={tenderData?.status || '-'}
+                secondary={tenderData?.status || '—'}
               />
             </ListItem>
 
             <ListItem>
               <ListItemText
                 primary={t('tender-drawer.title')}
-                secondary={tenderData?.title || '-'}
+                secondary={tenderData?.title || '—'}
               />
             </ListItem>
 
             <ListItem>
               <ListItemText
                 primary={t('tender-drawer.short-description')}
-                secondary={tenderData?.shortDescription || '-'}
+                secondary={tenderData?.shortDescription || '—'}
               />
             </ListItem>
 
@@ -237,14 +237,14 @@ export function TenderDrawer(props: TenderDrawerProps) {
               <ListItem>
                 <ListItemText
                   primary={t('tender-drawer.start-date')}
-                  secondary={formatDate(tenderData.startPeriod) || '-'}
+                  secondary={formatDate(tenderData.startPeriod) || '—'}
                 />
               </ListItem>
 
               <ListItem>
                 <ListItemText
                   primary={t('tender-drawer.end-date')}
-                  secondary={formatDate(tenderData.endPeriod) || '-'}
+                  secondary={formatDate(tenderData.endPeriod) || '—'}
                 />
               </ListItem>
             </Box>
@@ -288,25 +288,25 @@ export function TenderDrawer(props: TenderDrawerProps) {
                 <ListItem sx={{ pl: 4 }}>
                   <ListItemText
                     primary={t('address.street')}
-                    secondary={tenderData?.address?.street || '-'}
+                    secondary={tenderData?.address?.street || '—'}
                   />
                 </ListItem>
                 <ListItem sx={{ pl: 4 }}>
                   <ListItemText
                     primary={t('address.city')}
-                    secondary={tenderData?.address?.city || '-'}
+                    secondary={tenderData?.address?.city || '—'}
                   />
                 </ListItem>
                 <ListItem sx={{ pl: 4 }}>
                   <ListItemText
                     primary={t('address.address-suffix')}
-                    secondary={tenderData?.address?.suffix || '-'}
+                    secondary={tenderData?.address?.suffix || '—'}
                   />
                 </ListItem>
                 <ListItem sx={{ pl: 4 }}>
                   <ListItemText
                     primary={t('address.postal-code')}
-                    secondary={tenderData?.address?.postalCode || '-'}
+                    secondary={tenderData?.address?.postalCode || '—'}
                   />
                 </ListItem>
                 <ListItem sx={{ pl: 4 }}>
