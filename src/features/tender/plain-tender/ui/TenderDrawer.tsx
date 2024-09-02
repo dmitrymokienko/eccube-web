@@ -86,6 +86,7 @@ export function TenderDrawer(props: TenderDrawerProps) {
 
   const handleClose = () => {
     setAddressOpen(false)
+    setInvitedSuppliersOpen(false)
     onClose()
   }
 
