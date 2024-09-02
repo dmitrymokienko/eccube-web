@@ -204,6 +204,7 @@ export function PlainTenderForm(props: IPlainTenderFormProps) {
       </Box>
 
       <EmailTextField
+        emails={form.getValues('invitedSuppliers')}
         label={t('tender.label.supplier-invitation')}
         placeholder={t('placeholder.create-tender.supplier-invitation')}
         onAddEmail={(emails) => setValue('invitedSuppliers', emails)}
