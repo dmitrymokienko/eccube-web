@@ -1,7 +1,7 @@
 import TableCell from '@mui/material/TableCell'
 import TableRow from '@mui/material/TableRow'
 import { styled } from '@mui/material/styles'
-import MuiSortIcon from '@mui/icons-material/Sort'
+import StraightIcon from '@mui/icons-material/Straight'
 
 export const Row = styled(TableRow)(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
@@ -38,7 +38,7 @@ export const BodyRow = styled(TableRow)(({ theme }) => ({
   },
 }))
 
-export const SortIcon = styled(MuiSortIcon, {
+export const SortIcon = styled(StraightIcon, {
   shouldForwardProp: (propName: string) => propName !== 'active' && propName !== 'hover',
 })<{ active?: boolean; hover?: boolean }>(({ active, hover }) => ({
   '&&&': {

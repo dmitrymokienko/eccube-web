@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 
-export function PlainTenderSuccessCreationPage() {
+export function PlainTenderSuccessPublishingPage() {
   const { t } = useTranslation()
   const navigate = useNavigate()
 

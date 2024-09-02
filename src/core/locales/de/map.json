@@ -23,6 +23,10 @@
     "dashboard.onboarding-status-review": "Ihre Informationen werden überprüft"
   },
   "sidebar": {
+    "home": "Startseite",
+    "tenders": "Ausschreibungen",
+    "payments": "Zahlungen",
+    "settings": "Einstellungen",
     "banner-title1": "Wir sprechen gebäudemanagement",
     "banner-description1": "Über 10 Jahre Kommunikation und Projektmanagement mit Handwerkern, Einkäufern, Unternehmern, Beratern... zu verschiedenen Themen rund um das Gebäudemanagement.",
     "banner-title2": "Wir sichern ihr working capital",
@@ -51,7 +55,10 @@
     "complete-onboarding": "Vollständiges Onboarding",
     "go-to-app": "Gehen Sie zur Anwendung",
     "goBack": "Zurück",
-    "upload-file": "Datei hochladen"
+    "upload-file": "Datei hochladen",
+    "cancel": "Stornieren",
+    "publish": "Veröffentlichen",
+    "update": "Aktualisieren"
   },
   "field": {
     "email": "E-Mail",
@@ -146,7 +153,7 @@
     "search": "Suche",
     "invitation": "Einladung"
   },
-   "address": {
+  "address": {
     "address": "Adresse",
     "street": "Straße",
     "address-suffix": "Adresszusatz",
@@ -154,9 +161,22 @@
     "postal-code": "Postleitzahl",
     "country": "Land"
   },
+  "table": {
+    "pagination": {
+      "rows-per-page": "Zeilen pro Seite"
+    },
+    "tender": {
+      "header": {
+        "title": "Titel",
+        "shortDescription": "Kurzbeschreibung",
+        "status": "Status"
+      }
+    }
+  },
   "tender": {
     "label": {
       "new-tender": "Neue Ausschreibung",
+      "edit-tender": "Bearbeitung der Ausschreibung",
       "tender-list": "Ausschreibungsliste",
       "tender-details": "Ausschreibungsdetails",
       "tender-title": "Ausschreibungstitel",
@@ -167,6 +187,34 @@
     "description": {
       "successfully-created-tender": "Wir haben eine E-Mail an die ausgewählten Lieferanten geschickt. Sie können die Liste der Lieferanten und andere Details in der Schublade 'Ausschreibungsdetails' im Dashboard einsehen.",
       "successfully-created-tender-draft": "Die Ausschreibung wurde als Entwurf gespeichert. Sie können die Bearbeitung über die Schublade 'Ausschreibungsdetails' im Dashboard fortsetzen."
+    }
+  },
+  "tender-drawer": {
+    "header-title": "Ausschreibungsdetails",
+    "edit-details": "Details bearbeiten",
+    "delete-tender": "Ausschreibung löschen",
+    "status": "Status",
+    "title": "Titel",
+    "short-description": "Kurzbeschreibung",
+    "work-description": "Arbeitsbeschreibung",
+    "start-date": "Startdatum",
+    "end-date": "Enddatum",
+    "payment-term": "Zahlungsfrist",
+    "publishment": "Veröffentlichung",
+    "invited-suppliers": "Eingeladene Lieferanten",
+    "confirm-delete-title": "Ausschreibung löschen",
+    "confirm-delete-content": "Sind Sie sicher, dass Sie diese Ausschreibung löschen möchten?"
+  },
+  "modal": {
+    "tender": {
+      "delete-tender": {
+        "title": "Ausschreibung löschen",
+        "content": "Sind Sie sicher, dass Sie diese Ausschreibung löschen möchten?"
+      },
+      "confirm-publish-tender": {
+        "title": "Ausschreibung veröffentlichen",
+        "content": "Sind Sie sicher, dass Sie diese Ausschreibung veröffentlichen möchten?"
+      }
     }
   }
 }

@@ -46,6 +46,12 @@ export async function createNewTenderDraftApi(data: Partial<CreateTenderDto>) {
 
 //
 
+export async function fetchTenderByIdApi(id: string) {
+  return defaultApiClient.get<ITender>(`/api/tender/${id}`)
+}
+
+//
+
 export async function fetchTenderListApi(filters?: TenderListQueryFilters) {
   const queryParams = createQueryParams(filters)
   return defaultApiClient.get<ITender[]>(`/api/tender/list?${queryParams}`)
@@ -53,13 +59,20 @@ export async function fetchTenderListApi(filters?: TenderListQueryFilters) {
 
 //
 
-export async function updateByIdApi(id: string, data: Partial<CreateTenderDto>) {
+export async function updateByIdApi(data: Partial<CreateTenderDto> & { id: string }) {
+  const { id } = data
   const res = await defaultApiClient.put<Partial<CreateTenderDto>, ITender>(
     `/api/tender/${id}`,
     omit(['uploadedFiles'], data)
   )
   await uploadTenderFilesApi(data.uploadedFiles || [])
   return res
+}
+
+//
+
+export async function publishTenderApi(id: string) {
+  return defaultApiClient.post(`/api/tender/publish/${id}`, undefined)
 }
 
 //

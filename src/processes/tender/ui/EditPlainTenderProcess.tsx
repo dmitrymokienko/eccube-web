@@ -4,9 +4,9 @@ import {
 } from '@/shared/ui/layouts/SeparateLayout/SeparateLayout'
 import EccubeBg from '@/shared/assets/images/eccube_bg2.jpeg'
 import { useUnit } from 'effector-react'
-import { ReactNode, useContext, useMemo } from 'react'
+import { ReactNode, useContext, useEffect, useMemo } from 'react'
 import { SidebarRandomContent, getRandomInt } from '@/shared/ui/layouts/SeparateLayout/lib/utils'
-import { Outlet, useNavigate } from 'react-router-dom'
+import { Outlet, useNavigate, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
@@ -14,39 +14,47 @@ import { LogoutButton } from '@/shared/ui/components/Button/LogoutButton'
 import { PrevPageButton } from '@/shared/ui/components/Button/PrevPageButton'
 import { AuthContext } from '@/shared/ui/providers/AuthProvider'
 import { FormProvider, useForm } from 'react-hook-form'
-import { PlainTenderProcessForm } from '@/features/tender/plain-tender/model/interfaces'
 import { tenderModel } from '@/features/tender/plain-tender/model'
+import { prepareTenderDtoToRHFMapper } from '@/features/tender/plain-tender/api/mapper'
+import { PlainTenderProcessForm } from '@/features/tender/plain-tender/model/interfaces'
 
-export interface ICreatePlainTenderProcessProps {
+export interface IEditPlainTenderProcessProps {
   children?: ReactNode
 }
 
-export function CreatePlainTenderProcess(props: ICreatePlainTenderProcessProps) {
+export function EditPlainTenderProcess(props: IEditPlainTenderProcessProps) {
   const { children } = props
 
   const { t } = useTranslation()
   const navigate = useNavigate()
+  const { id } = useParams() as { id: string }
 
   const { loggedIn } = useContext(AuthContext)
 
+  const tender = useUnit(tenderModel.$currentTender)
   const isLoading = useUnit(tenderModel.$isLoading)
 
   const form = useForm<PlainTenderProcessForm>({
-    defaultValues: {
-      startPeriod: null,
-      endPeriod: null,
-      // @ts-expect-error RHF set default value
-      publishment: '',
-      paymentTerm: '', // important to have default value for RadioGroup
-      country: t('common.Germany'),
-    },
+    defaultValues: tender ? prepareTenderDtoToRHFMapper(tender) : undefined,
   })
-
-  //   const firstPage = useMatch('/tender/plain/step_1')
 
   const sidebar = useMemo(() => {
     const random = getRandomInt()
     return SidebarRandomContent[random]
+  }, [])
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await tenderModel.fetchByIdFx(id)
+      form.reset(prepareTenderDtoToRHFMapper(data))
+    }
+    if (!tender) fetchData()
+  }, [tender])
+
+  useEffect(() => {
+    return () => {
+      tenderModel.reset()
+    }
   }, [])
 
   return (
@@ -61,13 +69,7 @@ export function CreatePlainTenderProcess(props: ICreatePlainTenderProcessProps) 
             width: '100%',
           }}
         >
-          <PrevPageButton
-            onClick={() => {
-              navigate(-1)
-            }}
-          >
-            {t('button.goBack')}
-          </PrevPageButton>
+          <PrevPageButton onClick={() => navigate(-1)}>{t('button.goBack')}</PrevPageButton>
 
           <LogoutButton />
         </Box>

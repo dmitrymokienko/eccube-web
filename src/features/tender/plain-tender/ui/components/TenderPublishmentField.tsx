@@ -5,7 +5,7 @@ import FormGroup from '@mui/material/FormGroup'
 import FormLabel from '@mui/material/FormLabel'
 import { useFormContext } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
-import { CreatePlainTenderProcessForm } from '../../model/interfaces'
+import { PlainTenderProcessForm } from '../../model/interfaces'
 import { TenderPublishment } from '@/entities/tender/model/constants'
 
 const PUBLISHMENT_FIELDS = [
@@ -28,7 +28,7 @@ type PublishmentItemType = (typeof PUBLISHMENT_FIELDS)[number]
 export function TenderPublishmentField() {
   const { t } = useTranslation()
 
-  const form = useFormContext<CreatePlainTenderProcessForm>()
+  const form = useFormContext<PlainTenderProcessForm>()
   const {
     watch,
     getValues,

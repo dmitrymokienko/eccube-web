@@ -1,6 +1,7 @@
 import { ITender } from '@/entities/tender/model/interfaces'
 import { ITableColumn, ITableRow } from '@/shared/ui/components/Table/interfaces'
 import Typography from '@mui/material/Typography'
+import { t } from 'i18next'
 
 export function prepareTenderTable(rows: ITender[]): {
   columns: ITableColumn[]
@@ -16,18 +17,18 @@ export function prepareTenderTable(rows: ITender[]): {
       },
       {
         id: 'title',
-        title: 'Title',
+        title: t('table.tender.header.title'),
         align: 'left',
       },
       {
         id: 'shortDescription',
-        title: 'Short description',
+        title: t('table.tender.header.shortDescription'),
         align: 'left',
         sx: { width: '40%' },
       },
       {
         id: 'status',
-        title: 'Status',
+        title: t('table.tender.header.status'),
         align: 'right',
         sx: { width: '80px' },
         format: (value) => (

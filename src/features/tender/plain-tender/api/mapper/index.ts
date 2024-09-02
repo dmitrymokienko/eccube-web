@@ -1,10 +1,11 @@
 import { Locale } from '@/entities/locale/types'
 import { omit } from '@/shared/libs/utils/utilities'
-import { prepareRTEForSubmit } from '@/shared/ui/components/RichTextEditor/utils'
-import { CreatePlainTenderProcessForm } from '../../model/interfaces'
+import { prepareRTEForRHF, prepareRTEForSubmit } from '@/shared/ui/components/RichTextEditor/utils'
+import { PlainTenderProcessForm } from '../../model/interfaces'
 import { convertToTimestamp } from '@/shared/libs/utils/datetime'
+import { ITender } from '@/entities/tender/model/interfaces'
 
-export function prepareCreateTenderDtoMapper(data: CreatePlainTenderProcessForm) {
+export function prepareRHFTenderToTenderDtoMapper(data: PlainTenderProcessForm) {
   const {
     street = '',
     addressSuffix = '',
@@ -30,8 +31,35 @@ export function prepareCreateTenderDtoMapper(data: CreatePlainTenderProcessForm)
     },
     startPeriod: convertToTimestamp(startPeriod),
     endPeriod: convertToTimestamp(endPeriod),
-    publishment: publishment || [],
+    publishment: (publishment || []).filter(Boolean),
     paymentTerm: paymentTerm ? parseInt(paymentTerm, 10) : undefined,
     workDescription: prepareRTEForSubmit(workDescription),
+  }
+}
+
+export function prepareTenderDtoToRHFMapper(data: ITender): Partial<PlainTenderProcessForm> {
+  const {
+    address,
+    startPeriod,
+    endPeriod,
+    workDescription,
+    paymentTerm,
+    publishment,
+    title,
+    shortDescription,
+  } = omit(['id', 'status', 'fields', 'uploadedFiles'], data)
+
+  return {
+    title: title || '',
+    shortDescription: shortDescription || '',
+    workDescription: prepareRTEForRHF(workDescription),
+    street: address?.street || '',
+    addressSuffix: address?.suffix || '',
+    postalCode: address?.postalCode || '',
+    city: address?.city || '',
+    startPeriod: startPeriod ? new Date(startPeriod) : null,
+    endPeriod: endPeriod ? new Date(endPeriod) : null,
+    publishment: publishment || '',
+    paymentTerm: paymentTerm || '',
   }
 }

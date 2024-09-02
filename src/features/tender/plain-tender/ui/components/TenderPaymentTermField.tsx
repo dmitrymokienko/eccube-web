@@ -6,12 +6,12 @@ import Radio from '@mui/material/Radio'
 import RadioGroup from '@mui/material/RadioGroup'
 import { Controller, useFormContext } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
-import { CreatePlainTenderProcessForm } from '../../model/interfaces'
+import { PlainTenderProcessForm } from '../../model/interfaces'
 import TextField from '@mui/material/TextField'
 import { useState } from 'react'
 
 export interface ITenderPaymentTermFieldProps {
-  name?: keyof CreatePlainTenderProcessForm
+  name?: keyof PlainTenderProcessForm
 }
 
 const VALUES = [30, 60, 90]
@@ -24,7 +24,7 @@ export function TenderPaymentTermField(props: ITenderPaymentTermFieldProps) {
 
   const [visibleAdditionalField, setVisibleAdditionalField] = useState(false)
 
-  const form = useFormContext<CreatePlainTenderProcessForm>()
+  const form = useFormContext<PlainTenderProcessForm>()
 
   const {
     setValue,
