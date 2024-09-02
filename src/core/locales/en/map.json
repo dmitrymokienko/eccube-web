@@ -175,6 +175,7 @@
   "tender": {
     "label": {
       "new-tender": "New tender",
+      "edit-tender": "Edition of the tender",
       "tender-list": "Tender list",
       "tender-details": "Tender details",
       "tender-title": "Tender title",

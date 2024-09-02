@@ -16,12 +16,12 @@ import { ProtectedRoute } from './components/ProtectedRoute'
 import { PaymentsPage } from '@/pages/payments/ui/page'
 import { CompanyProfileKybPage } from '@/pages/kyb/profile/ui/page'
 import { PlainTenderCreationPage } from '@/pages/tender/creation/plain-tender/creation-form/ui/page'
-import { PlainTenderEditionPage } from '@/pages/tender/edition/plain-tender/ui/edition-form/page'
 import { PlainTenderSuccessCreationPage } from '@/pages/tender/creation/plain-tender/creation-success/ui/page'
 import { PlainTenderDraftCreationPage } from '@/pages/tender/creation/plain-tender/draft-creation/ui/page'
 import { EditPlainTenderProcess } from '@/processes/tender/ui/EditPlainTenderProcess'
-import { PlainTenderDraftEditionPage } from '@/pages/tender/edition/plain-tender/ui/draft-edition/ui/page'
-import { PlainTenderSuccessPublishingPage } from '@/pages/tender/edition/plain-tender/ui/publishing-success/ui/page'
+import { PlainTenderEditionPage } from '@/pages/tender/edition/plain-tender/edition-form/ui/page'
+import { PlainTenderSuccessPublishingPage } from '@/pages/tender/edition/plain-tender/publishing-success/ui/page'
+import { PlainTenderDraftEditionPage } from '@/pages/tender/edition/plain-tender/draft-edition/ui/page'
 
 export const router = createBrowserRouter([
   {
@@ -131,11 +131,11 @@ export const router = createBrowserRouter([
                 element: <PlainTenderCreationPage />,
               },
               {
-                path: 'success',
+                path: ':id/success',
                 element: <PlainTenderSuccessCreationPage />,
               },
               {
-                path: 'draft',
+                path: ':id/draft',
                 element: <PlainTenderDraftCreationPage />,
               },
             ],

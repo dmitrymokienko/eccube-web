@@ -31,7 +31,7 @@ export function prepareRHFTenderToTenderDtoMapper(data: PlainTenderProcessForm) 
     },
     startPeriod: convertToTimestamp(startPeriod),
     endPeriod: convertToTimestamp(endPeriod),
-    publishment: publishment || [],
+    publishment: (publishment || []).filter(Boolean),
     paymentTerm: paymentTerm ? parseInt(paymentTerm, 10) : undefined,
     workDescription: prepareRTEForSubmit(workDescription),
   }

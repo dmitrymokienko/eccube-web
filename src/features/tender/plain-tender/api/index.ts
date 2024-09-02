@@ -60,10 +60,10 @@ export async function fetchTenderListApi(filters?: TenderListQueryFilters) {
 //
 
 export async function updateByIdApi(data: Partial<CreateTenderDto> & { id: string }) {
-  const { id, ...rest } = data
+  const { id } = data
   const res = await defaultApiClient.put<Partial<CreateTenderDto>, ITender>(
     `/api/tender/${id}`,
-    omit(['uploadedFiles'], rest)
+    omit(['uploadedFiles'], data)
   )
   await uploadTenderFilesApi(data.uploadedFiles || [])
   return res
@@ -72,7 +72,7 @@ export async function updateByIdApi(data: Partial<CreateTenderDto> & { id: strin
 //
 
 export async function publishTenderApi(id: string) {
-  return defaultApiClient.post(`/api/tender/publish/${id}`, null)
+  return defaultApiClient.post(`/api/tender/publish/${id}`, undefined)
 }
 
 //

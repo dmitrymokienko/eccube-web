@@ -2,16 +2,17 @@ import Button from '@mui/material/Button'
 import Stack from '@mui/material/Stack'
 import Typography from '@mui/material/Typography'
 import { useTranslation } from 'react-i18next'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 
 export function PlainTenderSuccessCreationPage() {
   const { t } = useTranslation()
   const navigate = useNavigate()
 
+  const { id } = useParams() as { id: string }
+
   const onContinue = () => {
-    // TODO: add id query param (open drawer)
-    navigate(`/dashboard/tenders?id=`)
+    navigate(`/dashboard/tenders?id=${id}`)
   }
 
   return (

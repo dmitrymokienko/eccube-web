@@ -1,4 +1,5 @@
 import { Z_INDEX } from '@/shared/libs/constants/style'
+import { Awaitable } from '@/shared/types/utilities'
 import NiceModal, { NiceModalHocProps, useModal } from '@ebay/nice-modal-react'
 import Button from '@mui/material/Button'
 import Dialog from '@mui/material/Dialog'
@@ -13,9 +14,9 @@ export interface IConfirmationDialogProps extends NiceModalHocProps {
   title: string | JSX.Element
   content: string | JSX.Element
   confirmText?: string
-  onConfirm?: () => void
+  onConfirm?: () => Awaitable<void> | void
   cancelText?: string
-  onCancel?: () => void
+  onCancel?: () => Awaitable<void> | void
 }
 
 export const ConfirmationDialog: FC<IConfirmationDialogProps> = NiceModal.create(
@@ -45,10 +46,10 @@ export const ConfirmationDialog: FC<IConfirmationDialogProps> = NiceModal.create
           <DialogContentText>{content}</DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCancel} variant="outlined">
+          <Button onClick={handleConfirm} variant="contained">
             {confirmText || t('button.continue')}
           </Button>
-          <Button onClick={handleConfirm} variant="contained">
+          <Button onClick={handleCancel} variant="outlined">
             {cancelText || t('button.cancel')}
           </Button>
         </DialogActions>

@@ -25,12 +25,12 @@ export function PlainTenderCreationPage() {
   const onSubmit = async (data: PlainTenderProcessForm) => {
     NiceModal.show(ConfirmationDialog, {
       title: t('modal.tender.confirm-publish-tender.title'),
-      message: t('modal.tender.confirm-publish-tender.description'),
+      content: t('modal.tender.confirm-publish-tender.content'),
       onConfirm: async () => {
         const payload = prepareRHFTenderToTenderDtoMapper({ ...data, uploadedFiles })
         try {
-          await tenderModel.createNewTenderFx(payload)
-          navigate('/tender/create/plain/success')
+          const res = await tenderModel.createNewTenderFx(payload)
+          navigate(`/tender/create/plain/${res.id}/success`)
         } catch (e) {
           console.error(e)
         }
@@ -42,8 +42,8 @@ export function PlainTenderCreationPage() {
     const data = getValues()
     const payload = prepareRHFTenderToTenderDtoMapper({ ...data, uploadedFiles })
     try {
-      await tenderModel.createNewTenderDraftFx(payload)
-      navigate('/tender/create/plain/draft')
+      const res = await tenderModel.createNewTenderDraftFx(payload)
+      navigate(`/tender/create/plain/${res.id}/draft`)
     } catch (e) {
       console.error(e)
     }

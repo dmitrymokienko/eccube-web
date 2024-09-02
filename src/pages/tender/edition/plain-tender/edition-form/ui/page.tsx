@@ -11,11 +11,13 @@ import { useUnit } from 'effector-react'
 import { useState } from 'react'
 import { FieldErrors, useFormContext } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 export function PlainTenderEditionPage() {
   const { t } = useTranslation()
   const navigate = useNavigate()
+
+  const { id } = useParams() as { id: string }
 
   const tender = useUnit(tenderModel.$currentTender)
 
@@ -27,13 +29,13 @@ export function PlainTenderEditionPage() {
   const onSubmit = async (data: PlainTenderProcessForm) => {
     NiceModal.show(ConfirmationDialog, {
       title: t('modal.tender.confirm-publish-tender.title'),
-      message: t('modal.tender.confirm-publish-tender.description'),
+      content: t('modal.tender.confirm-publish-tender.content'),
       onConfirm: async () => {
         const payload = prepareRHFTenderToTenderDtoMapper({ ...data, uploadedFiles })
         try {
-          await tenderModel.updateByIdFx({ ...payload, id: tender!.id })
-          await tenderModel.withdrawalFromDraftFx(tender!.id)
-          navigate('/tender/create/plain/success')
+          await tenderModel.updateByIdFx({ ...payload, id: id })
+          await tenderModel.withdrawalFromDraftFx(id)
+          navigate(`/tender/edit/plain/${id}/success`)
         } catch (e) {
           console.error(e)
         }
@@ -45,8 +47,8 @@ export function PlainTenderEditionPage() {
     const data = getValues()
     const payload = prepareRHFTenderToTenderDtoMapper({ ...data, uploadedFiles })
     try {
-      await tenderModel.updateByIdFx({ ...payload, id: tender!.id })
-      navigate('/tender/create/plain/draft')
+      await tenderModel.updateByIdFx({ ...payload, id })
+      navigate(`/tender/edit/plain/${id}/draft`)
     } catch (e) {
       console.error(e)
     }
@@ -58,7 +60,7 @@ export function PlainTenderEditionPage() {
 
   return (
     <Stack spacing={4}>
-      <Typography variant="h3">{t('tender.label.new-tender')}</Typography>
+      <Typography variant="h3">{t('tender.label.edit-tender')}</Typography>
 
       <Stack component="form" spacing={2} onSubmit={handleSubmit(onSubmit, onInvalid)}>
         <PlainTenderForm uploadedFiles={uploadedFiles} setFiles={setFiles} />

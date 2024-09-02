@@ -176,6 +176,7 @@
   "tender": {
     "label": {
       "new-tender": "Neue Ausschreibung",
+      "edit-tender": "Bearbeitung der Ausschreibung",
       "tender-list": "Ausschreibungsliste",
       "tender-details": "Ausschreibungsdetails",
       "tender-title": "Ausschreibungstitel",
