@@ -53,6 +53,7 @@ export function TenderDrawer(props: TenderDrawerProps) {
   const isCompact = useMediaQuery<Theme>((theme) => theme.breakpoints.down(1280))
 
   const [addressOpen, setAddressOpen] = useState(false)
+  const [invitedSuppliersOpen, setInvitedSuppliersOpen] = useState(false)
 
   const tenderData = useUnit(tenderModel.$currentTender)
 
@@ -90,6 +91,10 @@ export function TenderDrawer(props: TenderDrawerProps) {
 
   const handleAddressClick = () => {
     setAddressOpen((prev) => !prev)
+  }
+
+  const handleInvitedSuppliersClick = () => {
+    setInvitedSuppliersOpen((prev) => !prev)
   }
 
   return (
@@ -319,16 +324,33 @@ export function TenderDrawer(props: TenderDrawerProps) {
             </Collapse>
 
             {tenderData?.invitedSuppliers?.length > 0 && (
-              <ListItem>
-                <ListItemText primary={t('tender-drawer.invited-suppliers')} />
-                <List>
-                  {tenderData?.invitedSuppliers?.map((supplier, index) => (
-                    <ListItem key={index}>
-                      <ListItemText secondary={supplier} />
-                    </ListItem>
-                  ))}
-                </List>
-              </ListItem>
+              <>
+                <ListItemButton
+                  onClick={handleInvitedSuppliersClick}
+                  sx={(theme) => ({
+                    backgroundColor: theme.palette.grey[300],
+                    borderRadius: '4px',
+                    mt: 2,
+                  })}
+                >
+                  <ListItemText primary={t('tender-drawer.invited-suppliers')} />
+                  {invitedSuppliersOpen ? <ExpandLess /> : <ExpandMore />}
+                </ListItemButton>
+
+                <Collapse in={invitedSuppliersOpen} timeout="auto" unmountOnExit>
+                  <List
+                    sx={(theme) => ({
+                      backgroundColor: theme.palette.grey[100],
+                    })}
+                  >
+                    {tenderData.invitedSuppliers.map((email) => (
+                      <ListItem key={email}>
+                        <ListItemText secondary={email} />
+                      </ListItem>
+                    ))}
+                  </List>
+                </Collapse>
+              </>
             )}
 
             {/* <ListItem>

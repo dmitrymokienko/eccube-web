@@ -6,6 +6,8 @@ export type PlainTenderProcessForm = Omit<
   ITender,
   'id' | 'workDescription' | 'startPeriod' | 'endPeriod' | 'address'
 > & {
+  id?: string
+
   city: string
   postalCode: string
   street: string
