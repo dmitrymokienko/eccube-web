@@ -47,8 +47,8 @@ export function prepareTenderTable(rows: ITender[]): {
     rows: (rows || []).map((row, index) => ({
       id: row.id,
       number: index + 1,
-      title: row.title || '-',
-      shortDescription: row.shortDescription || '-',
+      title: row.title || '—',
+      shortDescription: row.shortDescription || '—',
       status: row.status,
     })),
   }

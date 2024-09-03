@@ -45,9 +45,10 @@ export function prepareTenderDtoToRHFMapper(data: ITender): Partial<PlainTenderP
     workDescription,
     paymentTerm,
     publishment,
+    invitedSuppliers,
     title,
     shortDescription,
-  } = omit(['id', 'status', 'fields', 'uploadedFiles'], data)
+  } = omit(['fields', 'uploadedFiles'], data)
 
   return {
     title: title || '',
@@ -61,5 +62,6 @@ export function prepareTenderDtoToRHFMapper(data: ITender): Partial<PlainTenderP
     endPeriod: endPeriod ? new Date(endPeriod) : null,
     publishment: publishment || '',
     paymentTerm: paymentTerm || '',
+    invitedSuppliers: invitedSuppliers || [],
   }
 }

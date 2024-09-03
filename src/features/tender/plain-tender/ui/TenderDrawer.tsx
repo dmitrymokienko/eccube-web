@@ -53,6 +53,7 @@ export function TenderDrawer(props: TenderDrawerProps) {
   const isCompact = useMediaQuery<Theme>((theme) => theme.breakpoints.down(1280))
 
   const [addressOpen, setAddressOpen] = useState(false)
+  const [invitedSuppliersOpen, setInvitedSuppliersOpen] = useState(false)
 
   const tenderData = useUnit(tenderModel.$currentTender)
 
@@ -85,11 +86,16 @@ export function TenderDrawer(props: TenderDrawerProps) {
 
   const handleClose = () => {
     setAddressOpen(false)
+    setInvitedSuppliersOpen(false)
     onClose()
   }
 
   const handleAddressClick = () => {
     setAddressOpen((prev) => !prev)
+  }
+
+  const handleInvitedSuppliersClick = () => {
+    setInvitedSuppliersOpen((prev) => !prev)
   }
 
   return (
@@ -190,21 +196,21 @@ export function TenderDrawer(props: TenderDrawerProps) {
             <ListItem>
               <ListItemText
                 primary={t('tender-drawer.status')}
-                secondary={tenderData?.status || '-'}
+                secondary={tenderData?.status || '—'}
               />
             </ListItem>
 
             <ListItem>
               <ListItemText
                 primary={t('tender-drawer.title')}
-                secondary={tenderData?.title || '-'}
+                secondary={tenderData?.title || '—'}
               />
             </ListItem>
 
             <ListItem>
               <ListItemText
                 primary={t('tender-drawer.short-description')}
-                secondary={tenderData?.shortDescription || '-'}
+                secondary={tenderData?.shortDescription || '—'}
               />
             </ListItem>
 
@@ -237,14 +243,14 @@ export function TenderDrawer(props: TenderDrawerProps) {
               <ListItem>
                 <ListItemText
                   primary={t('tender-drawer.start-date')}
-                  secondary={formatDate(tenderData.startPeriod) || '-'}
+                  secondary={formatDate(tenderData.startPeriod) || '—'}
                 />
               </ListItem>
 
               <ListItem>
                 <ListItemText
                   primary={t('tender-drawer.end-date')}
-                  secondary={formatDate(tenderData.endPeriod) || '-'}
+                  secondary={formatDate(tenderData.endPeriod) || '—'}
                 />
               </ListItem>
             </Box>
@@ -288,25 +294,25 @@ export function TenderDrawer(props: TenderDrawerProps) {
                 <ListItem sx={{ pl: 4 }}>
                   <ListItemText
                     primary={t('address.street')}
-                    secondary={tenderData?.address?.street || '-'}
+                    secondary={tenderData?.address?.street || '—'}
                   />
                 </ListItem>
                 <ListItem sx={{ pl: 4 }}>
                   <ListItemText
                     primary={t('address.city')}
-                    secondary={tenderData?.address?.city || '-'}
+                    secondary={tenderData?.address?.city || '—'}
                   />
                 </ListItem>
                 <ListItem sx={{ pl: 4 }}>
                   <ListItemText
                     primary={t('address.address-suffix')}
-                    secondary={tenderData?.address?.suffix || '-'}
+                    secondary={tenderData?.address?.suffix || '—'}
                   />
                 </ListItem>
                 <ListItem sx={{ pl: 4 }}>
                   <ListItemText
                     primary={t('address.postal-code')}
-                    secondary={tenderData?.address?.postalCode || '-'}
+                    secondary={tenderData?.address?.postalCode || '—'}
                   />
                 </ListItem>
                 <ListItem sx={{ pl: 4 }}>
@@ -319,16 +325,33 @@ export function TenderDrawer(props: TenderDrawerProps) {
             </Collapse>
 
             {tenderData?.invitedSuppliers?.length > 0 && (
-              <ListItem>
-                <ListItemText primary={t('tender-drawer.invited-suppliers')} />
-                <List>
-                  {tenderData?.invitedSuppliers?.map((supplier, index) => (
-                    <ListItem key={index}>
-                      <ListItemText secondary={supplier} />
-                    </ListItem>
-                  ))}
-                </List>
-              </ListItem>
+              <>
+                <ListItemButton
+                  onClick={handleInvitedSuppliersClick}
+                  sx={(theme) => ({
+                    backgroundColor: theme.palette.grey[300],
+                    borderRadius: '4px',
+                    mt: 2,
+                  })}
+                >
+                  <ListItemText primary={t('tender-drawer.invited-suppliers')} />
+                  {invitedSuppliersOpen ? <ExpandLess /> : <ExpandMore />}
+                </ListItemButton>
+
+                <Collapse in={invitedSuppliersOpen} timeout="auto" unmountOnExit>
+                  <List
+                    sx={(theme) => ({
+                      backgroundColor: theme.palette.grey[100],
+                    })}
+                  >
+                    {tenderData.invitedSuppliers.map((email) => (
+                      <ListItem key={email}>
+                        <ListItemText secondary={email} />
+                      </ListItem>
+                    ))}
+                  </List>
+                </Collapse>
+              </>
             )}
 
             {/* <ListItem>
