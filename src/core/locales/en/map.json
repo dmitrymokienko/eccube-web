@@ -204,6 +204,14 @@
     "confirm-delete-title": "Delete Tender",
     "confirm-delete-content": "Are you sure you want to delete this tender?"
   },
+  "settings": {
+    "label": {
+      "my-account": "My account",
+      "company-details": "Company details",
+      "change-password": "Change password",
+      "delete-account": "Delete account"
+    }
+  },
   "modal": {
     "tender": {
       "delete-tender": {

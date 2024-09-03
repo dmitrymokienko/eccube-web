@@ -11,11 +11,11 @@ import {
 import { Sidebar } from './components/Sidebar'
 import AppBar from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
-import { LogoutButton } from '../../components/Button/LogoutButton'
 import { ISidebarDrawerProps } from './components/SidebarDrawer'
 import { omit } from '@/shared/libs/utils/utilities'
 import { Z_INDEX } from '@/shared/libs/constants/style'
 import EccubeLogo from '@/shared/assets/icons/eccube-logo-dark.svg?react'
+import { AvatarMenu } from '../../components/AvatarMenu/AvatarMenu'
 
 export interface ISidebarLayoutProps {
   children: ReactNode
@@ -109,7 +109,9 @@ export function SidebarLayout(props: ISidebarLayoutProps) {
             </Box>
           )}
 
-          <LogoutButton />
+          <AvatarMenu />
+
+          {/* <LogoutButton /> */}
         </Toolbar>
       </AppBar>
 
