@@ -13,6 +13,8 @@ import { useNavigate } from 'react-router-dom'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import LogoutIcon from '@mui/icons-material/Logout'
+import NiceModal from '@ebay/nice-modal-react'
+import { ConfirmationDialog } from '../Dialogs/ConfirmationDialog'
 
 export function AvatarMenu() {
   const { t } = useTranslation()
@@ -36,9 +38,15 @@ export function AvatarMenu() {
   }
 
   const handleLogout = async () => {
-    await logoutUserApi()
-    auth.setRefreshToken(null)
-    navigate('/login')
+    NiceModal.show(ConfirmationDialog, {
+      title: t('modal.logout.title'),
+      content: t('modal.logout.content'),
+      onConfirm: async () => {
+        await logoutUserApi()
+        auth.setRefreshToken(null)
+        navigate('/login')
+      },
+    })
     handleClose()
   }
 

@@ -214,6 +214,10 @@
     }
   },
   "modal": {
+    "logout": {
+      "title": "Ausloggen",
+      "content": "Möchten Sie sich wirklich abmelden?"
+    },
     "tender": {
       "delete-tender": {
         "title": "Ausschreibung löschen",

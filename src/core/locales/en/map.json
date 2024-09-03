@@ -213,6 +213,10 @@
     }
   },
   "modal": {
+    "logout": {
+      "title": "Logout",
+      "content": "Are you sure you want to logout?"
+    },
     "tender": {
       "delete-tender": {
         "title": "Delete Tender",
