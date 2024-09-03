@@ -16,6 +16,8 @@ import { AuthContext } from '@/shared/ui/providers/AuthProvider'
 import { FormProvider, useForm } from 'react-hook-form'
 import { PlainTenderProcessForm } from '@/features/tender/plain-tender/model/interfaces'
 import { tenderModel } from '@/features/tender/plain-tender/model'
+import { mapCountryCodeToName } from '@/shared/libs/mappers/countries'
+import { Locale } from '@/entities/locale/types'
 
 export interface ICreatePlainTenderProcessProps {
   children?: ReactNode
@@ -38,7 +40,7 @@ export function CreatePlainTenderProcess(props: ICreatePlainTenderProcessProps) 
       // @ts-expect-error RHF set default value
       publishment: '',
       paymentTerm: '', // important to have default value for RadioGroup
-      country: t('common.Germany'),
+      country: mapCountryCodeToName(Locale.DE),
     },
   })
 

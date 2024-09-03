@@ -4,6 +4,7 @@ import { prepareRTEForRHF, prepareRTEForSubmit } from '@/shared/ui/components/Ri
 import { PlainTenderProcessForm } from '../../model/interfaces'
 import { convertToTimestamp } from '@/shared/libs/utils/datetime'
 import { ITender } from '@/entities/tender/model/interfaces'
+import { mapCountryCodeToName } from '@/shared/libs/mappers/countries'
 
 export function prepareRHFTenderToTenderDtoMapper(data: PlainTenderProcessForm) {
   const {
@@ -27,7 +28,7 @@ export function prepareRHFTenderToTenderDtoMapper(data: PlainTenderProcessForm) 
       suffix: addressSuffix.trim(),
       postalCode: postalCode.trim(),
       city: city.trim(),
-      country: Locale.DE,
+      country: Locale.DE, // TODO: TEMPORARY HARDCODED
     },
     startPeriod: convertToTimestamp(startPeriod),
     endPeriod: convertToTimestamp(endPeriod),
@@ -58,6 +59,7 @@ export function prepareTenderDtoToRHFMapper(data: ITender): Partial<PlainTenderP
     addressSuffix: address?.suffix || '',
     postalCode: address?.postalCode || '',
     city: address?.city || '',
+    country: mapCountryCodeToName(Locale.DE),
     startPeriod: startPeriod ? new Date(startPeriod) : null,
     endPeriod: endPeriod ? new Date(endPeriod) : null,
     publishment: publishment || '',
