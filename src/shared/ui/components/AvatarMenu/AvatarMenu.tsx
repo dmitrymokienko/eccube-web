@@ -12,9 +12,12 @@ import { auth } from '@/entities/auth/model'
 import { useNavigate } from 'react-router-dom'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
+import PersonIcon from '@mui/icons-material/Person'
+import EmailIcon from '@mui/icons-material/Email'
 import LogoutIcon from '@mui/icons-material/Logout'
 import NiceModal from '@ebay/nice-modal-react'
 import { ConfirmationDialog } from '../Dialogs/ConfirmationDialog'
+import Divider from '@mui/material/Divider'
 
 export function AvatarMenu() {
   const { t } = useTranslation()
@@ -63,6 +66,26 @@ export function AvatarMenu() {
       </IconButton>
 
       <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
+        {user?.firstName && user?.lastName && (
+          <MenuItem disabled>
+            <ListItemIcon>
+              <PersonIcon fontSize="small" />
+            </ListItemIcon>
+            {`${user.firstName} ${user.lastName}`}
+          </MenuItem>
+        )}
+
+        {user?.email && (
+          <MenuItem disabled>
+            <ListItemIcon>
+              <EmailIcon fontSize="small" />
+            </ListItemIcon>
+            {user.email}
+          </MenuItem>
+        )}
+
+        <Divider />
+
         <MenuItem onClick={handleAccount}>
           <ListItemIcon>
             <AccountCircleIcon fontSize="small" />
