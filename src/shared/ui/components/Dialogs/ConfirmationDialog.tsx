@@ -1,4 +1,3 @@
-import { Z_INDEX } from '@/shared/libs/constants/style'
 import { Awaitable } from '@/shared/types/utilities'
 import NiceModal, { NiceModalHocProps, useModal } from '@ebay/nice-modal-react'
 import Button from '@mui/material/Button'
@@ -36,11 +35,7 @@ export const ConfirmationDialog: FC<IConfirmationDialogProps> = NiceModal.create
     }
 
     return (
-      <Dialog
-        open={dialog.visible}
-        onClose={onCancel}
-        PaperProps={{ sx: { zIndex: Z_INDEX.Dialog } }}
-      >
+      <Dialog open={dialog.visible} onClose={onCancel}>
         <DialogTitle>{title}</DialogTitle>
         <DialogContent>
           <DialogContentText>{content}</DialogContentText>
