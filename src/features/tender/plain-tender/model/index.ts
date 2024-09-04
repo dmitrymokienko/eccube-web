@@ -37,6 +37,7 @@ const $isLoading = combine(
   createNewTenderFx.pending,
   createNewTenderDraftFx.pending,
   withdrawalFromDraftFx.pending,
+  fetchByIdFx.pending,
   fetchTenderListFx.pending,
   updateByIdFx.pending,
   deleteByIdFx.pending,

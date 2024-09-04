@@ -107,7 +107,6 @@ export function TenderDrawer(props: TenderDrawerProps) {
         sx: {
           width: '100%',
           maxWidth: isCompact ? `${DRAWER_WIDTH}px` : `calc(${DRAWER_WIDTH}px + ${BANNER_WIDTH}px)`,
-          zIndex: Z_INDEX.Drawer,
         },
       }}
     >

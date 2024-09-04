@@ -3,7 +3,7 @@ export interface IUser {
   firstName: string
   lastName: string
   email: string
-  //   avatar: string
+  avatarUrl?: string
   address: string
   company: string
   createdAt: string
@@ -21,4 +21,9 @@ export interface ILoginUserResponse {
     refreshToken: string
     expiresIn: number
   }
+}
+
+export enum AccountType {
+  SUPPLIER = 'supplier',
+  CUSTOMER = 'customer',
 }

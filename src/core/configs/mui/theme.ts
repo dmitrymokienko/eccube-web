@@ -3,6 +3,7 @@ import { components } from './components'
 import { palette } from './palette'
 import { typography } from './typography'
 import type {} from '@mui/x-date-pickers/themeAugmentation' // When using TypeScript 4.x and above
+import { Z_INDEX } from '@/shared/libs/constants/style'
 
 export const muiTheme = createTheme({
   breakpoints: {
@@ -21,4 +22,9 @@ export const muiTheme = createTheme({
   palette,
   components,
   typography,
+  zIndex: {
+    appBar: Z_INDEX.Soaring,
+    drawer: Z_INDEX.Drawer,
+    modal: Z_INDEX.Dialog,
+  },
 })

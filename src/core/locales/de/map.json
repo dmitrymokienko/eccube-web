@@ -205,7 +205,19 @@
     "confirm-delete-title": "Ausschreibung löschen",
     "confirm-delete-content": "Sind Sie sicher, dass Sie diese Ausschreibung löschen möchten?"
   },
+  "settings": {
+    "label": {
+      "my-account": "Mein Konto",
+      "company-details": "Firmendetails",
+      "change-password": "Passwort ändern",
+      "delete-account": "Konto löschen"
+    }
+  },
   "modal": {
+    "logout": {
+      "title": "Ausloggen",
+      "content": "Möchten Sie sich wirklich abmelden?"
+    },
     "tender": {
       "delete-tender": {
         "title": "Ausschreibung löschen",
