@@ -22,3 +22,8 @@ export interface ILoginUserResponse {
     expiresIn: number
   }
 }
+
+export enum AccountType {
+  SUPPLIER = 'supplier',
+  CUSTOMER = 'customer',
+}

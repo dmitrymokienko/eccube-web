@@ -11,7 +11,8 @@ import { logoutUserApi } from '@/entities/auth/api'
 import { auth } from '@/entities/auth/model'
 import { useNavigate } from 'react-router-dom'
 import ListItemIcon from '@mui/material/ListItemIcon'
-import AccountCircleIcon from '@mui/icons-material/AccountCircle'
+// import AccountCircleIcon from '@mui/icons-material/AccountCircle'
+import SettingsIcon from '@mui/icons-material/Settings'
 import PersonIcon from '@mui/icons-material/Person'
 import EmailIcon from '@mui/icons-material/Email'
 import LogoutIcon from '@mui/icons-material/Logout'
@@ -61,7 +62,9 @@ export function AvatarMenu() {
         {user?.avatarUrl ? (
           <Avatar alt={initials} src={user.avatarUrl} />
         ) : (
-          <Avatar sx={(theme) => ({ bgcolor: theme.palette.custom.blue[1] })}>{initials}</Avatar>
+          <Avatar alt={initials} sx={(theme) => ({ bgcolor: theme.palette.custom.blue[1] })}>
+            <PersonIcon fontSize="small" />
+          </Avatar>
         )}
       </IconButton>
 
@@ -88,7 +91,7 @@ export function AvatarMenu() {
 
         <MenuItem onClick={handleAccount}>
           <ListItemIcon>
-            <AccountCircleIcon fontSize="small" />
+            <SettingsIcon fontSize="small" />
           </ListItemIcon>
           {t('settings.label.my-account')}
         </MenuItem>
