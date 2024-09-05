@@ -15,6 +15,7 @@ import SettingsIcon from '@mui/icons-material/Settings'
 import PersonIcon from '@mui/icons-material/Person'
 import EmailIcon from '@mui/icons-material/Email'
 import LogoutIcon from '@mui/icons-material/Logout'
+import DoneIcon from '@mui/icons-material/Done'
 import NiceModal from '@ebay/nice-modal-react'
 import { ConfirmationDialog } from '../Dialogs/ConfirmationDialog'
 import Divider from '@mui/material/Divider'
@@ -30,6 +31,7 @@ export function AvatarMenu() {
   const [anchorEl, setAnchorEl] = useState<Nullable<HTMLElement>>(null)
 
   const user = useUnit(currentUser.$info)
+  const language = useUnit(locale.$language)
 
   const handleClick = (event: MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget)
@@ -37,6 +39,12 @@ export function AvatarMenu() {
 
   const handleClose = () => {
     setAnchorEl(null)
+  }
+
+  const handleSelectLanguage = (lang: Locale) => {
+    locale.setLanguage(lang)
+    i18n.changeLanguage(lang)
+    handleClose()
   }
 
   const handleAccount = () => {
@@ -95,25 +103,33 @@ export function AvatarMenu() {
         <NestedMenuItem
           parentMenuOpen={!!anchorEl}
           rightAnchored={false}
-          onClick={handleClose}
           label={t('common.language')}
         >
           <MenuItem
             onClick={() => {
-              const lang = Locale.DE
-              locale.setLanguage(lang)
-              i18n.changeLanguage(lang)
+              handleSelectLanguage(Locale.DE)
             }}
           >
+            <ListItemIcon>
+              <DoneIcon
+                fontSize="small"
+                sx={{ visibility: language === Locale.DE ? 'visible' : 'hidden' }}
+              />
+            </ListItemIcon>
             {t('common.Germany')}
           </MenuItem>
+
           <MenuItem
             onClick={() => {
-              const lang = Locale.EN
-              locale.setLanguage(lang)
-              i18n.changeLanguage(lang)
+              handleSelectLanguage(Locale.EN)
             }}
           >
+            <ListItemIcon>
+              <DoneIcon
+                fontSize="small"
+                sx={{ visibility: language === Locale.EN ? 'visible' : 'hidden' }}
+              />
+            </ListItemIcon>
             {t('common.English')}
           </MenuItem>
         </NestedMenuItem>

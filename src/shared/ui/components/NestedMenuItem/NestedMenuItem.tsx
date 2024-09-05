@@ -79,6 +79,12 @@ export const NestedMenuItem = forwardRef<HTMLElement, NestedMenuItemProps>((prop
     return false
   }
 
+  const handleMouseClick: MouseEventHandler = (event) => {
+    if (event.target === containerRef.current) {
+      setIsSubMenuOpen(true)
+    }
+  }
+
   const handleFocus: FocusEventHandler = (event) => {
     if (event.target === containerRef.current) {
       setIsSubMenuOpen(true)
@@ -116,6 +122,7 @@ export const NestedMenuItem = forwardRef<HTMLElement, NestedMenuItemProps>((prop
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onKeyDown={handleKeyDown}
+      onClick={handleMouseClick}
     >
       <MenuItem ref={menuItemRef as Ref<HTMLLIElement>} {...MenuItemProps}>
         {rightAnchored ? (
