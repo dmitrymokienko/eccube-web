@@ -139,6 +139,19 @@ export const router = createBrowserRouter([
           },
         ],
       },
+      {
+        path: 'guest',
+        children: [
+          {
+            path: 'info',
+            element: <SupplierHomePage />,
+          },
+          {
+            path: 'job-pool',
+            element: <TendersPage />,
+          },
+        ],
+      },
       // autoredirect to customer dashboard
       {
         path: '*',
