@@ -17,11 +17,11 @@ import EmailIcon from '@mui/icons-material/Email'
 import LogoutIcon from '@mui/icons-material/Logout'
 import DoneIcon from '@mui/icons-material/Done'
 import NiceModal from '@ebay/nice-modal-react'
-import { ConfirmationDialog } from '../Dialogs/ConfirmationDialog'
 import Divider from '@mui/material/Divider'
-import { NestedMenuItem } from '../NestedMenuItem/NestedMenuItem'
 import { locale } from '@/entities/locale/model'
 import { Locale } from '@/entities/locale/types'
+import { ConfirmationDialog } from '@/shared/ui/components/Dialogs/ConfirmationDialog'
+import { NestedMenuItem } from '@/shared/ui/components/NestedMenuItem/NestedMenuItem'
 
 export function AvatarMenu() {
   const { t, i18n } = useTranslation()

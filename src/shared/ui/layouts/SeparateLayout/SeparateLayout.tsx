@@ -3,9 +3,9 @@ import { ReactNode } from 'react'
 import EccubeLogo from '../../../assets/icons/eccube-logo-white.svg?react'
 import { SxProps, Theme } from '@mui/material/styles'
 import useMediaQuery from '@mui/material/useMediaQuery'
-import { LangSwitcher } from '../../components/LangSwitcher/LangSwitcher'
 import { Loader as DefaultLoader } from '../../components/Loader'
 import { Z_INDEX } from '@/shared/libs/constants/style'
+import { LangSwitcher } from '@/widgets/LangSwitcher/ui/LangSwitcher'
 
 export interface ISeparateLayoutProps {
   children: ReactNode

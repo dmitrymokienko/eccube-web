@@ -14,8 +14,8 @@ import { ISidebarDrawerProps } from './components/SidebarDrawer'
 import { omit } from '@/shared/libs/utils/utilities'
 import { Z_INDEX } from '@/shared/libs/constants/style'
 import EccubeLogo from '@/shared/assets/icons/eccube-logo-dark.svg?react'
-import { AvatarMenu } from '../../components/AvatarMenu/AvatarMenu'
-import { ProfileTypeSwitcher } from '../../components/AccountTypeSwitcher/ProfileTypeSwitcher'
+import { ProfileTypeSwitcher } from '@/widgets/AccountTypeSwitcher/ui/ProfileTypeSwitcher'
+import { AvatarMenu } from '@/widgets/AvatarMenu/ui/AvatarMenu'
 
 export interface ISidebarLayoutProps {
   children: ReactNode
