@@ -11,22 +11,27 @@ import { logoutUserApi } from '@/entities/auth/api'
 import { auth } from '@/entities/auth/model'
 import { useNavigate } from 'react-router-dom'
 import ListItemIcon from '@mui/material/ListItemIcon'
-// import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import SettingsIcon from '@mui/icons-material/Settings'
 import PersonIcon from '@mui/icons-material/Person'
 import EmailIcon from '@mui/icons-material/Email'
 import LogoutIcon from '@mui/icons-material/Logout'
+import DoneIcon from '@mui/icons-material/Done'
 import NiceModal from '@ebay/nice-modal-react'
-import { ConfirmationDialog } from '../Dialogs/ConfirmationDialog'
 import Divider from '@mui/material/Divider'
+import { locale } from '@/entities/locale/model'
+import { Locale } from '@/entities/locale/types'
+import { ConfirmationDialog } from '@/shared/ui/components/Dialogs/ConfirmationDialog'
+import { NestedMenuItem } from '@/shared/ui/components/NestedMenuItem/NestedMenuItem'
 
 export function AvatarMenu() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
+
   const navigate = useNavigate()
 
-  const user = useUnit(currentUser.$info)
-
   const [anchorEl, setAnchorEl] = useState<Nullable<HTMLElement>>(null)
+
+  const user = useUnit(currentUser.$info)
+  const language = useUnit(locale.$language)
 
   const handleClick = (event: MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget)
@@ -34,6 +39,12 @@ export function AvatarMenu() {
 
   const handleClose = () => {
     setAnchorEl(null)
+  }
+
+  const handleSelectLanguage = (lang: Locale) => {
+    locale.setLanguage(lang)
+    i18n.changeLanguage(lang)
+    handleClose()
   }
 
   const handleAccount = () => {
@@ -88,6 +99,42 @@ export function AvatarMenu() {
         )}
 
         <Divider />
+
+        <NestedMenuItem
+          parentMenuOpen={!!anchorEl}
+          rightAnchored={false}
+          label={t('common.language')}
+        >
+          <MenuItem
+            onClick={() => {
+              handleSelectLanguage(Locale.DE)
+            }}
+          >
+            <ListItemIcon>
+              <DoneIcon
+                fontSize="small"
+                sx={{ visibility: language === Locale.DE ? 'visible' : 'hidden' }}
+              />
+            </ListItemIcon>
+            {t('common.Germany')}
+          </MenuItem>
+
+          <MenuItem
+            onClick={() => {
+              handleSelectLanguage(Locale.EN)
+            }}
+          >
+            <ListItemIcon>
+              <DoneIcon
+                fontSize="small"
+                sx={{ visibility: language === Locale.EN ? 'visible' : 'hidden' }}
+              />
+            </ListItemIcon>
+            {t('common.English')}
+          </MenuItem>
+        </NestedMenuItem>
+
+        <Divider sx={{ my: 1 }} />
 
         <MenuItem onClick={handleAccount}>
           <ListItemIcon>

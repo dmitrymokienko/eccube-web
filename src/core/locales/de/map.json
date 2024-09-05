@@ -24,9 +24,11 @@
   },
   "sidebar": {
     "home": "Startseite",
-    "tenders": "Ausschreibungen",
+    "tenders": "Meine Ausschreibungen",
     "payments": "Zahlungen",
     "settings": "Einstellungen",
+    "job-pool": "Stellenpool",
+    "participation": "Teilnahme",
     "banner-title1": "Wir sprechen gebäudemanagement",
     "banner-description1": "Über 10 Jahre Kommunikation und Projektmanagement mit Handwerkern, Einkäufern, Unternehmern, Beratern... zu verschiedenen Themen rund um das Gebäudemanagement.",
     "banner-title2": "Wir sichern ihr working capital",
@@ -143,6 +145,7 @@
   "common": {
     "language": "Sprache",
     "Germany": "Deutschland",
+    "English": "Englisch",
     "eccube": "Eccube",
     "dashboard": "Armaturenbrett",
     "settings": "Einstellungen",
@@ -211,6 +214,21 @@
       "company-details": "Firmendetails",
       "change-password": "Passwort ändern",
       "delete-account": "Konto löschen"
+    }
+  },
+  "profileType": {
+    "select-label": "Profiltyp",
+    "supplier": "Lieferant",
+    "customer": "Kunde"
+  },
+  "home": {
+    "customer": {
+      "title": "Jetzt sind Sie auf der Kundenseite",
+      "description": "Mit dem Kundenprofil können Sie Ausschreibungen erstellen, Lieferanten einladen und Zahlungen für den Gewinner der Ausschreibung vornehmen. Verwenden Sie das Navigationsmenü, um zur Anbieterseite zu wechseln."
+    },
+    "supplier": {
+      "title": "Jetzt sind Sie auf der Anbieterseite",
+      "description": "Mit dem Lieferantenprofil können Sie an Ausschreibungen teilnehmen, Einladungen erhalten und Bestellungen erstellen. Verwenden Sie das Navigationsmenü, um zur Kundenseite zu wechseln."
     }
   },
   "modal": {

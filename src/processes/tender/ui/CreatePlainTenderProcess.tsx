@@ -1,7 +1,3 @@
-import {
-  SEPARATE_LAYOUT_SIDEBAR_WIDTH,
-  SeparateLayout,
-} from '@/shared/ui/layouts/SeparateLayout/SeparateLayout'
 import EccubeBg from '@/shared/assets/images/eccube_bg2.jpeg'
 import { useUnit } from 'effector-react'
 import { ReactNode, useContext, useMemo } from 'react'
@@ -10,7 +6,6 @@ import { Outlet, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
-import { LogoutButton } from '@/shared/ui/components/Button/LogoutButton'
 import { PrevPageButton } from '@/shared/ui/components/Button/PrevPageButton'
 import { AuthContext } from '@/shared/ui/providers/AuthProvider'
 import { FormProvider, useForm } from 'react-hook-form'
@@ -18,6 +13,10 @@ import { PlainTenderProcessForm } from '@/features/tender/plain-tender/model/int
 import { tenderModel } from '@/features/tender/plain-tender/model'
 import { mapCountryCodeToName } from '@/shared/libs/mappers/countries'
 import { Locale } from '@/entities/locale/types'
+import {
+  SEPARATE_LAYOUT_SIDEBAR_WIDTH,
+  SeparateLayout,
+} from '@/shared/ui/layouts/SeparateLayout/ui/SeparateLayout'
 
 export interface ICreatePlainTenderProcessProps {
   children?: ReactNode
@@ -70,8 +69,6 @@ export function CreatePlainTenderProcess(props: ICreatePlainTenderProcessProps) 
           >
             {t('button.goBack')}
           </PrevPageButton>
-
-          <LogoutButton />
         </Box>
       }
       Sidebar={

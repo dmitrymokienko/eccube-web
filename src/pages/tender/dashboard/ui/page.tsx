@@ -1,4 +1,3 @@
-import { SidebarLayout } from '@/shared/ui/layouts/SidebarLayout/SidebarLayout'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import { useNavigate, useSearchParams } from 'react-router-dom'
@@ -10,6 +9,7 @@ import { tenderModel } from '@/features/tender/plain-tender/model'
 import { useUnit } from 'effector-react'
 import { currentUser } from '@/entities/currentUser/model'
 import { TenderDrawer } from '@/features/tender/plain-tender/ui/TenderDrawer'
+import { SidebarLayout } from '@/shared/ui/layouts/SidebarLayout/ui/SidebarLayout'
 
 export function TendersPage() {
   const { t } = useTranslation()

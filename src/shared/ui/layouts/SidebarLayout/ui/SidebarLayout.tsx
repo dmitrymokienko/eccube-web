@@ -1,13 +1,12 @@
 import Box from '@mui/material/Box'
 import { ComponentProps, ReactNode } from 'react'
 import { SxProps, useTheme } from '@mui/material/styles'
-import { LangSwitcher } from '../../components/LangSwitcher/LangSwitcher'
-import { Loader as DefaultLoader } from '../../components/Loader'
+import { Loader as DefaultLoader } from '../../../components/Loader'
 import {
   SIDEBAR_LAYOUT_DRAWER_WIDTH,
   SIDEBAR_LAYOUT_MAX_CONTENT_WIDTH,
   SIDEBAR_LAYOUT_NAV_HEIGHT,
-} from './lib/constants'
+} from '../lib/constants'
 import { Sidebar } from './components/Sidebar'
 import AppBar from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
@@ -15,7 +14,8 @@ import { ISidebarDrawerProps } from './components/SidebarDrawer'
 import { omit } from '@/shared/libs/utils/utilities'
 import { Z_INDEX } from '@/shared/libs/constants/style'
 import EccubeLogo from '@/shared/assets/icons/eccube-logo-dark.svg?react'
-import { AvatarMenu } from '../../components/AvatarMenu/AvatarMenu'
+import { ProfileTypeSwitcher } from '@/widgets/AccountTypeSwitcher/ui/ProfileTypeSwitcher'
+import { AvatarMenu } from '@/widgets/AvatarMenu/ui/AvatarMenu'
 
 export interface ISidebarLayoutProps {
   children: ReactNode
@@ -33,7 +33,6 @@ export interface ISidebarLayoutProps {
     visible?: boolean
     sx?: SxProps
   }
-  showLangSwitcher?: boolean
 }
 
 export function SidebarLayout(props: ISidebarLayoutProps) {
@@ -46,7 +45,6 @@ export function SidebarLayout(props: ISidebarLayoutProps) {
     MainProps = {},
     LoaderProps = {},
     SidebarProps = {},
-    showLangSwitcher = true,
   } = props
 
   const theme = useTheme()
@@ -103,15 +101,11 @@ export function SidebarLayout(props: ISidebarLayoutProps) {
 
           <Box sx={{ flexGrow: 1 }} />
 
-          {showLangSwitcher && (
-            <Box px={3}>
-              <LangSwitcher />
-            </Box>
-          )}
+          <Box px={3}>
+            <ProfileTypeSwitcher />
+          </Box>
 
           <AvatarMenu />
-
-          {/* <LogoutButton /> */}
         </Toolbar>
       </AppBar>
 

@@ -12,7 +12,7 @@ export function PlainTenderSuccessCreationPage() {
   const { id } = useParams() as { id: string }
 
   const onContinue = () => {
-    navigate(`/dashboard/tenders?id=${id}`)
+    navigate(`/dashboard/customer/tenders?id=${id}`)
   }
 
   return (

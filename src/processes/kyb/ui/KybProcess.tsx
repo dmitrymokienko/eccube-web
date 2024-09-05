@@ -1,7 +1,3 @@
-import {
-  SEPARATE_LAYOUT_SIDEBAR_WIDTH,
-  SeparateLayout,
-} from '@/shared/ui/layouts/SeparateLayout/SeparateLayout'
 import EccubeBg from '@/shared/assets/images/eccube_bg.jpeg'
 import { useUnit } from 'effector-react'
 import { ReactNode, useContext, useMemo } from 'react'
@@ -14,6 +10,10 @@ import { LogoutButton } from '@/shared/ui/components/Button/LogoutButton'
 import { kyb } from '@/entities/kyb/model'
 import { PrevPageButton } from '@/shared/ui/components/Button/PrevPageButton'
 import { AuthContext } from '@/shared/ui/providers/AuthProvider'
+import {
+  SEPARATE_LAYOUT_SIDEBAR_WIDTH,
+  SeparateLayout,
+} from '@/shared/ui/layouts/SeparateLayout/ui/SeparateLayout'
 
 export interface IAuthProcessProps {
   children?: ReactNode

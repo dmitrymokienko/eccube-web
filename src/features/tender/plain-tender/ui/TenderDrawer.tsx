@@ -167,21 +167,27 @@ export function TenderDrawer(props: TenderDrawerProps) {
 
             <Stack direction="row" spacing={1}>
               <Tooltip title={t('button.goBack')}>
-                <IconButton onClick={handleClose} color="default">
-                  <KeyboardBackspaceIcon />
-                </IconButton>
+                <span>
+                  <IconButton onClick={handleClose} color="default">
+                    <KeyboardBackspaceIcon />
+                  </IconButton>
+                </span>
               </Tooltip>
 
               <Tooltip title={t('tender-drawer.edit-details')}>
-                <IconButton onClick={onEdit} color="primary" disabled={!tenderData}>
-                  <EditIcon />
-                </IconButton>
+                <span>
+                  <IconButton onClick={onEdit} color="primary" disabled={!tenderData}>
+                    <EditIcon />
+                  </IconButton>
+                </span>
               </Tooltip>
 
               <Tooltip title={t('tender-drawer.delete-tender')}>
-                <IconButton onClick={onDelete} color="error" disabled={!tenderData}>
-                  <DeleteIcon />
-                </IconButton>
+                <span>
+                  <IconButton onClick={onDelete} color="error" disabled={!tenderData}>
+                    <DeleteIcon />
+                  </IconButton>
+                </span>
               </Tooltip>
             </Stack>
           </Stack>
@@ -214,19 +220,15 @@ export function TenderDrawer(props: TenderDrawerProps) {
             </ListItem>
 
             {!!tenderData.workDescription && (
-              <ListItem>
-                <ListItemText
-                  primary={t('tender-drawer.work-description')}
-                  secondary={
-                    <Box sx={{ mt: 1 }}>
-                      <RichTextEditor
-                        readOnly
-                        showRichBar={false}
-                        editorState={prepareRTEForRHF(tenderData.workDescription)}
-                      />
-                    </Box>
-                  }
-                />
+              <ListItem sx={{ flexDirection: 'column', alignItems: 'flex-start' }}>
+                <Typography variant="body1">{t('tender-drawer.work-description')}</Typography>
+                <Box sx={{ mt: 1, width: '100%' }}>
+                  <RichTextEditor
+                    readOnly
+                    showRichBar={false}
+                    editorState={prepareRTEForRHF(tenderData.workDescription)}
+                  />
+                </Box>
               </ListItem>
             )}
 

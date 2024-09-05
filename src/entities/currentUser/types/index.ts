@@ -23,7 +23,7 @@ export interface ILoginUserResponse {
   }
 }
 
-export enum AccountType {
+export enum ProfileType {
   SUPPLIER = 'supplier',
   CUSTOMER = 'customer',
 }

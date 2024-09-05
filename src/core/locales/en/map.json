@@ -24,9 +24,11 @@
   },
   "sidebar": {
     "home": "Home",
-    "tenders": "Tenders",
+    "tenders": "My Tenders",
     "payments": "Payments",
     "settings": "Settings",
+    "job-pool": "Job pool",
+    "participation": "Participation",
     "banner-title1": "We speak building management",
     "banner-description1": "Over 10 years of communication and project management with craftsmen, purchasers, contractors, consultants... on various topics related to facility management.",
     "banner-title2": "We secure your working capital",
@@ -142,6 +144,7 @@
   "common": {
     "language": "Language",
     "Germany": "Germany",
+    "English": "English",
     "eccube": "Eccube",
     "dashboard": "Dashboard",
     "settings": "Settings",
@@ -210,6 +213,21 @@
       "company-details": "Company details",
       "change-password": "Change password",
       "delete-account": "Delete account"
+    }
+  },
+  "profileType": {
+    "select-label": "Profile type",
+    "supplier": "Supplier",
+    "customer": "Customer"
+  },
+  "home": {
+    "customer": {
+      "title": "Now you are on the customer side",
+      "description": "Customer profile allows you to create tenders, invite suppliers, and make payments for tender's winner. Use the navigation menu to switch to the supplier side."
+    },
+    "supplier": {
+      "title": "Now you are on the supplier side",
+      "description": "Supplier profile allows you to participate in tenders, receive invitations and create orders. Use the navigation menu to switch to the customer side."
     }
   },
   "modal": {

@@ -1,4 +1,4 @@
-import { SidebarLayout } from '@/shared/ui/layouts/SidebarLayout/SidebarLayout'
+import { SidebarLayout } from '@/shared/ui/layouts/SidebarLayout/ui/SidebarLayout'
 import Typography from '@mui/material/Typography'
 
 export function SettingsPage() {

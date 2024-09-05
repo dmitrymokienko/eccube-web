@@ -1,5 +1,4 @@
 import { Navigate, createBrowserRouter } from 'react-router-dom'
-import { HomePage } from '@/pages/home/ui/page.tsx'
 import { KybProcess } from '@/processes/kyb/ui/KybProcess.tsx'
 import { TendersPage } from '@/pages/tender/dashboard/ui/page'
 import { SettingsPage } from '@/pages/settings/ui/page.tsx'
@@ -22,6 +21,8 @@ import { EditPlainTenderProcess } from '@/processes/tender/ui/EditPlainTenderPro
 import { PlainTenderEditionPage } from '@/pages/tender/edition/plain-tender/edition-form/ui/page'
 import { PlainTenderSuccessPublishingPage } from '@/pages/tender/edition/plain-tender/publishing-success/ui/page'
 import { PlainTenderDraftEditionPage } from '@/pages/tender/edition/plain-tender/draft-edition/ui/page'
+import { CustomerHomePage } from '@/pages/home/customer/ui/page'
+import { SupplierHomePage } from '@/pages/home/supplier/ui/page'
 
 export const router = createBrowserRouter([
   {
@@ -42,6 +43,7 @@ export const router = createBrowserRouter([
       },
     ],
   },
+
   {
     path: '/login',
     element: <AuthProcess />,
@@ -52,6 +54,7 @@ export const router = createBrowserRouter([
       },
     ],
   },
+
   {
     path: '/callback',
     element: <KybProcess />,
@@ -95,20 +98,51 @@ export const router = createBrowserRouter([
     element: <ProtectedRoute />,
     children: [
       {
-        path: 'home',
-        element: <HomePage />,
+        path: 'customer',
+        children: [
+          {
+            path: 'home',
+            element: <CustomerHomePage />,
+          },
+          {
+            path: 'payments',
+            element: <PaymentsPage />,
+          },
+          {
+            path: 'tenders',
+            element: <TendersPage />,
+          },
+          {
+            path: 'settings',
+            element: <SettingsPage />,
+          },
+        ],
       },
       {
-        path: 'payments',
-        element: <PaymentsPage />,
+        path: 'supplier',
+        children: [
+          {
+            path: 'home',
+            element: <SupplierHomePage />,
+          },
+          {
+            path: 'job-pool',
+            element: <TendersPage />,
+          },
+          {
+            path: 'participation',
+            element: <TendersPage />,
+          },
+          {
+            path: 'settings',
+            element: <SettingsPage />,
+          },
+        ],
       },
+      // autoredirect to customer dashboard
       {
-        path: 'tenders',
-        element: <TendersPage />,
-      },
-      {
-        path: 'settings',
-        element: <SettingsPage />,
+        path: '*',
+        element: <Navigate to="/dashboard/customer/home" replace />,
       },
     ],
   },

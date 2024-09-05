@@ -1,11 +1,11 @@
 import Button from '@mui/material/Button'
 import ReactJson, { InteractionProps } from 'react-json-view'
 import { useCallback, useState } from 'react'
-import { SidebarLayout } from '@/shared/ui/layouts/SidebarLayout/SidebarLayout'
 import { OnboardingInformer } from '@/features/onboarding/ui/OnboardingInformer'
 import { useTranslation } from 'react-i18next'
 import { mollie } from '@/entities/mollie/model'
 import Box from '@mui/material/Box'
+import { SidebarLayout } from '@/shared/ui/layouts/SidebarLayout/ui/SidebarLayout'
 
 const defaultPayment = {
   amount: {
