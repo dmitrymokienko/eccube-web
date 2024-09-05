@@ -1,7 +1,6 @@
 import Box from '@mui/material/Box'
 import { ComponentProps, ReactNode } from 'react'
 import { SxProps, useTheme } from '@mui/material/styles'
-import { LangSwitcher } from '../../components/LangSwitcher/LangSwitcher'
 import { Loader as DefaultLoader } from '../../components/Loader'
 import {
   SIDEBAR_LAYOUT_DRAWER_WIDTH,
@@ -34,7 +33,6 @@ export interface ISidebarLayoutProps {
     visible?: boolean
     sx?: SxProps
   }
-  showLangSwitcher?: boolean
 }
 
 export function SidebarLayout(props: ISidebarLayoutProps) {
@@ -47,7 +45,6 @@ export function SidebarLayout(props: ISidebarLayoutProps) {
     MainProps = {},
     LoaderProps = {},
     SidebarProps = {},
-    showLangSwitcher = true,
   } = props
 
   const theme = useTheme()
@@ -104,13 +101,9 @@ export function SidebarLayout(props: ISidebarLayoutProps) {
 
           <Box sx={{ flexGrow: 1 }} />
 
-          <ProfileTypeSwitcher />
-
-          {showLangSwitcher && (
-            <Box px={3}>
-              <LangSwitcher />
-            </Box>
-          )}
+          <Box px={3}>
+            <ProfileTypeSwitcher />
+          </Box>
 
           <AvatarMenu />
         </Toolbar>
