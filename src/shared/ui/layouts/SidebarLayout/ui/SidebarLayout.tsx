@@ -1,12 +1,12 @@
 import Box from '@mui/material/Box'
 import { ComponentProps, ReactNode } from 'react'
 import { SxProps, useTheme } from '@mui/material/styles'
-import { Loader as DefaultLoader } from '../../components/Loader'
+import { Loader as DefaultLoader } from '../../../components/Loader'
 import {
   SIDEBAR_LAYOUT_DRAWER_WIDTH,
   SIDEBAR_LAYOUT_MAX_CONTENT_WIDTH,
   SIDEBAR_LAYOUT_NAV_HEIGHT,
-} from './lib/constants'
+} from '../lib/constants'
 import { Sidebar } from './components/Sidebar'
 import AppBar from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'

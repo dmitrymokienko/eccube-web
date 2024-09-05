@@ -1,8 +1,3 @@
-import {
-  SEPARATE_LAYOUT_COMPACT_BREAKPOINT,
-  SEPARATE_LAYOUT_SIDEBAR_WIDTH,
-  SeparateLayout,
-} from '@/shared/ui/layouts/SeparateLayout/SeparateLayout'
 import EccubeBg from '@/shared/assets/images/eccube_bg.jpeg'
 import { useUnit } from 'effector-react'
 import { ReactNode, useMemo } from 'react'
@@ -15,6 +10,11 @@ import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import { auth } from '@/entities/auth/model'
+import {
+  SEPARATE_LAYOUT_COMPACT_BREAKPOINT,
+  SEPARATE_LAYOUT_SIDEBAR_WIDTH,
+  SeparateLayout,
+} from '@/shared/ui/layouts/SeparateLayout/ui/SeparateLayout'
 
 export interface IAuthProcessProps {
   children?: ReactNode

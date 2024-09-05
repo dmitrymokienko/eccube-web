@@ -1,7 +1,3 @@
-import {
-  SEPARATE_LAYOUT_SIDEBAR_WIDTH,
-  SeparateLayout,
-} from '@/shared/ui/layouts/SeparateLayout/SeparateLayout'
 import EccubeBg from '@/shared/assets/images/eccube_bg2.jpeg'
 import { useUnit } from 'effector-react'
 import { ReactNode, useContext, useMemo } from 'react'
@@ -17,6 +13,10 @@ import { PlainTenderProcessForm } from '@/features/tender/plain-tender/model/int
 import { tenderModel } from '@/features/tender/plain-tender/model'
 import { mapCountryCodeToName } from '@/shared/libs/mappers/countries'
 import { Locale } from '@/entities/locale/types'
+import {
+  SEPARATE_LAYOUT_SIDEBAR_WIDTH,
+  SeparateLayout,
+} from '@/shared/ui/layouts/SeparateLayout/ui/SeparateLayout'
 
 export interface ICreatePlainTenderProcessProps {
   children?: ReactNode
