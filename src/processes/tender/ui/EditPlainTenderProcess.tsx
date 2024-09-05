@@ -10,7 +10,6 @@ import { Outlet, useNavigate, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
-import { LogoutButton } from '@/shared/ui/components/Button/LogoutButton'
 import { PrevPageButton } from '@/shared/ui/components/Button/PrevPageButton'
 import { AuthContext } from '@/shared/ui/providers/AuthProvider'
 import { FormProvider, useForm } from 'react-hook-form'
@@ -70,8 +69,6 @@ export function EditPlainTenderProcess(props: IEditPlainTenderProcessProps) {
           }}
         >
           <PrevPageButton onClick={() => navigate(-1)}>{t('button.goBack')}</PrevPageButton>
-
-          <LogoutButton />
         </Box>
       }
       Sidebar={

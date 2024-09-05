@@ -16,6 +16,7 @@ import { omit } from '@/shared/libs/utils/utilities'
 import { Z_INDEX } from '@/shared/libs/constants/style'
 import EccubeLogo from '@/shared/assets/icons/eccube-logo-dark.svg?react'
 import { AvatarMenu } from '../../components/AvatarMenu/AvatarMenu'
+import { ProfileTypeSwitcher } from '../../components/AccountTypeSwitcher/ProfileTypeSwitcher'
 
 export interface ISidebarLayoutProps {
   children: ReactNode
@@ -103,6 +104,8 @@ export function SidebarLayout(props: ISidebarLayoutProps) {
 
           <Box sx={{ flexGrow: 1 }} />
 
+          <ProfileTypeSwitcher />
+
           {showLangSwitcher && (
             <Box px={3}>
               <LangSwitcher />
@@ -110,8 +113,6 @@ export function SidebarLayout(props: ISidebarLayoutProps) {
           )}
 
           <AvatarMenu />
-
-          {/* <LogoutButton /> */}
         </Toolbar>
       </AppBar>
 

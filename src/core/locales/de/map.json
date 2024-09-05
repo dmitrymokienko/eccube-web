@@ -213,6 +213,11 @@
       "delete-account": "Konto löschen"
     }
   },
+  "profileType": {
+    "select-label": "Profiltyp",
+    "supplier": "Lieferant",
+    "customer": "Kunde"
+  },
   "modal": {
     "logout": {
       "title": "Ausloggen",

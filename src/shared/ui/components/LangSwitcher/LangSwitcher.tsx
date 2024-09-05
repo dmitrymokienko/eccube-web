@@ -34,7 +34,7 @@ export function LangSwitcher() {
         labelId="lang-select-label"
         id="lang-select"
         value={language}
-        label="Language"
+        label={t('common.language')}
         onChange={handleChange}
       >
         <MenuItem value={Locale.DE}>DE</MenuItem> {/* Deutsch */}
