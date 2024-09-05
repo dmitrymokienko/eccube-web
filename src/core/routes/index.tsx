@@ -94,6 +94,21 @@ export const router = createBrowserRouter([
   },
 
   {
+    path: '/dashboard/guest',
+    // element: <div />,
+    children: [
+      {
+        path: 'home',
+        element: <SupplierHomePage />,
+      },
+      {
+        path: 'job-pool',
+        element: <TendersPage />,
+      },
+    ],
+  },
+
+  {
     path: '/dashboard',
     element: <ProtectedRoute />,
     children: [
@@ -136,19 +151,6 @@ export const router = createBrowserRouter([
           {
             path: 'settings',
             element: <SettingsPage />,
-          },
-        ],
-      },
-      {
-        path: 'guest',
-        children: [
-          {
-            path: 'info',
-            element: <SupplierHomePage />,
-          },
-          {
-            path: 'job-pool',
-            element: <TendersPage />,
           },
         ],
       },
