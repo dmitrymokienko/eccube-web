@@ -220,6 +220,16 @@
     "supplier": "Supplier",
     "customer": "Customer"
   },
+  "home": {
+    "customer": {
+      "title": "Now you are on the customer side",
+      "description": "Customer profile allows you to create tenders, invite suppliers, and make payments for tender's winner. Use the navigation menu to switch to the supplier side."
+    },
+    "supplier": {
+      "title": "Now you are on the supplier side",
+      "description": "Supplier profile allows you to participate in tenders, receive invitations and create orders. Use the navigation menu to switch to the customer side."
+    }
+  },
   "modal": {
     "logout": {
       "title": "Logout",

@@ -221,6 +221,16 @@
     "supplier": "Lieferant",
     "customer": "Kunde"
   },
+  "home": {
+    "customer": {
+      "title": "Jetzt sind Sie auf der Kundenseite",
+      "description": "Mit dem Kundenprofil können Sie Ausschreibungen erstellen, Lieferanten einladen und Zahlungen für den Gewinner der Ausschreibung vornehmen. Verwenden Sie das Navigationsmenü, um zur Anbieterseite zu wechseln."
+    },
+    "supplier": {
+      "title": "Jetzt sind Sie auf der Anbieterseite",
+      "description": "Mit dem Lieferantenprofil können Sie an Ausschreibungen teilnehmen, Einladungen erhalten und Bestellungen erstellen. Verwenden Sie das Navigationsmenü, um zur Kundenseite zu wechseln."
+    }
+  },
   "modal": {
     "logout": {
       "title": "Ausloggen",
