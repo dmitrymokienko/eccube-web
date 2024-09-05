@@ -142,6 +142,7 @@
   "common": {
     "language": "Language",
     "Germany": "Germany",
+    "English": "English",
     "eccube": "Eccube",
     "dashboard": "Dashboard",
     "settings": "Settings",

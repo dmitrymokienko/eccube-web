@@ -105,7 +105,7 @@ export function AvatarMenu() {
               i18n.changeLanguage(lang)
             }}
           >
-            GE
+            {t('common.Germany')}
           </MenuItem>
           <MenuItem
             onClick={() => {
@@ -114,7 +114,7 @@ export function AvatarMenu() {
               i18n.changeLanguage(lang)
             }}
           >
-            EN
+            {t('common.English')}
           </MenuItem>
         </NestedMenuItem>
 
