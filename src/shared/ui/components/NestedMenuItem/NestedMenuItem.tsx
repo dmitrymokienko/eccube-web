@@ -105,10 +105,7 @@ export const NestedMenuItem = forwardRef<HTMLElement, NestedMenuItemProps>((prop
 
   const open = isSubMenuOpen && parentMenuOpen
 
-  let tabIndex
-  if (!props.disabled) {
-    tabIndex = tabIndexProp !== undefined ? tabIndexProp : -1
-  }
+  const tabIndex = props.disabled ? undefined : tabIndexProp !== undefined ? tabIndexProp : -1
 
   return (
     <Box
