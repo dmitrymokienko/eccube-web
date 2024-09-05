@@ -68,7 +68,7 @@ export function AuthProvider({ children }: IAuthProviderProps) {
         setLoggedIn(true)
         // auto-redirect after token refresh
         if (window.location.pathname === '/login' || window.location.pathname === '/signup') {
-          window.location.href = '/dashboard/home'
+          window.location.href = '/dashboard/customer/home'
         }
       }
       return user

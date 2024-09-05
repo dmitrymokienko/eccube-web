@@ -6,14 +6,17 @@ import { useUnit } from 'effector-react'
 import { useTranslation } from 'react-i18next'
 import { currentUser } from '@/entities/currentUser/model'
 import { ProfileType } from '@/entities/currentUser/types'
+import { useNavigate } from 'react-router-dom'
 
 export function ProfileTypeSwitcher() {
   const { t } = useTranslation()
+  const navigate = useNavigate()
 
   const profileType = useUnit(currentUser.$profileType)
 
   const handleChange = (e: SelectChangeEvent) => {
     currentUser.setProfileType(e.target.value as ProfileType)
+    navigate(`/dashboard/${e.target.value}/home`)
   }
 
   return (

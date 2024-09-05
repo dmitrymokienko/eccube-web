@@ -24,9 +24,11 @@
   },
   "sidebar": {
     "home": "Startseite",
-    "tenders": "Ausschreibungen",
+    "tenders": "Meine Ausschreibungen",
     "payments": "Zahlungen",
     "settings": "Einstellungen",
+    "job-pool": "Stellenpool",
+    "participation": "Teilnahme",
     "banner-title1": "Wir sprechen gebäudemanagement",
     "banner-description1": "Über 10 Jahre Kommunikation und Projektmanagement mit Handwerkern, Einkäufern, Unternehmern, Beratern... zu verschiedenen Themen rund um das Gebäudemanagement.",
     "banner-title2": "Wir sichern ihr working capital",

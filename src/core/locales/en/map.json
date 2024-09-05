@@ -24,9 +24,11 @@
   },
   "sidebar": {
     "home": "Home",
-    "tenders": "Tenders",
+    "tenders": "My Tenders",
     "payments": "Payments",
     "settings": "Settings",
+    "job-pool": "Job pool",
+    "participation": "Participation",
     "banner-title1": "We speak building management",
     "banner-description1": "Over 10 years of communication and project management with craftsmen, purchasers, contractors, consultants... on various topics related to facility management.",
     "banner-title2": "We secure your working capital",

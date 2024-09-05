@@ -5,8 +5,8 @@ import Select, { SelectChangeEvent } from '@mui/material/Select'
 import { useUnit } from 'effector-react'
 import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import { locale } from '../../../../entities/locale/model'
-import { Locale } from '../../../../entities/locale/types'
+import { locale } from '@/entities/locale/model'
+import { Locale } from '@/entities/locale/types'
 
 // TODO: customize component
 export function LangSwitcher() {

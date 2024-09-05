@@ -95,20 +95,51 @@ export const router = createBrowserRouter([
     element: <ProtectedRoute />,
     children: [
       {
-        path: 'home',
-        element: <HomePage />,
+        path: 'customer',
+        children: [
+          {
+            path: 'home',
+            element: <HomePage />,
+          },
+          {
+            path: 'payments',
+            element: <PaymentsPage />,
+          },
+          {
+            path: 'tenders',
+            element: <TendersPage />,
+          },
+          {
+            path: 'settings',
+            element: <SettingsPage />,
+          },
+        ],
       },
       {
-        path: 'payments',
-        element: <PaymentsPage />,
+        path: 'supplier',
+        children: [
+          {
+            path: 'home',
+            element: <HomePage />,
+          },
+          {
+            path: 'job-pool',
+            element: <TendersPage />,
+          },
+          {
+            path: 'participation',
+            element: <TendersPage />,
+          },
+          {
+            path: 'settings',
+            element: <SettingsPage />,
+          },
+        ],
       },
+      // autoredirect to customer dashboard
       {
-        path: 'tenders',
-        element: <TendersPage />,
-      },
-      {
-        path: 'settings',
-        element: <SettingsPage />,
+        path: '*',
+        element: <Navigate to="/dashboard/customer/home" replace />,
       },
     ],
   },
