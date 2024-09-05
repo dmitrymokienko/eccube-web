@@ -11,7 +11,6 @@ import { logoutUserApi } from '@/entities/auth/api'
 import { auth } from '@/entities/auth/model'
 import { useNavigate } from 'react-router-dom'
 import ListItemIcon from '@mui/material/ListItemIcon'
-// import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import SettingsIcon from '@mui/icons-material/Settings'
 import PersonIcon from '@mui/icons-material/Person'
 import EmailIcon from '@mui/icons-material/Email'
@@ -19,14 +18,18 @@ import LogoutIcon from '@mui/icons-material/Logout'
 import NiceModal from '@ebay/nice-modal-react'
 import { ConfirmationDialog } from '../Dialogs/ConfirmationDialog'
 import Divider from '@mui/material/Divider'
+import { NestedMenuItem } from '../NestedMenuItem/NestedMenuItem'
+import { locale } from '@/entities/locale/model'
+import { Locale } from '@/entities/locale/types'
 
 export function AvatarMenu() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
+
   const navigate = useNavigate()
 
-  const user = useUnit(currentUser.$info)
-
   const [anchorEl, setAnchorEl] = useState<Nullable<HTMLElement>>(null)
+
+  const user = useUnit(currentUser.$info)
 
   const handleClick = (event: MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget)
@@ -88,6 +91,34 @@ export function AvatarMenu() {
         )}
 
         <Divider />
+
+        <NestedMenuItem
+          parentMenuOpen={!!anchorEl}
+          rightAnchored={false}
+          onClick={handleClose}
+          label={t('common.language')}
+        >
+          <MenuItem
+            onClick={() => {
+              const lang = Locale.DE
+              locale.setLanguage(lang)
+              i18n.changeLanguage(lang)
+            }}
+          >
+            GE
+          </MenuItem>
+          <MenuItem
+            onClick={() => {
+              const lang = Locale.EN
+              locale.setLanguage(lang)
+              i18n.changeLanguage(lang)
+            }}
+          >
+            EN
+          </MenuItem>
+        </NestedMenuItem>
+
+        <Divider sx={{ my: 1 }} />
 
         <MenuItem onClick={handleAccount}>
           <ListItemIcon>
