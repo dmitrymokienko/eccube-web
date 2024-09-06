@@ -18,5 +18,5 @@ export type PlainTenderProcessForm = Omit<
   workDescription: EditorState
 }
 
-// type TenderListQueryFiltersKeys = 'createdById' | 'onlyDrafts' | 'excludeDrafts' | 'limit' | 'offset'
+// type TenderListQueryFiltersKeys = 'onlyAuthorTendersById' | 'excludeAuthorTendersById' | 'onlyDrafts' | 'excludeDrafts' | 'limit' | 'page'
 export type TenderListQueryFilters = Record<string, string | number | boolean | undefined | null>

@@ -22,7 +22,7 @@ export function TendersPage() {
 
   useEffect(() => {
     if (!user) return
-    tenderModel.fetchTenderListFx({ createdById: user.id })
+    tenderModel.fetchTenderListFx({ onlyAuthorTendersById: user.id })
   }, [user])
 
   const onCloseDrawer = () => {
