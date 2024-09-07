@@ -31,7 +31,7 @@ import { formatDate } from '@/shared/libs/utils/datetime'
 import { mapCountryCodeToName } from '@/shared/libs/mappers/countries'
 import { Locale } from '@/entities/locale/types'
 import { Z_INDEX } from '@/shared/libs/constants/style'
-import { tenderModel } from '../model'
+import { tenderModel } from '../../../model'
 import { ConfirmationDialog } from '@/shared/ui/components/Dialogs/ConfirmationDialog'
 import { Nullable } from '@/shared/types/utilities'
 
@@ -44,7 +44,7 @@ interface TenderDrawerProps {
   onClose: () => void
 }
 
-export function TenderDrawer(props: TenderDrawerProps) {
+export function CustomerTenderDrawer(props: TenderDrawerProps) {
   const { id, open, onClose } = props
 
   const { t } = useTranslation()

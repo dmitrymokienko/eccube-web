@@ -8,8 +8,8 @@ import { prepareTenderTable } from '../lib/utils'
 import { tenderModel } from '@/features/tender/plain-tender/model'
 import { useUnit } from 'effector-react'
 import { currentUser } from '@/entities/currentUser/model'
-import { TenderDrawer } from '@/features/tender/plain-tender/ui/TenderDrawer'
 import { SidebarLayout } from '@/shared/ui/layouts/SidebarLayout/ui/SidebarLayout'
+import { CustomerTenderDrawer } from '@/features/tender/plain-tender/ui/drawers/customerTenderDrawer/CustomerTenderDrawer'
 
 export function CustomerTendersPage() {
   const { t } = useTranslation()
@@ -56,7 +56,7 @@ export function CustomerTendersPage() {
         </Button>
       </Box>
 
-      <TenderDrawer id={id} open={isDrawerOpen} onClose={onCloseDrawer} />
+      <CustomerTenderDrawer id={id} open={isDrawerOpen} onClose={onCloseDrawer} />
 
       <Table {...tableData} onRowClick={onRowClick} />
     </SidebarLayout>
