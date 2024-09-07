@@ -11,7 +11,7 @@ import { currentUser } from '@/entities/currentUser/model'
 import { TenderDrawer } from '@/features/tender/plain-tender/ui/TenderDrawer'
 import { SidebarLayout } from '@/shared/ui/layouts/SidebarLayout/ui/SidebarLayout'
 
-export function TendersPage() {
+export function JobPoolTendersPage() {
   const { t } = useTranslation()
   const navigate = useNavigate()
   const [params, setParams] = useSearchParams()
@@ -22,7 +22,7 @@ export function TendersPage() {
 
   useEffect(() => {
     if (!user) return
-    tenderModel.fetchTenderListFx({ onlyAuthorTendersById: user.id })
+    tenderModel.fetchTenderListFx({ excludeAuthorTendersById: user.id, excludeDrafts: true })
   }, [user])
 
   const onCloseDrawer = () => {

@@ -1,6 +1,6 @@
 import { Navigate, createBrowserRouter } from 'react-router-dom'
 import { KybProcess } from '@/processes/kyb/ui/KybProcess.tsx'
-import { TendersPage } from '@/pages/tender/dashboard/ui/page'
+import { CustomerTendersPage } from '@/pages/tender/dashboard/customer/ui/page'
 import { SettingsPage } from '@/pages/settings/ui/page.tsx'
 import { AuthProcess } from '@/processes/auth/ui/AuthProcess.tsx'
 import { CreatePlainTenderProcess } from '@/processes/tender/ui/CreatePlainTenderProcess.tsx'
@@ -23,6 +23,7 @@ import { PlainTenderSuccessPublishingPage } from '@/pages/tender/edition/plain-t
 import { PlainTenderDraftEditionPage } from '@/pages/tender/edition/plain-tender/draft-edition/ui/page'
 import { CustomerHomePage } from '@/pages/home/customer/ui/page'
 import { SupplierHomePage } from '@/pages/home/supplier/ui/page'
+import { JobPoolTendersPage } from '@/pages/tender/dashboard/supplier/ui/page'
 
 export const router = createBrowserRouter([
   {
@@ -93,6 +94,7 @@ export const router = createBrowserRouter([
     ],
   },
 
+  // TODO: update
   {
     path: '/dashboard/guest',
     // element: <div />,
@@ -103,7 +105,7 @@ export const router = createBrowserRouter([
       },
       {
         path: 'job-pool',
-        element: <TendersPage />,
+        element: <JobPoolTendersPage />,
       },
     ],
   },
@@ -125,7 +127,7 @@ export const router = createBrowserRouter([
           },
           {
             path: 'tenders',
-            element: <TendersPage />,
+            element: <CustomerTendersPage />,
           },
           {
             path: 'settings',
@@ -142,11 +144,11 @@ export const router = createBrowserRouter([
           },
           {
             path: 'job-pool',
-            element: <TendersPage />,
+            element: <JobPoolTendersPage />,
           },
           {
             path: 'participation',
-            element: <TendersPage />,
+            element: <div>NEXT TIME</div>,
           },
           {
             path: 'settings',
