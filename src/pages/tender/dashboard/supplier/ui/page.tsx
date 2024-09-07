@@ -8,10 +8,10 @@ import { prepareTenderTable } from '../lib/utils'
 import { tenderModel } from '@/features/tender/plain-tender/model'
 import { useUnit } from 'effector-react'
 import { currentUser } from '@/entities/currentUser/model'
-import { TenderDrawer } from '@/features/tender/plain-tender/ui/TenderDrawer'
 import { SidebarLayout } from '@/shared/ui/layouts/SidebarLayout/ui/SidebarLayout'
+import { JobPoolTenderDrawer } from '@/features/tender/plain-tender/ui/drawers/jobPoolTenderDrawer/JobPoolTenderDrawer'
 
-export function TendersPage() {
+export function JobPoolTendersPage() {
   const { t } = useTranslation()
   const navigate = useNavigate()
   const [params, setParams] = useSearchParams()
@@ -22,7 +22,7 @@ export function TendersPage() {
 
   useEffect(() => {
     if (!user) return
-    tenderModel.fetchTenderListFx({ createdById: user.id })
+    tenderModel.fetchTenderListFx({ excludeAuthorTendersById: user.id, excludeDrafts: true })
   }, [user])
 
   const onCloseDrawer = () => {
@@ -56,7 +56,7 @@ export function TendersPage() {
         </Button>
       </Box>
 
-      <TenderDrawer id={id} open={isDrawerOpen} onClose={onCloseDrawer} />
+      <JobPoolTenderDrawer id={id} open={isDrawerOpen} onClose={onCloseDrawer} />
 
       <Table {...tableData} onRowClick={onRowClick} />
     </SidebarLayout>

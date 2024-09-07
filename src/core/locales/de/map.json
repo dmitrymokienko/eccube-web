@@ -206,7 +206,8 @@
     "publishment": "Veröffentlichung",
     "invited-suppliers": "Eingeladene Lieferanten",
     "confirm-delete-title": "Ausschreibung löschen",
-    "confirm-delete-content": "Sind Sie sicher, dass Sie diese Ausschreibung löschen möchten?"
+    "confirm-delete-content": "Sind Sie sicher, dass Sie diese Ausschreibung löschen möchten?",
+    "participate-button": "Teilnehmen"
   },
   "settings": {
     "label": {
@@ -244,6 +245,10 @@
       "confirm-publish-tender": {
         "title": "Ausschreibung veröffentlichen",
         "content": "Sind Sie sicher, dass Sie diese Ausschreibung veröffentlichen möchten?"
+      },
+      "confirm-participate": {
+        "title": "An der Ausschreibung teilnehmen",
+        "content": "Sind Sie sicher, dass Sie an dieser Ausschreibung teilnehmen"
       }
     }
   }

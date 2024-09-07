@@ -53,7 +53,7 @@ sample({
     deleteByIdFx.doneData,
   ],
   source: currentUser.$info,
-  fn: (user) => ({ createdById: user?.id }),
+  fn: (user) => ({ onlyAuthorTendersById: user?.id }),
   target: fetchTenderListFx,
 })
 
