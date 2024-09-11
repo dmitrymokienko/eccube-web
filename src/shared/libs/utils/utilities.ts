@@ -25,10 +25,8 @@ export function createQueryParams(
   Object.entries(params).forEach(([key, value]) => {
     if (Array.isArray(value)) {
       value.forEach((val) => searchParams.append(key, val))
-    } else {
-      if (value !== undefined) {
-        searchParams.append(key, `${value}`)
-      }
+    } else if (value !== undefined) {
+      searchParams.append(key, `${value}`)
     }
   })
   return searchParams.toString()
