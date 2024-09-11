@@ -18,7 +18,7 @@
     "preview": "vite preview",
     "preinstall": "npx only-allow pnpm",
     "prepare": "husky install",
-    "precommit": "lint-staged && tsc"
+    "precommit": "lint-staged && tsc --noEmit"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx}": [
