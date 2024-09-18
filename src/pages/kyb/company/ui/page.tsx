@@ -73,8 +73,11 @@ export function CompanyKybPage() {
               setValueAs: (value) => value.trim(),
             })}
             // https://github.com/react-hook-form/react-hook-form/issues/220
-            InputLabelProps={{ shrink: !!watch('name') }}
+            slotProps={{
+              inputLabel: { shrink: !!watch('name') },
+            }}
           />
+
           <TextField
             label={t('field.registration-number')}
             placeholder={t('placeholder.registration-number')}
@@ -84,8 +87,11 @@ export function CompanyKybPage() {
               required: t('validation.required'),
               setValueAs: (value) => value.trim(),
             })}
-            InputLabelProps={{ shrink: !!watch('registrationNumber') }}
+            slotProps={{
+              inputLabel: { shrink: !!watch('registrationNumber') },
+            }}
           />
+
           <TextField
             label={t('field.vat-number')}
             placeholder={t('placeholder.vat-number')}
@@ -95,8 +101,11 @@ export function CompanyKybPage() {
               required: t('validation.required'),
               setValueAs: (value) => value.trim(),
             })}
-            InputLabelProps={{ shrink: !!watch('vatNumber') }}
+            slotProps={{
+              inputLabel: { shrink: !!watch('vatNumber') },
+            }}
           />
+
           {/* address */}
           <TextField
             label={t('field.street-and-number')}
@@ -107,8 +116,11 @@ export function CompanyKybPage() {
               required: t('validation.required'),
               setValueAs: (value) => value.trim(),
             })}
-            InputLabelProps={{ shrink: !!watch('address.streetAndNumber') }}
+            slotProps={{
+              inputLabel: { shrink: !!watch('address.streetAndNumber') },
+            }}
           />
+
           <TextField
             label={t('field.postal-code')}
             placeholder={t('placeholder.postal-code')}
@@ -118,8 +130,11 @@ export function CompanyKybPage() {
               required: t('validation.required'),
               setValueAs: (value) => value.trim(),
             })}
-            InputLabelProps={{ shrink: !!watch('address.postalCode') }}
+            slotProps={{
+              inputLabel: { shrink: !!watch('address.postalCode') },
+            }}
           />
+
           <TextField
             label={t('field.city')}
             placeholder={t('placeholder.city')}
@@ -129,8 +144,11 @@ export function CompanyKybPage() {
               required: t('validation.required'),
               setValueAs: (value) => value.trim(),
             })}
-            InputLabelProps={{ shrink: !!watch('address.city') }}
+            slotProps={{
+              inputLabel: { shrink: !!watch('address.city') },
+            }}
           />
+
           {/* TODO: select */}
           <TextField
             label={t('field.country')}
@@ -141,7 +159,9 @@ export function CompanyKybPage() {
               required: t('validation.required'),
               setValueAs: (value) => value.trim(),
             })}
-            InputLabelProps={{ shrink: !!watch('address.country') }}
+            slotProps={{
+              inputLabel: { shrink: !!watch('address.country') },
+            }}
           />
 
           <Button variant="contained" type="submit" sx={{ marginTop: '24px' }}>

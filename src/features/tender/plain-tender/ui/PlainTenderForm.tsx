@@ -46,7 +46,9 @@ export function PlainTenderForm(props: IPlainTenderFormProps) {
           validate: (value = '') => value.trim().length < 120,
         })}
         // https://github.com/react-hook-form/react-hook-form/issues/220
-        InputLabelProps={{ shrink: !!watch('title') }}
+        slotProps={{
+          inputLabel: { shrink: !!watch('title') },
+        }}
       />
 
       <TextField
@@ -60,7 +62,9 @@ export function PlainTenderForm(props: IPlainTenderFormProps) {
           validate: (value = '') => value.trim().length < 300,
         })}
         // https://github.com/react-hook-form/react-hook-form/issues/220
-        InputLabelProps={{ shrink: !!watch('shortDescription') }}
+        slotProps={{
+          inputLabel: { shrink: !!watch('shortDescription') },
+        }}
       />
 
       {/* PRICE */}
@@ -139,7 +143,9 @@ export function PlainTenderForm(props: IPlainTenderFormProps) {
           validate: (value = '') => value.trim().length < 200,
         })}
         // https://github.com/react-hook-form/react-hook-form/issues/220
-        InputLabelProps={{ shrink: !!watch('street') }}
+        slotProps={{
+          inputLabel: { shrink: !!watch('street') },
+        }}
       />
 
       <TextField
@@ -153,7 +159,9 @@ export function PlainTenderForm(props: IPlainTenderFormProps) {
           validate: (value = '') => value.trim().length < 200,
         })}
         // https://github.com/react-hook-form/react-hook-form/issues/220
-        InputLabelProps={{ shrink: !!watch('addressSuffix') }}
+        slotProps={{
+          inputLabel: { shrink: !!watch('addressSuffix') },
+        }}
       />
 
       <TextField
@@ -168,7 +176,9 @@ export function PlainTenderForm(props: IPlainTenderFormProps) {
           validate: (value = '') => value.trim().length < 5,
         })}
         // https://github.com/react-hook-form/react-hook-form/issues/220
-        InputLabelProps={{ shrink: !!watch('postalCode') }}
+        slotProps={{
+          inputLabel: { shrink: !!watch('postalCode') },
+        }}
       />
 
       <TextField
@@ -182,7 +192,9 @@ export function PlainTenderForm(props: IPlainTenderFormProps) {
           validate: (value = '') => value.trim().length < 200,
         })}
         // https://github.com/react-hook-form/react-hook-form/issues/220
-        InputLabelProps={{ shrink: !!watch('city') }}
+        slotProps={{
+          inputLabel: { shrink: !!watch('city') },
+        }}
       />
 
       <TextField
@@ -197,7 +209,9 @@ export function PlainTenderForm(props: IPlainTenderFormProps) {
           validate: (value = '') => value.trim().length < 200,
         })}
         // https://github.com/react-hook-form/react-hook-form/issues/220
-        InputLabelProps={{ shrink: true }} // due to the fact that readonly/disabled fields are empty
+        slotProps={{
+          inputLabel: { shrink: true }, // due to the fact that readonly/disabled fields are empty
+        }}
       />
 
       {/* TODO: mobile view (column) */}
