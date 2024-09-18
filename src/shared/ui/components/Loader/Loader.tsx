@@ -18,7 +18,7 @@ export function Loader(props: ILoaderProps) {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'rgba(0,0,0,0.1)',
+        backgroundColor: 'rgba(0,0,0,0.5)',
         zIndex: Z_INDEX.Loader,
         position: 'fixed',
         top: 0,
