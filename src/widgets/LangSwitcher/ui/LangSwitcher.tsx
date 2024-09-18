@@ -18,8 +18,7 @@ export function LangSwitcher() {
     if (language) {
       i18n.changeLanguage(language)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [language])
 
   const handleChange = (event: SelectChangeEvent) => {
     const lang = event.target.value as Locale
