@@ -11,6 +11,7 @@ import { TenderPublishmentField } from './components/TenderPublishmentField'
 import { TenderPaymentTermField } from './components/TenderPaymentTermField'
 import { FilesUploader } from '@/features/uploadFiles/ui/FilesUploader'
 import { EmailTextField } from '@/shared/ui/components/TextFields/EmailTextField'
+import { PriceMultiField } from './components/PriceMultiField'
 
 export interface IPlainTenderFormProps {
   uploadedFiles: File[]
@@ -62,6 +63,30 @@ export function PlainTenderForm(props: IPlainTenderFormProps) {
         InputLabelProps={{ shrink: !!watch('shortDescription') }}
       />
 
+      {/* PRICE */}
+
+      <PriceMultiField />
+
+      {/* TODO: CUSTOM FIELDS */}
+
+      {/* TODO: 1. Add more actions (highlight, do/undo, text-alignment and etc) */}
+      {/* TODO: 2. 3-line by default */}
+      <Controller
+        name="workDescription"
+        control={control}
+        rules={{ required: t('validation.required') }}
+        render={({ field }) => (
+          <RichTextEditor
+            showRichBar
+            error={!!errors?.workDescription}
+            helperText={errors?.workDescription?.message}
+            placeholder={t('placeholder.create-tender.rte-project-description')}
+            editorState={field.value || EditorState.createEmpty()}
+            onChange={field.onChange}
+          />
+        )}
+      />
+
       {/* TODO: DesktopDatePicker - one line;  */}
       {/* TODO: MobileDatePicker - 2 lines */}
       {/* 
@@ -98,6 +123,8 @@ export function PlainTenderForm(props: IPlainTenderFormProps) {
           )}
         />
       </Box>
+
+      <FilesUploader files={uploadedFiles} onUpload={setFiles} sx={{ pb: 2 }} />
 
       {/* ADDRESS */}
 
@@ -172,28 +199,6 @@ export function PlainTenderForm(props: IPlainTenderFormProps) {
         // https://github.com/react-hook-form/react-hook-form/issues/220
         InputLabelProps={{ shrink: true }} // due to the fact that readonly/disabled fields are empty
       />
-
-      {/* TODO: CUSTOM FIELDS */}
-
-      {/* TODO: 1. Add more actions (highlight, do/undo, text-alignment and etc) */}
-      {/* TODO: 2. 3-line by default */}
-      <Controller
-        name="workDescription"
-        control={control}
-        rules={{ required: t('validation.required') }}
-        render={({ field }) => (
-          <RichTextEditor
-            showRichBar
-            error={!!errors?.workDescription}
-            helperText={errors?.workDescription?.message}
-            placeholder={t('placeholder.create-tender.rte-project-description')}
-            editorState={field.value || EditorState.createEmpty()}
-            onChange={field.onChange}
-          />
-        )}
-      />
-
-      <FilesUploader files={uploadedFiles} onUpload={setFiles} sx={{ pb: 2 }} />
 
       {/* TODO: mobile view (column) */}
       <TenderPaymentTermField />

@@ -18,7 +18,7 @@ export function LangSwitcher() {
     if (language) {
       i18n.changeLanguage(language)
     }
-  }, [language])
+  }, [i18n, language])
 
   const handleChange = (event: SelectChangeEvent) => {
     const lang = event.target.value as Locale

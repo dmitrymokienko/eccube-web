@@ -1,6 +1,7 @@
 import { RawDraftContentState } from 'draft-js'
 import { TenderPublishment } from '../constants'
 import { Nullable } from '@/shared/types/utilities'
+import { Currency, PricePer, PriceType } from '@/entities/currencies/constants'
 
 export interface ITender {
   id: string
@@ -10,6 +11,11 @@ export interface ITender {
 
   startPeriod: Nullable<string> // timestamp
   endPeriod: Nullable<string> // timestamp
+
+  currency: Currency
+  price: number
+  pricePer: PricePer
+  priceType: PriceType
 
   address: {
     street: string

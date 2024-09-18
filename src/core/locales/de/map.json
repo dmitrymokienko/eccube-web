@@ -154,7 +154,10 @@
     "team": "Team",
     "notifications": "Benachrichtigungen",
     "search": "Suche",
-    "invitation": "Einladung"
+    "invitation": "Einladung",
+    "price": "Preis",
+    "gross": "Brutto",
+    "net": "Netto"
   },
   "address": {
     "address": "Adresse",

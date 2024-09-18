@@ -153,7 +153,10 @@
     "team": "Team",
     "notifications": "Notifications",
     "search": "Search",
-    "invitation": "Invitation"
+    "invitation": "Invitation",
+    "price": "Price",
+    "gross": "Gross",
+    "net": "Net"
   },
   "address": {
     "address": "Address",

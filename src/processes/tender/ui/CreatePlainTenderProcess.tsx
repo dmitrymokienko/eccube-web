@@ -17,6 +17,7 @@ import {
   SEPARATE_LAYOUT_SIDEBAR_WIDTH,
   SeparateLayout,
 } from '@/shared/ui/layouts/SeparateLayout/ui/SeparateLayout'
+import { Currency, PricePer, PriceType } from '@/entities/currencies/constants'
 
 export interface ICreatePlainTenderProcessProps {
   children?: ReactNode
@@ -36,6 +37,9 @@ export function CreatePlainTenderProcess(props: ICreatePlainTenderProcessProps) 
     defaultValues: {
       startPeriod: null,
       endPeriod: null,
+      currency: Currency.EUR,
+      pricePer: PricePer.EUR_HOURS,
+      priceType: PriceType.GROSS,
       // @ts-expect-error RHF set default value
       publishment: '',
       paymentTerm: '', // important to have default value for RadioGroup
