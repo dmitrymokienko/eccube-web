@@ -17,15 +17,14 @@ export function PriceMultiField() {
   const theme = useTheme()
 
   const {
-    register,
     control,
     formState: { errors },
   } = useFormContext<PlainTenderProcessForm>()
 
-  const error = !!errors.price || !!errors.currency || !!errors.pricePer || !!errors.priceType
+  const error = !!errors.amount || !!errors.currency || !!errors.pricePer || !!errors.priceType
 
   const errorText =
-    errors.price?.message ||
+    errors.amount?.message ||
     errors.currency?.message ||
     errors.pricePer?.message ||
     errors.priceType?.message
@@ -64,28 +63,36 @@ export function PriceMultiField() {
           )}
         />
 
-        <TextField
-          {...register(`price`, { required: t('validation.required') })}
-          placeholder="0"
-          error={!!errors.price}
-          slotProps={{
-            input: {
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              inputComponent: CurrencyFormat as any,
-            },
-          }}
-          sx={{
-            '&': {
-              margin: '0',
-            },
-            '& input': {
-              paddingTop: '10px',
-              paddingBottom: '10px',
-            },
-            '.MuiFormHelperText-root': {
-              display: 'none',
-            },
-          }}
+        {/* used Controller due to the fact that 'react-number-format' inside */}
+        <Controller
+          name="amount"
+          control={control}
+          rules={{ required: t('validation.required') }}
+          render={({ field }) => (
+            <TextField
+              {...field}
+              placeholder="0"
+              error={!!errors.amount}
+              slotProps={{
+                input: {
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  inputComponent: CurrencyFormat as any,
+                },
+              }}
+              sx={{
+                '&': {
+                  margin: '0',
+                },
+                '& input': {
+                  paddingTop: '10px',
+                  paddingBottom: '10px',
+                },
+                '.MuiFormHelperText-root': {
+                  display: 'none',
+                },
+              }}
+            />
+          )}
         />
 
         <Controller

@@ -13,7 +13,7 @@ export interface ITender {
   endPeriod: Nullable<string> // timestamp
 
   currency: Currency
-  price: number
+  amount: number
   pricePer: PricePer
   priceType: PriceType
 

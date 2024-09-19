@@ -9,23 +9,23 @@ import '@fontsource/roboto-condensed/500.css'
 import '@fontsource/roboto-condensed/700.css'
 import '@fontsource/bebas-neue/400.css'
 import { AuthProvider } from './shared/ui/providers/AuthProvider'
-import { router } from './core/routes'
-import './core/configs/i18n/config'
 import { PopupsProvider } from './shared/ui/providers/PopupsProvider'
 import { LanguageProvider } from './shared/ui/providers/LanguageProvider'
+import { router } from './core/routes'
+import './core/configs/i18n/config'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <ThemeRegistry>
-      <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <PopupsProvider>
-          <LanguageProvider>
+      <LanguageProvider>
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <PopupsProvider>
             <AuthProvider>
               <RouterProvider router={router} />
             </AuthProvider>
-          </LanguageProvider>
-        </PopupsProvider>
-      </LocalizationProvider>
+          </PopupsProvider>
+        </LocalizationProvider>
+      </LanguageProvider>
     </ThemeRegistry>
   </React.StrictMode>
 )
