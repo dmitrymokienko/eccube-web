@@ -1,5 +1,6 @@
 import { ITender } from '@/entities/tender/model/interfaces'
 import { ITableColumn, ITableRow } from '@/shared/ui/components/Table/interfaces'
+import { useTheme } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
 import { t } from 'i18next'
 
@@ -31,16 +32,7 @@ export function prepareTenderTable(rows: ITender[]): {
         title: t('table.tender.header.status'),
         align: 'right',
         sx: { width: '80px' },
-        format: (value) => (
-          <Typography
-            variant="body1"
-            color={(theme) =>
-              value === 'published' ? theme.palette.info.main : theme.palette.text.primary
-            }
-          >
-            {`${value}`.toLocaleUpperCase()}
-          </Typography>
-        ),
+        format: (value) => <StatusText value={value} />,
       },
     ],
 
@@ -52,4 +44,19 @@ export function prepareTenderTable(rows: ITender[]): {
       status: row.status,
     })),
   }
+}
+
+function StatusText(props: { value: string | number }) {
+  const { value } = props
+
+  const theme = useTheme()
+
+  return (
+    <Typography
+      variant="body1"
+      color={value === 'published' ? theme.palette.info.main : theme.palette.text.primary}
+    >
+      {`${value}`.toLocaleUpperCase()}
+    </Typography>
+  )
 }

@@ -154,7 +154,10 @@
     "team": "Team",
     "notifications": "Benachrichtigungen",
     "search": "Suche",
-    "invitation": "Einladung"
+    "invitation": "Einladung",
+    "price": "Preis",
+    "gross": "Brutto",
+    "net": "Netto"
   },
   "address": {
     "address": "Adresse",
@@ -207,7 +210,8 @@
     "invited-suppliers": "Eingeladene Lieferanten",
     "confirm-delete-title": "Ausschreibung löschen",
     "confirm-delete-content": "Sind Sie sicher, dass Sie diese Ausschreibung löschen möchten?",
-    "participate-button": "Teilnehmen"
+    "participate-button": "Teilnehmen",
+    "price": "Preis"
   },
   "settings": {
     "label": {

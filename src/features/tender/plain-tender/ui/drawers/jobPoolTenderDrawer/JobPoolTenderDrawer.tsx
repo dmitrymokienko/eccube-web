@@ -32,6 +32,8 @@ import { Nullable } from '@/shared/types/utilities'
 import Button from '@mui/material/Button'
 import NiceModal from '@ebay/nice-modal-react'
 import { ConfirmationDialog } from '@/shared/ui/components/Dialogs/ConfirmationDialog'
+import { transformCentsToAmount } from '@/shared/libs/utils/currencies'
+import { PricePer, PriceType } from '@/entities/currencies/constants'
 
 const DRAWER_WIDTH = 800
 const BANNER_WIDTH = 320
@@ -183,6 +185,13 @@ export function JobPoolTenderDrawer(props: TenderDrawerProps) {
               <ListItemText
                 primary={t('tender-drawer.short-description')}
                 secondary={tenderData?.shortDescription || '—'}
+              />
+            </ListItem>
+
+            <ListItem>
+              <ListItemText
+                primary={t('tender-drawer.price')}
+                secondary={`€${transformCentsToAmount(tenderData?.amount) || ' — '} ${tenderData?.pricePer || PricePer.EUR} (${tenderData?.priceType || PriceType.GROSS})`}
               />
             </ListItem>
 

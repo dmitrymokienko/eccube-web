@@ -5,6 +5,8 @@ import { PlainTenderProcessForm } from '../../model/interfaces'
 import { convertToTimestamp } from '@/shared/libs/utils/datetime'
 import { ITender } from '@/entities/tender/model/interfaces'
 import { mapCountryCodeToName } from '@/shared/libs/mappers/countries'
+import { Currency, PricePer, PriceType } from '@/entities/currencies/constants'
+import { transformAmountToCents, transformCentsToAmount } from '@/shared/libs/utils/currencies'
 
 export function prepareRHFTenderToTenderDtoMapper(data: PlainTenderProcessForm) {
   const {
@@ -17,6 +19,7 @@ export function prepareRHFTenderToTenderDtoMapper(data: PlainTenderProcessForm) 
     publishment,
     startPeriod,
     endPeriod,
+    amount,
     ...rest
   } = omit(['country'], data)
 
@@ -30,6 +33,7 @@ export function prepareRHFTenderToTenderDtoMapper(data: PlainTenderProcessForm) 
       city: city.trim(),
       country: Locale.DE, // TODO: TEMPORARY HARDCODED
     },
+    amount: transformAmountToCents(amount),
     startPeriod: convertToTimestamp(startPeriod),
     endPeriod: convertToTimestamp(endPeriod),
     publishment: (publishment || []).filter(Boolean),
@@ -49,21 +53,33 @@ export function prepareTenderDtoToRHFMapper(data: ITender): Partial<PlainTenderP
     invitedSuppliers,
     title,
     shortDescription,
+    currency,
+    pricePer,
+    priceType,
+    amount,
   } = omit(['fields', 'uploadedFiles'], data)
 
   return {
+    // main
     title: title || '',
     shortDescription: shortDescription || '',
     workDescription: prepareRTEForRHF(workDescription),
+    startPeriod: startPeriod ? new Date(startPeriod) : null,
+    endPeriod: endPeriod ? new Date(endPeriod) : null,
+    publishment: publishment || '',
+    paymentTerm: paymentTerm || '',
+    // price
+    amount: transformCentsToAmount(amount),
+    currency: currency || Currency.EUR,
+    pricePer: pricePer || PricePer.EUR_HOURS,
+    priceType: priceType || PriceType.GROSS,
+    // address
     street: address?.street || '',
     addressSuffix: address?.suffix || '',
     postalCode: address?.postalCode || '',
     city: address?.city || '',
     country: mapCountryCodeToName(Locale.DE),
-    startPeriod: startPeriod ? new Date(startPeriod) : null,
-    endPeriod: endPeriod ? new Date(endPeriod) : null,
-    publishment: publishment || '',
-    paymentTerm: paymentTerm || '',
+    // third party
     invitedSuppliers: invitedSuppliers || [],
   }
 }

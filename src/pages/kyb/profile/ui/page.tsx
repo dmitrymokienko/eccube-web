@@ -68,8 +68,11 @@ export function CompanyProfileKybPage() {
               setValueAs: (value) => value.trim(),
             })}
             // https://github.com/react-hook-form/react-hook-form/issues/220
-            InputLabelProps={{ shrink: !!watch('email') }}
+              slotProps={{
+              inputLabel: { shrink: !!watch('email') },
+            }}
           /> */}
+
           <TextField
             label={t('field.company-email')}
             placeholder={t('placeholder.company-email')}
@@ -80,8 +83,11 @@ export function CompanyProfileKybPage() {
               setValueAs: (value) => value.trim(),
             })}
             // https://github.com/react-hook-form/react-hook-form/issues/220
-            InputLabelProps={{ shrink: !!watch('email') }}
+            slotProps={{
+              inputLabel: { shrink: !!watch('email') },
+            }}
           />
+
           <TextField
             label={t('field.company-website')}
             placeholder={t('placeholder.company-website')}
@@ -91,8 +97,11 @@ export function CompanyProfileKybPage() {
               required: t('validation.required'),
               setValueAs: (value) => value.trim(),
             })}
-            InputLabelProps={{ shrink: !!watch('website') }}
+            slotProps={{
+              inputLabel: { shrink: !!watch('website') },
+            }}
           />
+
           <TextField
             label={t('field.company-phone')}
             placeholder={t('placeholder.company-phone')}
@@ -102,8 +111,11 @@ export function CompanyProfileKybPage() {
               required: t('validation.required'),
               setValueAs: (value) => value.trim(),
             })}
-            InputLabelProps={{ shrink: !!watch('phone') }}
+            slotProps={{
+              inputLabel: { shrink: !!watch('phone') },
+            }}
           />
+
           {/* TODO: create select component */}
           <TextField
             label={t('field.company-business-category')}
@@ -114,8 +126,11 @@ export function CompanyProfileKybPage() {
               required: t('validation.required'),
               setValueAs: (value) => value.trim(),
             })}
-            InputLabelProps={{ shrink: !!watch('businessCategory') }}
+            slotProps={{
+              inputLabel: { shrink: !!watch('businessCategory') },
+            }}
           />
+
           <Button variant="contained" type="submit" sx={{ marginTop: '24px' }}>
             {t('button.next')}
           </Button>

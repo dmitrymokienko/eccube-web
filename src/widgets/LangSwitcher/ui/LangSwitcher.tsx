@@ -3,7 +3,6 @@ import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
 import { useUnit } from 'effector-react'
-import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { locale } from '@/entities/locale/model'
 import { Locale } from '@/entities/locale/types'
@@ -13,12 +12,6 @@ export function LangSwitcher() {
   const { t, i18n } = useTranslation()
 
   const language = useUnit(locale.$language)
-
-  useEffect(() => {
-    if (language) {
-      i18n.changeLanguage(language)
-    }
-  }, [language])
 
   const handleChange = (event: SelectChangeEvent) => {
     const lang = event.target.value as Locale

@@ -4,10 +4,10 @@ import { EditorState } from 'draft-js'
 
 export type PlainTenderProcessForm = Omit<
   ITender,
-  'id' | 'workDescription' | 'startPeriod' | 'endPeriod' | 'address'
+  'id' | 'workDescription' | 'startPeriod' | 'endPeriod' | 'address' | 'amount'
 > & {
   id?: string
-
+  amount: string
   city: string
   postalCode: string
   street: string

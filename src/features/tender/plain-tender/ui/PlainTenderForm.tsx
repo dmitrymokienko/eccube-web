@@ -11,6 +11,7 @@ import { TenderPublishmentField } from './components/TenderPublishmentField'
 import { TenderPaymentTermField } from './components/TenderPaymentTermField'
 import { FilesUploader } from '@/features/uploadFiles/ui/FilesUploader'
 import { EmailTextField } from '@/shared/ui/components/TextFields/EmailTextField'
+import { PriceMultiField } from './components/PriceMultiField'
 
 export interface IPlainTenderFormProps {
   uploadedFiles: File[]
@@ -45,7 +46,9 @@ export function PlainTenderForm(props: IPlainTenderFormProps) {
           validate: (value = '') => value.trim().length < 120,
         })}
         // https://github.com/react-hook-form/react-hook-form/issues/220
-        InputLabelProps={{ shrink: !!watch('title') }}
+        slotProps={{
+          inputLabel: { shrink: !!watch('title') },
+        }}
       />
 
       <TextField
@@ -59,7 +62,33 @@ export function PlainTenderForm(props: IPlainTenderFormProps) {
           validate: (value = '') => value.trim().length < 300,
         })}
         // https://github.com/react-hook-form/react-hook-form/issues/220
-        InputLabelProps={{ shrink: !!watch('shortDescription') }}
+        slotProps={{
+          inputLabel: { shrink: !!watch('shortDescription') },
+        }}
+      />
+
+      {/* PRICE */}
+
+      <PriceMultiField />
+
+      {/* TODO: CUSTOM FIELDS */}
+
+      {/* TODO: 1. Add more actions (highlight, do/undo, text-alignment and etc) */}
+      {/* TODO: 2. 3-line by default */}
+      <Controller
+        name="workDescription"
+        control={control}
+        rules={{ required: t('validation.required') }}
+        render={({ field }) => (
+          <RichTextEditor
+            showRichBar
+            error={!!errors?.workDescription}
+            helperText={errors?.workDescription?.message}
+            placeholder={t('placeholder.create-tender.rte-project-description')}
+            editorState={field.value || EditorState.createEmpty()}
+            onChange={field.onChange}
+          />
+        )}
       />
 
       {/* TODO: DesktopDatePicker - one line;  */}
@@ -99,6 +128,8 @@ export function PlainTenderForm(props: IPlainTenderFormProps) {
         />
       </Box>
 
+      <FilesUploader files={uploadedFiles} onUpload={setFiles} sx={{ pb: 2 }} />
+
       {/* ADDRESS */}
 
       <TextField
@@ -112,7 +143,9 @@ export function PlainTenderForm(props: IPlainTenderFormProps) {
           validate: (value = '') => value.trim().length < 200,
         })}
         // https://github.com/react-hook-form/react-hook-form/issues/220
-        InputLabelProps={{ shrink: !!watch('street') }}
+        slotProps={{
+          inputLabel: { shrink: !!watch('street') },
+        }}
       />
 
       <TextField
@@ -126,7 +159,9 @@ export function PlainTenderForm(props: IPlainTenderFormProps) {
           validate: (value = '') => value.trim().length < 200,
         })}
         // https://github.com/react-hook-form/react-hook-form/issues/220
-        InputLabelProps={{ shrink: !!watch('addressSuffix') }}
+        slotProps={{
+          inputLabel: { shrink: !!watch('addressSuffix') },
+        }}
       />
 
       <TextField
@@ -141,7 +176,9 @@ export function PlainTenderForm(props: IPlainTenderFormProps) {
           validate: (value = '') => value.trim().length < 5,
         })}
         // https://github.com/react-hook-form/react-hook-form/issues/220
-        InputLabelProps={{ shrink: !!watch('postalCode') }}
+        slotProps={{
+          inputLabel: { shrink: !!watch('postalCode') },
+        }}
       />
 
       <TextField
@@ -155,7 +192,9 @@ export function PlainTenderForm(props: IPlainTenderFormProps) {
           validate: (value = '') => value.trim().length < 200,
         })}
         // https://github.com/react-hook-form/react-hook-form/issues/220
-        InputLabelProps={{ shrink: !!watch('city') }}
+        slotProps={{
+          inputLabel: { shrink: !!watch('city') },
+        }}
       />
 
       <TextField
@@ -170,30 +209,10 @@ export function PlainTenderForm(props: IPlainTenderFormProps) {
           validate: (value = '') => value.trim().length < 200,
         })}
         // https://github.com/react-hook-form/react-hook-form/issues/220
-        InputLabelProps={{ shrink: true }} // due to the fact that readonly/disabled fields are empty
+        slotProps={{
+          inputLabel: { shrink: true }, // due to the fact that readonly/disabled fields are empty
+        }}
       />
-
-      {/* TODO: CUSTOM FIELDS */}
-
-      {/* TODO: 1. Add more actions (highlight, do/undo, text-alignment and etc) */}
-      {/* TODO: 2. 3-line by default */}
-      <Controller
-        name="workDescription"
-        control={control}
-        rules={{ required: t('validation.required') }}
-        render={({ field }) => (
-          <RichTextEditor
-            showRichBar
-            error={!!errors?.workDescription}
-            helperText={errors?.workDescription?.message}
-            placeholder={t('placeholder.create-tender.rte-project-description')}
-            editorState={field.value || EditorState.createEmpty()}
-            onChange={field.onChange}
-          />
-        )}
-      />
-
-      <FilesUploader files={uploadedFiles} onUpload={setFiles} sx={{ pb: 2 }} />
 
       {/* TODO: mobile view (column) */}
       <TenderPaymentTermField />
