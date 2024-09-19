@@ -22,10 +22,12 @@ import { locale } from '@/entities/locale/model'
 import { Locale } from '@/entities/locale/types'
 import { ConfirmationDialog } from '@/shared/ui/components/Dialogs/ConfirmationDialog'
 import { NestedMenuItem } from '@/shared/ui/components/NestedMenuItem/NestedMenuItem'
+import { enqueueSnackbar } from 'notistack'
+import { useTheme } from '@mui/material/styles'
 
 export function AvatarMenu() {
   const { t, i18n } = useTranslation()
-
+  const theme = useTheme()
   const navigate = useNavigate()
 
   const [anchorEl, setAnchorEl] = useState<Nullable<HTMLElement>>(null)
@@ -50,6 +52,20 @@ export function AvatarMenu() {
   const handleAccount = () => {
     navigate('/settings/my-account')
     handleClose()
+  }
+
+  const handleCopyEmail = () => {
+    if (user?.email) {
+      navigator.clipboard.writeText(user.email)
+      enqueueSnackbar(t('snackbar.email-copied'), { variant: 'success' })
+    }
+  }
+
+  const handleCopyFullName = () => {
+    if (user?.firstName && user?.lastName) {
+      navigator.clipboard.writeText(`${user.firstName} ${user.lastName}`)
+      enqueueSnackbar(t('snackbar.full-name-copied'), { variant: 'success' })
+    }
   }
 
   const handleLogout = async () => {
@@ -81,8 +97,8 @@ export function AvatarMenu() {
 
       <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
         {user?.firstName && user?.lastName && (
-          <MenuItem disabled>
-            <ListItemIcon>
+          <MenuItem onClick={handleCopyFullName} sx={{ color: theme.palette.grey[400] }}>
+            <ListItemIcon sx={{ color: theme.palette.grey[400] }}>
               <PersonIcon fontSize="small" />
             </ListItemIcon>
             {`${user.firstName} ${user.lastName}`}
@@ -90,8 +106,8 @@ export function AvatarMenu() {
         )}
 
         {user?.email && (
-          <MenuItem disabled>
-            <ListItemIcon>
+          <MenuItem onClick={handleCopyEmail} sx={{ color: theme.palette.grey[400] }}>
+            <ListItemIcon sx={{ color: theme.palette.grey[400] }}>
               <EmailIcon fontSize="small" />
             </ListItemIcon>
             {user.email}
