@@ -12,15 +12,18 @@ import { AuthProvider } from './shared/ui/providers/AuthProvider'
 import { router } from './core/routes'
 import './core/configs/i18n/config'
 import { PopupsProvider } from './shared/ui/providers/PopupsProvider'
+import { LanguageProvider } from './shared/ui/providers/LanguageProvider'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <ThemeRegistry>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <PopupsProvider>
-          <AuthProvider>
-            <RouterProvider router={router} />
-          </AuthProvider>
+          <LanguageProvider>
+            <AuthProvider>
+              <RouterProvider router={router} />
+            </AuthProvider>
+          </LanguageProvider>
         </PopupsProvider>
       </LocalizationProvider>
     </ThemeRegistry>
