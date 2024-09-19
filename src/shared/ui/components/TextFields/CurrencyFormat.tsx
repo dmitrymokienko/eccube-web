@@ -7,7 +7,7 @@ export interface ICurrencyFormatProps extends NumericFormatProps {
 
 export const CurrencyFormat = forwardRef<HTMLElement, ICurrencyFormatProps>((props, ref) => {
   const { onChange, ...other } = props
-  console.log('CurrencyFormat', props)
+
   return (
     <NumericFormat
       {...other}
