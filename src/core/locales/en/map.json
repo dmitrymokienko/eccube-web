@@ -60,7 +60,8 @@
     "upload-file": "Upload file",
     "cancel": "Cancel",
     "publish": "Publish",
-    "update": "Update"
+    "update": "Update",
+    "home-start-tour": "Start tour"
   },
   "field": {
     "email": "Email",
@@ -252,6 +253,18 @@
       "confirm-participate": {
         "title": "Participate in the tender",
         "content": "Are you sure you want to participate in this tender?"
+      }
+    }
+  },
+  "user-tours": {
+    "home-page": {
+      "profile-switcher": {
+        "title": "Profile switcher",
+        "description": "Switch between customer and supplier profiles"
+      },
+      "sidebar-menu": {
+        "title": "Sidebar menu",
+        "description": "Navigate through the app using the sidebar menu.\n When you change the profile, the menu items will change accordingly."
       }
     }
   }

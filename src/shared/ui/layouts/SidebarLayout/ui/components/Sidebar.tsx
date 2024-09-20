@@ -21,6 +21,8 @@ import { useTranslation } from 'react-i18next'
 import { currentUser } from '@/entities/currentUser/model'
 import { ProfileType } from '@/entities/currentUser/types'
 
+export const SIDEBAR_LAYOUT_SIDEBAR_LIST_ID = 'eccube-sidebar-menu-list-items'
+
 const getMenuItems = (profileType: ProfileType = ProfileType.CUSTOMER) => {
   if (profileType === ProfileType.SUPPLIER) {
     return [
@@ -97,7 +99,7 @@ export function Sidebar(props: ISidebarDrawerProps) {
       {...props}
     >
       <Stack spacing={8} pt={`calc(${SIDEBAR_LAYOUT_NAV_HEIGHT}px + 80px)`} pb={3} px={1}>
-        <List>
+        <List id={SIDEBAR_LAYOUT_SIDEBAR_LIST_ID}>
           {MENU_ITEMS.map((v, i) => {
             const Icon = v.icon
             return (

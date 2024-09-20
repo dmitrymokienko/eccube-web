@@ -44,6 +44,9 @@ importers:
       draft-js:
         specifier: ^0.11.7
         version: 0.11.7(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      driver.js:
+        specifier: ^1.3.1
+        version: 1.3.1
       effector:
         specifier: ^23.2.2
         version: 23.2.2
@@ -1319,6 +1322,9 @@ packages:
     peerDependencies:
       react: '>=0.14.0'
       react-dom: '>=0.14.0'
+
+  driver.js@1.3.1:
+    resolution: {integrity: sha512-MvUdXbqSgEsgS/H9KyWb5Rxy0aE6BhOVT4cssi2x2XjmXea6qQfgdx32XKVLLSqTaIw7q/uxU5Xl3NV7+cN6FQ==}
 
   effector-localstorage@1.0.0:
     resolution: {integrity: sha512-SyJiKCHv05GPcWAC/lupQJWvp2EwY2QRfMuiy/JmuXxw++WUi5ozvxKrPT9ntRndn3AgD3S+LOPPwl7GWi/rzw==}
@@ -3541,6 +3547,8 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
     transitivePeerDependencies:
       - encoding
+
+  driver.js@1.3.1: {}
 
   effector-localstorage@1.0.0(effector@23.2.2):
     dependencies:
