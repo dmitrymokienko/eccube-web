@@ -8,6 +8,8 @@ import { currentUser } from '@/entities/currentUser/model'
 import { ProfileType } from '@/entities/currentUser/types'
 import { useNavigate } from 'react-router-dom'
 
+export const PROFILE_TYPE_STORAGE_ID = 'eccube-profile-type-switcher'
+
 export function ProfileTypeSwitcher() {
   const { t } = useTranslation()
   const navigate = useNavigate()
@@ -20,18 +22,20 @@ export function ProfileTypeSwitcher() {
   }
 
   return (
-    <FormControl sx={{ width: 140 }}>
-      <InputLabel id="profile-type-select-label">{t('profileType.select-label')}</InputLabel>
-      <Select
-        labelId="profile-type-select-label"
-        id="profile-type-select"
-        value={profileType}
-        label={t('profileType.select-label')}
-        onChange={handleChange}
-      >
-        <MenuItem value={ProfileType.SUPPLIER}>{t('profileType.supplier')}</MenuItem>
-        <MenuItem value={ProfileType.CUSTOMER}>{t('profileType.customer')}</MenuItem>
-      </Select>
-    </FormControl>
+    <div id={PROFILE_TYPE_STORAGE_ID}>
+      <FormControl sx={{ width: 140 }}>
+        <InputLabel id="profile-type-select-label">{t('profileType.select-label')}</InputLabel>
+        <Select
+          labelId="profile-type-select-label"
+          id="profile-type-select"
+          value={profileType}
+          label={t('profileType.select-label')}
+          onChange={handleChange}
+        >
+          <MenuItem value={ProfileType.SUPPLIER}>{t('profileType.supplier')}</MenuItem>
+          <MenuItem value={ProfileType.CUSTOMER}>{t('profileType.customer')}</MenuItem>
+        </Select>
+      </FormControl>
+    </div>
   )
 }

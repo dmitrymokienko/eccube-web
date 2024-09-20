@@ -60,7 +60,8 @@
     "upload-file": "Datei hochladen",
     "cancel": "Stornieren",
     "publish": "Veröffentlichen",
-    "update": "Aktualisieren"
+    "update": "Aktualisieren",
+    "home-start-tour": "Starten Sie die Tour"
   },
   "field": {
     "email": "E-Mail",
@@ -253,6 +254,18 @@
       "confirm-participate": {
         "title": "An der Ausschreibung teilnehmen",
         "content": "Sind Sie sicher, dass Sie an dieser Ausschreibung teilnehmen"
+      }
+    }
+  },
+  "user-tours": {
+    "home-page": {
+      "profile-switcher": {
+        "title": "Profilumschalter",
+        "description": "Wechseln Sie zwischen den Profilen 'Kunde' und 'Lieferant'."
+      },
+      "sidebar-menu": {
+        "title": "Seitenleistenmenü",
+        "description": "Navigieren Sie mit Hilfe des Menüs in der Seitenleiste durch die App.\n Wenn Sie das Profil ändern, ändern sich die Menüpunkte entsprechend."
       }
     }
   }
