@@ -5,6 +5,7 @@ import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import { useTranslation } from 'react-i18next'
 import { driver } from 'driver.js'
+import Box from '@mui/material/Box'
 
 export function SupplierHomePage() {
   const { t } = useTranslation()
@@ -33,17 +34,31 @@ export function SupplierHomePage() {
 
   return (
     <SidebarLayout>
-      <Typography variant="h4" textAlign="center" sx={{ marginTop: '32px' }}>
+      <Typography variant="h4" textAlign="center" sx={{ mt: 11 }}>
         {t('home.supplier.title')}
       </Typography>
 
-      <Typography variant="subtitle1" sx={{ marginTop: '32px' }}>
+      <Typography variant="subtitle1" textAlign="center" sx={{ mt: 4 }}>
         {t('home.supplier.description')}
       </Typography>
 
-      <Button fullWidth={false} onClick={startTour}>
-        {t('button.home-start-tour')}
-      </Button>
+      <Box
+        sx={{
+          mt: 3,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-around',
+          width: '100%',
+        }}
+      >
+        <Button fullWidth={false} onClick={startTour}>
+          {t('button.home-start-tour')}
+        </Button>
+
+        <Button fullWidth={false} href="https://eccube.de/" target="_blank">
+          {t('button.learn-more')}
+        </Button>
+      </Box>
     </SidebarLayout>
   )
 }

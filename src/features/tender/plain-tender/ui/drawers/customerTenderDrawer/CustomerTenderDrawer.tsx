@@ -220,12 +220,14 @@ export function CustomerTenderDrawer(props: TenderDrawerProps) {
               />
             </ListItem>
 
-            <ListItem>
-              <ListItemText
-                primary={t('tender-drawer.price')}
-                secondary={`€${transformCentsToAmount(tenderData?.amount) || '—'} ${tenderData?.pricePer} (${tenderData?.priceType})`}
-              />
-            </ListItem>
+            {tenderData?.amount && (
+              <ListItem>
+                <ListItemText
+                  primary={t('tender-drawer.price')}
+                  secondary={`${transformCentsToAmount(tenderData?.amount)} ${tenderData?.pricePer} (${tenderData?.priceType})`}
+                />
+              </ListItem>
+            )}
 
             {!!tenderData.workDescription && (
               <ListItem sx={{ flexDirection: 'column', alignItems: 'flex-start' }}>

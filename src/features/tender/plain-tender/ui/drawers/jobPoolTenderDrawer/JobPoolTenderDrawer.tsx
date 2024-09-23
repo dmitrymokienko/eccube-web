@@ -188,12 +188,14 @@ export function JobPoolTenderDrawer(props: TenderDrawerProps) {
               />
             </ListItem>
 
-            <ListItem>
-              <ListItemText
-                primary={t('tender-drawer.price')}
-                secondary={`€${transformCentsToAmount(tenderData?.amount) || ' — '} ${tenderData?.pricePer || PricePer.EUR} (${tenderData?.priceType || PriceType.GROSS})`}
-              />
-            </ListItem>
+            {tenderData?.amount && (
+              <ListItem>
+                <ListItemText
+                  primary={t('tender-drawer.price')}
+                  secondary={`${transformCentsToAmount(tenderData?.amount)} ${tenderData?.pricePer || PricePer.EUR} (${tenderData?.priceType || PriceType.GROSS})`}
+                />
+              </ListItem>
+            )}
 
             {!!tenderData.workDescription && (
               <ListItem sx={{ flexDirection: 'column', alignItems: 'flex-start' }}>

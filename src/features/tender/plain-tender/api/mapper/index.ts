@@ -34,6 +34,7 @@ export function prepareRHFTenderToTenderDtoMapper(data: PlainTenderProcessForm) 
       country: Locale.DE, // TODO: TEMPORARY HARDCODED
     },
     amount: transformAmountToCents(amount),
+    currency: Currency.EUR, // TODO: TEMPORARY HARDCODED
     startPeriod: convertToTimestamp(startPeriod),
     endPeriod: convertToTimestamp(endPeriod),
     publishment: (publishment || []).filter(Boolean),
