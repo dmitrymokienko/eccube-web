@@ -56,6 +56,12 @@ export const RichTextEditor = (props: RichTextEditorProps) => {
   //   .getBlockForKey(selection.getStartKey())
   //   .getType()
 
+  const focusEditor = () => {
+    if (editorRef.current) {
+      editorRef.current.focus()
+    }
+  }
+
   const handleKeyCommand = (command: string) => {
     const newState = RichUtils.handleKeyCommand(editorState, command)
     if (newState) {
@@ -191,7 +197,7 @@ export const RichTextEditor = (props: RichTextEditorProps) => {
           </>
         )}
 
-        <Box sx={{ pt: 1 }}>
+        <Box onClick={focusEditor} sx={{ pt: 1 }}>
           <Editor
             editorState={editorState}
             handleKeyCommand={handleKeyCommand}

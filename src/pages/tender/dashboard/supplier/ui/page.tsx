@@ -1,7 +1,4 @@
-import Box from '@mui/material/Box'
-import Button from '@mui/material/Button'
-import { useNavigate, useSearchParams } from 'react-router-dom'
-import { useTranslation } from 'react-i18next'
+import { useSearchParams } from 'react-router-dom'
 import { Table } from '@/shared/ui/components/Table/Table'
 import { useEffect, MouseEvent } from 'react'
 import { prepareTenderTable } from '../lib/utils'
@@ -10,10 +7,9 @@ import { useUnit } from 'effector-react'
 import { currentUser } from '@/entities/currentUser/model'
 import { SidebarLayout } from '@/shared/ui/layouts/SidebarLayout/ui/SidebarLayout'
 import { JobPoolTenderDrawer } from '@/features/tender/plain-tender/ui/drawers/jobPoolTenderDrawer/JobPoolTenderDrawer'
+import Box from '@mui/material/Box'
 
 export function JobPoolTendersPage() {
-  const { t } = useTranslation()
-  const navigate = useNavigate()
   const [params, setParams] = useSearchParams()
 
   const user = useUnit(currentUser.$info)
@@ -43,18 +39,7 @@ export function JobPoolTendersPage() {
 
   return (
     <SidebarLayout LoaderProps={{ visible: isLoading }}>
-      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }} py={3}>
-        <Button
-          fullWidth={false}
-          variant="contained"
-          type="submit"
-          onClick={() => {
-            navigate('/tender/create/plain')
-          }}
-        >
-          {t('button.createTender')}
-        </Button>
-      </Box>
+      <Box sx={{ mt: 11 }} />
 
       <JobPoolTenderDrawer id={id} open={isDrawerOpen} onClose={onCloseDrawer} />
 

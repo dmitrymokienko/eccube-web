@@ -12,13 +12,14 @@ import { TenderPaymentTermField } from './components/TenderPaymentTermField'
 import { FilesUploader } from '@/features/uploadFiles/ui/FilesUploader'
 import { EmailTextField } from '@/shared/ui/components/TextFields/EmailTextField'
 import { PriceMultiField } from './components/PriceMultiField'
+import { TenderPublishment } from '@/entities/tender/model/constants'
 
 export interface IPlainTenderFormProps {
   uploadedFiles: File[]
   setFiles: (files: File[]) => void
 }
 
-export function PlainTenderForm(props: IPlainTenderFormProps) {
+export function PlainTenderForm(props: Readonly<IPlainTenderFormProps>) {
   const { uploadedFiles, setFiles } = props
 
   const { t } = useTranslation()
@@ -32,6 +33,12 @@ export function PlainTenderForm(props: IPlainTenderFormProps) {
     control,
     formState: { errors },
   } = form
+
+  const publishment = watch('publishment')
+
+  const showEmailField =
+    publishment?.includes(TenderPublishment.TEAM) ||
+    publishment?.includes(TenderPublishment.INVITATION)
 
   return (
     <Stack spacing={2}>
@@ -69,7 +76,7 @@ export function PlainTenderForm(props: IPlainTenderFormProps) {
 
       {/* PRICE */}
 
-      <PriceMultiField />
+      <PriceMultiField optional />
 
       {/* TODO: CUSTOM FIELDS */}
 
@@ -222,12 +229,14 @@ export function PlainTenderForm(props: IPlainTenderFormProps) {
         <TenderPublishmentField />
       </Box>
 
-      <EmailTextField
-        emails={form.getValues('invitedSuppliers')}
-        label={t('tender.label.supplier-invitation')}
-        placeholder={t('placeholder.create-tender.supplier-invitation')}
-        onAddEmail={(emails) => setValue('invitedSuppliers', emails)}
-      />
+      {showEmailField && (
+        <EmailTextField
+          emails={form.getValues('invitedSuppliers')}
+          label={t('tender.label.supplier-invitation')}
+          placeholder={t('placeholder.create-tender.supplier-invitation')}
+          onAddEmail={(emails) => setValue('invitedSuppliers', emails)}
+        />
+      )}
     </Stack>
   )
 }
