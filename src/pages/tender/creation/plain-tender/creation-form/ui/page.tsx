@@ -60,7 +60,6 @@ export function PlainTenderCreationPage() {
       <Stack component="form" spacing={2} onSubmit={handleSubmit(onSubmit, onInvalid)}>
         <PlainTenderForm uploadedFiles={uploadedFiles} setFiles={setFiles} />
 
-        {/* TODO: add confirm dialogs */}
         <Stack spacing={2} sx={{ py: 4 }}>
           <Button type="submit">{t('button.create')}</Button>
 
