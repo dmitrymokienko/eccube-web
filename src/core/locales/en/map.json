@@ -90,6 +90,8 @@
       "description": "Description",
       "start-date": "Start date",
       "end-date": "End date",
+      "tender-start-date": "Tender start date",
+      "tender-end-date": "Tender last date",
       "street": "Street",
       "city": "City",
       "postal-code": "Postal code",
