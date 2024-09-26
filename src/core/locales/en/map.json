@@ -90,6 +90,8 @@
       "description": "Description",
       "start-date": "Start date",
       "end-date": "End date",
+      "tender-start-date": "Tender start date",
+      "tender-end-date": "Tender last date",
       "street": "Street",
       "city": "City",
       "postal-code": "Postal code",
@@ -100,7 +102,8 @@
       "payment-terms": "Payment terms",
       "address-suffix": "Address suffix",
       "publishment": "Publishment",
-      "days": "days"
+      "days": "days",
+      "dates-hint": "Select dates when this tender will be available for participation by suppliers/craftsmen"
     }
   },
   "placeholder": {

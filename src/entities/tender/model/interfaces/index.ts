@@ -9,6 +9,17 @@ export interface ITender {
   title: string
   shortDescription: string
 
+  jobType: 'oneTime' | 'cyclic'
+  jobStartDate: Nullable<string> // timestamp
+  jobEndDate: Nullable<string> // timestamp
+  jobCycleFrequency: Nullable<string> // number
+  jobStartPeriod: Nullable<string> // timestamp
+  jobEndPeriod: Nullable<string> // timestamp
+  jobDays: string[]
+  jobDayOfMonth: Nullable<number[]>
+  jobQuarterMonth: Nullable<string>
+  jobDayOfQuarter: Nullable<number[]>
+
   startPeriod: Nullable<string> // timestamp
   endPeriod: Nullable<string> // timestamp
 

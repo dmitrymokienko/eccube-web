@@ -13,6 +13,10 @@ import { FilesUploader } from '@/features/uploadFiles/ui/FilesUploader'
 import { EmailTextField } from '@/shared/ui/components/TextFields/EmailTextField'
 import { PriceMultiField } from './components/PriceMultiField'
 import { TenderPublishment } from '@/entities/tender/model/constants'
+import { JobTypeMultiField } from './components/JobTypeMultiField'
+import InfoIcon from '@mui/icons-material/Info'
+import Tooltip from '@mui/material/Tooltip'
+import IconButton from '@mui/material/IconButton'
 
 export interface IPlainTenderFormProps {
   uploadedFiles: File[]
@@ -78,6 +82,8 @@ export function PlainTenderForm(props: Readonly<IPlainTenderFormProps>) {
 
       <PriceMultiField optional />
 
+      <JobTypeMultiField />
+
       {/* TODO: CUSTOM FIELDS */}
 
       {/* TODO: 1. Add more actions (highlight, do/undo, text-alignment and etc) */}
@@ -104,7 +110,7 @@ export function PlainTenderForm(props: Readonly<IPlainTenderFormProps>) {
       import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
       import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
       */}
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: 3 }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', gap: 3, pr: 4, position: 'relative' }}>
         {/* TODO: disable all date before 'now()' */}
         <Controller
           name="startPeriod"
@@ -112,7 +118,7 @@ export function PlainTenderForm(props: Readonly<IPlainTenderFormProps>) {
           rules={{ required: t('validation.required') }}
           render={({ field }) => (
             <DatePicker
-              label={t('field.create-tender.start-date')}
+              label={t('field.create-tender.tender-start-date')}
               value={field.value}
               inputRef={field.ref}
               onChange={(date) => field.onChange(date)}
@@ -126,13 +132,27 @@ export function PlainTenderForm(props: Readonly<IPlainTenderFormProps>) {
           rules={{ required: t('validation.required') }}
           render={({ field }) => (
             <DatePicker
-              label={t('field.create-tender.end-date')}
+              label={t('field.create-tender.tender-end-date')}
               value={field.value}
               inputRef={field.ref}
               onChange={(date) => field.onChange(date)}
             />
           )}
         />
+
+        <Tooltip title={t('field.create-tender.dates-hint')}>
+          <span>
+            <IconButton
+              onClick={() => {
+                // TODO: show tooltip on Mobile click
+              }}
+              color="default"
+              sx={{ position: 'absolute', top: '8px', right: '0' }}
+            >
+              <InfoIcon fontSize="small" />
+            </IconButton>
+          </span>
+        </Tooltip>
       </Box>
 
       <FilesUploader files={uploadedFiles} onUpload={setFiles} sx={{ pb: 2 }} />

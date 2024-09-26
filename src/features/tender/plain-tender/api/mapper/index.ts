@@ -8,6 +8,33 @@ import { mapCountryCodeToName } from '@/shared/libs/mappers/countries'
 import { Currency, PricePer, PriceType } from '@/entities/currencies/constants'
 import { transformAmountToCents, transformCentsToAmount } from '@/shared/libs/utils/currencies'
 
+const tempoOmit = [
+  'jobType',
+  'jobStartDate',
+  'jobEndDate',
+  'jobCycleFrequency',
+  'jobStartPeriod',
+  'jobEndPeriod',
+  'jobDays',
+  'jobDayOfMonth',
+  'jobQuarterMonth',
+  'jobDayOfQuarter',
+] as Partial<
+  keyof Pick<
+    PlainTenderProcessForm,
+    | 'jobType'
+    | 'jobStartDate'
+    | 'jobEndDate'
+    | 'jobCycleFrequency'
+    | 'jobStartPeriod'
+    | 'jobEndPeriod'
+    | 'jobDays'
+    | 'jobDayOfMonth'
+    | 'jobQuarterMonth'
+    | 'jobDayOfQuarter'
+  >
+>[]
+
 export function prepareRHFTenderToTenderDtoMapper(data: PlainTenderProcessForm) {
   const {
     street = '',
@@ -21,7 +48,7 @@ export function prepareRHFTenderToTenderDtoMapper(data: PlainTenderProcessForm) 
     endPeriod,
     amount,
     ...rest
-  } = omit(['country'], data)
+  } = omit(['country', ...tempoOmit], data)
 
   return {
     ...rest,
