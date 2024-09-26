@@ -45,6 +45,12 @@ export interface ITender {
   invitedSuppliers: string[]
 
   uploadedFiles?: File[]
+  // {
+  //   filename: string
+  //   url: string
+  //   size: number
+  //   uploadedAt: string // timestamp
+  // }[]
 
   status: string
 

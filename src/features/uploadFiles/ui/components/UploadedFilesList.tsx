@@ -16,7 +16,8 @@ export function UploadedFilesList(props: IUploadedFilesListProps) {
         <UploadedFile
           key={file.name}
           fileName={file.name}
-          // downloadLink={file.fileUrl}
+          // @ts-expect-error TODO: fix this
+          downloadLink={file.url}
           onDelete={onDelete}
         />
       ))}

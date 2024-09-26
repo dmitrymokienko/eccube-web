@@ -21,7 +21,10 @@ export function PlainTenderEditionPage() {
 
   const tender = useUnit(tenderModel.$currentTender)
 
-  const [uploadedFiles, setFiles] = useState<File[]>(tender?.uploadedFiles || [])
+  const [uploadedFiles, setFiles] = useState<File[]>(
+    // @ts-expect-error TODO: fix this
+    (tender?.uploadedFiles || []).map((v) => ({ ...v, name: v.filename }))
+  )
 
   const form = useFormContext<PlainTenderProcessForm>()
   const { getValues, handleSubmit } = form
