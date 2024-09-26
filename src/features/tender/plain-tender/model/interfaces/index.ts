@@ -4,7 +4,14 @@ import { EditorState } from 'draft-js'
 
 export type PlainTenderProcessForm = Omit<
   ITender,
-  'id' | 'workDescription' | 'startPeriod' | 'endPeriod' | 'address' | 'amount'
+  | 'id'
+  | 'workDescription'
+  | 'startPeriod'
+  | 'endPeriod'
+  | 'address'
+  | 'amount'
+  | 'jobStartDate'
+  | 'jobEndDate'
 > & {
   id?: string
   amount: string
@@ -15,6 +22,8 @@ export type PlainTenderProcessForm = Omit<
   country: string
   startPeriod: Nullable<Date>
   endPeriod: Nullable<Date>
+  jobStartDate: Nullable<Date>
+  jobEndDate: Nullable<Date>
   workDescription: EditorState
 }
 

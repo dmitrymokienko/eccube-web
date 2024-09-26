@@ -16,6 +16,9 @@ export interface ITender {
   jobStartPeriod: Nullable<string> // timestamp
   jobEndPeriod: Nullable<string> // timestamp
   jobDays: string[]
+  jobDayOfMonth: Nullable<number[]>
+  jobQuarterMonth: Nullable<string>
+  jobDayOfQuarter: Nullable<number[]>
 
   startPeriod: Nullable<string> // timestamp
   endPeriod: Nullable<string> // timestamp
