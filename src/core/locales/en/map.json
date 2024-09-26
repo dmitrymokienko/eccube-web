@@ -215,7 +215,8 @@
     "confirm-delete-title": "Delete Tender",
     "confirm-delete-content": "Are you sure you want to delete this tender?",
     "participate-button": "Participate",
-    "price": "Price"
+    "price": "Price",
+    "uploaded-files": "Uploaded Files"
   },
   "settings": {
     "label": {

@@ -214,7 +214,8 @@
     "confirm-delete-title": "Ausschreibung löschen",
     "confirm-delete-content": "Sind Sie sicher, dass Sie diese Ausschreibung löschen möchten?",
     "participate-button": "Teilnehmen",
-    "price": "Preis"
+    "price": "Preis",
+    "uploaded-files": "Hochgeladene Dateien"
   },
   "settings": {
     "label": {

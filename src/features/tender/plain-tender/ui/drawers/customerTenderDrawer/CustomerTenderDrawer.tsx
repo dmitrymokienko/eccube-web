@@ -35,6 +35,7 @@ import { tenderModel } from '../../../model'
 import { ConfirmationDialog } from '@/shared/ui/components/Dialogs/ConfirmationDialog'
 import { Nullable } from '@/shared/types/utilities'
 import { transformCentsToAmount } from '@/shared/libs/utils/currencies'
+import { UploadedFilesList } from '@/features/uploadFiles/ui/components/UploadedFilesList'
 
 const DRAWER_WIDTH = 800
 const BANNER_WIDTH = 320
@@ -266,6 +267,23 @@ export function CustomerTenderDrawer(props: TenderDrawerProps) {
               </ListItem>
             </Box>
 
+            {!!tenderData?.uploadedFiles?.length && (
+              <ListItem sx={{ flexDirection: 'column', alignItems: 'flex-start' }}>
+                <Typography variant="body1">{t('tender-drawer.uploaded-files')}</Typography>
+                <Box sx={{ mt: 1, width: '100%' }}>
+                  <UploadedFilesList
+                    files={tenderData.uploadedFiles.map((v) => ({
+                      ...v,
+                      // @ts-expect-error TODO: fix this
+                      name: v.filename,
+                      // @ts-expect-error TODO: fix this
+                      downloadUrl: v.url,
+                    }))}
+                  />
+                </Box>
+              </ListItem>
+            )}
+
             {tenderData.paymentTerm && (
               <ListItem>
                 <ListItemText
@@ -364,20 +382,6 @@ export function CustomerTenderDrawer(props: TenderDrawerProps) {
                 </Collapse>
               </>
             )}
-
-            {/* <ListItem>
-            <ListItemText primary="Uploaded Attachments" />
-            <List>
-              {tenderData?.uploadedFiles?.map((attachment, index) => (
-                <ListItem key={index}>
-                  <ListItemIcon>
-                    <AttachFileIcon />
-                  </ListItemIcon>
-                  <ListItemText secondary={attachment} />
-                </ListItem>
-              ))}
-            </List>
-          </ListItem> */}
           </List>
         )}
       </Box>
