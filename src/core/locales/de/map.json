@@ -101,7 +101,8 @@
       "payment-terms": "Zahlungsbedingungen",
       "address-suffix": "Adresszusatz",
       "publishment": "Veröffentlichung",
-      "days": "Tage"
+      "days": "Tage",
+      "dates-hint": "Wählen Sie die Termine aus, an denen diese Ausschreibung für Lieferanten/Handwerker zur Teilnahme verfügbar ist"
     }
   },
   "placeholder": {

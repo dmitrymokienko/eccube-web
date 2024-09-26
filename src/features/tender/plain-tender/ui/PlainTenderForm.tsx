@@ -140,24 +140,16 @@ export function PlainTenderForm(props: Readonly<IPlainTenderFormProps>) {
           )}
         />
 
-        <Tooltip
-          title={t(
-            'Select dates when this tender will be available for suppliers/craftsmen participation'
-          )}
-        >
+        <Tooltip title={t('field.create-tender.dates-hint')}>
           <span>
             <IconButton
               onClick={() => {
                 // TODO: show tooltip on Mobile click
               }}
               color="default"
-              sx={{
-                position: 'absolute',
-                top: '8px',
-                right: '0',
-              }}
+              sx={{ position: 'absolute', top: '8px', right: '0' }}
             >
-              <InfoIcon />
+              <InfoIcon fontSize="small" />
             </IconButton>
           </span>
         </Tooltip>
