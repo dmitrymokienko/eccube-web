@@ -4,13 +4,13 @@ import { CreateTenderDto } from '@/features/tender/plain-tender/api/dto'
 import { ITender } from '@/entities/tender/model/interfaces'
 import { TenderListQueryFilters } from '../model/interfaces'
 
-export async function uploadTenderFilesApi(uploadedFiles: File[]) {
+export async function uploadTenderFilesApi(uploadedFiles: File[], tenderId: string) {
   if (uploadedFiles.length === 0) return false
   const formData = new FormData()
   for (const file of uploadedFiles) {
     formData.append('files', file)
   }
-  await defaultApiClient.post<FormData, ITender>('/api/tender/upload', formData, {
+  await defaultApiClient.post<FormData, ITender>(`/api/tender/upload/${tenderId}`, formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },
@@ -26,8 +26,7 @@ export async function createNewTenderApi(data: CreateTenderDto) {
     omit(['uploadedFiles'], data)
   )
   const tenderId = res.id
-  console.log('tenderId:: ', tenderId)
-  await uploadTenderFilesApi(data.uploadedFiles || [])
+  await uploadTenderFilesApi(data.uploadedFiles || [], tenderId)
   return res
 }
 
@@ -39,8 +38,7 @@ export async function createNewTenderDraftApi(data: Partial<CreateTenderDto>) {
     omit(['uploadedFiles'], data)
   )
   const tenderId = res.id
-  console.log('tenderId:: ', tenderId)
-  await uploadTenderFilesApi(data.uploadedFiles || [])
+  await uploadTenderFilesApi(data.uploadedFiles || [], tenderId)
   return res
 }
 
@@ -65,7 +63,7 @@ export async function updateByIdApi(data: Partial<CreateTenderDto> & { id: strin
     `/api/tender/${id}`,
     omit(['uploadedFiles'], data)
   )
-  await uploadTenderFilesApi(data.uploadedFiles || [])
+  await uploadTenderFilesApi(data.uploadedFiles || [], id)
   return res
 }
 
