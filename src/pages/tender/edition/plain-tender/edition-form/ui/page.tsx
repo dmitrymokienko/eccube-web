@@ -49,6 +49,7 @@ export function PlainTenderEditionPage() {
     const payload = prepareRHFTenderToTenderDtoMapper({ ...data, uploadedFiles })
     try {
       await tenderModel.updateByIdFx({ ...payload, id })
+      await tenderModel.deleteUploadedFilesFx()
       navigate(`/tender/edit/plain/${id}/draft`)
     } catch (e) {
       console.error(e)

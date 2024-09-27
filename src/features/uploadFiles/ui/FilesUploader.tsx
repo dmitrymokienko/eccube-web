@@ -14,12 +14,13 @@ const ATTACHMENT_MAX_SIZE = 10 * 1024 * 1024 // 10MB
 export interface IFilesUploaderProps {
   files: IUploadedFile[]
   onUpload: (files: IUploadedFile[]) => void
+  onDelete?: (fileName: string) => void
   deletable?: boolean
   sx?: SxProps
 }
 
 export function FilesUploader(props: IFilesUploaderProps) {
-  const { files = [], onUpload, deletable = true, sx = {} } = props
+  const { files = [], onUpload, onDelete, deletable = true, sx = {} } = props
 
   const { t } = useTranslation()
 
@@ -47,7 +48,12 @@ export function FilesUploader(props: IFilesUploaderProps) {
     }
   }
 
-  const onDelete = (fileName: string) => {
+  const handleDelete = (fileName: string) => {
+    if (typeof onDelete === 'function') {
+      const file = files.find((v) => v.name === fileName)
+      if (!file?.url) return
+      onDelete(file.url)
+    }
     const newFiles = files.filter((v) => v.name !== fileName)
     onUpload(newFiles)
   }
@@ -70,7 +76,7 @@ export function FilesUploader(props: IFilesUploaderProps) {
         )}
       </Stack>
 
-      <UploadedFilesList files={files} onDelete={deletable ? onDelete : undefined} />
+      <UploadedFilesList files={files} onDelete={deletable ? handleDelete : undefined} />
     </Stack>
   )
 }

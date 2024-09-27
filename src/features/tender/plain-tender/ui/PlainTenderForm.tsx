@@ -18,6 +18,7 @@ import InfoIcon from '@mui/icons-material/Info'
 import Tooltip from '@mui/material/Tooltip'
 import IconButton from '@mui/material/IconButton'
 import { IUploadedFile } from '@/entities/uploadFiles/model/interfaces'
+import { tenderModel } from '../model'
 
 export interface IPlainTenderFormProps {
   uploadedFiles: IUploadedFile[]
@@ -156,7 +157,12 @@ export function PlainTenderForm(props: Readonly<IPlainTenderFormProps>) {
         </Tooltip>
       </Box>
 
-      <FilesUploader files={uploadedFiles} onUpload={setFiles} sx={{ pb: 2 }} />
+      <FilesUploader
+        files={uploadedFiles}
+        onUpload={setFiles}
+        onDelete={tenderModel.setUploadFilesToDelete}
+        sx={{ pb: 2 }}
+      />
 
       {/* ADDRESS */}
 

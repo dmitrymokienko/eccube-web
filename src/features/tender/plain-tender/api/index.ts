@@ -19,6 +19,12 @@ export async function uploadTenderFilesApi(uploadedFiles: IUploadedFile[], tende
   return true
 }
 
+export async function deleteUploadedFilesApi(filesUrls: string[], tenderId: string) {
+  const queryParams = createQueryParams({ filesUrls: filesUrls.join(';') })
+  await defaultApiClient.delete(`/api/tender/upload/${tenderId}?${queryParams}`)
+  return true
+}
+
 //
 
 export async function createNewTenderApi(data: CreateTenderDto) {
@@ -64,7 +70,14 @@ export async function updateByIdApi(data: Partial<CreateTenderDto> & { id: strin
     `/api/tender/${id}`,
     omit(['uploadedFiles'], data)
   )
-  await uploadTenderFilesApi(data.uploadedFiles || [], id)
+
+  const filesToUpload = []
+  for (const file of data.uploadedFiles || []) {
+    if (!file.url) {
+      filesToUpload.push(file)
+    }
+  }
+  await uploadTenderFilesApi(filesToUpload, id)
   return res
 }
 
