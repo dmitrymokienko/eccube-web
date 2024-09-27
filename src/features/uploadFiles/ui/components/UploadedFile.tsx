@@ -1,11 +1,12 @@
 import AttachFileIcon from '@mui/icons-material/AttachFile'
+import DownloadIcon from '@mui/icons-material/Download'
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
 import ListItem from '@mui/material/ListItem'
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import { Theme } from '@mui/material/styles'
-import { MouseEventHandler } from 'react'
+import { MouseEventHandler, useState } from 'react'
 
 export interface IUploadedFileProps {
   fileName: string
@@ -23,6 +24,8 @@ const getListItemStyles = (theme: Theme) => ({
 export function UploadedFile(props: IUploadedFileProps) {
   const { fileName, onDelete, downloadLink } = props
 
+  const [hover, setHover] = useState(false)
+
   const handleDelete: MouseEventHandler<HTMLDivElement> = (e) => {
     e.preventDefault()
     e.stopPropagation()
@@ -34,7 +37,7 @@ export function UploadedFile(props: IUploadedFileProps) {
   const Content = (
     <>
       <ListItemIcon sx={{ minWidth: '42px' }}>
-        <AttachFileIcon />
+        {hover && downloadLink ? <DownloadIcon /> : <AttachFileIcon />}
       </ListItemIcon>
 
       <ListItemText primary={fileName} primaryTypographyProps={{ noWrap: true }} />
@@ -54,6 +57,8 @@ export function UploadedFile(props: IUploadedFileProps) {
         component="a"
         href={downloadLink}
         target="_blank"
+        onMouseEnter={() => setHover(true)}
+        onMouseLeave={() => setHover(false)}
         sx={(theme) => getListItemStyles(theme)}
       >
         {Content}

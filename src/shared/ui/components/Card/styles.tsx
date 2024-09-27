@@ -9,7 +9,7 @@ export const CardWrapper = styled(Box, {
   ...(outlined ? getOutlinedStyles(theme) : {}),
   ...(onClick ? { cursor: 'pointer' } : {}),
   ...(selected ? getSelectedStyles(theme, outlined) : {}),
-  ...(disabled ? getInactiveStyles() : {}),
+  ...(disabled ? getInactiveStyles(theme) : {}),
 }))
 
 function getDefaultStyles(theme: Theme) {
@@ -41,13 +41,13 @@ function getSelectedStyles(theme: Theme, outlined = false) {
   }
 }
 
-function getInactiveStyles() {
+function getInactiveStyles(theme: Theme) {
   return {
     cursor: 'not-allowed',
     borderRadius: '12px',
     padding: '20px',
     border: `none`,
-    background: `rgba(244, 245, 246, 0.50)`,
+    background: theme.palette.divider,
     boxShadow: `none`,
     '&:hover': {
       boxShadow: `none`,
@@ -60,7 +60,7 @@ function getOutlinedStyles(theme: Theme) {
     cursor: 'default',
     borderRadius: '12px',
     padding: '19px',
-    border: `1px solid ${theme.palette.grey[200]}`,
+    border: `1px solid ${theme.palette.divider}`,
     boxShadow: 'none',
     '&:hover': {
       boxShadow: 'none',
