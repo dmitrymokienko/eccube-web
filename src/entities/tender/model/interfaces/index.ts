@@ -2,6 +2,7 @@ import { RawDraftContentState } from 'draft-js'
 import { TenderPublishment } from '../constants'
 import { Nullable } from '@/shared/types/utilities'
 import { Currency, PricePer, PriceType } from '@/entities/currencies/constants'
+import { IUploadedFile } from '@/entities/uploadFiles/model/interfaces'
 
 export interface ITender {
   id: string
@@ -44,13 +45,7 @@ export interface ITender {
 
   invitedSuppliers: string[]
 
-  uploadedFiles?: File[]
-  // {
-  //   filename: string
-  //   url: string
-  //   size: number
-  //   uploadedAt: string // timestamp
-  // }[]
+  uploadedFiles?: IUploadedFile[]
 
   status: string
 

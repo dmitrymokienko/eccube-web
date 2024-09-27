@@ -17,10 +17,11 @@ import { JobTypeMultiField } from './components/JobTypeMultiField'
 import InfoIcon from '@mui/icons-material/Info'
 import Tooltip from '@mui/material/Tooltip'
 import IconButton from '@mui/material/IconButton'
+import { IUploadedFile } from '@/entities/uploadFiles/model/interfaces'
 
 export interface IPlainTenderFormProps {
-  uploadedFiles: File[]
-  setFiles: (files: File[]) => void
+  uploadedFiles: IUploadedFile[]
+  setFiles: (files: IUploadedFile[]) => void
 }
 
 export function PlainTenderForm(props: Readonly<IPlainTenderFormProps>) {

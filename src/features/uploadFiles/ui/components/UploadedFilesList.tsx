@@ -1,8 +1,9 @@
 import List from '@mui/material/List'
 import { UploadedFile } from './UploadedFile'
+import { IUploadedFile } from '@/entities/uploadFiles/model/interfaces'
 
 export interface IUploadedFilesListProps {
-  files: File[]
+  files: IUploadedFile[]
   onDelete?: (fileName: string) => void
 }
 
@@ -16,7 +17,6 @@ export function UploadedFilesList(props: IUploadedFilesListProps) {
         <UploadedFile
           key={file.name}
           fileName={file.name}
-          // @ts-expect-error TODO: fix this
           downloadLink={file.url}
           onDelete={onDelete}
         />

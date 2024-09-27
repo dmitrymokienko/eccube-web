@@ -3,8 +3,9 @@ import { createQueryParams, omit } from '@/shared/libs/utils/utilities'
 import { CreateTenderDto } from '@/features/tender/plain-tender/api/dto'
 import { ITender } from '@/entities/tender/model/interfaces'
 import { TenderListQueryFilters } from '../model/interfaces'
+import { IUploadedFile } from '@/entities/uploadFiles/model/interfaces'
 
-export async function uploadTenderFilesApi(uploadedFiles: File[], tenderId: string) {
+export async function uploadTenderFilesApi(uploadedFiles: IUploadedFile[], tenderId: string) {
   if (uploadedFiles.length === 0) return false
   const formData = new FormData()
   for (const file of uploadedFiles) {

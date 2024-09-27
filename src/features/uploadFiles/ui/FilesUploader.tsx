@@ -6,13 +6,14 @@ import { isEmpty } from '@/shared/libs/utils/utilities'
 import { UploadedFilesList } from './components/UploadedFilesList'
 import { useTranslation } from 'react-i18next'
 import { SxProps } from '@mui/material/styles'
+import { IUploadedFile } from '@/entities/uploadFiles/model/interfaces'
 
 const MAX_COUNT = 6
 const ATTACHMENT_MAX_SIZE = 10 * 1024 * 1024 // 10MB
 
 export interface IFilesUploaderProps {
-  files: File[]
-  onUpload: (files: File[]) => void
+  files: IUploadedFile[]
+  onUpload: (files: IUploadedFile[]) => void
   deletable?: boolean
   sx?: SxProps
 }
@@ -29,7 +30,7 @@ export function FilesUploader(props: IFilesUploaderProps) {
   const onFileUpload = (e: FormEvent<HTMLInputElement>) => {
     setError(false)
     const extractedFiles = e.currentTarget.files as FileList
-    const extractedFile = extractedFiles[0] as File
+    const extractedFile = extractedFiles[0]
     const isFileAlreadyExists = files.some((v) => v.name === extractedFile.name)
     if (isFileAlreadyExists) {
       setError(t('validation.upload-file-already-exists'))

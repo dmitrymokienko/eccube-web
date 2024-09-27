@@ -1,3 +1,4 @@
+import { IUploadedFile } from '@/entities/uploadFiles/model/interfaces'
 import { prepareRHFTenderToTenderDtoMapper } from '@/features/tender/plain-tender/api/mapper'
 import { tenderModel } from '@/features/tender/plain-tender/model'
 import { PlainTenderProcessForm } from '@/features/tender/plain-tender/model/interfaces'
@@ -16,7 +17,7 @@ export function PlainTenderCreationPage() {
   const { t } = useTranslation()
   const navigate = useNavigate()
 
-  const [uploadedFiles, setFiles] = useState<File[]>([])
+  const [uploadedFiles, setFiles] = useState<IUploadedFile[]>([])
 
   const form = useFormContext<PlainTenderProcessForm>()
 

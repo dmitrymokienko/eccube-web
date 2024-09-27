@@ -1,3 +1,4 @@
+import { IUploadedFile } from '@/entities/uploadFiles/model/interfaces'
 import { prepareRHFTenderToTenderDtoMapper } from '@/features/tender/plain-tender/api/mapper'
 import { tenderModel } from '@/features/tender/plain-tender/model'
 import { PlainTenderProcessForm } from '@/features/tender/plain-tender/model/interfaces'
@@ -21,10 +22,7 @@ export function PlainTenderEditionPage() {
 
   const tender = useUnit(tenderModel.$currentTender)
 
-  const [uploadedFiles, setFiles] = useState<File[]>(
-    // @ts-expect-error TODO: fix this
-    (tender?.uploadedFiles || []).map((v) => ({ ...v, name: v.filename }))
-  )
+  const [uploadedFiles, setFiles] = useState<IUploadedFile[]>(tender?.uploadedFiles || [])
 
   const form = useFormContext<PlainTenderProcessForm>()
   const { getValues, handleSubmit } = form

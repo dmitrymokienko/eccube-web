@@ -271,15 +271,7 @@ export function CustomerTenderDrawer(props: TenderDrawerProps) {
               <ListItem sx={{ flexDirection: 'column', alignItems: 'flex-start' }}>
                 <Typography variant="body1">{t('tender-drawer.uploaded-files')}</Typography>
                 <Box sx={{ mt: 1, width: '100%' }}>
-                  <UploadedFilesList
-                    files={tenderData.uploadedFiles.map((v) => ({
-                      ...v,
-                      // @ts-expect-error TODO: fix this
-                      name: v.filename,
-                      // @ts-expect-error TODO: fix this
-                      downloadUrl: v.url,
-                    }))}
-                  />
+                  <UploadedFilesList files={tenderData.uploadedFiles} />
                 </Box>
               </ListItem>
             )}
