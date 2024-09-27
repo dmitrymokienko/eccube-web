@@ -3,6 +3,7 @@ import {
   createNewTenderApi,
   createNewTenderDraftApi,
   deleteByIdApi,
+  deleteUploadedFilesApi,
   fetchTenderByIdApi,
   fetchTenderListApi,
   publishTenderApi,
@@ -29,9 +30,26 @@ const updateByIdFx = createEffect(updateByIdApi)
 
 const deleteByIdFx = createEffect(deleteByIdApi)
 
+const $uploadFilesToDelete = createStore<string[]>([]) // urls of files to delete
+const setUploadFilesToDelete = createEvent<string[] | string>()
+const deleteUploadedFilesFx = createEffect(async () => {
+  const tenderId = $currentTender.getState()?.id
+  const urls = $uploadFilesToDelete.getState()
+  if (!tenderId || urls.length === 0) return
+  await deleteUploadedFilesApi(urls, tenderId!)
+})
+
 $currentTender.on(fetchByIdFx.doneData, (_, data) => data).reset(reset)
 
 $list.on(fetchTenderListFx.doneData, (_, data) => data).reset(reset)
+
+$uploadFilesToDelete
+  .on(deleteUploadedFilesFx.doneData, () => [])
+  .on(setUploadFilesToDelete, (state, payload) => {
+    if (typeof payload === 'string') return [...state, payload]
+    return [...state, ...payload]
+  })
+  .reset(reset)
 
 const $isLoading = combine(
   createNewTenderFx.pending,
@@ -74,4 +92,8 @@ export const tenderModel = {
 
   $list,
   fetchTenderListFx,
+
+  $uploadFilesToDelete,
+  setUploadFilesToDelete,
+  deleteUploadedFilesFx,
 }
