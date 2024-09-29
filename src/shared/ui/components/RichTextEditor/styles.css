@@ -8,6 +8,7 @@ div.DraftEditor-root {
   font-family: 'Roboto Condensed', sans-serif;
   color: #0f1112;
   min-height: 100px;
+  z-index: 0;
 }
 
 .public-DraftStyleDefault-ol,
