@@ -9,7 +9,7 @@ import { tenderModel } from '@/features/tender/plain-tender/model'
 import { useUnit } from 'effector-react'
 import { currentUser } from '@/entities/currentUser/model'
 import { SidebarLayout } from '@/shared/ui/layouts/SidebarLayout/ui/SidebarLayout'
-import { CustomerTenderDrawer } from '@/features/tender/plain-tender/ui/drawers/customerTenderDrawer/CustomerTenderDrawer'
+import { CustomerTenderDrawer } from '@/widgets/TenderDrawers/customerTenderDrawer/CustomerTenderDrawer'
 
 export function CustomerTendersPage() {
   const { t } = useTranslation()

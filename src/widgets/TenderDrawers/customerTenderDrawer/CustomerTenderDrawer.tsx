@@ -10,7 +10,6 @@ import Stack from '@mui/material/Stack'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import IconButton from '@mui/material/IconButton'
-import Divider from '@mui/material/Divider'
 import ListItem from '@mui/material/ListItem'
 import ListItemText from '@mui/material/ListItemText'
 import List from '@mui/material/List'
@@ -25,17 +24,16 @@ import ListItemButton from '@mui/material/ListItemButton'
 
 import { RichTextEditor } from '@/shared/ui/components/RichTextEditor'
 import { prepareRTEForRHF } from '@/shared/ui/components/RichTextEditor/utils'
-import EccubeLogo from '@/shared/assets/icons/eccube-logo-white.svg?react'
-import { SIDEBAR_LAYOUT_NAV_HEIGHT } from '@/shared/ui/layouts/SidebarLayout/lib/constants'
 import { formatDate } from '@/shared/libs/utils/datetime'
 import { mapCountryCodeToName } from '@/shared/libs/mappers/countries'
 import { Locale } from '@/entities/locale/types'
-import { Z_INDEX } from '@/shared/libs/constants/style'
-import { tenderModel } from '../../../model'
 import { ConfirmationDialog } from '@/shared/ui/components/Dialogs/ConfirmationDialog'
 import { Nullable } from '@/shared/types/utilities'
 import { transformCentsToAmount } from '@/shared/libs/utils/currencies'
 import { UploadedFilesList } from '@/features/uploadFiles/ui/components/UploadedFilesList'
+import { LogoBannerOffset } from '../components/LogoBannerOffset'
+import { TenderNavBar } from '../components/TenderNavBar'
+import { tenderModel } from '@/features/tender/plain-tender/model'
 
 const DRAWER_WIDTH = 800
 const BANNER_WIDTH = 320
@@ -46,7 +44,7 @@ interface TenderDrawerProps {
   onClose: () => void
 }
 
-export function CustomerTenderDrawer(props: TenderDrawerProps) {
+export function CustomerTenderDrawer(props: Readonly<TenderDrawerProps>) {
   const { id, open, onClose } = props
 
   const { t } = useTranslation()
@@ -122,80 +120,45 @@ export function CustomerTenderDrawer(props: TenderDrawerProps) {
         }}
       >
         {/* decor */}
-        {!isCompact && (
-          <Box
-            sx={(theme) => ({
-              position: 'fixed',
-              left: 0,
-              top: 0,
-              bottom: 0,
-              width: `${BANNER_WIDTH}px`,
-              backgroundColor: theme.palette.custom.const.black,
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              p: 2,
-            })}
-          >
-            <EccubeLogo />
-          </Box>
-        )}
+        <LogoBannerOffset />
 
         {/* nav */}
-        <Box
-          component="nav"
-          sx={(theme) => ({
-            position: 'sticky',
-            top: 0,
-            height: SIDEBAR_LAYOUT_NAV_HEIGHT,
-            zIndex: Z_INDEX.SlightlySoaring,
-            backgroundColor: theme.palette.background.paper,
-          })}
-        >
-          <Stack
-            direction="row"
-            sx={{
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              height: SIDEBAR_LAYOUT_NAV_HEIGHT,
-            }}
-          >
-            <Typography variant="h5">
-              {t('tender-drawer.header-title')}
-              {/* <Typography component="span" variant="h5" color="grey[300]">
+        <TenderNavBar>
+          <Typography variant="h5">
+            {t('tender-drawer.header-title')}
+            {/* <Typography component="span" variant="h5" color="grey[300]">
                 {tenderData?.status && ` / ${tenderData.status}`}
               </Typography> */}
-            </Typography>
+          </Typography>
 
-            <Stack direction="row" spacing={1}>
-              <Tooltip title={t('button.goBack')}>
-                <span>
-                  <IconButton onClick={handleClose} color="default">
-                    <KeyboardBackspaceIcon />
-                  </IconButton>
-                </span>
-              </Tooltip>
+          <Box sx={{ flexGrow: 1 }} />
 
-              <Tooltip title={t('tender-drawer.edit-details')}>
-                <span>
-                  <IconButton onClick={onEdit} color="primary" disabled={!tenderData}>
-                    <EditIcon />
-                  </IconButton>
-                </span>
-              </Tooltip>
+          <Stack direction="row" spacing={1}>
+            <Tooltip title={t('button.goBack')}>
+              <span>
+                <IconButton onClick={handleClose} color="default">
+                  <KeyboardBackspaceIcon />
+                </IconButton>
+              </span>
+            </Tooltip>
 
-              <Tooltip title={t('tender-drawer.delete-tender')}>
-                <span>
-                  <IconButton onClick={onDelete} color="error" disabled={!tenderData}>
-                    <DeleteIcon />
-                  </IconButton>
-                </span>
-              </Tooltip>
-            </Stack>
+            <Tooltip title={t('tender-drawer.edit-details')}>
+              <span>
+                <IconButton onClick={onEdit} color="primary" disabled={!tenderData}>
+                  <EditIcon />
+                </IconButton>
+              </span>
+            </Tooltip>
+
+            <Tooltip title={t('tender-drawer.delete-tender')}>
+              <span>
+                <IconButton onClick={onDelete} color="error" disabled={!tenderData}>
+                  <DeleteIcon />
+                </IconButton>
+              </span>
+            </Tooltip>
           </Stack>
-
-          <Divider />
-        </Box>
+        </TenderNavBar>
 
         {/* info list */}
         {!!tenderData && (
