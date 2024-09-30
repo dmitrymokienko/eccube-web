@@ -1,5 +1,4 @@
-// @ts-expect-error - React is required for the ref to work
-import React, { MouseEvent, Ref, forwardRef } from 'react'
+import { MouseEvent, Ref, forwardRef } from 'react'
 import { CardWrapper } from './styles'
 import { ICommonCardProps } from './types'
 

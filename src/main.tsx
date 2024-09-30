@@ -1,4 +1,4 @@
-import React from 'react'
+import { StrictMode } from 'react'
 import ReactDOM from 'react-dom/client'
 import { RouterProvider } from 'react-router-dom'
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFnsV3'
@@ -16,7 +16,7 @@ import { router } from './core/routes'
 import './core/configs/i18n/config'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
+  <StrictMode>
     <ThemeRegistry>
       <LanguageProvider>
         <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -28,5 +28,5 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         </LocalizationProvider>
       </LanguageProvider>
     </ThemeRegistry>
-  </React.StrictMode>
+  </StrictMode>
 )

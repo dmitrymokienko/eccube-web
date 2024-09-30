@@ -6,8 +6,8 @@ import { tenderModel } from '@/features/tender/plain-tender/model'
 import { useUnit } from 'effector-react'
 import { currentUser } from '@/entities/currentUser/model'
 import { SidebarLayout } from '@/shared/ui/layouts/SidebarLayout/ui/SidebarLayout'
-import { JobPoolTenderDrawer } from '@/features/tender/plain-tender/ui/drawers/jobPoolTenderDrawer/JobPoolTenderDrawer'
 import Box from '@mui/material/Box'
+import { JobPoolTenderDrawer } from '@/widgets/TenderDrawers/jobPoolTenderDrawer/JobPoolTenderDrawer'
 
 export function JobPoolTendersPage() {
   const [params, setParams] = useSearchParams()
