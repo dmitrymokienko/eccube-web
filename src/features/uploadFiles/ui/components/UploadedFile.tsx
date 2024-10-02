@@ -7,6 +7,7 @@ import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import { Theme } from '@mui/material/styles'
 import { MouseEventHandler, useState } from 'react'
+import { replaceCustomPrefix, replaceUUID } from '@/shared/libs/utils/strings'
 
 export interface IUploadedFileProps {
   fileName: string
@@ -50,11 +51,13 @@ export function UploadedFile(props: IUploadedFileProps) {
     </>
   )
 
+  const filename = replaceCustomPrefix(replaceUUID(fileName.split('/').pop()!))
+
   if (downloadLink) {
     return (
       <ListItemButton
-        download
         component="a"
+        download={filename} // pure name
         href={downloadLink}
         target="_blank"
         onMouseEnter={() => setHover(true)}
