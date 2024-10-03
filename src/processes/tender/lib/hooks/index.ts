@@ -9,12 +9,12 @@ export function useTenderSchema() {
     title: z
       .string()
       .min(1, { message: t('validation.required') })
-      .max(120, { message: t('validation.maxLength', { max: 120 }) }),
+      .max(120, { message: t('validation.maxLength', { n: 120 }) }),
 
     shortDescription: z
       .string()
       .min(1, { message: t('validation.required') })
-      .max(300, { message: t('validation.maxLength', { max: 300 }) }),
+      .max(300, { message: t('validation.maxLength', { n: 300 }) }),
 
     workDescription: z
       .any()
@@ -34,34 +34,37 @@ export function useTenderSchema() {
         }
       ),
 
-    startPeriod: z.date().refine((value) => value !== null, { message: t('validation.required') }),
+    startPeriod: z.date({
+      required_error: t('validation.required'),
+      invalid_type_error: t('validation.date'),
+    }),
 
-    endPeriod: z.date().refine((value) => value !== null, { message: t('validation.required') }),
+    endPeriod: z.date({
+      required_error: t('validation.required'),
+      invalid_type_error: t('validation.date'),
+    }),
 
     street: z
       .string()
       .min(1, { message: t('validation.required') })
-      .max(200, { message: t('validation.maxLength', { max: 200 }) }),
+      .max(200, { message: t('validation.maxLength', { n: 200 }) }),
 
-    addressSuffix: z
-      .string()
-      .max(200, { message: t('validation.maxLength', { max: 200 }) })
-      .optional(),
+    addressSuffix: z.string().max(200, { message: t('validation.maxLength', { n: 200 }) }),
 
     postalCode: z
       .string()
       .min(1, { message: t('validation.required') })
-      .max(5, { message: t('validation.maxLength', { max: 5 }) }),
+      .max(4, { message: t('validation.maxLength', { n: 4 }) }),
 
     city: z
       .string()
       .min(1, { message: t('validation.required') })
-      .max(200, { message: t('validation.maxLength', { max: 200 }) }),
+      .max(200, { message: t('validation.maxLength', { n: 200 }) }),
 
-    country: z
-      .string()
-      .min(1, { message: t('validation.required') })
-      .max(200, { message: t('validation.maxLength', { max: 200 }) }),
+    // country: z
+    //   .string()
+    //   .min(1, { message: t('validation.required') })
+    //   .max(200, { message: t('validation.maxLength', { n: 200 }) }),
 
     publishment: z.array(z.string()).min(1, { message: t('validation.required') }),
 
@@ -69,16 +72,23 @@ export function useTenderSchema() {
 
     paymentTerm: z.string().optional(),
 
-    price: z
-      .object({
-        amount: z
-          .number()
-          .refine((value) => value !== undefined, { message: t('validation.required') }),
-        currency: z
-          .string()
-          .refine((value) => value !== undefined, { message: t('validation.required') }),
-      })
+    amount: z
+      .string()
+      .min(1, { message: t('validation.required') })
+      .max(10, { message: t('validation.maxLength', { n: 10 }) })
       .optional(),
+
+    currency: z
+      .string()
+      .refine((value) => value !== undefined, { message: t('validation.required') }),
+
+    pricePer: z
+      .string()
+      .refine((value) => value !== undefined, { message: t('validation.required') }),
+
+    priceType: z
+      .string()
+      .refine((value) => value !== undefined, { message: t('validation.required') }),
 
     jobTypes: z.array(z.string()).optional(),
   })

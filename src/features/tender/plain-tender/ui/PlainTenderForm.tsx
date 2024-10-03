@@ -104,16 +104,22 @@ export function PlainTenderForm(props: Readonly<IPlainTenderFormProps>) {
       import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
       */}
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 3, pr: 4, position: 'relative' }}>
-        {/* TODO: disable all date before 'now()' */}
         <Controller
           name="startPeriod"
           control={control}
           render={({ field }) => (
             <DatePicker
+              disablePast
               label={t('field.create-tender.tender-start-date')}
               value={field.value}
               inputRef={field.ref}
               onChange={(date) => field.onChange(date)}
+              slotProps={{
+                textField: {
+                  error: !!errors?.startPeriod,
+                  helperText: errors?.startPeriod?.message,
+                },
+              }}
             />
           )}
         />
@@ -123,10 +129,17 @@ export function PlainTenderForm(props: Readonly<IPlainTenderFormProps>) {
           control={control}
           render={({ field }) => (
             <DatePicker
+              disablePast
               label={t('field.create-tender.tender-end-date')}
               value={field.value}
               inputRef={field.ref}
               onChange={(date) => field.onChange(date)}
+              slotProps={{
+                textField: {
+                  error: !!errors?.endPeriod,
+                  helperText: errors?.endPeriod?.message,
+                },
+              }}
             />
           )}
         />
@@ -208,7 +221,7 @@ export function PlainTenderForm(props: Readonly<IPlainTenderFormProps>) {
         placeholder={t('placeholder.create-tender.country')}
         error={!!errors?.country}
         helperText={errors?.country?.message}
-        {...register('country')}
+        {...register('country', { disabled: true })}
         // https://github.com/react-hook-form/react-hook-form/issues/220
         slotProps={{
           inputLabel: { shrink: true }, // due to the fact that readonly/disabled fields are empty
