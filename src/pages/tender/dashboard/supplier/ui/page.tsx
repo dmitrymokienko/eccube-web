@@ -7,7 +7,7 @@ import { useUnit } from 'effector-react'
 import { currentUser } from '@/entities/currentUser/model'
 import { SidebarLayout } from '@/shared/ui/layouts/SidebarLayout/ui/SidebarLayout'
 import Box from '@mui/material/Box'
-import { JobPoolTenderDrawer } from '@/widgets/TenderDrawers/jobPoolTenderDrawer/JobPoolTenderDrawer'
+import { JobPoolTenderDrawer } from '@/widgets/TenderDrawers/ui/jobPoolTenderDrawer/JobPoolTenderDrawer'
 
 export function JobPoolTendersPage() {
   const [params, setParams] = useSearchParams()

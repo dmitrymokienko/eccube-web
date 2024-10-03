@@ -58,7 +58,6 @@ export class ApiClient {
               throw new Error('No tokens')
             }
             auth.setAccessToken(backendTokens.accessToken)
-            auth.setAccessToken(backendTokens.accessToken)
             auth.setRefreshToken(backendTokens.refreshToken)
             const { exp = null } = jwtDecode(backendTokens.accessToken)
             auth.setExpiresIn(exp)

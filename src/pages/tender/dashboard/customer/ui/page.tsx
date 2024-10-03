@@ -3,27 +3,34 @@ import Button from '@mui/material/Button'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Table } from '@/shared/ui/components/Table/Table'
-import { useEffect, MouseEvent } from 'react'
+import { MouseEvent } from 'react'
 import { prepareTenderTable } from '../lib/utils'
 import { tenderModel } from '@/features/tender/plain-tender/model'
 import { useUnit } from 'effector-react'
 import { currentUser } from '@/entities/currentUser/model'
 import { SidebarLayout } from '@/shared/ui/layouts/SidebarLayout/ui/SidebarLayout'
-import { CustomerTenderDrawer } from '@/widgets/TenderDrawers/customerTenderDrawer/CustomerTenderDrawer'
+import { useIsFetching, useIsMutating, useQuery } from '@tanstack/react-query'
+import { CustomerTenderDrawer } from '@/widgets/TenderDrawers/ui/customerTenderDrawer/CustomerTenderDrawer'
 
 export function CustomerTendersPage() {
   const { t } = useTranslation()
   const navigate = useNavigate()
   const [params, setParams] = useSearchParams()
 
-  const user = useUnit(currentUser.$info)
-  const tendersList = useUnit(tenderModel.$list)
   const isLoading = useUnit(tenderModel.$isLoading)
+  const user = useUnit(currentUser.$info)
 
-  useEffect(() => {
-    if (!user) return
-    tenderModel.fetchTenderListFx({ onlyAuthorTendersById: user.id })
-  }, [user])
+  const userId = user?.id
+
+  const isFetching = useIsFetching({ queryKey: ['customerTenderList', userId] })
+  const isMutating = useIsMutating({ mutationKey: ['customerTenderList', userId] })
+
+  const { data: list } = useQuery({
+    queryKey: ['customerTenderList', userId],
+    queryFn: async () => tenderModel.fetchTenderListFx({ onlyAuthorTendersById: userId }),
+    enabled: !!userId,
+    initialData: [],
+  })
 
   const onCloseDrawer = () => {
     if (!params.has('id')) return
@@ -36,13 +43,13 @@ export function CustomerTendersPage() {
     setParams(params)
   }
 
-  const tableData = prepareTenderTable(tendersList)
+  const tableData = prepareTenderTable(list)
 
   const isDrawerOpen = params.has('id')
   const id = params.get('id')
 
   return (
-    <SidebarLayout LoaderProps={{ visible: isLoading }}>
+    <SidebarLayout LoaderProps={{ visible: isLoading || isFetching > 0 || isMutating > 0 }}>
       <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }} py={3}>
         <Button
           fullWidth={false}
@@ -52,7 +59,7 @@ export function CustomerTendersPage() {
             navigate('/tender/create/plain')
           }}
         >
-          {t('button.createTender')}
+          {t('button.createTender')}``
         </Button>
       </Box>
 

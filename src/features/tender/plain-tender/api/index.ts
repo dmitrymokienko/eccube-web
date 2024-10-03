@@ -64,7 +64,7 @@ export async function fetchTenderListApi(filters?: TenderListQueryFilters) {
 
 //
 
-export async function updateByIdApi(data: Partial<CreateTenderDto> & { id: string }) {
+export async function updateTenderByIdApi(data: Partial<CreateTenderDto> & { id: string }) {
   const { id } = data
   const res = await defaultApiClient.put<Partial<CreateTenderDto>, ITender>(
     `/api/tender/${id}`,
@@ -89,6 +89,6 @@ export async function publishTenderApi(id: string) {
 
 //
 
-export async function deleteByIdApi(id: string) {
+export async function deleteTenderByIdApi(id: string) {
   return defaultApiClient.delete(`/api/tender/${id}`)
 }

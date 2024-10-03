@@ -45,17 +45,23 @@ export function JobTypeMultiField() {
       />
 
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 3 }}>
-        {/* TODO: disable all date before 'now()' */}
         <Controller
           name="jobStartDate"
           control={control}
           rules={{ required: t('validation.required') }}
           render={({ field }) => (
             <DatePicker
+              disablePast
               label={t('field.create-tender.start-date')}
               value={field.value}
               inputRef={field.ref}
               onChange={(date) => field.onChange(date)}
+              slotProps={{
+                textField: {
+                  error: !!errors?.jobStartDate,
+                  helperText: errors?.jobStartDate?.message,
+                },
+              }}
             />
           )}
         />
@@ -66,10 +72,17 @@ export function JobTypeMultiField() {
           rules={{ required: jobType === 'oneTime' ? t('validation.required') : undefined }}
           render={({ field }) => (
             <DatePicker
+              disablePast
               label={t('field.create-tender.end-date')}
               value={field.value}
               inputRef={field.ref}
               onChange={(date) => field.onChange(date)}
+              slotProps={{
+                textField: {
+                  error: !!errors?.jobEndDate,
+                  helperText: errors?.jobEndDate?.message,
+                },
+              }}
             />
           )}
         />

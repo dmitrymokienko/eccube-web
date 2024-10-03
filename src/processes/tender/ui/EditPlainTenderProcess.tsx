@@ -16,12 +16,14 @@ import {
   SEPARATE_LAYOUT_SIDEBAR_WIDTH,
   SeparateLayout,
 } from '@/shared/ui/layouts/SeparateLayout/ui/SeparateLayout'
+import { useTenderSchema } from '../lib/hooks'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 export interface IEditPlainTenderProcessProps {
   children?: ReactNode
 }
 
-export function EditPlainTenderProcess(props: IEditPlainTenderProcessProps) {
+export function EditPlainTenderProcess(props: Readonly<IEditPlainTenderProcessProps>) {
   const { children } = props
 
   const { t } = useTranslation()
@@ -33,8 +35,11 @@ export function EditPlainTenderProcess(props: IEditPlainTenderProcessProps) {
   const tender = useUnit(tenderModel.$currentTender)
   const isLoading = useUnit(tenderModel.$isLoading)
 
+  const tenderSchema = useTenderSchema()
+
   const form = useForm<PlainTenderProcessForm>({
     defaultValues: tender ? prepareTenderDtoToRHFMapper(tender) : undefined,
+    resolver: zodResolver(tenderSchema),
   })
 
   const sidebar = useMemo(() => {
