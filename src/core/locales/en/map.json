@@ -134,6 +134,9 @@
   },
   "validation": {
     "required": "This field is required",
+    "date": "Please select/enter a valid date",
+    "minLength": "This field must be at least {{n}} characters long",
+    "maxLength": "This field must be at most {{n}} characters long",
     "email": "Please enter a valid email address",
     "email-already-exists": "Email already exists",
     "password": "Password must be at least 8 characters long",

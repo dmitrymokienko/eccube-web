@@ -53,11 +53,7 @@ export function PlainTenderForm(props: Readonly<IPlainTenderFormProps>) {
         placeholder={t('placeholder.create-tender.title')}
         error={!!errors?.title}
         helperText={errors?.title?.message}
-        {...register('title', {
-          required: t('validation.required'),
-          setValueAs: (value = '') => value.trim(),
-          validate: (value = '') => value.trim().length < 120,
-        })}
+        {...register('title')}
         // https://github.com/react-hook-form/react-hook-form/issues/220
         slotProps={{
           inputLabel: { shrink: !!watch('title') },
@@ -69,11 +65,7 @@ export function PlainTenderForm(props: Readonly<IPlainTenderFormProps>) {
         placeholder={t('placeholder.create-tender.short-description')}
         error={!!errors?.shortDescription}
         helperText={errors?.shortDescription?.message}
-        {...register('shortDescription', {
-          required: t('validation.required'),
-          setValueAs: (value = '') => value.trim(),
-          validate: (value = '') => value.trim().length < 300,
-        })}
+        {...register('shortDescription')}
         // https://github.com/react-hook-form/react-hook-form/issues/220
         slotProps={{
           inputLabel: { shrink: !!watch('shortDescription') },
@@ -93,7 +85,6 @@ export function PlainTenderForm(props: Readonly<IPlainTenderFormProps>) {
       <Controller
         name="workDescription"
         control={control}
-        rules={{ required: t('validation.required') }}
         render={({ field }) => (
           <RichTextEditor
             showRichBar
@@ -113,17 +104,22 @@ export function PlainTenderForm(props: Readonly<IPlainTenderFormProps>) {
       import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
       */}
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 3, pr: 4, position: 'relative' }}>
-        {/* TODO: disable all date before 'now()' */}
         <Controller
           name="startPeriod"
           control={control}
-          rules={{ required: t('validation.required') }}
           render={({ field }) => (
             <DatePicker
+              disablePast
               label={t('field.create-tender.tender-start-date')}
               value={field.value}
               inputRef={field.ref}
               onChange={(date) => field.onChange(date)}
+              slotProps={{
+                textField: {
+                  error: !!errors?.startPeriod,
+                  helperText: errors?.startPeriod?.message,
+                },
+              }}
             />
           )}
         />
@@ -131,13 +127,19 @@ export function PlainTenderForm(props: Readonly<IPlainTenderFormProps>) {
         <Controller
           name="endPeriod"
           control={control}
-          rules={{ required: t('validation.required') }}
           render={({ field }) => (
             <DatePicker
+              disablePast
               label={t('field.create-tender.tender-end-date')}
               value={field.value}
               inputRef={field.ref}
               onChange={(date) => field.onChange(date)}
+              slotProps={{
+                textField: {
+                  error: !!errors?.endPeriod,
+                  helperText: errors?.endPeriod?.message,
+                },
+              }}
             />
           )}
         />
@@ -171,11 +173,7 @@ export function PlainTenderForm(props: Readonly<IPlainTenderFormProps>) {
         placeholder={t('placeholder.create-tender.street')}
         error={!!errors?.street}
         helperText={errors?.street?.message}
-        {...register('street', {
-          required: t('validation.required'),
-          setValueAs: (value = '') => value.trim(),
-          validate: (value = '') => value.trim().length < 200,
-        })}
+        {...register('street')}
         // https://github.com/react-hook-form/react-hook-form/issues/220
         slotProps={{
           inputLabel: { shrink: !!watch('street') },
@@ -187,11 +185,7 @@ export function PlainTenderForm(props: Readonly<IPlainTenderFormProps>) {
         placeholder={t('placeholder.create-tender.address-suffix')}
         error={!!errors?.addressSuffix}
         helperText={errors?.addressSuffix?.message}
-        {...register('addressSuffix', {
-          required: t('validation.required'),
-          setValueAs: (value = '') => value.trim(),
-          validate: (value = '') => value.trim().length < 200,
-        })}
+        {...register('addressSuffix')}
         // https://github.com/react-hook-form/react-hook-form/issues/220
         slotProps={{
           inputLabel: { shrink: !!watch('addressSuffix') },
@@ -203,12 +197,7 @@ export function PlainTenderForm(props: Readonly<IPlainTenderFormProps>) {
         placeholder={t('placeholder.create-tender.postal-code')}
         error={!!errors?.postalCode}
         helperText={errors?.postalCode?.message}
-        {...register('postalCode', {
-          required: t('validation.required'),
-          setValueAs: (value = '') => value.trim(),
-          // TODO: what is the correct length for postal code?
-          validate: (value = '') => value.trim().length < 5,
-        })}
+        {...register('postalCode')}
         // https://github.com/react-hook-form/react-hook-form/issues/220
         slotProps={{
           inputLabel: { shrink: !!watch('postalCode') },
@@ -220,11 +209,7 @@ export function PlainTenderForm(props: Readonly<IPlainTenderFormProps>) {
         placeholder={t('placeholder.create-tender.city')}
         error={!!errors?.city}
         helperText={errors?.city?.message}
-        {...register('city', {
-          required: t('validation.required'),
-          setValueAs: (value = '') => value.trim(),
-          validate: (value = '') => value.trim().length < 200,
-        })}
+        {...register('city')}
         // https://github.com/react-hook-form/react-hook-form/issues/220
         slotProps={{
           inputLabel: { shrink: !!watch('city') },
@@ -236,12 +221,7 @@ export function PlainTenderForm(props: Readonly<IPlainTenderFormProps>) {
         placeholder={t('placeholder.create-tender.country')}
         error={!!errors?.country}
         helperText={errors?.country?.message}
-        {...register('country', {
-          disabled: true,
-          required: t('validation.required'),
-          setValueAs: (value = '') => value.trim(),
-          validate: (value = '') => value.trim().length < 200,
-        })}
+        {...register('country', { disabled: true })}
         // https://github.com/react-hook-form/react-hook-form/issues/220
         slotProps={{
           inputLabel: { shrink: true }, // due to the fact that readonly/disabled fields are empty

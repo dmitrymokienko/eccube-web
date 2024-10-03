@@ -6,6 +6,9 @@ import { useState } from 'react'
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline'
 import AddIcon from '@mui/icons-material/Add'
 import { omit } from '@/shared/libs/utils/utilities'
+import { z } from 'zod'
+
+const emailSchema = z.string().email({ message: 'Invalid email address' })
 
 export type IEmailTextFieldProps = Partial<TextFieldProps> & {
   emails?: string[]
@@ -20,23 +23,21 @@ export function EmailTextField(props: IEmailTextFieldProps) {
   const [error, setError] = useState<string>('')
 
   const handleAddEmail = () => {
-    if (validateEmail(inputText)) {
+    try {
+      emailSchema.parse(inputText)
       setEmails([...emails, inputText])
       onAddEmail?.([...emails, inputText])
       setInputText('')
       setError('')
-    } else {
-      setError('Invalid email address')
+    } catch (e) {
+      if (e instanceof z.ZodError) {
+        setError(e.errors[0].message)
+      }
     }
   }
 
   const handleDeleteEmail = (emailToDelete: string) => {
     setEmails(emails.filter((email) => email !== emailToDelete))
-  }
-
-  const validateEmail = (email: string) => {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    return re.test(email)
   }
 
   return (
@@ -47,12 +48,14 @@ export function EmailTextField(props: IEmailTextFieldProps) {
         onChange={(e) => setInputText(e.target.value)}
         error={!!error}
         helperText={error}
-        InputProps={{
-          startAdornment: (
-            <IconButton onClick={handleAddEmail}>
-              <AddIcon />
-            </IconButton>
-          ),
+        slotProps={{
+          input: {
+            startAdornment: (
+              <IconButton onClick={handleAddEmail}>
+                <AddIcon />
+              </IconButton>
+            ),
+          },
         }}
         {...omit(['emails', 'error', 'helperText', 'value', 'onChange'], props)}
       />

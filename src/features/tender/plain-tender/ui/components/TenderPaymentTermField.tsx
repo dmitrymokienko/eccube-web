@@ -17,7 +17,7 @@ export interface ITenderPaymentTermFieldProps {
 const VALUES = [30, 60, 90]
 const ID = 'eccube-tender-payment-term-radios'
 
-export function TenderPaymentTermField(props: ITenderPaymentTermFieldProps) {
+export function TenderPaymentTermField(props: Readonly<ITenderPaymentTermFieldProps>) {
   const { name = 'paymentTerm' } = props
 
   const { t } = useTranslation()
@@ -79,7 +79,7 @@ export function TenderPaymentTermField(props: ITenderPaymentTermFieldProps) {
 
       <TextField
         type="number"
-        inputProps={{ min: 1 }}
+        slotProps={{ htmlInput: { min: 1 } }}
         defaultValue={VALUES[VALUES.length - 1]}
         label={t('field.create-tender.days')}
         placeholder={t('placeholder.create-tender.days')}
