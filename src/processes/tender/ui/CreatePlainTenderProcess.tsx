@@ -18,12 +18,14 @@ import {
   SeparateLayout,
 } from '@/shared/ui/layouts/SeparateLayout/ui/SeparateLayout'
 import { Currency, PricePer, PriceType } from '@/entities/currencies/constants'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useTenderSchema } from '../lib/hooks'
 
 export interface ICreatePlainTenderProcessProps {
   children?: ReactNode
 }
 
-export function CreatePlainTenderProcess(props: ICreatePlainTenderProcessProps) {
+export function CreatePlainTenderProcess(props: Readonly<ICreatePlainTenderProcessProps>) {
   const { children } = props
 
   const { t } = useTranslation()
@@ -32,6 +34,8 @@ export function CreatePlainTenderProcess(props: ICreatePlainTenderProcessProps) 
   const { loggedIn } = useContext(AuthContext)
 
   const isLoading = useUnit(tenderModel.$isLoading)
+
+  const tenderSchema = useTenderSchema()
 
   const form = useForm<PlainTenderProcessForm>({
     defaultValues: {
@@ -45,6 +49,7 @@ export function CreatePlainTenderProcess(props: ICreatePlainTenderProcessProps) 
       paymentTerm: '', // important to have default value for RadioGroup
       country: mapCountryCodeToName(Locale.DE),
     },
+    resolver: zodResolver(tenderSchema),
   })
 
   //   const firstPage = useMatch('/tender/plain/step_1')
