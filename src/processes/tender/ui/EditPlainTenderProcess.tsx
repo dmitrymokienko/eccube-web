@@ -23,7 +23,7 @@ export interface IEditPlainTenderProcessProps {
   children?: ReactNode
 }
 
-export function EditPlainTenderProcess(props: IEditPlainTenderProcessProps) {
+export function EditPlainTenderProcess(props: Readonly<IEditPlainTenderProcessProps>) {
   const { children } = props
 
   const { t } = useTranslation()

@@ -2,12 +2,12 @@ import { combine, createEffect, createEvent, createStore, sample } from 'effecto
 import {
   createNewTenderApi,
   createNewTenderDraftApi,
-  deleteByIdApi,
+  deleteTenderByIdApi,
   deleteUploadedFilesApi,
   fetchTenderByIdApi,
   fetchTenderListApi,
   publishTenderApi,
-  updateByIdApi,
+  updateTenderByIdApi,
 } from '../api'
 import { ITender } from '@/entities/tender/model/interfaces'
 import { currentUser } from '@/entities/currentUser/model'
@@ -26,9 +26,9 @@ const fetchTenderListFx = createEffect(fetchTenderListApi)
 
 const withdrawalFromDraftFx = createEffect(publishTenderApi)
 
-const updateByIdFx = createEffect(updateByIdApi)
+const updateByIdFx = createEffect(updateTenderByIdApi)
 
-const deleteByIdFx = createEffect(deleteByIdApi)
+const deleteByIdFx = createEffect(deleteTenderByIdApi)
 
 const $uploadFilesToDelete = createStore<string[]>([]) // urls of files to delete
 const setUploadFilesToDelete = createEvent<string[] | string>()

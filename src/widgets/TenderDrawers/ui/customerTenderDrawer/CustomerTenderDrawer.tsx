@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react'
-import { useUnit } from 'effector-react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { useUnit } from 'effector-react'
 import NiceModal from '@ebay/nice-modal-react'
 import Drawer from '@mui/material/Drawer' // SwipeableDrawer
 import useMediaQuery from '@mui/material/useMediaQuery'
@@ -31,9 +31,10 @@ import { ConfirmationDialog } from '@/shared/ui/components/Dialogs/ConfirmationD
 import { Nullable } from '@/shared/types/utilities'
 import { transformCentsToAmount } from '@/shared/libs/utils/currencies'
 import { UploadedFilesList } from '@/features/uploadFiles/ui/components/UploadedFilesList'
+import { currentUser } from '@/entities/currentUser/model'
+import { useDrawerTenderQuery } from '../../lib/hooks'
 import { LogoBannerOffset } from '../components/LogoBannerOffset'
 import { TenderNavBar } from '../components/TenderNavBar'
-import { tenderModel } from '@/features/tender/plain-tender/model'
 
 const DRAWER_WIDTH = 800
 const BANNER_WIDTH = 320
@@ -52,15 +53,16 @@ export function CustomerTenderDrawer(props: Readonly<TenderDrawerProps>) {
 
   const isCompact = useMediaQuery<Theme>((theme) => theme.breakpoints.down(1280))
 
+  const user = useUnit(currentUser.$info)
+
   const [addressOpen, setAddressOpen] = useState(false)
   const [invitedSuppliersOpen, setInvitedSuppliersOpen] = useState(false)
 
-  const tenderData = useUnit(tenderModel.$currentTender)
-
-  useEffect(() => {
-    if (!id) return
-    tenderModel.fetchByIdFx(id)
-  }, [id])
+  const { tenderData, deleteTender } = useDrawerTenderQuery({
+    id,
+    onDelete: onClose,
+    queryKey: ['customerTenderList', user?.id],
+  })
 
   const onEdit = () => {
     if (!tenderData) throw new Error('No tender found')
@@ -74,12 +76,7 @@ export function CustomerTenderDrawer(props: Readonly<TenderDrawerProps>) {
       title: t('modal.tender.delete-tender.title'),
       content: t('modal.tender.delete-tender.content'),
       onConfirm: async () => {
-        try {
-          await tenderModel.deleteByIdFx(tenderData.id)
-          onClose()
-        } catch (error) {
-          console.error('Failed to delete tender', error)
-        }
+        await deleteTender.mutateAsync(tenderData.id)
       },
     })
   }
